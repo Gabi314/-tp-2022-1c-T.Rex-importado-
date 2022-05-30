@@ -1,0 +1,21 @@
+[INFO] 13:02:33:680 MEMORIA/(14325:14325): Memoria lista para recibir a Cpu
+[INFO] 13:04:21:619 MEMORIA/(14590:14590): Memoria lista para recibir a Cpu
+[INFO] 13:07:53:398 MEMORIA/(15118:15118): Memoria lista para recibir a Cpu
+[INFO] 13:08:04:828 MEMORIA/(15118:15118): Se conecto un cliente!
+[INFO] 13:08:04:828 MEMORIA/(15118:15118): Me llegaron los siguientes valores:
+
+[INFO] 13:08:04:828 MEMORIA/(15118:15118): pido archivo configuracion de memoria
+[ERROR] 13:08:04:828 MEMORIA/(15118:15118): Cpu se desconecto. Terminando conexion
+[INFO] 15:19:01:379 MEMORIA/(5233:5233): Memoria lista para recibir a Cpu
+[INFO] 15:21:16:037 MEMORIA/(5596:5596): Memoria lista para recibir a Cpu o Kernel
+[INFO] 15:21:24:497 MEMORIA/(5233:5233): Se conecto un cliente!
+[INFO] 15:21:24:508 MEMORIA/(5233:5233): Me llegaron los siguientes valores:
+
+[INFO] 15:21:24:508 MEMORIA/(5233:5233): pido archivo configuracion de memoria
+[ERROR] 15:21:24:509 MEMORIA/(5233:5233): Cpu se desconecto. Terminando conexion
+[INFO] 15:23:31:766 MEMORIA/(5966:5966): Memoria lista para recibir a Cpu o Kernel
+[INFO] 15:23:36:590 MEMORIA/(5966:5966): Se conecto un cliente!
+[INFO] 15:23:36:606 MEMORIA/(5966:5966): Me llegaron los siguientes valores:
+
+[INFO] 15:23:36:606 MEMORIA/(5966:5966): pido archivo configuracion de memoria
+[ERROR] 15:23:36:607 MEMORIA/(5966:5966): Se desconecto el cliente. Terminando conexion

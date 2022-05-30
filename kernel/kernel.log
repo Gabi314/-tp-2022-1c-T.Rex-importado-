@@ -1,0 +1,28 @@
+[INFO] 13:13:25:527 Kernel/(14808:14808): Kernel listo para recibir a consola
+[INFO] 13:13:34:792 Kernel/(14808:14808): Se conecto un cliente!
+[ERROR] 13:13:35:325 Kernel/(14808:14808): la consola se desconecto. Finalizando Kernel
+[INFO] 13:15:28:261 Kernel/(15014:15014): Kernel listo para recibir a consola
+[INFO] 13:15:46:485 Kernel/(15014:15014): Se conecto un cliente!
+[INFO] 13:15:46:485 Kernel/(15014:15014): Me llegaron los siguientes valores:
+
+[INFO] 13:15:46:485 Kernel/(15014:15014): Consola saluda al Kernel
+[ERROR] 13:15:46:485 Kernel/(15014:15014): La consola se desconecto. Finalizando Kernel
+[INFO] 15:33:12:786 Kernel/(24685:24685): Kernel listo para recibir a consola
+[INFO] 15:33:20:412 Kernel/(24685:24685): Se conecto la consola!
+[INFO] 15:33:20:413 Kernel/(24685:24685): Me llegaron las siguientes instrucciones:
+
+[INFO] 15:33:20:413 Kernel/(24685:24685): aca iria el path de con las instrucciones
+[ERROR] 15:33:20:413 Kernel/(24685:24685): La consola se desconecto. Finalizando Kernel
+[INFO] 18:53:29:355 Kernel/(7722:7722): Kernel listo para recibir a consola
+[INFO] 18:53:40:744 Kernel/(7722:7722): Se conecto la consola!
+[INFO] 18:53:40:744 Kernel/(7722:7722): Me llegaron las siguientes instrucciones:
+
+[INFO] 18:53:40:744 Kernel/(7722:7722): aca iria el path con las instrucciones
+[ERROR] 18:53:40:745 Kernel/(7722:7722): La consola se desconecto. Finalizando Kernel
+[INFO] 19:32:31:194 Kernel/(12983:12983): Kernel listo para recibir a consola
+[INFO] 19:32:45:388 Kernel/(12983:12983): Se conecto la consola!
+[INFO] 19:32:45:390 Kernel/(12983:12983): Me llegaron las siguientes instrucciones:
+
+[INFO] 19:32:45:390 Kernel/(12983:12983): aca iria el path con las instrucciones
+[ERROR] 19:32:45:390 Kernel/(12983:12983): La consola se desconecto. Finalizando Kernel
+[INFO] 19:35:09:339 Kernel/(13340:13340): Kernel listo para recibir a consola

@@ -1,0 +1,34 @@
+[INFO] 19:35:02:230 CPU/(13318:13318): Cpu listo para recibir a Kernel
+[INFO] 19:36:11:020 CPU/(13474:13474): Cpu listo para recibir a Kernel
+[INFO] 19:36:17:048 CPU/(13474:13474): Se conecto el Kernel!
+[INFO] 19:36:17:049 CPU/(13474:13474): Me llegaron los siguientes valores:
+
+[INFO] 19:36:17:049 CPU/(13474:13474): Aca le mandaria el pcb
+[ERROR] 19:36:17:050 CPU/(13474:13474): Kernel se desconecto. Terminando conexion
+[INFO] 19:53:10:483 CPU/(15731:15731): Cpu listo para recibir a Kernel
+[INFO] 19:57:53:987 CPU/(16498:16498): Cpu listo para recibir a Kernel
+[INFO] 19:58:47:962 CPU/(16668:16668): Cpu listo para recibir a Kernel
+[INFO] 20:04:19:453 CPU/(17360:17360): Cpu listo para recibir a Kernel
+[INFO] 20:04:24:145 CPU/(15731:15731): Se conecto el Kernel!
+[INFO] 20:04:24:150 CPU/(15731:15731): Me llegaron los siguientes valores:
+
+[INFO] 20:04:24:150 CPU/(15731:15731): Aca le mandaria el pcb
+[ERROR] 20:04:24:150 CPU/(15731:15731): Kernel se desconecto. Terminando conexion
+[INFO] 20:05:06:966 CPU/(17528:17528): Cpu listo para recibir a Kernel
+[INFO] 20:05:11:424 CPU/(17528:17528): Se conecto el Kernel!
+[INFO] 20:05:11:424 CPU/(17528:17528): Me llegaron los siguientes valores:
+
+[INFO] 20:05:11:424 CPU/(17528:17528): Aca le mandaria el pcb
+[ERROR] 20:05:11:922 CPU/(17528:17528): Kernel se desconecto. Terminando conexion
+[INFO] 12:41:21:281 CPU/(11391:11391): Cpu listo para recibir a Kernel
+[INFO] 12:41:45:044 CPU/(11391:11391): Se conecto el Kernel!
+[INFO] 12:41:45:050 CPU/(11391:11391): Me llegaron los siguientes valores:
+
+[INFO] 12:41:45:051 CPU/(11391:11391): Aca le mandaria el pcb
+[ERROR] 12:41:45:737 CPU/(11391:11391): Kernel se desconecto. Terminando conexion
+[INFO] 12:42:56:278 CPU/(11629:11629): Cpu listo para recibir a Kernel
+[INFO] 12:43:02:959 CPU/(11629:11629): Se conecto el Kernel!
+[INFO] 12:43:02:959 CPU/(11629:11629): Me llegaron los siguientes valores:
+
+[INFO] 12:43:02:959 CPU/(11629:11629): Aca le mandaria el pcb
+[ERROR] 12:43:02:959 CPU/(11629:11629): Kernel se desconecto. Terminando conexion
