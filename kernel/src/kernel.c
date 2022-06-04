@@ -1,9 +1,9 @@
 #include "funcionesKernel.h"
 
 int main(void) {
-	//conexionConConsola();
+	conexionConConsola();
 	//conexionConCpu();
-	conexionConMemoria();
+	//conexionConMemoria();
 }
 void conexionConMemoria(void){
 	int conexion;

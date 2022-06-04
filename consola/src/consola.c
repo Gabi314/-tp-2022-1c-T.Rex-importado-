@@ -1,32 +1,73 @@
 #include "funcionesConsola.h"
+// ./home/utnso/tp-2022-1c-T.Rex/pseudocodigo
 
-int main(void) {
+int main(int argc, char** argv) {
+
+	logger = iniciar_logger();
+
+	if(argc < 2) {
+    	log_error(logger,"Falta un parametro");
+    	return EXIT_FAILURE;
+	}
 
 	int conexion;
 	char* ip;
 	char* puerto;
-	char* instrucciones;
 
-	t_log* logger;
-	t_config* config;
 
-	logger = iniciar_logger();
+	FILE* archivo = fopen(argv[2], "r");
 
-	log_info(logger,"Aca se loggea consola");//(?
+	if(archivo == NULL){
+		log_error(logger,"No se lee el archivo");
+	}else{
+		log_info(logger,"Se leyo el archivo correctamente");
+	}
+
+	//char* contenido = NULL;
+	//size_t len = 0;
+
+	 struct stat sb;
+	 stat(argv[2], &sb);
+
+	 char *contenido = malloc(sb.st_size);
+	 t_list* instrucciones = malloc(sb.st_size);
+	 instrucciones = list_create();
+
+	 while (fscanf(archivo, "%[^\n] ", contenido) != EOF) {
+
+	     //log_info(logger,unElemento);
+	     list_add(instrucciones,contenido);
+
+	 }
+
+
+	/*while (getline(&contenido, &len, archivo) != -1) {
+		list_add(instrucciones,contenido);
+		//log_info(logger,"%s",contenido);
+
+	}*/
+	//for(int i=0; i < instrucciones->elements_count; i++){
+		log_info(logger,list_get(instrucciones,0));
+	//}
+
+	//log_info(logger,"Las instrucciones son: %s",instrucciones);
+	//char** instruccionesSeparadas = string_split(instrucciones,"\n");
 
 	config = iniciar_config();
 
 	ip = config_get_string_value(config,"IP_KERNEL");
 	puerto = config_get_string_value(config,"PUERTO_KERNEL");
-	instrucciones = config_get_string_value(config,"instrucciones");
 
 	// Creamos una conexión hacia el servidor
     conexion = crear_conexion(ip, puerto);
 
 	// Armamos y enviamos el paquete
-	paquete(conexion,instrucciones);
+	paquete(conexion,"hola");
 
+	fclose(archivo);
+	//free(contenido);
 	terminar_programa(conexion, logger, config);
+
 
 }
 
