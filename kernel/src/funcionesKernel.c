@@ -74,21 +74,31 @@ t_list* recibir_paquete(int socket_cliente)
 	int size;
 	int desplazamiento = 0;
 	void * buffer;
-	t_list* valores = list_create();
-	int tamanio;
+
+	t_list* listaDeInstrucciones = list_create();
+	t_list* identificadores = list_create();
+
+	int tamanioIdentificador;
 
 	buffer = recibir_buffer(&size, socket_cliente);
+
 	while(desplazamiento < size)
 	{
-		memcpy(&tamanio, buffer + desplazamiento, sizeof(int));
+		instrucciones* instruccion = malloc(sizeof(instrucciones));
+		memcpy(&tamanioIdentificador, buffer + desplazamiento, sizeof(int));
 		desplazamiento+=sizeof(int);
-		char* valor = malloc(tamanio);
-		memcpy(valor, buffer+desplazamiento, tamanio);
-		desplazamiento+=tamanio;
-		list_add(valores, valor);
+		instruccion->identificador = malloc(tamanioIdentificador);
+		memcpy(instruccion->identificador, buffer+desplazamiento, tamanioIdentificador);
+		desplazamiento+=tamanioIdentificador;
+		memcpy(instruccion->parametros, buffer+desplazamiento, sizeof(int[2]));
+		desplazamiento+=sizeof(int[2]);
+		list_add(listaDeInstrucciones, instruccion);// Despues de esto habria que agragarlas al pcb
+		//pcb->instrucciones = listaDeInstrucciones
+
+		list_add(identificadores,instruccion->identificador);//Para que loguee los identificadores cuando les llegan de consola
 	}
 	free(buffer);
-	return valores;
+	return identificadores;
 }
 
 //----------------------------- Para ser cliente de Cpu o de Memoria -------------------------------------------------
@@ -162,16 +172,6 @@ void crear_buffer(t_paquete* paquete)
 	paquete->buffer->stream = NULL;
 }
 
-t_paquete* crear_super_paquete(void)
-{
-	//me falta un malloc!
-	t_paquete* paquete;
-
-	//descomentar despues de arreglar
-	//paquete->codigo_operacion = PAQUETE;
-	//crear_buffer(paquete);
-	return paquete;
-}
 
 t_paquete* crear_paquete(void)
 {
@@ -212,3 +212,4 @@ void liberar_conexion(int socket_cliente)
 {
 	close(socket_cliente);
 }
+

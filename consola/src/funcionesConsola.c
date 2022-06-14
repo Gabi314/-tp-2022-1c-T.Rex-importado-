@@ -66,16 +66,6 @@ void crear_buffer(t_paquete* paquete)
 	paquete->buffer->stream = NULL;
 }
 
-t_paquete* crear_super_paquete(void)
-{
-	//me falta un malloc!
-	t_paquete* paquete;
-
-	//descomentar despues de arreglar
-	//paquete->codigo_operacion = PAQUETE;
-	//crear_buffer(paquete);
-	return paquete;
-}
 
 t_paquete* crear_paquete(void)
 {
@@ -85,14 +75,16 @@ t_paquete* crear_paquete(void)
 	return paquete;
 }
 
-void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio)
+void agregar_a_paquete(t_paquete* paquete, instrucciones* instruccion, int identificador_length)
 {
-	paquete->buffer->stream = realloc(paquete->buffer->stream, paquete->buffer->size + tamanio + sizeof(int));
+	void* id = instruccion->identificador;
+	paquete->buffer->stream = realloc(paquete->buffer->stream, paquete->buffer->size + identificador_length + sizeof(int) + sizeof(int[2]));;
 
-	memcpy(paquete->buffer->stream + paquete->buffer->size, &tamanio, sizeof(int));
-	memcpy(paquete->buffer->stream + paquete->buffer->size + sizeof(int), valor, tamanio);
+	memcpy(paquete->buffer->stream + paquete->buffer->size, &identificador_length, sizeof(int));
+	memcpy(paquete->buffer->stream + paquete->buffer->size + sizeof(int), id, identificador_length);
+	memcpy(paquete->buffer->stream + paquete->buffer->size + sizeof(int) + identificador_length, &instruccion->parametros, sizeof(int[2]));
 
-	paquete->buffer->size += tamanio + sizeof(int);
+	paquete->buffer->size += identificador_length + sizeof(int) + sizeof(int[2]);
 }
 
 void enviar_paquete(t_paquete* paquete, int socket_cliente)
@@ -116,3 +108,4 @@ void liberar_conexion(int socket_cliente)
 {
 	close(socket_cliente);
 }
+

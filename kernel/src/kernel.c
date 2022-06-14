@@ -32,7 +32,8 @@ int conexionConConsola(void){
 	log_info(logger, "Kernel listo para recibir a consola");
 	int cliente_fd = esperar_cliente(server_fd);
 
-	t_list* lista;
+	t_list* instrucciones;
+
 	while (1) {
 		int cod_op = recibir_operacion(cliente_fd);
 		switch (cod_op) {
@@ -40,9 +41,10 @@ int conexionConConsola(void){
 				recibir_mensaje(cliente_fd);
 			break;
 			case PAQUETE:
-				lista = recibir_paquete(cliente_fd);
-				log_info(logger, "Me llegaron las siguientes instrucciones:\n");
-				list_iterate(lista, (void*) iterator);
+				instrucciones = recibir_paquete(cliente_fd);
+
+				log_info(logger, "Me llegaron las siguientes instrucciones: \n");
+				list_iterate(instrucciones, (void*) iterator);
 			break;
 			case -1:
 				log_error(logger, "La consola se desconecto. Finalizando Kernel");

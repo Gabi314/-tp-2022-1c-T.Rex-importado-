@@ -25,6 +25,12 @@ typedef enum
 t_log* logger;
 
 //-------------- Funciones para Kernel como servidor de consola ---------
+typedef struct
+{
+	char* identificador;
+	int parametros[2];
+} instrucciones;
+
 void* recibir_buffer(int*, int);
 
 int iniciar_servidor(void);

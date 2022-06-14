@@ -63,3 +63,11 @@
 
 [INFO] 12:54:19:035 Kernel/(4779:4779): hola
 [ERROR] 12:54:19:863 Kernel/(4779:4779): La consola se desconecto. Finalizando Kernel
+[INFO] 12:29:35:214 Kernel/(17280:17280): Kernel listo para recibir a consola
+[INFO] 12:29:40:924 Kernel/(17280:17280): Se conecto la consola!
+[INFO] 12:29:40:925 Kernel/(17280:17280): Me llegaron las siguientes instrucciones: 
+
+[INFO] 12:29:40:925 Kernel/(17280:17280): NO_OP
+[INFO] 12:29:40:925 Kernel/(17280:17280): NO_OP
+[INFO] 12:29:40:926 Kernel/(17280:17280): EXIT
+[ERROR] 12:29:40:926 Kernel/(17280:17280): La consola se desconecto. Finalizando Kernel

@@ -95,3 +95,30 @@
 [INFO] 18:52:54:460 CONSOLA/(8887:8887): Se leyo el archivo correctamente
 [INFO] 18:52:54:467 CONSOLA/(8887:8887): EXIT
 [INFO] 18:53:08:639 CONSOLA/(8937:8937): Se leyo el archivo correctamente
+[INFO] 12:24:44:900 CONSOLA/(16546:16546): Se leyo el archivo correctamente
+[INFO] 12:24:44:904 CONSOLA/(16546:16546): instruccion: NO_OP
+
+[INFO] 12:24:44:904 CONSOLA/(16546:16546): instruccion: NO_OP
+
+[INFO] 12:24:44:905 CONSOLA/(16546:16546): instruccion: NO_OP
+
+[INFO] 12:24:44:912 CONSOLA/(16546:16546): instruccion: NO_OP
+
+[INFO] 12:24:44:912 CONSOLA/(16546:16546): instruccion: NO_OP
+
+[INFO] 12:24:44:912 CONSOLA/(16546:16546): instruccion: EXIT
+
+[INFO] 12:25:52:728 CONSOLA/(16706:16706): Se leyo el archivo correctamente
+[INFO] 12:25:52:729 CONSOLA/(16706:16706): instruccion: NO_OP
+
+[INFO] 12:25:52:729 CONSOLA/(16706:16706): instruccion: NO_OP
+
+[INFO] 12:25:52:730 CONSOLA/(16706:16706): instruccion: EXIT
+
+[INFO] 12:29:40:924 CONSOLA/(17300:17300): Se leyo el archivo correctamente
+[INFO] 12:29:40:925 CONSOLA/(17300:17300): instruccion: NO_OP
+
+[INFO] 12:29:40:925 CONSOLA/(17300:17300): instruccion: NO_OP
+
+[INFO] 12:29:40:925 CONSOLA/(17300:17300): instruccion: EXIT
+
