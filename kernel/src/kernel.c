@@ -1,10 +1,63 @@
 #include "funcionesKernel.h"
 
 int main(void) {
-	conexionConConsola();
+
+    iniciar_config();
+	crear_colas();
+    generar_conexiones();
+
+	//conexionConConsola();
 	//conexionConCpu();
 	//conexionConMemoria();
 }
+
+
+void iniciar_config(){
+	t_config* config;
+
+	logger = log_create("log.log", "Servidor", 1, LOG_LEVEL_INFO);
+	if((config = config_create("cliente.config")) == NULL){
+			printf("Error leyendo archivo de configuración. \n");
+		}
+	//ipKernel = config_get_string_value(config, "IP");
+	pidKernel = 0; // ID del kernel
+	ipMemoria = config_get_string_value(config, "IP_MEMORIA");
+	puertoMemoria = config_get_string_value(config, "PUERTO_MEMORIA");
+	ipCpu = config_get_string_value(config, "IP_CPU");
+	puertoCpuDispatch = config_get_string_value(config, "PUERTO_CPU_DISPATCH");
+	puertoCpuInterrupt = config_get_string_value(config, "PUERTO_CPU_INTERRUPT");
+	puertoKernel = config_get_string_value(config, "PUERTO_ESCUCHA");
+	algoritmoPlanificacion = config_get_string_value(config, "ALGORITMO_PLANIFICACION");
+	estimacionInicial = config_get_string_value(config, "ESTIMACION_INICIAL");
+	alfa = atoi(config_get_string_value(config, "ALFA"));
+	gradoMultiprogramacionTotal = atoi(config_get_string_value(config, "GRADO_MULTIPROGRAMACION"));
+	tiempoMaximoBloqueado = config_get_string_value(config, "TIEMPO_MAXIMO_BLOQUEADO");
+	gradoMultiprogramacionActual = 0; //Arranca en 0 porque no hay procesos en memoria
+}
+
+
+void crear_colas(){
+	colaNew = queue_create();
+	colaReady = queue_create(); //deberia ser una fila, pq la vamos a tener q ordenar con el algoritmo srt
+	colaSuspendedReady = queue_create();
+	colaExe = queue_create();
+	colaBlocked = queue_create();
+	colaSuspendedBlocked = queue_create();
+	colaExit = queue_create();
+}
+
+void generar_conexiones(){
+     socketServidor = iniciar_servidor();
+     log_info(logger, "Servidor listo para recibir al cliente");
+     socketMemoria = crear_conexion(ipMemoria, puertoMemoria);
+	 socketCpuDispatch = crear_conexion(ipCpu, puertoCpuDispatch);
+	 //falta también las conexiones con cpu para interrupciones
+}
+
+
+
+//---------------------------------------------------------------------------------------------
+
 void conexionConMemoria(void){
 	int conexion;
 	char* ip;
@@ -25,6 +78,11 @@ void conexionConMemoria(void){
 	terminar_programa(conexion, logger, config);
 }
 
+
+
+//---------------------------------------------------------------------------------------------
+
+//preguntar por el switch
 int conexionConConsola(void){
 	logger = log_create("./kernel.log", "Kernel", 1, LOG_LEVEL_DEBUG);
 
@@ -56,6 +114,9 @@ int conexionConConsola(void){
 			}
 	  return EXIT_SUCCESS;
 }
+
+// -----------------------------------------------------------------------------------------------------
+
 
 void conexionConCpu(void){
 

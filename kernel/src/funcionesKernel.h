@@ -16,6 +16,49 @@
 #define IP_KERNEL "127.0.0.1"
 #define PUERTO_KERNEL "8000"
 
+
+
+int pidKernel;
+int socketServidor;
+int socketCpuDispatch;
+char* ipCpu;
+char* puertoCpuDispatch;
+char* puertoCpuInterrupt;
+char* puertoKernel;
+char* algoritmoPlanificacion;
+char* estimacionInicial;
+int alfa;
+int gradoMultiprogramacionTotal;
+int gradoMultiprogramacionActual;
+bool procesoEjecutando;
+char* tiempoMaximoBloqueado;
+int socketMemoria;
+char* ipMemoria;
+char* puertoMemoria;
+int tamanioTotalIdentificadores;
+int contadorInstrucciones;
+int desplazamiento;
+char* tamanioDelProceso;
+
+
+typedef struct
+{
+	int idProceso;
+	int tamanioProceso;
+	t_list* instrucciones;
+	int program_counter;
+	int tabla_paginas; // el tipo ???
+	float estimacion_rafaga;
+	int socket_cliente;
+} t_pcb;
+
+typedef enum
+{
+	I_O,
+	EXIT,
+	INTERRUPT
+}op_code_cpu;
+
 typedef enum
 {
 	MENSAJE,
@@ -36,6 +79,7 @@ void* recibir_buffer(int*, int);
 int iniciar_servidor(void);
 int esperar_cliente(int);
 t_list* recibir_paquete(int);
+t_pcb* tomar_pcb(int);
 void recibir_mensaje(int);
 int recibir_operacion(int);
 
@@ -59,19 +103,23 @@ typedef struct
 
 int crear_conexion(char* ip, int puertoCpuDispatch);
 void enviar_mensaje(char* mensaje, int socket_cliente);
+void crear_buffer(t_paquete* paquete)
 t_paquete* crear_paquete(void);
 t_paquete* crear_super_paquete(void);
-void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio);
+//void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio);
+void eliminar_paquete_mensaje(t_paquete* paqueteMensaje);
+void obtenerTamanioIdentificadores(instrucciones* instruccion);
+void agregar_instrucciones_a_paquete(instrucciones* instruccion)
 void enviar_paquete(t_paquete* paquete, int socket_cliente);
 void liberar_conexion(int socket_cliente);
 void eliminar_paquete(t_paquete* paquete);
+void eliminar_paquete_mensaje(t_paquete* paqueteMensaje);
 
 //Funciones propias del Kernel como cliente
 t_log* iniciar_logger(void);
 t_config* iniciar_config(void);
 void paquete(int,char*);// aca iria en vez de un char la estructura pcb
 void terminar_programa(int, t_log*, t_config*);
-
 void conexionConCpu(void);
 //Funciones propias del Kernel como cliente
 

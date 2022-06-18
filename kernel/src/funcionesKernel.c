@@ -101,6 +101,48 @@ t_list* recibir_paquete(int socket_cliente)
 	return identificadores;
 }
 
+
+t_pcb* tomar_pcb(int socket_cliente)
+{
+	int size;
+	int desplazamiento = 0;
+	void * buffer;
+
+	buffer = recibir_buffer(&size, socket_cliente);
+	t_pcb* pcb = malloc(sizeof(t_pcb));
+	pcb->instrucciones = list_create();
+	int contadorInstrucciones;
+	int i = 0;
+		memcpy(&pcb->idProceso, buffer + desplazamiento, sizeof(int));
+		desplazamiento+=sizeof(int);
+		memcpy(&pcb->tamanioProceso, buffer + desplazamiento, sizeof(int));
+		desplazamiento+=sizeof(int);
+		memcpy(&contadorInstrucciones, buffer + desplazamiento, sizeof(int));
+		desplazamiento+=sizeof(int);
+		while(i < contadorInstrucciones){
+			instrucciones* instruccion = malloc(sizeof(instrucciones));
+			int identificador_length;
+			memcpy(&identificador_length, buffer + desplazamiento, sizeof(int));
+			desplazamiento+=sizeof(int);
+			instruccion->identificador = malloc(identificador_length);
+			memcpy(instruccion->identificador, buffer+desplazamiento, identificador_length);
+			desplazamiento+=identificador_length;
+			memcpy(instruccion->parametros, buffer+desplazamiento, sizeof(int[2]));
+			desplazamiento+=sizeof(int[2]);
+			list_add(pcb -> instrucciones, instruccion);
+			i++;
+		}
+		memcpy(&pcb->program_counter, buffer + desplazamiento, sizeof(int));
+		desplazamiento+=sizeof(int);
+		memcpy(&pcb->tabla_paginas, buffer + desplazamiento, sizeof(int));
+		desplazamiento+=sizeof(int);
+		memcpy(&pcb->estimacion_rafaga, buffer + desplazamiento, sizeof(float));
+		desplazamiento+=sizeof(float);
+		memcpy(&pcb->socket_cliente, buffer + desplazamiento, sizeof(int));
+	free(buffer);
+	return pcb;
+}
+
 //----------------------------- Para ser cliente de Cpu o de Memoria -------------------------------------------------
 
 void* serializar_paquete(t_paquete* paquete, int bytes)
@@ -173,6 +215,19 @@ void crear_buffer(t_paquete* paquete)
 }
 
 
+void agregar_instrucciones_al_paquete(instrucciones* instruccion) {
+	void* id = instruccion->identificador;
+	int longitudId = strlen(instruccion->identificador)+1;
+	memcpy(paquete->buffer->stream + desplazamiento, &longitudId, sizeof(int));
+	desplazamiento+=sizeof(int);
+	memcpy(paquete->buffer->stream + desplazamiento, id, longitudId);
+	desplazamiento+=longitudId;
+	memcpy(paquete->buffer->stream + desplazamiento, &(instruccion->parametros), sizeof(int[2]));
+	desplazamiento+=sizeof(int[2]);
+	free(instruccion->identificador);
+	free(instruccion);
+}
+
 t_paquete* crear_paquete(void)
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
@@ -180,7 +235,7 @@ t_paquete* crear_paquete(void)
 	crear_buffer(paquete);
 	return paquete;
 }
-
+/*
 void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio)
 {
 	paquete->buffer->stream = realloc(paquete->buffer->stream, paquete->buffer->size + tamanio + sizeof(int));
@@ -189,6 +244,41 @@ void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio)
 	memcpy(paquete->buffer->stream + paquete->buffer->size + sizeof(int), valor, tamanio);
 
 	paquete->buffer->size += tamanio + sizeof(int);
+}
+*/
+
+void agregar_a_paquete_kernel_cpu(t_pcb* pcb)
+{
+	tamanioTotalIdentificadores = 0;
+	contadorInstrucciones = 0;
+	desplazamiento = 0;
+	paquete = crear_paquete();
+	list_iterate(pcb->instrucciones, (void*) obtenerTamanioIdentificadores);
+	paquete->buffer->stream = realloc(paquete->buffer->stream, paquete->buffer->size + tamanioTotalIdentificadores + contadorInstrucciones*sizeof(int[2]) + contadorInstrucciones*sizeof(int) + 6*sizeof(int) + sizeof(float));
+	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->idProceso), sizeof(int));
+	desplazamiento+=sizeof(int);
+	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->tamanioProceso), sizeof(int));
+	desplazamiento+=sizeof(int);
+	memcpy(paquete->buffer->stream + desplazamiento, &contadorInstrucciones, sizeof(int));
+	desplazamiento+=sizeof(int);
+	list_iterate(pcb->instrucciones, (void*) agregarInstruccionesAlPaquete);
+	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->program_counter), sizeof(int));
+	desplazamiento+=sizeof(int);
+	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->tabla_paginas), sizeof(int));
+	desplazamiento+=sizeof(int);
+	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->estimacion_rafaga), sizeof(float));
+	desplazamiento+=sizeof(float);
+	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->socket_cliente), sizeof(int));
+	desplazamiento+=sizeof(int);
+	paquete->buffer->size = desplazamiento;
+	free(pcb);
+}
+
+
+
+void obtenerTamanioIdentificadores(instrucciones* instruccion) {
+	tamanioTotalIdentificadores += (strlen(instruccion -> identificador)+1);
+	contadorInstrucciones++;
 }
 
 void enviar_paquete(t_paquete* paquete, int socket_cliente)
@@ -207,6 +297,14 @@ void eliminar_paquete(t_paquete* paquete)
 	free(paquete->buffer);
 	free(paquete);
 }
+
+void eliminar_paquete_mensaje(t_paquete* paqueteMensaje)
+{
+	free(paqueteMensaje->buffer->stream);
+	free(paqueteMensaje->buffer);
+	free(paqueteMensaje);
+}
+
 
 void liberar_conexion(int socket_cliente)
 {
