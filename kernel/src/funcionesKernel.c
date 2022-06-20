@@ -29,6 +29,10 @@ int iniciar_servidor(void)
 	return socket_servidor;
 }
 
+t_config* iniciar_config(void){
+	return config_create("kernel.config");
+}
+
 int esperar_cliente(int socket_servidor)
 {
 	// Aceptamos un nuevo cliente
@@ -261,7 +265,7 @@ void agregar_a_paquete_kernel_cpu(t_pcb* pcb)
 	desplazamiento+=sizeof(int);
 	memcpy(paquete->buffer->stream + desplazamiento, &contadorInstrucciones, sizeof(int));
 	desplazamiento+=sizeof(int);
-	list_iterate(pcb->instrucciones, (void*) agregarInstruccionesAlPaquete);
+	list_iterate(pcb->instrucciones, (void*) agregar_instrucciones_al_paquete);
 	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->program_counter), sizeof(int));
 	desplazamiento+=sizeof(int);
 	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->tabla_paginas), sizeof(int));
@@ -310,4 +314,7 @@ void liberar_conexion(int socket_cliente)
 {
 	close(socket_cliente);
 }
+
+
+
 

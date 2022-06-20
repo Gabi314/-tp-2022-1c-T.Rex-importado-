@@ -2,7 +2,7 @@
 
 int main(void) {
 
-    iniciar_config();
+	cargar_pcb();
 	crear_colas();
     generar_conexiones();
 
@@ -12,11 +12,11 @@ int main(void) {
 }
 
 
-void iniciar_config(){
+void cargar_pcb(){
 	t_config* config;
 
 	logger = log_create("log.log", "Servidor", 1, LOG_LEVEL_INFO);
-	if((config = config_create("cliente.config")) == NULL){
+	if((config = config_create("kernel.config")) == NULL){
 			printf("Error leyendo archivo de configuración. \n");
 		}
 	//ipKernel = config_get_string_value(config, "IP");
@@ -58,7 +58,7 @@ void generar_conexiones(){
 
 //---------------------------------------------------------------------------------------------
 
-void conexionConMemoria(void){
+/*void conexionConMemoria(void){
 	int conexion;
 	char* ip;
 	int puerto;
@@ -76,14 +76,14 @@ void conexionConMemoria(void){
 	paquete(conexion, "pido archivo configuracion de memoria");
 
 	terminar_programa(conexion, logger, config);
-}
+}*/
 
 
 
 //---------------------------------------------------------------------------------------------
 
 //preguntar por el switch
-int conexionConConsola(void){
+/*int conexionConConsola(void){
 	logger = log_create("./kernel.log", "Kernel", 1, LOG_LEVEL_DEBUG);
 
 	int server_fd = iniciar_servidor();
@@ -114,11 +114,11 @@ int conexionConConsola(void){
 			}
 	  return EXIT_SUCCESS;
 }
-
+*/
 // -----------------------------------------------------------------------------------------------------
 
 
-void conexionConCpu(void){
+/*void conexionConCpu(void){
 
 	int conexion;
 	char* ip;
@@ -139,17 +139,17 @@ void conexionConCpu(void){
 	paquete(conexion,pcb);
 
 	terminar_programa(conexion, logger, config);
-}
+}*/
 
 t_log* iniciar_logger(void){
 	return log_create("./kernel.log","KERNEL",true,LOG_LEVEL_INFO);
 }
 
-t_config* iniciar_config(void){
+/*t_config* iniciar_config(void){
 	return config_create("kernel.config");
-}
+}*/
 
-void paquete(int conexion, char* mensaje){
+/*void paquete(int conexion, char* mensaje){
 
 	t_paquete* paquete = crear_paquete();
 
@@ -159,7 +159,8 @@ void paquete(int conexion, char* mensaje){
 
     enviar_paquete(paquete,conexion);
     eliminar_paquete(paquete);
-}
+}*/
+//Revisar ubicacion
 
 void terminar_programa(int conexion, t_log* logger, t_config* config){
 	/* Y por ultimo, hay que liberar lo que utilizamos (conexion, log y config)
