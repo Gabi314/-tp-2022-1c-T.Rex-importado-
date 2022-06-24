@@ -117,32 +117,36 @@ t_pcb* tomar_pcb(int socket_cliente)
 	pcb->instrucciones = list_create();
 	int contadorInstrucciones;
 	int i = 0;
-		memcpy(&pcb->idProceso, buffer + desplazamiento, sizeof(int));
+
+	memcpy(&pcb->idProceso, buffer + desplazamiento, sizeof(int));
+	desplazamiento+=sizeof(int);
+	memcpy(&pcb->tamanioProceso, buffer + desplazamiento, sizeof(int));
+	desplazamiento+=sizeof(int);
+	memcpy(&contadorInstrucciones, buffer + desplazamiento, sizeof(int));
+	desplazamiento+=sizeof(int);
+
+	while(i < contadorInstrucciones){
+		instrucciones* instruccion = malloc(sizeof(instrucciones));
+		int identificador_length;
+		memcpy(&identificador_length, buffer + desplazamiento, sizeof(int));
 		desplazamiento+=sizeof(int);
-		memcpy(&pcb->tamanioProceso, buffer + desplazamiento, sizeof(int));
-		desplazamiento+=sizeof(int);
-		memcpy(&contadorInstrucciones, buffer + desplazamiento, sizeof(int));
-		desplazamiento+=sizeof(int);
-		while(i < contadorInstrucciones){
-			instrucciones* instruccion = malloc(sizeof(instrucciones));
-			int identificador_length;
-			memcpy(&identificador_length, buffer + desplazamiento, sizeof(int));
-			desplazamiento+=sizeof(int);
-			instruccion->identificador = malloc(identificador_length);
-			memcpy(instruccion->identificador, buffer+desplazamiento, identificador_length);
-			desplazamiento+=identificador_length;
-			memcpy(instruccion->parametros, buffer+desplazamiento, sizeof(int[2]));
-			desplazamiento+=sizeof(int[2]);
-			list_add(pcb -> instrucciones, instruccion);
-			i++;
-		}
-		memcpy(&pcb->program_counter, buffer + desplazamiento, sizeof(int));
-		desplazamiento+=sizeof(int);
-		memcpy(&pcb->tabla_paginas, buffer + desplazamiento, sizeof(int));
-		desplazamiento+=sizeof(int);
-		memcpy(&pcb->estimacion_rafaga, buffer + desplazamiento, sizeof(float));
-		desplazamiento+=sizeof(float);
-		memcpy(&pcb->socket_cliente, buffer + desplazamiento, sizeof(int));
+		instruccion->identificador = malloc(identificador_length);
+		memcpy(instruccion->identificador, buffer+desplazamiento, identificador_length);
+		desplazamiento+=identificador_length;
+		memcpy(instruccion->parametros, buffer+desplazamiento, sizeof(int[2]));
+		desplazamiento+=sizeof(int[2]);
+		list_add(pcb -> instrucciones, instruccion);
+		i++;
+	}
+
+	memcpy(&pcb->program_counter, buffer + desplazamiento, sizeof(int));
+	desplazamiento+=sizeof(int);
+	memcpy(&pcb->tabla_paginas, buffer + desplazamiento, sizeof(int));
+	desplazamiento+=sizeof(int);
+	memcpy(&pcb->estimacion_rafaga, buffer + desplazamiento, sizeof(float));
+	desplazamiento+=sizeof(float);
+	memcpy(&pcb->socket_cliente, buffer + desplazamiento, sizeof(int));
+
 	free(buffer);
 	return pcb;
 }

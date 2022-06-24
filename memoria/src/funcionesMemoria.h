@@ -7,9 +7,12 @@
 #include<unistd.h>
 #include<netdb.h>
 #include<commons/log.h>
+#include<commons/config.h>
 #include<commons/collections/list.h>
 #include<string.h>
+#include<commons/string.h>
 #include<assert.h>
+#include<stdbool.h>
 
 #define IP_MEMORIA "127.0.0.1"
 #define PUERTO_MEMORIA 8002
@@ -34,4 +37,34 @@ int recibir_operacion(int);
 void iterator(char* value);
 int conexionConCpu(void);
 
+//Variables globales de config
+int tamanioDeMemoria;
+int tamanioDePagina;
+int entradasPorTabla;
+int retardoMemoria; //Tiempo en milisegundos que se deberá esperar para dar una respuesta al CPU
+char* algoritmoDeReemplazo;
+int marcosPorProceso;
+int retardoSwap; //Tiempo en milisegundos que se deberá esperar para cada operación del SWAP (leer/escribir)
+
+//Tabla de paginas
+typedef struct{// capaz usar diccionario
+	//int* entradas;
+	int marco;
+	bool presencia;
+	bool uso;
+	bool modificado;
+}t_segundoNivel;
+
+typedef struct{// capaz usar diccionario
+	t_list* tablasDeSegundoNivel; // int tablasDeSegundoNivel[entradas]
+	int pid;
+}t_primerNivel;
+
+void crearConfiguraciones();
+void inicializarEstructuras();
+int pidDeTablaDe1erNivel();
+int buscarNroPaginaDe1erNivel(int);
+void escribirEnSwap(int);
+
 #endif /* FUNCIONES_MEMORIA_H_*/
+

@@ -22,9 +22,9 @@ void cargar_pcb(){
 	//ipKernel = config_get_string_value(config, "IP");
 	pidKernel = 0; // ID del kernel
 	ipMemoria = config_get_string_value(config, "IP_MEMORIA");
-	puertoMemoria = config_get_string_value(config, "PUERTO_MEMORIA");
+	puertoMemoria = config_get_int_value(config, "PUERTO_MEMORIA");//son intss
 	ipCpu = config_get_string_value(config, "IP_CPU");
-	puertoCpuDispatch = config_get_string_value(config, "PUERTO_CPU_DISPATCH");
+	puertoCpuDispatch = config_get_int_value(config, "PUERTO_CPU_DISPATCH");//son intss
 	puertoCpuInterrupt = config_get_string_value(config, "PUERTO_CPU_INTERRUPT");
 	puertoKernel = config_get_string_value(config, "PUERTO_ESCUCHA");
 	algoritmoPlanificacion = config_get_string_value(config, "ALGORITMO_PLANIFICACION");
@@ -49,8 +49,8 @@ void crear_colas(){
 void generar_conexiones(){
      socketServidor = iniciar_servidor();
      log_info(logger, "Servidor listo para recibir al cliente");
-     socketMemoria = crear_conexion(ipMemoria, puertoMemoria);
-	 socketCpuDispatch = crear_conexion(ipCpu, puertoCpuDispatch);
+     socketMemoria = crear_conexion(ipMemoria, puertoMemoria);//estan pasando un string en los puertos
+	 socketCpuDispatch = crear_conexion(ipCpu, puertoCpuDispatch);//
 	 //falta también las conexiones con cpu para interrupciones
 }
 

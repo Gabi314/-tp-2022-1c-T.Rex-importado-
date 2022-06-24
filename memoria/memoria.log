@@ -19,3 +19,89 @@
 
 [INFO] 15:23:36:606 MEMORIA/(5966:5966): pido archivo configuracion de memoria
 [ERROR] 15:23:36:607 MEMORIA/(5966:5966): Se desconecto el cliente. Terminando conexion
+[INFO] 23:21:52:464 MEMORIA/(8885:8885): 3
+[INFO] 23:22:51:200 MEMORIA/(8993:8993): 3
+[INFO] 23:22:51:205 MEMORIA/(8993:8993): 3
+[INFO] 23:26:00:674 MEMORIA/(9315:9315): 4
+[INFO] 23:26:00:675 MEMORIA/(9315:9315): 8
+[INFO] 23:27:30:160 MEMORIA/(9510:9510): 8
+[INFO] 18:52:24:660 MEMORIA/(4968:4968): 0
+[INFO] 18:52:24:679 MEMORIA/(4968:4968): nro de tabla 161617736
+[INFO] 18:53:31:186 MEMORIA/(5138:5138): 0
+[INFO] 18:53:31:186 MEMORIA/(5138:5138): nro de tabla 0
+[INFO] 19:53:14:659 MEMORIA/(13399:13399): 0
+[INFO] 19:54:16:287 MEMORIA/(13551:13551): 0
+[INFO] 19:59:14:392 MEMORIA/(14268:14268): 0
+[INFO] 20:02:04:079 MEMORIA/(14663:14663): 0
+[INFO] 20:04:09:846 MEMORIA/(15015:15015): 0
+[INFO] 20:05:08:414 MEMORIA/(15160:15160): holalaa
+[INFO] 20:15:48:543 MEMORIA/(16656:16656): holalaa
+[INFO] 20:20:07:833 MEMORIA/(17228:17228): el tamanio de la lista es: 1
+[INFO] 20:24:18:450 MEMORIA/(17791:17791): EL pid es: 0
+[INFO] 20:50:38:317 MEMORIA/(21696:21696): EL pid es: 0
+[INFO] 23:11:58:125 MEMORIA/(4175:4175): El nro de tabla asociado al pid 0 es 0
+[INFO] 23:16:26:875 MEMORIA/(4857:4857): El nro de tabla asociado al pid 2 es 0
+[INFO] 23:17:34:045 MEMORIA/(5045:5045): Tamanio: 149787024
+[INFO] 23:17:34:054 MEMORIA/(5045:5045): El nro de tabla asociado al pid 2 es 4
+[INFO] 23:18:47:162 MEMORIA/(5241:5241): Tamanio: 3
+[INFO] 23:18:47:167 MEMORIA/(5241:5241): El nro de tabla asociado al pid 1 es 4
+[INFO] 23:19:50:819 MEMORIA/(5403:5403): Tamanio: 3
+[INFO] 23:21:16:571 MEMORIA/(5626:5626): Tamanio: 3
+[INFO] 23:21:16:574 MEMORIA/(5626:5626): El nro de tabla asociado al pid 1 es 4
+[INFO] 23:22:33:229 MEMORIA/(5808:5808): Tamanio: 3
+[INFO] 23:22:33:230 MEMORIA/(5808:5808): El nro de tabla asociado al pid 1 es 4
+[INFO] 23:29:25:915 MEMORIA/(5923:5923): Tamanio: 3
+[INFO] 23:33:29:439 MEMORIA/(7307:7307): Tamanio: 3
+[INFO] 23:33:29:440 MEMORIA/(7307:7307): El nro de tabla asociado al pid 0 es 4
+[INFO] 23:33:44:026 MEMORIA/(7362:7362): Tamanio: 1
+[INFO] 23:33:44:027 MEMORIA/(7362:7362): El nro de tabla asociado al pid 0 es 4
+[INFO] 23:34:03:675 MEMORIA/(7426:7426): Tamanio: 1
+[INFO] 23:34:03:675 MEMORIA/(7426:7426): El nro de tabla asociado al pid 1 es 4
+[INFO] 23:34:25:330 MEMORIA/(7517:7517): Tamanio: 1
+[INFO] 23:34:25:331 MEMORIA/(7517:7517): El nro de tabla asociado al pid 0 es 4
+[INFO] 23:35:13:519 MEMORIA/(7633:7633): El nro de tabla asociado al pid 0 es 0
+[INFO] 23:35:58:247 MEMORIA/(7754:7754): El nro de tabla asociado al pid 0 es 4
+[INFO] 23:37:36:219 πα‚	/(8001:8001): El nro de tabla asociado al pid 0 es 4
+[INFO] 23:38:10:467 MEMORIA/(8098:8098): El nro de tabla asociado al pid 0 es 4
+[INFO] 23:38:53:019 MEMORIA/(8207:8207): El nro de tabla asociado al pid 1 es 0
+[INFO] 23:41:18:758 MEMORIA/(8531:8531): El nro de tabla asociado al pid 0 es 4
+[INFO] 23:41:42:339 MEMORIA/(8604:8604): El nro de tabla asociado al pid 0 es 4
+[INFO] 23:48:29:281 MEMORIA/(9431:9431): El nro de tabla asociado al pid 0 es 0
+[INFO] 15:49:56:808 MEMORIA/(5100:5100): El pid es: 1
+[INFO] 15:50:39:164 MEMORIA/(5241:5241): El pid es: 1
+[INFO] 15:50:39:167 MEMORIA/(5241:5241): El nro de tabla asociado al pid 1 es 0
+[INFO] 16:03:02:435 MEMORIA/(6062:6062): El pid es: 1
+[INFO] 16:05:11:237 MEMORIA/(6915:6915): El pid es: 1
+[INFO] 16:05:11:238 MEMORIA/(6915:6915): El nro de tabla asociado al pid 1 es 0
+[INFO] 16:10:28:036 MEMORIA/(7377:7377): El pid es: 167895472
+[INFO] 16:10:28:042 MEMORIA/(7377:7377): El nro de tabla asociado al pid 1 es 4
+[INFO] 16:16:22:487 MEMORIA/(7923:7923): El pid es: 1
+[INFO] 16:16:22:487 MEMORIA/(7923:7923): El nro de tabla asociado al pid 1 es 0
+[INFO] 16:17:40:363 MEMORIA/(8073:8073): El pid es: 1 y tamanio 2
+[INFO] 16:17:40:364 MEMORIA/(8073:8073): El nro de tabla asociado al pid 1 es 0
+[INFO] 16:18:36:609 MEMORIA/(8185:8185): El pid es: 0
+[INFO] 16:18:36:610 MEMORIA/(8185:8185): El nro de tabla asociado al pid 1 es 4
+[INFO] 16:19:29:260 MEMORIA/(8301:8301): El pid es: 1
+[INFO] 16:19:29:260 MEMORIA/(8301:8301): El nro de tabla asociado al pid 1 es 0
+[INFO] 16:22:22:674 MEMORIA/(8587:8587): El pid es: 0
+[INFO] 16:22:22:680 MEMORIA/(8587:8587): El nro de tabla asociado al pid 0 es 0
+[INFO] 16:23:51:835 MEMORIA/(8740:8740): El pid es: 1
+[INFO] 16:23:51:836 MEMORIA/(8740:8740): El nro de tabla asociado al pid 1 es 0
+[INFO] 16:24:37:392 MEMORIA/(8839:8839): El pid es: 1
+[INFO] 16:24:37:392 MEMORIA/(8839:8839): El nro de tabla asociado al pid 1 es 0
+[INFO] 16:29:08:922 MEMORIA/(9233:9233): El pid es: 1
+[INFO] 16:29:08:927 MEMORIA/(9233:9233): El nro de tabla asociado al pid 1 es 4
+[INFO] 16:30:32:327 MEMORIA/(9386:9386): El pid es: 0
+[INFO] 16:30:32:328 MEMORIA/(9386:9386): El nro de tabla asociado al pid 1 es 0
+[INFO] 16:31:44:514 MEMORIA/(9535:9535): El pid es: 0
+[INFO] 16:31:44:535 MEMORIA/(9535:9535): El nro de tabla asociado al pid 1 es 0
+[INFO] 16:33:47:976 MEMORIA/(9772:9772): El pid es: 1
+[INFO] 16:33:47:987 MEMORIA/(9772:9772): El nro de tabla asociado al pid 1 es 4
+[INFO] 16:34:09:371 MEMORIA/(9832:9832): El pid es: 1
+[INFO] 16:34:09:372 MEMORIA/(9832:9832): El nro de tabla asociado al pid 1 es 4
+[INFO] 16:35:26:959 MEMORIA/(10003:10003): El pid es: 1
+[INFO] 16:35:26:963 MEMORIA/(10003:10003): El nro de tabla asociado al pid 1 es 0
+[INFO] 16:37:53:785 MEMORIA/(10293:10293): El pid es: 1
+[INFO] 16:37:53:791 MEMORIA/(10293:10293): El nro de tabla asociado al pid 1 es 4
+[INFO] 17:13:47:769 MEMORIA/(13646:13646): El pid es: 0
+[INFO] 17:13:47:770 MEMORIA/(13646:13646): El nro de tabla asociado al pid 0 es 0
