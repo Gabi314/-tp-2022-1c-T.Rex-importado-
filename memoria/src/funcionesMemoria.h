@@ -47,12 +47,17 @@ int marcosPorProceso;
 int retardoSwap; //Tiempo en milisegundos que se deberá esperar para cada operación del SWAP (leer/escribir)
 
 //Tabla de paginas
+typedef struct{
+	int numeroDePagina;//depnde en que linea ponga esta variable cambia su valor(basura, memory leak)
+	int numeroMarco;
+	int presencia;
+	int uso;
+	int modificado;
+
+}pagina;
+
 typedef struct{// capaz usar diccionario
-	//int* entradas;
-	int marco;
-	bool presencia;
-	bool uso;
-	bool modificado;
+	t_list* paginas;
 }t_segundoNivel;
 
 typedef struct{// capaz usar diccionario
@@ -60,9 +65,10 @@ typedef struct{// capaz usar diccionario
 	int pid;
 }t_primerNivel;
 
+
+
 void crearConfiguraciones();
 void inicializarEstructuras();
-int pidDeTablaDe1erNivel();
 int buscarNroPaginaDe1erNivel(int);
 void escribirEnSwap(int);
 

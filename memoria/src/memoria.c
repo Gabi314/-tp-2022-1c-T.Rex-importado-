@@ -3,24 +3,44 @@
 int marcosTotales = 0;
 int pid = 0;//lo hardcodeo
 int entrada = 0;
+int contPaginas = 0;
+
 t_list* listaT1nivel;
+t_list* listaT2nivel;
+t_list* listaDePaginas;
+
 
 int main(void) {
 	logger = log_create("memoria.log", "MEMORIA", 1, LOG_LEVEL_INFO);
 	crearConfiguraciones();
 
 	listaT1nivel = list_create();
+	listaT2nivel = list_create();
+	listaDePaginas = list_create();
 	inicializarEstructuras();
-	//pid++;
-	//inicializarEstructuras(); preguntar en el grupo por que devuelve el pid 1 en posicion 0
+	pid++;
+	inicializarEstructuras();
+	pid++;
+	inicializarEstructuras();
 
-	t_primerNivel* unaTablaDe1erNivel = malloc(sizeof(unaTablaDe1erNivel));
-	unaTablaDe1erNivel = list_get(listaT1nivel,0);
+	//pagina* paginaBuscada = malloc(sizeof(pagina));
+
+	pagina* unaPagina = list_get(listaDePaginas,12);
+
+	//memcpy(paginaBuscada, paginaEnLista, sizeof(pagina));
+
+
+	log_info(logger,"%d",unaPagina->numeroDePagina);
+
+	//free(paginaBuscada);
+
+
+	t_primerNivel* unaTablaDe1erNivel = list_get(listaT1nivel,1);
 
 	log_info(logger,"El pid es: %d",unaTablaDe1erNivel->pid);
-	free(unaTablaDe1erNivel);
+	log_info(logger,"El nro de tabla asociado al pid %d es %d",unaTablaDe1erNivel->pid,buscarNroPaginaDe1erNivel(unaTablaDe1erNivel->pid));
 
-	log_info(logger,"El nro de tabla asociado al pid %d es %d",pid,buscarNroPaginaDe1erNivel(pid));
+	//free(unaTablaDe1erNivel);
 
 
 }
@@ -40,24 +60,29 @@ void crearConfiguraciones(){
 }
 
 void inicializarEstructuras(){
-	t_primerNivel* tablaPrimerNivel = malloc(sizeof(tablaPrimerNivel));
 
-	int contadorDeMarcos = 0;
+
+	t_primerNivel* tablaPrimerNivel = malloc(sizeof(t_primerNivel));
 	tablaPrimerNivel->pid = pid;
 	tablaPrimerNivel->tablasDeSegundoNivel = list_create();
 
+	//For tablas 2do nivel
 	for(int i=0;i<entradasPorTabla;i++){
 
-		t_segundoNivel* tablaDeSegundoNivel = malloc(sizeof(tablaDeSegundoNivel));
-		tablaDeSegundoNivel->marco = contadorDeMarcos;
-		//list_add(listaT2nivel,tablaDeSegundoNivel); No seria necesario por ahora
+		t_segundoNivel* tablaDeSegundoNivel = malloc(sizeof(t_segundoNivel));
+		tablaDeSegundoNivel->paginas = list_create();
+
+		cargarPaginas(tablaDeSegundoNivel);
+		//tablaDeSegundoNivel->marcos = contadorDeMarcos;
+		list_add(listaT2nivel,tablaDeSegundoNivel);
 
 		list_add(tablaPrimerNivel->tablasDeSegundoNivel, tablaDeSegundoNivel);
-		contadorDeMarcos++;
 
 
 		free(tablaDeSegundoNivel);
 	}
+
+	contPaginas = 0;
 
 
 	list_add(listaT1nivel,tablaPrimerNivel);
@@ -65,6 +90,21 @@ void inicializarEstructuras(){
 	free(tablaPrimerNivel);
 
 	escribirEnSwap(pid);
+}
+
+void cargarPaginas(t_segundoNivel* tablaDeSegundoNivel){
+
+	for(int j=0;j<entradasPorTabla;j++){ //crear x cantidad de marcos y agregar de a 1 a la lista
+			pagina* unaPagina = malloc(sizeof(pagina));
+
+			unaPagina->numeroDePagina = contPaginas;
+			contPaginas++;
+
+			list_add(listaDePaginas,unaPagina);
+
+			list_add(tablaDeSegundoNivel->paginas,unaPagina);
+
+		}
 }
 
 void escribirEnSwap(int pid){
@@ -84,7 +124,7 @@ void escribirEnSwap(int pid){
 
 
 int buscarNroPaginaDe1erNivel(int pid){
-	t_primerNivel* unaTablaDe1erNivel = malloc(sizeof(unaTablaDe1erNivel));
+	t_primerNivel* unaTablaDe1erNivel = malloc(sizeof(t_primerNivel));
 
 	for(int i=0;i < list_size(listaT1nivel);i++){
 
