@@ -315,6 +315,192 @@ void liberar_conexion(int socket_cliente)
 	close(socket_cliente);
 }
 
+//-----------------PLANIFICADOR---------------
 
+
+
+
+t_algoritmo_planificacion obtener_algoritmo(){
+
+	 t_algoritmo_planificacion switcher;
+	 char* algoritmo = config_get_string_value(config, "ALGORITMO_PLANIFICACION");
+
+	    //FIFO
+	    if (strcmp(algoritmo,"FIFO") == 0)
+	    {
+	        switcher = FIFO;
+	        log_info(logger, "El algoritmo de planificacion elegido es FIFO.");
+	    }
+
+	    //SFJ CON DESALOJO
+	    if (strcmp(algoritmo,"SRT") == 0)
+	    {
+	        switcher = SRT;
+	        log_info(logger, "El algoritmo de planificacion elegido es SJF.");
+	    }
+	    return switcher;
+}
+
+
+
+t_pcb* obtenerSiguienteDeReady(){
+
+	//sem_wait(&contadorReady);
+
+	t_pcb* procesoPlanificado = NULL;
+
+	int tamanioDeColaReady(){
+
+		int tamanio;
+
+		//pthread_mutex_lock(&mutexReady);
+		tamanio = list_size(colaReady);
+		//pthread_mutex_unlock(&mutexReady);
+
+		return tamanio;
+			}
+
+			if (tamanioDeColaReady() > 0){
+
+				// Aca dentro un SWITCH para los distintos algoritmos q llama a una funcion para cada uno
+			  switch(algoritmoPlanificacionActual){
+
+				//CASO FIFO
+				case FIFO:
+					procesoPlanificado = obtenerSiguienteFIFO();
+				break;
+
+				//CASO SJF con desalojo
+				case SRT:
+					procesoPlanificado = obtenerSiguienteSRT();
+				break;
+
+			  }
+			}
+
+			// Devuelve NULL si no hay nada en ready
+			// Caso contrario devuelve el que tiene mas prioridad segun el algoritmo que se este empleando
+			return procesoPlanificado;
+		}
+
+
+		t_pcb* obtenerSiguienteFIFO(){
+			t_pcb* procesoPlanificado = list_get(colaReady,0);
+			return procesoPlanificado;
+		}
+
+		t_pcb* obtenerSiguienteSRT(){
+
+			t_pcb* procesoPlanificado = NULL;
+			t_pcb* procesoAux = NULL;
+		    int i;
+			int indexARemover;
+			float shortestJob;
+
+			//pthread_mutex_lock(&mutexReady);
+			procesoAux = list_get(colaReady,0);
+			//pthread_mutex_unlock(&mutexReady);
+
+			indexARemover = 0;
+			shortestJob = procesoAux->estimacion_rafaga;
+
+			//itero por la lista de Ready
+			//sem_wait(&contadorReady);
+			//pthread_mutex_lock(&mutexReady);
+
+		    for(i=1;i<list_size(colaReady);i++){
+		    	procesoAux = list_get(colaReady,i);
+		    	if(shortestJob > procesoAux->estimacion_rafaga){
+		    		shortestJob = procesoAux->estimacion_rafaga;
+		    		indexARemover = i;
+		    	}
+
+		    }
+
+
+		    procesoPlanificado = list_remove(colaReady, indexARemover);
+
+		        //pthread_mutex_unlock(&mutexReady);
+
+		    	return procesoPlanificado;
+		    }
+
+
+		    //--------------------TRANSICIONES---------------
+
+		    void agregarANew(t_pcb* proceso) {
+
+		    	//pthread_mutex_lock(&mutexNew);
+
+		    	queue_push(colaNew, proceso);
+		    	log_info(logger, "[NEW] Entra el proceso de PID: %d a la cola.", proceso->idProceso);
+
+		    	//pthread_mutex_unlock(&mutexNew);
+
+		    	//sem_post(&analizarSuspension); // Despierta al planificador de mediano plazo
+		    	//sem_wait(&suspensionFinalizada); // Espera a que ya se haya hecho, o no, la suspension
+
+		    	//sem_post(&contadorNew); // Despierta al planificador de largo plazo
+		    	//sem_post(&largoPlazo);
+		    }
+
+		    t_pcb* sacarDeNew(){
+
+		    	//sem_wait(&contadorNew);
+		    	//pthread_mutex_lock(&mutexNew);
+
+		    	t_pcb* proceso = queue_pop(colaNew);
+		    	log_info(logger, "[NEW] Se saca el proceso de PID: %d de la cola", proceso->idProceso);
+
+		    	//pthread_mutex_unlock(&mutexNew);
+
+		    	return proceso;
+		    }
+
+
+		    void agregarAReady(t_pcb* proceso){
+
+		    	//time_t a = time(NULL);
+		    	//proceso->horaDeIngresoAReady = ((float) a)*1000;
+		    	//proceso->tiempoEspera = 0;
+		    	//sem_wait(&multiprogramacion); Lo sacamos de aca para usarlo en el contexto en el que se llama a la funcion, porque no siempre que se agrega a ready, se toca la multiprogramacion
+		    	//pthread_mutex_lock(&mutexReady);
+
+		    	//proceso->suspendido = false;
+		    	list_add(colaReady, proceso);
+		    	log_info(logger, "[READY] Entra el proceso de PID: %d a la cola.", proceso->idProceso);
+
+		    	//pthread_mutex_unlock(&mutexReady);
+		    	//sem_post(&contadorReady);
+		    	//sem_post(&contadorProcesosEnMemoria); Lo sacamos de aca para usarlo en el contexto en el que se llama a la funcion, porque no siempre que se agrega a ready, se toca la multiprogramacion
+		    }
+
+
+		    void agregarABlocked(t_pcb* proceso){		//ver semaforos
+
+		    	//sem_wait(&contadorExe);
+		    	//pthread_mutex_lock(&mutexBlock);
+
+		    	list_add(colaBlocked, proceso);
+		    	log_info(logger, "[BLOCK] Entra el proceso de PID: %d a la cola.", proceso->idProceso);
+
+		    	//pthread_mutex_unlock(&mutexBlock);
+		    	//sem_post(&multiprocesamiento);
+		    	//sem_post(&contadorBlock);
+
+		    		//sem_post(&analizarSuspension);
+		    		//sem_wait(&suspensionFinalizada);
+		    	}
+
+		    	void sacarDeBlocked(t_pcb* proceso){
+
+		    		//sem_wait(&contadorBlock);
+		    		//pthread_mutex_lock(&mutexBlock);
+
+		    		list_remove(colaBlocked, proceso);
+		    		log_info(logger, "[BLOCK] Sale el proceso de PID: %d de la cola.", proceso->idProceso);
+
+		    		//pthread_mutex_unlock(&mutexBlock);
+		    	}
 
 

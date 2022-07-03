@@ -128,10 +128,36 @@ void eliminar_paquete_mensaje(t_paquete* paqueteMensaje);
 //Funciones propias del Kernel como cliente
 t_log* iniciar_logger(void);
 t_config* iniciar_config(void);
+t_config* config;
 //void paquete(int,char*);// aca iria en vez de un char la estructura pcb
 //Revisar esta funcion
 void terminar_programa(int, t_log*, t_config*);
 void conexionConCpu(void);
 //Funciones propias del Kernel como cliente
 
+//-------------PLANIFICADOR---------------
+
+
+typedef enum{
+	SRT,
+	FIFO
+}t_algoritmo_planificacion;
+
+
+t_algoritmo_planificacion algoritmoPlanificacionActual;
+
+t_pcb* obtenerSiguienteFIFO();
+t_pcb* obtenerSiguienteSRT();
+
+//--------------------TRANSICIONES---------------
+
+void agregarANew(t_pcb* proceso);
+t_pcb* sacarDeNew();
+void agregarAReady(t_pcb* proceso);
+
 #endif /* FUNCIONES_KERNEL_H_ */
+
+
+
+
+

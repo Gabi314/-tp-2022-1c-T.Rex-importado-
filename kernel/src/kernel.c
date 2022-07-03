@@ -38,12 +38,12 @@ void cargar_pcb(){
 
 void crear_colas(){
 	colaNew = queue_create();
-	colaReady = queue_create(); //deberia ser una fila, pq la vamos a tener q ordenar con el algoritmo srt
+	colaReady = list_create();
 	colaSuspendedReady = queue_create();
-	colaExe = queue_create();
-	colaBlocked = queue_create();
-	colaSuspendedBlocked = queue_create();
-	colaExit = queue_create();
+	colaExe = list_create();
+	colaBlocked = list_create();
+	colaSuspendedBlocked = list_create();
+	colaExit = list_create();
 }
 
 void generar_conexiones(){
@@ -54,7 +54,22 @@ void generar_conexiones(){
 	 //falta también las conexiones con cpu para interrupciones
 }
 
+t_log* iniciar_logger(void){
+	return log_create("./kernel.log","KERNEL",true,LOG_LEVEL_INFO);
+}
 
+void terminar_programa(int conexion, t_log* logger, t_config* config){
+	/* Y por ultimo, hay que liberar lo que utilizamos (conexion, log y config)
+	  con las funciones de las commons y del TP mencionadas en el enunciado */
+	log_destroy(logger);
+	config_destroy(config);
+
+	liberar_conexion(conexion);
+}
+
+void iterator(char* value) {
+	log_info(logger,"%s", value);
+}
 
 //---------------------------------------------------------------------------------------------
 
@@ -141,9 +156,7 @@ void generar_conexiones(){
 	terminar_programa(conexion, logger, config);
 }*/
 
-t_log* iniciar_logger(void){
-	return log_create("./kernel.log","KERNEL",true,LOG_LEVEL_INFO);
-}
+
 
 /*t_config* iniciar_config(void){
 	return config_create("kernel.config");
@@ -162,15 +175,4 @@ t_log* iniciar_logger(void){
 }*/
 //Revisar ubicacion
 
-void terminar_programa(int conexion, t_log* logger, t_config* config){
-	/* Y por ultimo, hay que liberar lo que utilizamos (conexion, log y config)
-	  con las funciones de las commons y del TP mencionadas en el enunciado */
-	log_destroy(logger);
-	config_destroy(config);
 
-	liberar_conexion(conexion);
-}
-
-void iterator(char* value) {
-	log_info(logger,"%s", value);
-}
