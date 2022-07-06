@@ -13,6 +13,8 @@
 #include<commons/config.h>
 #include<string.h>
 #include<assert.h>
+#include<stdbool.h>
+#include<semaphore.h>
 
 #define IP_KERNEL "127.0.0.1"
 #define PUERTO_KERNEL "8000"
@@ -59,7 +61,9 @@ typedef struct
 	int program_counter;
 	int tabla_paginas; // el tipo ???
 	float estimacion_rafaga;
+	bool suspendido;
 	int socket_cliente;
+	int socketMemoria;
 } t_pcb;
 
 typedef enum
@@ -138,6 +142,7 @@ void conexionConCpu(void);
 //-------------PLANIFICADOR---------------
 
 
+
 typedef enum{
 	SRT,
 	FIFO
@@ -154,6 +159,13 @@ t_pcb* obtenerSiguienteSRT();
 void agregarANew(t_pcb* proceso);
 t_pcb* sacarDeNew();
 void agregarAReady(t_pcb* proceso);
+void agregarABlocked(t_pcb* proceso);
+void sacarDeBlocked(t_pcb* proceso);
+void agregarASuspendedBlocked(t_pcb* proceso);
+void sacarDeSuspendedBlocked(t_pcb* proceso);
+void agregarAReadySuspended(t_pcb* proceso);
+t_pcb* sacarDeReadySuspended();
+
 
 #endif /* FUNCIONES_KERNEL_H_ */
 

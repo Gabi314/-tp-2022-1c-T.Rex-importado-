@@ -2,8 +2,8 @@
 
 int main(void) {
 
-	cargar_pcb();
-	crear_colas();
+	inicializar_configuracion();
+	inicializar_colas();
     generar_conexiones();
 
 	//conexionConConsola();
@@ -12,7 +12,7 @@ int main(void) {
 }
 
 
-void cargar_pcb(){
+void inicializar_configuracion(){
 	t_config* config;
 
 	logger = log_create("log.log", "Servidor", 1, LOG_LEVEL_INFO);
@@ -36,7 +36,7 @@ void cargar_pcb(){
 }
 
 
-void crear_colas(){
+void inicializar_colas(){
 	colaNew = queue_create();
 	colaReady = list_create();
 	colaSuspendedReady = queue_create();
