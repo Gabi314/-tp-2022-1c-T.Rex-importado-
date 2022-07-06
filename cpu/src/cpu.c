@@ -38,31 +38,44 @@ int conexionConKernel(void){
 void conexionConMemoria(void){
 
 	int conexion;
-	char* ip;
-	int puerto;
+	char* ipMemoria;
+	int puertoMemoria;
+	logger = log_create("cpu.log", "CPU", 1, LOG_LEVEL_DEBUG);
+	t_config* config = config_create("cpu.config");
 
-	t_log* logger = iniciar_logger();
-	t_config* config = iniciar_config();
-
-	ip = config_get_string_value(config,"IP_MEMORIA");
-	puerto =  config_get_int_value(config,"PUERTO_MEMORIA");
+	ipMemoria = config_get_string_value(config,"IP_MEMORIA");
+	puertoMemoria =  config_get_int_value(config,"PUERTO_MEMORIA");
 
 	// Creamos una conexión hacia el servidor
-    conexion = crear_conexion(ip, puerto);
-
+    conexion = crear_conexion(ipMemoria, puertoMemoria);
+	log_info(logger,"Hola memoria, soy cpu");
 	// Armamos y enviamos el paquete
-	paquete(conexion, "pido archivo configuracion de memoria");
+	paquete(conexion, "Dame el tamanio de pag y entradas por tabla");
 
-	terminar_programa(conexion, logger, config);
+	t_list* tamanioDePagYEntradas;
+
+	while (1) {
+
+		int cod_op = recibir_operacion(conexion);
+
+		switch (cod_op){
+				case PAQUETE:
+					tamanioDePagYEntradas = recibir_paquete(conexion);
+					log_info(logger, "Me llegaron los siguientes valores:\n");
+					list_iterate(tamanioDePagYEntradas, (void*) iterator);// con list_get por indice agarro tam_pagina y entradas_por_tabla
+					break;
+				case -1:
+					log_error(logger, "Terminando conexion");
+					terminar_programa(conexion, logger, config);
+					break;
+				default:
+					log_warning(logger,"Operacion desconocida. No quieras meter la pata");
+					break;
+				}
+		}
+
 }
 
-t_log* iniciar_logger(void){
-	return log_create("./cpu.log","CPU",true,LOG_LEVEL_INFO);
-}
-
-t_config* iniciar_config(void){
-	return config_create("cpu.config");
-}
 
 void paquete(int conexion, char* pedido){
 
@@ -70,7 +83,6 @@ void paquete(int conexion, char* pedido){
 
 	// Leemos y esta vez agregamos las lineas al paquete
     agregar_a_paquete(paquete,pedido,strlen(pedido) + 1);
-    //free(pcb); tira terrible error
 
     enviar_paquete(paquete,conexion);
     eliminar_paquete(paquete);
@@ -86,6 +98,6 @@ void terminar_programa(int conexion, t_log* logger, t_config* config){
 }
 
 
-void iterator(char* value) {
-	log_info(logger,"%s", value);
+void iterator(int value) {
+	log_info(logger,"%d", value);
 }

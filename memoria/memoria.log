@@ -23,3 +23,353 @@
 [INFO] 17:30:36:278 MEMORIA/(7782:7782): 150430832
 [INFO] 17:30:36:278 MEMORIA/(7782:7782): El pid es: 1
 [INFO] 17:30:36:278 MEMORIA/(7782:7782): El nro de tabla asociado al pid 1 es 1
+[INFO] 19:10:41:864 MEMORIA/(6640:6640): La pagina ubicada en la primer entrada de la 4ta tablaDeSegundo nivel es 12
+[INFO] 19:10:41:880 MEMORIA/(6640:6640): El pid es: 0
+[INFO] 19:10:41:880 MEMORIA/(6640:6640): El nro de tabla asociado al pid 0 es 0
+[INFO] 22:07:59:247 MEMORIA/(28465:28465): Memoria lista para recibir a Cpu o Kernel
+[INFO] 22:08:06:166 MEMORIA/(28465:28465): Se conecto un cliente!
+[INFO] 22:08:06:167 MEMORIA/(28465:28465): Me llegaron los siguientes valores:
+
+[INFO] 22:08:06:167 MEMORIA/(28465:28465): Dame el tamanio de pag y entradas por tabla
+[ERROR] 22:08:06:167 MEMORIA/(28465:28465): Se desconecto el cliente. Terminando conexion
+[INFO] 22:09:49:526 MEMORIA/(28729:28729): Memoria lista para recibir a Cpu o Kernel
+[INFO] 22:09:55:174 MEMORIA/(28729:28729): Se conecto un cliente!
+[INFO] 22:09:55:174 MEMORIA/(28729:28729): Me llegaron los siguientes valores:
+
+[INFO] 22:09:55:174 MEMORIA/(28729:28729): Dame el tamanio de pag y entradas por tabla
+[ERROR] 22:09:55:174 MEMORIA/(28729:28729): Se desconecto el cliente. Terminando conexion
+[INFO] 22:15:14:647 MEMORIA/(29371:29371): Memoria lista para recibir a Cpu o Kernel
+[INFO] 22:15:22:897 MEMORIA/(29371:29371): Se conecto un cliente!
+[INFO] 22:15:22:897 MEMORIA/(29371:29371): Me llegaron los siguientes valores:
+
+[INFO] 22:15:22:897 MEMORIA/(29371:29371): Dame el tamanio de pag y entradas por tabla
+[ERROR] 22:15:22:897 MEMORIA/(29371:29371): Se desconecto el cliente. Terminando conexion
+[INFO] 22:16:51:496 MEMORIA/(29617:29617): Memoria lista para recibir a Cpu o Kernel
+[INFO] 22:16:56:619 MEMORIA/(29617:29617): Se conecto un cliente!
+[INFO] 22:16:56:623 MEMORIA/(29617:29617): Me llegaron los siguientes valores:
+
+[INFO] 22:16:56:623 MEMORIA/(29617:29617): Dame el tamanio de pag y entradas por tabla
+[ERROR] 22:16:56:623 MEMORIA/(29617:29617): Se desconecto el cliente. Terminando conexion
+[INFO] 22:33:58:370 MEMORIA/(31749:31749): Memoria lista para recibir a Cpu o Kernel
+[INFO] 22:34:32:001 MEMORIA/(31849:31849): Memoria lista para recibir a Cpu o Kernel
+[INFO] 22:34:37:218 MEMORIA/(31749:31749): Se conecto un cliente!
+[INFO] 22:34:37:219 MEMORIA/(31749:31749): Me llegaron los siguientes valores:
+
+[INFO] 22:34:37:219 MEMORIA/(31749:31749): Dame el tamanio de pag y entradas por tabla
+[ERROR] 22:34:37:219 MEMORIA/(31749:31749): Se desconecto el cliente. Terminando conexion
+[INFO] 22:39:08:577 MEMORIA/(32451:32451): Memoria lista para recibir a Cpu o Kernel
+[INFO] 22:39:13:742 MEMORIA/(32451:32451): Se conecto un cliente!
+[INFO] 22:39:13:743 MEMORIA/(32451:32451): Me llegaron los siguientes valores:
+
+[INFO] 22:39:13:743 MEMORIA/(32451:32451): Dame el tamanio de pag y entradas por tabla
+[ERROR] 22:39:13:743 MEMORIA/(32451:32451): Se desconecto el cliente. Terminando conexion
+[INFO] 22:40:02:639 MEMORIA/(32587:32587): Memoria lista para recibir a Cpu o Kernel
+[INFO] 22:40:07:097 MEMORIA/(32587:32587): Se conecto un cliente!
+[INFO] 22:40:07:099 MEMORIA/(32587:32587): Me llegaron los siguientes valores:
+
+[INFO] 22:40:07:099 MEMORIA/(32587:32587): Dame el tamanio de pag y entradas por tabla
+[ERROR] 22:40:07:099 MEMORIA/(32587:32587): Se desconecto el cliente. Terminando conexion
+[INFO] 22:41:36:006 MEMORIA/(366:366): Memoria lista para recibir a Cpu o Kernel
+[INFO] 22:42:17:907 MEMORIA/(366:366): Se conecto un cliente!
+[INFO] 22:42:36:181 MEMORIA/(366:366): Me llegaron los siguientes valores:
+
+[INFO] 22:42:36:181 MEMORIA/(366:366): Dame el tamanio de pag y entradas por tabla
+[ERROR] 22:42:36:181 MEMORIA/(366:366): Se desconecto el cliente. Terminando conexion
+[INFO] 22:43:08:226 MEMORIA/(614:614): Memoria lista para recibir a Cpu o Kernel
+[INFO] 22:43:47:384 MEMORIA/(723:723): Memoria lista para recibir a Cpu o Kernel
+[INFO] 22:44:19:084 MEMORIA/(723:723): Se conecto un cliente!
+[INFO] 22:45:28:964 MEMORIA/(723:723): Me llegaron los siguientes valores:
+
+[INFO] 22:45:28:965 MEMORIA/(723:723): Dame el tamanio de pag y entradas por tabla
+[ERROR] 22:45:57:220 MEMORIA/(723:723): Se desconecto el cliente. Terminando conexion
+[INFO] 22:47:11:890 MEMORIA/(1255:1255): Memoria lista para recibir a Cpu o Kernel
+[INFO] 22:47:19:897 MEMORIA/(1255:1255): Se conecto un cliente!
+[INFO] 22:47:19:903 MEMORIA/(1255:1255): Me llegaron los siguientes valores:
+
+[INFO] 22:47:19:903 MEMORIA/(1255:1255): Dame el tamanio de pag y entradas por tabla
+[INFO] 22:53:52:017 MEMORIA/(2111:2111): Memoria lista para recibir a Cpu o Kernel
+[INFO] 22:53:57:098 MEMORIA/(2111:2111): Se conecto un cliente!
+[INFO] 22:53:57:108 MEMORIA/(2111:2111): Me llegaron los siguientes valores:
+
+[INFO] 22:53:57:108 MEMORIA/(2111:2111): Dame el tamanio de pag y entradas por tabla
+[ERROR] 22:54:04:929 MEMORIA/(2111:2111): Se desconecto el cliente. Terminando conexion
+[INFO] 22:57:06:957 MEMORIA/(2601:2601): Memoria lista para recibir a Cpu o Kernel
+[INFO] 22:57:24:619 MEMORIA/(2656:2656): Memoria lista para recibir a Cpu o Kernel
+[INFO] 22:57:34:113 MEMORIA/(2601:2601): Se conecto un cliente!
+[INFO] 22:57:34:115 MEMORIA/(2601:2601): Me llegaron los siguientes valores:
+
+[INFO] 22:57:34:116 MEMORIA/(2601:2601): Dame el tamanio de pag y entradas por tabla
+[ERROR] 22:57:37:116 MEMORIA/(2601:2601): Se desconecto el cliente. Terminando conexion
+[INFO] 17:14:43:235 MEMORIA/(9836:9836): Memoria lista para recibir a Cpu o Kernel
+[INFO] 17:14:48:781 MEMORIA/(9836:9836): Se conecto un cliente!
+[INFO] 17:14:48:789 MEMORIA/(9836:9836): Envio el tamanio de pag que es 64
+[INFO] 17:14:48:790 MEMORIA/(9836:9836): envio lo siguiente
+[INFO] 17:14:48:790 MEMORIA/(9836:9836): Me llegaron los siguientes valores:
+
+[INFO] 17:14:48:790 MEMORIA/(9836:9836): Dame el tamanio de pag y entradas por tabla
+[ERROR] 17:14:49:549 MEMORIA/(9836:9836): Se desconecto el cliente. Terminando conexion
+[INFO] 17:19:26:624 MEMORIA/(10307:10307): Memoria lista para recibir a Cpu o Kernel
+[INFO] 17:19:31:871 MEMORIA/(10307:10307): Se conecto un cliente!
+[INFO] 17:19:31:872 MEMORIA/(10307:10307): Envio el tamanio de pag que es 64
+[INFO] 17:19:31:872 MEMORIA/(10307:10307): envio lo siguiente
+[INFO] 17:19:31:872 MEMORIA/(10307:10307): Me llegaron los siguientes valores:
+
+[INFO] 17:19:31:872 MEMORIA/(10307:10307): Dame el tamanio de pag y entradas por tabla
+[ERROR] 17:19:42:382 MEMORIA/(10307:10307): Se desconecto el cliente. Terminando conexion
+[INFO] 17:22:10:547 MEMORIA/(10659:10659): Memoria lista para recibir a Cpu o Kernel
+[INFO] 17:22:15:793 MEMORIA/(10659:10659): Se conecto un cliente!
+[INFO] 17:22:15:795 MEMORIA/(10659:10659): Envio el tamanio de pag que es 64
+[INFO] 17:22:15:795 MEMORIA/(10659:10659): envio lo siguiente
+[INFO] 17:22:15:795 MEMORIA/(10659:10659): Me llegaron los siguientes valores:
+
+[INFO] 17:22:15:795 MEMORIA/(10659:10659): Dame el tamanio de pag y entradas por tabla
+[ERROR] 17:22:22:746 MEMORIA/(10659:10659): Se desconecto el cliente. Terminando conexion
+[INFO] 17:24:01:853 MEMORIA/(10855:10855): Memoria lista para recibir a Cpu o Kernel
+[INFO] 17:24:06:518 MEMORIA/(10855:10855): Se conecto un cliente!
+[INFO] 17:24:06:519 MEMORIA/(10855:10855): Envio el tamanio de pag que es 64
+[INFO] 17:24:06:519 MEMORIA/(10855:10855): envio lo siguiente
+[INFO] 17:24:06:519 MEMORIA/(10855:10855): Me llegaron los siguientes valores:
+
+[INFO] 17:24:06:519 MEMORIA/(10855:10855): Dame el tamanio de pag y entradas por tabla
+[ERROR] 17:24:12:218 MEMORIA/(10855:10855): Se desconecto el cliente. Terminando conexion
+[INFO] 17:24:46:283 MEMORIA/(10962:10962): Memoria lista para recibir a Cpu o Kernel
+[INFO] 17:24:50:201 MEMORIA/(10962:10962): Se conecto un cliente!
+[INFO] 17:24:50:202 MEMORIA/(10962:10962): Envio el tamanio de pag que es 64
+[INFO] 17:30:04:640 MEMORIA/(11545:11545): Memoria lista para recibir a Cpu o Kernel
+[INFO] 17:30:09:515 MEMORIA/(11545:11545): Se conecto un cliente!
+[INFO] 17:30:09:522 MEMORIA/(11545:11545): Envio el tamanio de pag que es 64
+[INFO] 17:30:09:522 MEMORIA/(11545:11545): envio lo siguiente
+[INFO] 17:30:09:522 MEMORIA/(11545:11545): Me llegaron los siguientes valores:
+
+[INFO] 17:30:09:522 MEMORIA/(11545:11545): Dame el tamanio de pag y entradas por tabla
+[ERROR] 17:30:15:208 MEMORIA/(11545:11545): Se desconecto el cliente. Terminando conexion
+[INFO] 17:33:01:813 MEMORIA/(11861:11861): Memoria lista para recibir a Cpu o Kernel
+[INFO] 17:33:07:393 MEMORIA/(11861:11861): Se conecto un cliente!
+[INFO] 17:33:07:393 MEMORIA/(11861:11861): Envio el tamanio de pag que es 64
+[INFO] 17:33:51:176 MEMORIA/(11974:11974): Memoria lista para recibir a Cpu o Kernel
+[INFO] 17:34:34:956 MEMORIA/(12056:12056): Memoria lista para recibir a Cpu o Kernel
+[INFO] 17:34:42:191 MEMORIA/(12056:12056): Se conecto un cliente!
+[INFO] 17:34:42:195 MEMORIA/(12056:12056): Envio el tamanio de pag que es 64
+[INFO] 17:34:42:195 MEMORIA/(12056:12056): Me llegaron los siguientes valores:
+
+[INFO] 17:34:42:195 MEMORIA/(12056:12056): Dame el tamanio de pag y entradas por tabla
+[ERROR] 17:34:45:889 MEMORIA/(12056:12056): Se desconecto el cliente. Terminando conexion
+[INFO] 17:42:12:357 MEMORIA/(13005:13005): Memoria lista para recibir a Cpu o Kernel
+[INFO] 17:42:17:091 MEMORIA/(13005:13005): Se conecto un cliente!
+[INFO] 17:42:17:092 MEMORIA/(13005:13005): Envio el tamanio de pag que es 64
+[INFO] 17:42:17:092 MEMORIA/(13005:13005): Me llegaron los siguientes valores:
+
+[INFO] 17:42:17:092 MEMORIA/(13005:13005): Dame el tamanio de pag y entradas por tabla
+[ERROR] 17:42:20:811 MEMORIA/(13005:13005): Se desconecto el cliente. Terminando conexion
+[INFO] 17:48:56:104 MEMORIA/(13759:13759): Memoria lista para recibir a Cpu o Kernel
+[INFO] 17:49:00:022 MEMORIA/(13759:13759): Se conecto un cliente!
+[INFO] 17:49:00:023 MEMORIA/(13759:13759): Envio el tamanio de pag que es 64
+[INFO] 17:49:00:023 MEMORIA/(13759:13759): Me llegaron los siguientes valores:
+
+[INFO] 17:49:00:023 MEMORIA/(13759:13759): Dame el tamanio de pag y entradas por tabla
+[ERROR] 17:49:04:708 MEMORIA/(13759:13759): Se desconecto el cliente. Terminando conexion
+[INFO] 18:01:47:891 MEMORIA/(14865:14865): Memoria lista para recibir a Cpu o Kernel
+[INFO] 18:01:53:529 MEMORIA/(14865:14865): Se conecto un cliente!
+[INFO] 18:01:53:532 MEMORIA/(14865:14865): Envio el tamanio de pag que es 64
+[INFO] 18:01:53:532 MEMORIA/(14865:14865): Me llegaron los siguientes valores:
+
+[INFO] 18:01:53:532 MEMORIA/(14865:14865): Dame el tamanio de pag y entradas por tabla
+[ERROR] 18:01:57:750 MEMORIA/(14865:14865): Se desconecto el cliente. Terminando conexion
+[INFO] 18:06:35:454 MEMORIA/(15343:15343): Memoria lista para recibir a Cpu o Kernel
+[INFO] 18:06:40:858 MEMORIA/(15343:15343): Se conecto un cliente!
+[INFO] 18:06:40:864 MEMORIA/(15343:15343): Envio el tamanio de pag que es 64
+[INFO] 18:06:40:864 MEMORIA/(15343:15343): Me llegaron los siguientes valores:
+
+[INFO] 18:06:40:864 MEMORIA/(15343:15343): Dame el tamanio de pag y entradas por tabla
+[ERROR] 18:06:49:565 MEMORIA/(15343:15343): Se desconecto el cliente. Terminando conexion
+[INFO] 18:09:20:985 MEMORIA/(15661:15661): Memoria lista para recibir a Cpu o Kernel
+[INFO] 18:09:24:624 MEMORIA/(15661:15661): Se conecto un cliente!
+[INFO] 18:09:24:624 MEMORIA/(15661:15661): Envio el tamanio de pag que es 64
+[INFO] 18:09:24:624 MEMORIA/(15661:15661): Me llegaron los siguientes valores:
+
+[INFO] 18:09:24:625 MEMORIA/(15661:15661): Dame el tamanio de pag y entradas por tabla
+[ERROR] 18:09:26:897 MEMORIA/(15661:15661): Se desconecto el cliente. Terminando conexion
+[INFO] 18:11:35:728 MEMORIA/(15922:15922): Memoria lista para recibir a Cpu o Kernel
+[INFO] 18:11:39:823 MEMORIA/(15922:15922): Se conecto un cliente!
+[INFO] 18:11:39:824 MEMORIA/(15922:15922): Envio el tamanio de pag que es 64
+[INFO] 18:11:39:824 MEMORIA/(15922:15922): Me llegaron los siguientes valores:
+
+[INFO] 18:11:39:824 MEMORIA/(15922:15922): Dame el tamanio de pag y entradas por tabla
+[ERROR] 18:11:45:163 MEMORIA/(15922:15922): Se desconecto el cliente. Terminando conexion
+[INFO] 18:11:55:615 MEMORIA/(15994:15994): Memoria lista para recibir a Cpu o Kernel
+[INFO] 18:11:59:808 MEMORIA/(15994:15994): Se conecto un cliente!
+[INFO] 18:11:59:813 MEMORIA/(15994:15994): Envio el tamanio de pag que es 64
+[INFO] 18:11:59:813 MEMORIA/(15994:15994): Me llegaron los siguientes valores:
+
+[INFO] 18:11:59:813 MEMORIA/(15994:15994): Dame el tamanio de pag y entradas por tabla
+[ERROR] 18:12:01:675 MEMORIA/(15994:15994): Se desconecto el cliente. Terminando conexion
+[INFO] 18:19:17:706 MEMORIA/(16742:16742): Memoria lista para recibir a Cpu o Kernel
+[INFO] 18:19:21:971 MEMORIA/(16742:16742): Se conecto un cliente!
+[INFO] 18:19:21:971 MEMORIA/(16742:16742): Envio el tamanio de pag que es 64
+[INFO] 18:19:21:971 MEMORIA/(16742:16742): Me llegaron los siguientes valores:
+
+[INFO] 18:19:21:971 MEMORIA/(16742:16742): Dame el tamanio de pag y entradas por tabla
+[ERROR] 18:19:25:592 MEMORIA/(16742:16742): Se desconecto el cliente. Terminando conexion
+[INFO] 18:41:15:270 MEMORIA/(18812:18812): Memoria lista para recibir a Cpu o Kernel
+[INFO] 18:41:20:178 MEMORIA/(18812:18812): Se conecto un cliente!
+[INFO] 18:41:20:180 MEMORIA/(18812:18812): Envio el tamanio de pag que es 64
+[INFO] 18:41:20:180 MEMORIA/(18812:18812): Me llegaron los siguientes valores:
+
+[INFO] 18:41:20:180 MEMORIA/(18812:18812): Dame el tamanio de pag y entradas por tabla
+[ERROR] 18:41:21:709 MEMORIA/(18812:18812): Se desconecto el cliente. Terminando conexion
+[INFO] 18:43:31:704 MEMORIA/(19061:19061): Memoria lista para recibir a Cpu o Kernel
+[INFO] 18:43:36:238 MEMORIA/(19061:19061): Se conecto un cliente!
+[INFO] 18:43:36:245 MEMORIA/(19061:19061): Envio el tamanio de pag y cant entradas que son:
+[INFO] 18:47:00:545 MEMORIA/(19465:19465): Memoria lista para recibir a Cpu o Kernel
+[INFO] 18:47:04:777 MEMORIA/(19465:19465): Se conecto un cliente!
+[INFO] 18:47:04:778 MEMORIA/(19465:19465): Envio el tamanio de pag y cant entradas que son:
+[INFO] 18:47:04:778 MEMORIA/(19465:19465): 134525128
+[INFO] 18:47:04:778 MEMORIA/(19465:19465): 134525124
+[INFO] 18:47:04:778 MEMORIA/(19465:19465): Me llegaron los siguientes valores:
+
+[INFO] 18:47:04:778 MEMORIA/(19465:19465): 146822656
+[ERROR] 18:47:05:320 MEMORIA/(19465:19465): Se desconecto el cliente. Terminando conexion
+[INFO] 18:48:53:254 MEMORIA/(19587:19587): Memoria lista para recibir a Cpu o Kernel
+[INFO] 18:48:57:251 MEMORIA/(19587:19587): Se conecto un cliente!
+[INFO] 18:48:57:252 MEMORIA/(19587:19587): Envio el tamanio de pag y cant entradas que son:
+[INFO] 18:48:57:252 MEMORIA/(19587:19587): 64
+[INFO] 18:48:57:252 MEMORIA/(19587:19587): 4
+[INFO] 18:48:57:252 MEMORIA/(19587:19587): Me llegaron los siguientes valores:
+
+[INFO] 18:48:57:252 MEMORIA/(19587:19587): 162760192
+[ERROR] 18:48:57:673 MEMORIA/(19587:19587): Se desconecto el cliente. Terminando conexion
+[INFO] 18:50:36:404 MEMORIA/(19692:19692): Memoria lista para recibir a Cpu o Kernel
+[INFO] 18:50:39:989 MEMORIA/(19692:19692): Se conecto un cliente!
+[INFO] 18:50:39:990 MEMORIA/(19692:19692): Envio el tamanio de pag y cant entradas que son:
+[INFO] 18:50:39:990 MEMORIA/(19692:19692): 64
+[INFO] 18:50:39:990 MEMORIA/(19692:19692): 4
+[INFO] 18:50:39:990 MEMORIA/(19692:19692): Me llegaron los siguientes valores:
+
+[INFO] 18:50:39:990 MEMORIA/(19692:19692): 143296000
+[ERROR] 18:50:40:604 MEMORIA/(19692:19692): Se desconecto el cliente. Terminando conexion
+[INFO] 18:51:40:273 MEMORIA/(19779:19779): Memoria lista para recibir a Cpu o Kernel
+[INFO] 18:51:45:257 MEMORIA/(19779:19779): Se conecto un cliente!
+[INFO] 18:51:45:261 MEMORIA/(19779:19779): Envio el tamanio de pag y cant entradas que son:
+[INFO] 18:51:45:261 MEMORIA/(19779:19779): 64
+[INFO] 18:51:45:261 MEMORIA/(19779:19779): 4
+[INFO] 18:51:45:261 MEMORIA/(19779:19779): Me llegaron los siguientes valores:
+
+[INFO] 18:51:45:262 MEMORIA/(19779:19779): 142951936
+[ERROR] 18:52:00:041 MEMORIA/(19779:19779): Se desconecto el cliente. Terminando conexion
+[INFO] 18:54:59:803 MEMORIA/(20021:20021): Memoria lista para recibir a Cpu o Kernel
+[INFO] 18:55:04:229 MEMORIA/(20021:20021): Se conecto un cliente!
+[INFO] 18:55:04:230 MEMORIA/(20021:20021): Envio el tamanio de pag y cant entradas que son:
+[INFO] 18:55:04:230 MEMORIA/(20021:20021): Me llegaron los siguientes valores:
+
+[INFO] 18:55:04:230 MEMORIA/(20021:20021): 149132800
+[ERROR] 18:55:27:647 MEMORIA/(20021:20021): Se desconecto el cliente. Terminando conexion
+[INFO] 18:56:57:047 MEMORIA/(20286:20286): Memoria lista para recibir a Cpu o Kernel
+[INFO] 18:57:01:416 MEMORIA/(20286:20286): Se conecto un cliente!
+[INFO] 18:57:01:420 MEMORIA/(20286:20286): Envio el tamanio de pag y cant entradas que son:
+[INFO] 18:57:01:420 MEMORIA/(20286:20286): Me llegaron los siguientes valores:
+
+[INFO] 18:57:01:420 MEMORIA/(20286:20286): 146793984
+[INFO] 18:58:02:788 MEMORIA/(20393:20393): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:00:55:557 MEMORIA/(20572:20572): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:02:02:663 MEMORIA/(20724:20724): Memoria lista para recibir a Cpu o Kernel
+[ERROR] 19:03:21:722 MEMORIA/(20286:20286): Se desconecto el cliente. Terminando conexion
+[INFO] 19:03:37:118 MEMORIA/(20841:20841): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:04:11:997 MEMORIA/(20841:20841): Se conecto un cliente!
+[INFO] 19:04:20:029 MEMORIA/(20841:20841): Envio el tamanio de pag y cant entradas que son:
+[INFO] 19:04:20:029 MEMORIA/(20841:20841): Me llegaron los siguientes valores:
+
+[INFO] 19:04:20:029 MEMORIA/(20841:20841): 166098432
+[ERROR] 19:07:06:995 MEMORIA/(20841:20841): Se desconecto el cliente. Terminando conexion
+[INFO] 19:12:18:640 MEMORIA/(21347:21347): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:13:19:656 MEMORIA/(21347:21347): Se conecto un cliente!
+[INFO] 19:13:19:656 MEMORIA/(21347:21347): Envio el tamanio de pag y cant entradas que son:
+[INFO] 19:13:19:656 MEMORIA/(21347:21347): Me llegaron los siguientes valores:
+
+[INFO] 19:13:19:656 MEMORIA/(21347:21347): 147699200
+[ERROR] 19:13:35:537 MEMORIA/(21347:21347): Se desconecto el cliente. Terminando conexion
+[INFO] 19:14:35:168 MEMORIA/(21536:21536): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:14:38:900 MEMORIA/(21536:21536): Se conecto un cliente!
+[INFO] 19:14:38:901 MEMORIA/(21536:21536): Envio el tamanio de pag y cant entradas que son:
+[INFO] 19:14:38:901 MEMORIA/(21536:21536): Me llegaron los siguientes valores:
+
+[INFO] 19:14:38:901 MEMORIA/(21536:21536): 134931968
+[ERROR] 19:14:58:745 MEMORIA/(21536:21536): Se desconecto el cliente. Terminando conexion
+[INFO] 19:15:53:491 MEMORIA/(21653:21653): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:15:59:962 MEMORIA/(21653:21653): Se conecto un cliente!
+[INFO] 19:15:59:963 MEMORIA/(21653:21653): Envio el tamanio de pag y cant entradas que son:
+[INFO] 19:15:59:963 MEMORIA/(21653:21653): Me llegaron los siguientes valores:
+
+[INFO] 19:15:59:964 MEMORIA/(21653:21653): 150533632
+[ERROR] 19:16:03:997 MEMORIA/(21653:21653): Se desconecto el cliente. Terminando conexion
+[INFO] 19:22:22:778 MEMORIA/(22026:22026): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:22:28:116 MEMORIA/(22026:22026): Se conecto un cliente!
+[INFO] 19:22:28:117 MEMORIA/(22026:22026): Envio el tamanio de pag y cant entradas que son:
+[INFO] 19:22:28:117 MEMORIA/(22026:22026): Me llegaron los siguientes valores:
+
+[INFO] 19:22:28:117 MEMORIA/(22026:22026): 147191296
+[ERROR] 19:22:32:899 MEMORIA/(22026:22026): Se desconecto el cliente. Terminando conexion
+[INFO] 19:23:03:589 MEMORIA/(22093:22093): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:23:07:465 MEMORIA/(22093:22093): Se conecto un cliente!
+[INFO] 19:23:07:468 MEMORIA/(22093:22093): Envio el tamanio de pag y cant entradas que son:
+[INFO] 19:23:07:468 MEMORIA/(22093:22093): Me llegaron los siguientes valores:
+
+[INFO] 19:23:07:468 MEMORIA/(22093:22093): 135878144
+[ERROR] 19:23:09:346 MEMORIA/(22093:22093): Se desconecto el cliente. Terminando conexion
+[INFO] 19:24:18:257 MEMORIA/(22226:22226): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:24:21:292 MEMORIA/(22226:22226): Se conecto un cliente!
+[INFO] 19:24:21:294 MEMORIA/(22226:22226): Envio el tamanio de pag y cant entradas que son:
+[INFO] 19:24:21:294 MEMORIA/(22226:22226): Me llegaron los siguientes valores:
+
+[INFO] 19:24:21:294 MEMORIA/(22226:22226): 163276288
+[ERROR] 19:24:25:526 MEMORIA/(22226:22226): Se desconecto el cliente. Terminando conexion
+[INFO] 19:24:31:013 MEMORIA/(22257:22257): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:25:00:007 MEMORIA/(22257:22257): Se conecto un cliente!
+[INFO] 19:25:45:708 MEMORIA/(22257:22257): Envio el tamanio de pag y cant entradas que son:
+[INFO] 19:25:45:708 MEMORIA/(22257:22257): Me llegaron los siguientes valores:
+
+[INFO] 19:25:45:709 MEMORIA/(22257:22257): 164328960
+[ERROR] 19:28:08:902 MEMORIA/(22257:22257): Se desconecto el cliente. Terminando conexion
+[INFO] 19:29:25:930 MEMORIA/(22644:22644): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:29:29:863 MEMORIA/(22644:22644): Se conecto un cliente!
+[INFO] 19:29:29:863 MEMORIA/(22644:22644): Envio el tamanio de pag y cant entradas que son:
+[INFO] 19:29:29:863 MEMORIA/(22644:22644): Me llegaron los siguientes valores:
+
+[INFO] 19:29:29:863 MEMORIA/(22644:22644): 146466256
+[INFO] 19:30:39:508 MEMORIA/(22742:22742): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:32:02:347 MEMORIA/(22848:22848): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:32:52:772 MEMORIA/(22931:22931): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:32:57:660 MEMORIA/(22931:22931): Se conecto un cliente!
+[INFO] 19:32:57:663 MEMORIA/(22931:22931): Envio el tamanio de pag y cant entradas que son:
+[INFO] 19:32:57:663 MEMORIA/(22931:22931): Me llegaron los siguientes valores:
+
+[INFO] 19:32:57:663 MEMORIA/(22931:22931): 148755920
+[ERROR] 19:33:02:178 MEMORIA/(22931:22931): Se desconecto el cliente. Terminando conexion
+[INFO] 19:33:26:162 MEMORIA/(22997:22997): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:33:30:302 MEMORIA/(22997:22997): Se conecto un cliente!
+[INFO] 19:33:30:303 MEMORIA/(22997:22997): Envio el tamanio de pag y cant entradas que son:
+[INFO] 19:33:30:303 MEMORIA/(22997:22997): Me llegaron los siguientes valores:
+
+[INFO] 19:33:30:303 MEMORIA/(22997:22997): 162293200
+[ERROR] 19:33:44:544 MEMORIA/(22997:22997): Se desconecto el cliente. Terminando conexion
+[INFO] 19:34:35:637 MEMORIA/(23087:23087): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:34:38:981 MEMORIA/(23087:23087): Se conecto un cliente!
+[INFO] 19:34:38:984 MEMORIA/(23087:23087): Envio el tamanio de pag y cant entradas que son:
+[INFO] 19:34:38:984 MEMORIA/(23087:23087): Me llegaron los siguientes valores:
+
+[INFO] 19:34:38:984 MEMORIA/(23087:23087): 156620240
+[INFO] 19:35:15:971 MEMORIA/(23161:23161): Memoria lista para recibir a Cpu o Kernel
+[ERROR] 19:35:21:383 MEMORIA/(23087:23087): Se desconecto el cliente. Terminando conexion
+[INFO] 19:35:35:728 MEMORIA/(23185:23185): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:35:38:906 MEMORIA/(23185:23185): Se conecto un cliente!
+[INFO] 19:35:38:906 MEMORIA/(23185:23185): Envio el tamanio de pag y cant entradas que son:
+[INFO] 19:35:38:906 MEMORIA/(23185:23185): Me llegaron los siguientes valores:
+
+[INFO] 19:35:38:906 MEMORIA/(23185:23185): 147609040
+[ERROR] 19:38:10:986 MEMORIA/(23185:23185): Se desconecto el cliente. Terminando conexion
+[INFO] 19:41:15:986 MEMORIA/(23516:23516): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:41:20:621 MEMORIA/(23516:23516): Se conecto un cliente!
+[INFO] 19:41:20:622 MEMORIA/(23516:23516): Envio el tamanio de pag y cant entradas que son:
+[INFO] 19:41:20:622 MEMORIA/(23516:23516): Me llegaron los siguientes valores:
+
+[INFO] 19:41:20:622 MEMORIA/(23516:23516): Dame el tamanio de pag y entradas por tabla
+[ERROR] 19:44:03:760 MEMORIA/(23516:23516): Se desconecto el cliente. Terminando conexion

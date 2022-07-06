@@ -13,8 +13,7 @@ int iniciar_servidor(void)
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_flags = AI_PASSIVE;
 
-	char puertoCpuDispatch[20];
-	sprintf(puertoCpuDispatch,"%d",PUERTO_CPU_DISPATCH);// convierte el entero a string para el getaddrinfo
+	char* puertoCpuDispatch = string_itoa(PUERTO_CPU_DISPATCH);// convierte el entero a string para el getaddrinfo
 
 	getaddrinfo(IP_CPU, puertoCpuDispatch, &hints, &servinfo);
 
@@ -86,10 +85,10 @@ t_list* recibir_paquete(int socket_cliente)
 	{
 		memcpy(&tamanio, buffer + desplazamiento, sizeof(int));
 		desplazamiento+=sizeof(int);
-		char* valor = malloc(tamanio);
-		memcpy(valor, buffer+desplazamiento, tamanio);
-		desplazamiento+=tamanio;
-		list_add(valores, valor);
+		int valor = 0;
+		memcpy(&valor, buffer+desplazamiento, sizeof(int));
+		desplazamiento+=sizeof(int);
+		list_add(valores, (void *)valor);
 	}
 	free(buffer);
 	return valores;
@@ -122,8 +121,7 @@ int crear_conexion(char *ip, int puertoMemoria)
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_flags = AI_PASSIVE;
 
-	char puerto[20];
-	sprintf(puerto,"%d",puertoMemoria); // convierte el entero a string para el getaddrinfo
+	char* puerto = string_itoa(puertoMemoria); // convierte el entero a string para el getaddrinfo
 
 	getaddrinfo(ip, puerto, &hints, &server_info);
 
@@ -138,26 +136,6 @@ int crear_conexion(char *ip, int puertoMemoria)
 	return socket_cliente;
 }
 
-void enviar_mensaje(char* mensaje, int socket_cliente)
-{
-	t_paquete* paquete = malloc(sizeof(t_paquete));
-
-	paquete->codigo_operacion = MENSAJE;
-	paquete->buffer = malloc(sizeof(t_buffer));
-	paquete->buffer->size = strlen(mensaje) + 1;
-	paquete->buffer->stream = malloc(paquete->buffer->size);
-	memcpy(paquete->buffer->stream, mensaje, paquete->buffer->size);
-
-	int bytes = paquete->buffer->size + 2*sizeof(int);
-
-	void* a_enviar = serializar_paquete(paquete, bytes);
-
-	send(socket_cliente, a_enviar, bytes, 0);
-
-	free(a_enviar);
-	eliminar_paquete(paquete);
-}
-
 
 void crear_buffer(t_paquete* paquete)
 {
@@ -166,16 +144,6 @@ void crear_buffer(t_paquete* paquete)
 	paquete->buffer->stream = NULL;
 }
 
-t_paquete* crear_super_paquete(void)
-{
-	//me falta un malloc!
-	t_paquete* paquete;
-
-	//descomentar despues de arreglar
-	//paquete->codigo_operacion = PAQUETE;
-	//crear_buffer(paquete);
-	return paquete;
-}
 
 t_paquete* crear_paquete(void)
 {
@@ -198,9 +166,10 @@ void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio)
 void enviar_paquete(t_paquete* paquete, int socket_cliente)
 {
 	int bytes = paquete->buffer->size + 2*sizeof(int);
-	void* a_enviar = serializar_paquete(paquete, bytes);
+	void* a_enviar = serializar_paquete(paquete, bytes);// void* se utiliza para mandar espacion de usuario a memoria a escribir
 
-	send(socket_cliente, a_enviar, bytes, 0);
+	send(socket_cliente, a_enviar, bytes, 0);// luego de esto, recibo el paquete de memoria tam_pagina y cant_entradas
+
 
 	free(a_enviar);
 }

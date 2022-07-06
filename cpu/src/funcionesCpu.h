@@ -34,7 +34,7 @@ void recibir_mensaje(int);
 int recibir_operacion(int);
 
 //Funcion propia de cpu como servidor
-void iterator(char* value);
+void iterator(int value);
 int conexionConKernel(void);
 //Funcion propia de cpu como servidor
 
@@ -52,9 +52,7 @@ typedef struct
 } t_paquete;
 
 int crear_conexion(char* ip, int puertoCpuDispatch);
-void enviar_mensaje(char* mensaje, int socket_cliente);
 t_paquete* crear_paquete(void);
-t_paquete* crear_super_paquete(void);
 void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio);
 void enviar_paquete(t_paquete* paquete, int socket_cliente);
 void liberar_conexion(int socket_cliente);

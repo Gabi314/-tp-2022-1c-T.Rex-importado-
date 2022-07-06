@@ -1,13 +1,14 @@
 #include "funcionesMemoria.h"
 
 int marcosTotales = 0;
-int pid = 0;//lo hardcodeo
+//Antes de esto debo mandarle a cpu tam_Pagina y cant_entradas_por_pagina
+int pid = 0;//Viene de Kernel, para devolver nroDeTabla1erNivel
+int entradaDeTablaDe1erNivel = 2; // Viene de cpu(calculado con la dir logica), con esto devuelvo nroTablaDe2doNivel
+
 int entrada = 0;
 int contPaginas = 0;
 
 t_list* listaT1nivel;
-t_list* listaT2nivel;
-t_list* listaDePaginas;
 
 
 int main(void) {
@@ -15,31 +16,21 @@ int main(void) {
 	crearConfiguraciones();
 
 	listaT1nivel = list_create();
-	listaT2nivel = list_create();
-	listaDePaginas = list_create();
-	inicializarEstructuras();
-	pid++;
-	inicializarEstructuras();
-	pid++;
+
 	inicializarEstructuras();
 
-	//pagina* paginaBuscada = malloc(sizeof(pagina));
+	conexionConCpu();
 
-	pagina* unaPagina = list_get(listaDePaginas,12);
+	/*t_primerNivel* unaTablaDe1erNivel = list_get(listaT1nivel,0);
+	t_segundoNivel* unaTablaDe2doNivel = list_get(unaTablaDe1erNivel->tablasDeSegundoNivel,3);
+	pagina* unaPagina = list_get(unaTablaDe2doNivel->paginas,0);
 
-	//memcpy(paginaBuscada, paginaEnLista, sizeof(pagina));
+	log_info(logger,"La pagina ubicada en la primer entrada de la 4ta tablaDeSegundo nivel es %d",unaPagina->numeroDePagina);
 
-
-	log_info(logger,"%d",unaPagina->numeroDePagina);
-
-	//free(paginaBuscada);
-
-
-	t_primerNivel* unaTablaDe1erNivel = list_get(listaT1nivel,1);
 
 	log_info(logger,"El pid es: %d",unaTablaDe1erNivel->pid);
-	log_info(logger,"El nro de tabla asociado al pid %d es %d",unaTablaDe1erNivel->pid,buscarNroPaginaDe1erNivel(unaTablaDe1erNivel->pid));
-
+	log_info(logger,"El nro de tabla asociado al pid %d es %d",unaTablaDe1erNivel->pid,buscarNroTablaDe1erNivel(unaTablaDe1erNivel->pid));
+	*/
 	//free(unaTablaDe1erNivel);
 
 
@@ -74,12 +65,11 @@ void inicializarEstructuras(){
 
 		cargarPaginas(tablaDeSegundoNivel);
 		//tablaDeSegundoNivel->marcos = contadorDeMarcos;
-		list_add(listaT2nivel,tablaDeSegundoNivel);
 
 		list_add(tablaPrimerNivel->tablasDeSegundoNivel, tablaDeSegundoNivel);
 
 
-		free(tablaDeSegundoNivel);
+		//free(tablaDeSegundoNivel);
 	}
 
 	contPaginas = 0;
@@ -87,7 +77,7 @@ void inicializarEstructuras(){
 
 	list_add(listaT1nivel,tablaPrimerNivel);
 
-	free(tablaPrimerNivel);
+	//free(tablaPrimerNivel);
 
 	escribirEnSwap(pid);
 }
@@ -99,8 +89,6 @@ void cargarPaginas(t_segundoNivel* tablaDeSegundoNivel){
 
 			unaPagina->numeroDePagina = contPaginas;
 			contPaginas++;
-
-			list_add(listaDePaginas,unaPagina);
 
 			list_add(tablaDeSegundoNivel->paginas,unaPagina);
 
@@ -123,7 +111,7 @@ void escribirEnSwap(int pid){
 }
 
 
-int buscarNroPaginaDe1erNivel(int pid){
+int buscarNroTablaDe1erNivel(int pid){
 	t_primerNivel* unaTablaDe1erNivel = malloc(sizeof(t_primerNivel));
 
 	for(int i=0;i < list_size(listaT1nivel);i++){
@@ -151,10 +139,10 @@ int conexionConCpu(void){
 		int cod_op = recibir_operacion(cliente_fd);
 		switch (cod_op) {
 		case MENSAJE:
-			recibir_mensaje(cliente_fd);
+			//recibir_mensaje(cliente_fd);
 			break;
 		case PAQUETE:
-			lista = recibir_paquete(cliente_fd);
+			lista = recibir_paquete(cliente_fd);// esto tengo que usar en cpu para recibir
 			log_info(logger, "Me llegaron los siguientes valores:\n");
 			list_iterate(lista, (void*) iterator);
 			break;
@@ -172,3 +160,5 @@ int conexionConCpu(void){
 void iterator(char* value) {
 	log_info(logger,"%s", value);
 }
+
+

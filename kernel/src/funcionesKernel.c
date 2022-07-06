@@ -284,6 +284,7 @@ void agregar_a_paquete_kernel_cpu(t_pcb* pcb)
 
 
 
+
 void obtenerTamanioIdentificadores(instrucciones* instruccion) {
 	tamanioTotalIdentificadores += (strlen(instruccion -> identificador)+1);
 	contadorInstrucciones++;
