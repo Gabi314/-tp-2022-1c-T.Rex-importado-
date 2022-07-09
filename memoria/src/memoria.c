@@ -3,12 +3,15 @@
 int marcosTotales = 0;
 //Antes de esto debo mandarle a cpu tam_Pagina y cant_entradas_por_pagina
 int pid = 0;//Viene de Kernel, para devolver nroDeTabla1erNivel
-int entradaDeTablaDe1erNivel = 2; // Viene de cpu(calculado con la dir logica), con esto devuelvo nroTablaDe2doNivel
+//int entradaDeTablaDe1erNivel = 2;  Viene de cpu(calculado con la dir logica), con esto devuelvo nroTablaDe2doNivel
 
-int entrada = 0;
 int contPaginas = 0;
+int contTablas2doNivel = 0;
+int flagDeEntradasPorTabla = 0;
 
 t_list* listaT1nivel;
+t_list* listaDeMarcos;
+t_list* listaT2Nivel;
 
 
 int main(void) {
@@ -16,10 +19,18 @@ int main(void) {
 	crearConfiguraciones();
 
 	listaT1nivel = list_create();
+	listaDeMarcos = list_create();
+	listaT2Nivel = list_create();
 
 	inicializarEstructuras();
 
 	conexionConCpu();
+
+	inicializarMarcos();
+
+
+	log_info(logger,"cantidad de marcos: %d", list_size(listaDeMarcos));
+
 
 	/*t_primerNivel* unaTablaDe1erNivel = list_get(listaT1nivel,0);
 	t_segundoNivel* unaTablaDe2doNivel = list_get(unaTablaDe1erNivel->tablasDeSegundoNivel,3);
@@ -34,6 +45,51 @@ int main(void) {
 	//free(unaTablaDe1erNivel);
 
 
+}
+
+int conexionConCpu(void){
+
+
+	int server_fd = iniciar_servidor();
+	log_info(logger, "Memoria lista para recibir a Cpu o Kernel");
+	int cliente_fd = esperar_cliente(server_fd);
+
+	nroTabla1erNivelYentrada = list_create();
+
+	int a = 1;
+	while (a == 1) {
+		int cod_op = recibir_operacion(cliente_fd);
+		switch (cod_op) {
+			case MENSAJE:
+				recibir_mensaje(cliente_fd);//recibe el pedido de tam_pag y cant_entradas
+				enviarTamanioDePaginaYCantidadDeEntradas(cliente_fd);
+				break;
+			case PAQUETE:
+				nroTabla1erNivelYentrada = recibir_nroTabla1erNivel_entradaTabla1erNivel(cliente_fd); // lista con valores de nro y entrada de tabla
+
+				int nroTabla2doNivel = leerYRetornarNroTabla2doNivel(nroTabla1erNivelYentrada);
+
+				enviarNroTabla2doNivel(cliente_fd,nroTabla2doNivel);
+				a = 0;
+				break;
+			case -1:
+				log_error(logger, "Se desconecto el cliente. Terminando conexion");
+				return EXIT_FAILURE;
+			default:
+				log_warning(logger,"Operacion desconocida. No quieras meter la pata");
+				break;
+		}
+	}
+	return EXIT_SUCCESS;
+}
+
+int leerYRetornarNroTabla2doNivel(t_list* nroTabla1erNivelYentrada){
+	nroTablaDePaginas1erNivel = (int) list_get(nroTabla1erNivelYentrada,0);
+	entradaTablaDePaginas1erNivel = (int) list_get(nroTabla1erNivelYentrada,1);
+
+	log_info(logger,"Me llego el nroTabla1erNivel %d y con la entrada %d",nroTablaDePaginas1erNivel,entradaTablaDePaginas1erNivel);
+
+	return numeroTabla2doNivelSegunIndice(nroTablaDePaginas1erNivel,entradaTablaDePaginas1erNivel);
 }
 
 void crearConfiguraciones(){
@@ -62,11 +118,14 @@ void inicializarEstructuras(){
 
 		t_segundoNivel* tablaDeSegundoNivel = malloc(sizeof(t_segundoNivel));
 		tablaDeSegundoNivel->paginas = list_create();
+		tablaDeSegundoNivel->numeroTabla = contTablas2doNivel;
+		contTablas2doNivel++; //Contador global que asigna el numero de tabla de 2do nivel a nivel global, igual al indice en la lista
 
 		cargarPaginas(tablaDeSegundoNivel);
 		//tablaDeSegundoNivel->marcos = contadorDeMarcos;
 
 		list_add(tablaPrimerNivel->tablasDeSegundoNivel, tablaDeSegundoNivel);
+		list_add(listaT2Nivel,tablaDeSegundoNivel);
 
 
 		//free(tablaDeSegundoNivel);
@@ -80,6 +139,19 @@ void inicializarEstructuras(){
 	//free(tablaPrimerNivel);
 
 	escribirEnSwap(pid);
+}
+
+void inicializarMarcos(){
+
+	for(int j=0;j<(tamanioDeMemoria/tamanioDePagina);j++){
+		marco* unMarco = malloc(sizeof(marco));
+		unMarco->numeroDeMarco = j;
+		unMarco->marcoLibre = 0;
+		list_add(listaDeMarcos,unMarco);
+
+		//free(unMarco);
+
+	}
 }
 
 void cargarPaginas(t_segundoNivel* tablaDeSegundoNivel){
@@ -127,38 +199,112 @@ int buscarNroTablaDe1erNivel(int pid){
 }
 
 
-int conexionConCpu(void){
+
+/*Entra proceso, inicializa y devuelvo tabla de primer nivel, cpu pide pagina se chequea si esta cargada y sino voy a
+ *ir asignanco marcos, cambio bit de presencia, hasta el maximo definido por archivo config
+ *
+ *Cpu viene con tabla de 1er nivel y con la entrada de tabla de primer nivel, le devuelvo tabla de 2do nivel
+ *Cpu viene con tabla de 2do nivel y con la entrada de tabla de 2do nivel, le devuelvo el marco si esta cargado sino, cargo y etc
+ *
+ *Estructura de memoria, con todos los marcos y los valores que les vamos escribiendo.
+ */
+
+void chequeoDeIndice(int indice){
+	if(indice<entradasPorTabla){
+		flagDeEntradasPorTabla = 1;
+	}
+}
 
 
-	int server_fd = iniciar_servidor();
-	log_info(logger, "Memoria lista para recibir a Cpu o Kernel");
-	int cliente_fd = esperar_cliente(server_fd);
+int numeroTabla2doNivelSegunIndice(int numeroTabla1erNivel,int indiceDeEntrada){
+	chequeoDeIndice(indiceDeEntrada);
 
-	t_list* lista;
-	while (1) {
-		int cod_op = recibir_operacion(cliente_fd);
-		switch (cod_op) {
-		case MENSAJE:
-			//recibir_mensaje(cliente_fd);
-			break;
-		case PAQUETE:
-			lista = recibir_paquete(cliente_fd);// esto tengo que usar en cpu para recibir
-			log_info(logger, "Me llegaron los siguientes valores:\n");
-			list_iterate(lista, (void*) iterator);
-			break;
-		case -1:
-			log_error(logger, "Se desconecto el cliente. Terminando conexion");
-			return EXIT_FAILURE;
-		default:
-			log_warning(logger,"Operacion desconocida. No quieras meter la pata");
-			break;
+	if(flagDeEntradasPorTabla == 1){
+		t_primerNivel* unaTablaDe1erNivel = malloc(sizeof(t_primerNivel));
+		t_segundoNivel* unaTablaDe2doNivel = malloc(sizeof(t_segundoNivel));
+		unaTablaDe1erNivel = list_get(listaT1nivel,numeroTabla1erNivel);
+		unaTablaDe2doNivel = list_get(unaTablaDe1erNivel->tablasDeSegundoNivel,indiceDeEntrada);
+		flagDeEntradasPorTabla = 0;
+
+		free(unaTablaDe1erNivel);
+		return unaTablaDe2doNivel->numeroTabla; //El indice de entrada es igual al numero de tabla de 2do nivel
+	}else{
+		return -1;//Si da -1 printeo un error
+	}
+
+}
+//numeroTabla1erNivel es igual al indice en la lista de tablas de primer nivel
+//Ahora tengo que agarrar la lista de tablas de 2do, buscar el primero que tenga el pid de la tablaDe1erNive
+//A ese indice sumarla el indiceDeEntrada y esa es la tablaDe2doNivel que necesito
+//Si el indice = 2, en la lista de tablas de 2do nivel, agarro posicion 2, que es la tabla numero 2, entonces es redundante
+
+
+
+
+//contador de marcos por proceso, asigno sumo 1, hasta maximo de marcos por procesos y ahi empiezo a reemplazar
+
+//Funcion de cargar pagina en memoria
+
+
+
+int marcoSegunIndice(int numeroTabla2doNivel,int indiceDeEntrada){
+
+	pagina* unaPagina = malloc(sizeof(pagina));
+	marco* unMarco = malloc(sizeof(marco));
+	t_segundoNivel* unaTablaDe2doNivel = malloc(sizeof(t_segundoNivel));
+
+	chequeoDeIndice(indiceDeEntrada);
+
+	if(flagDeEntradasPorTabla == 1){
+	int posicionDeLaTablaBuscada = buscarNroTablaDe2doNivel(numeroTabla2doNivel);
+	unaTablaDe2doNivel = list_get(listaT2Nivel,posicionDeLaTablaBuscada);
+
+	unaPagina = list_get(unaTablaDe2doNivel->paginas,indiceDeEntrada);
+
+	flagDeEntradasPorTabla = 0;
+
+		if(unaPagina->presencia == 1){
+			return unaPagina->numeroMarco;
+	}
+		else{
+	//En el caso en que no este cargada en memoria, tengo que cargarla asignando numero de marco y cambiando bit de presencia a 1
+	//Tengo que analizar caso en que no haya paginas por cargar, tengo que hacer contador por proceso
+	//ver tema de si es una pagina con info para swap
+
 		}
 	}
-	return EXIT_SUCCESS;
+
 }
+
+int buscarNroTablaDe2doNivel(int numeroDeTabla2doNivel){
+	t_segundoNivel* unaTablaDe2doNivel = malloc(sizeof(t_segundoNivel));
+
+	for(int i=0;i < list_size(listaT2Nivel);i++){
+
+		unaTablaDe2doNivel = list_get(listaT2Nivel,i);
+
+		if(unaTablaDe2doNivel->numeroTabla == numeroDeTabla2doNivel){
+			return i;
+		}
+	}
+	// return 4;//Puse 4 para que no me confunda si retorno 0
+	free(unaTablaDe2doNivel);
+}
+
+void leerElPedido(int posicion){
+
+}
+
+void escribirElPedido(char* loQueSeEscribe,int posicion){
+
+}
+
+
 
 void iterator(char* value) {
 	log_info(logger,"%s", value);
 }
+
+// falta terminar programa
 
 

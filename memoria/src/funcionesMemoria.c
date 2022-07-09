@@ -4,7 +4,7 @@ int iniciar_servidor(void)
 {
 	int socket_servidor;
 
-	struct addrinfo hints, *servinfo, *p;
+	struct addrinfo hints, *servinfo;
 
 	memset(&hints, 0, sizeof(hints));
 	hints.ai_family = AF_UNSPEC;
@@ -52,6 +52,14 @@ int recibir_operacion(int socket_cliente)
 	}
 }
 
+void recibir_mensaje(int socket_cliente)
+{
+	int size;
+	char* buffer = recibir_buffer(&size, socket_cliente);
+	log_info(logger, "Me llego el mensaje %s", buffer);
+	free(buffer);
+}
+
 void* recibir_buffer(int* size, int socket_cliente)
 {
 	void * buffer;
@@ -64,13 +72,16 @@ void* recibir_buffer(int* size, int socket_cliente)
 }
 
 
-t_list* recibir_paquete(int socket_cliente)
+// falta recibir recibir de kernel el pid y luego de cpu entradaDeTabla2doNivel
+// al recibir de kernel el pid creo las estructuras y devuelvo  el nro de tabla de 1er nivel
+
+t_list* recibir_pedido_deTamPagYCantEntradas(int socket_cliente)
 {
 	int size;
 	int desplazamiento = 0;
 	void * buffer;
-	t_list* valores = list_create(); // aca tengo que recibir de kernel el pid y luego de cpu entradaDeTabla2doNivel
-	int tamanio;					// al recibir de kernel el pid creo las estructuras y devuelvo con send el nro de tabla de 1er nivel
+	t_list* valores = list_create();
+	int tamanio;
 
 	buffer = recibir_buffer(&size, socket_cliente);
 	while(desplazamiento < size)
@@ -81,13 +92,16 @@ t_list* recibir_paquete(int socket_cliente)
 		memcpy(valor, buffer+desplazamiento, tamanio);
 		desplazamiento+=tamanio;
 		list_add(valores, valor);
+
 	}
 	free(buffer);
 
-	//ahora envio:
 
+	return valores;
+}
+void enviarTamanioDePaginaYCantidadDeEntradas(int socket_cliente){
 	t_paquete* paquete = crear_paquete();
-	log_info(logger,"Envio el tamanio de pag y cant entradas que son:");
+	log_info(logger,"Envio el tamanio de pag y cant entradas");
 
 	agregar_a_paquete(paquete,&tamanioDePagina,sizeof(tamanioDePagina));
 	agregar_a_paquete(paquete,&entradasPorTabla,sizeof(entradasPorTabla));
@@ -95,6 +109,41 @@ t_list* recibir_paquete(int socket_cliente)
 
 	enviar_paquete(paquete,socket_cliente);
 	eliminar_paquete(paquete);
+}
+
+void enviarNroTabla2doNivel(int socket_cliente,int nroTabla2doNivel){
+	t_paquete* paquete = crear_otro_paquete();
+	log_info(logger,"Envio el numero de tabla de 2do nivel");
+
+	agregar_a_paquete(paquete,&nroTabla2doNivel,sizeof(tamanioDePagina));
+
+
+	enviar_paquete(paquete,socket_cliente);
+	eliminar_paquete(paquete);
+}
+
+t_list* recibir_nroTabla1erNivel_entradaTabla1erNivel(int socket_cliente)
+{
+	int size;
+	int desplazamiento = 0;
+	void * buffer;
+	t_list* valores = list_create();
+	int tamanio;
+
+	buffer = recibir_buffer(&size, socket_cliente);
+
+	while(desplazamiento < size){
+		memcpy(&tamanio, buffer + desplazamiento, sizeof(int));
+		desplazamiento+=sizeof(int);
+		int valor = 0;
+		memcpy(&valor, buffer+desplazamiento, sizeof(int));
+		desplazamiento+=sizeof(int);
+		list_add(valores, (void *)valor);
+
+
+	}
+
+	free(buffer);
 	return valores;
 }
 
@@ -127,6 +176,14 @@ t_paquete* crear_paquete(void)
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
 	paquete->codigo_operacion = PAQUETE;
+	crear_buffer(paquete);
+	return paquete;
+}
+
+t_paquete* crear_otro_paquete(void)
+{
+	t_paquete* paquete = malloc(sizeof(t_paquete));
+	paquete->codigo_operacion = PAQUETE2;
 	crear_buffer(paquete);
 	return paquete;
 }

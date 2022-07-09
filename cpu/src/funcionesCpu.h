@@ -12,6 +12,7 @@
 #include<commons/config.h>
 #include<string.h>
 #include<assert.h>
+#include<math.h>
 
 #define IP_CPU "127.0.0.1"
 #define PUERTO_CPU_DISPATCH 8001 // por ahora este faltan los otros puertos para conectar a kernel
@@ -19,10 +20,12 @@
 typedef enum
 {
 	MENSAJE,
-	PAQUETE
+	PAQUETE,
+	PAQUETE2
 }op_code;
 
 t_log* logger;
+t_config* config;
 
 //-------------- Funciones para Cpu como servidor de Kernel ---------
 void* recibir_buffer(int*, int);
@@ -39,6 +42,34 @@ int conexionConKernel(void);
 //Funcion propia de cpu como servidor
 
 //-------------- Funciones para Cpu como cliente de Memoria -------------
+int conexion;
+//Variables globales de config
+int cantidadEntradasTlb;
+char* algoritmoReemplazoTlb;
+int retardoDeNOOP;
+char* ipMemoria;
+int puertoMemoria;
+int puertoDeEscuchaDispath;
+int puertoDeEscuchaInterrupt;
+
+
+t_list* tamanioDePagYEntradas;
+int tamanioDePagina;
+int entradasPorTabla;
+
+//Estructuras
+typedef struct
+{
+	t_list* listaDeCampos;
+} tlb;
+
+typedef struct
+{
+	int nroDePagina;
+	int nroDeMarco;
+	int instanteDeUltimaCarga;
+} campoTLB;
+
 typedef struct
 {
 	int size;
@@ -53,18 +84,33 @@ typedef struct
 
 int crear_conexion(char* ip, int puertoCpuDispatch);
 t_paquete* crear_paquete(void);
-void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio);
+void agregar_pedidoDeTamPagYCantEntradas_a_paquete(t_paquete* paquete, void* valor, int tamanio);
+void agregar_nroTabla1erNivelYEntrada_a_paquete(t_paquete* paquete, void* valor, int tamanio);
 void enviar_paquete(t_paquete* paquete, int socket_cliente);
+void* serializar_paquete(t_paquete* paquete, int bytes);
+void enviar_mensaje(char* mensaje, int socket_cliente);
 void liberar_conexion(int socket_cliente);
 void eliminar_paquete(t_paquete* paquete);
 
 //Funciones propias de Cpu como cliente
 t_log* iniciar_logger(void);
 t_config* iniciar_config(void);
-void paquete(int,char*);// aca iria en vez de un char la estructura pcb
+
+void paqueteEntradaTabla1erNivel(int,int,int);
+
 void terminar_programa(int, t_log*, t_config*);
 
-void conexionConMemoria(void);
+int conexionConMemoria(void);
+void inicializarConfiguraciones();
+
+tlb* inicializarTLB();
+void generarListaCamposTLB(tlb*);
+void reiniciarTLB();
+int chequeoDePagina(int);
+
+void pedidoDeNroTabla2doNivel(int,int);
+
+
 //Funciones propias de Cpu como cliente
 
 

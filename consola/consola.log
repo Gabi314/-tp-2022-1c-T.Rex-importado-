@@ -122,3 +122,10 @@
 
 [INFO] 12:29:40:925 CONSOLA/(17300:17300): instruccion: EXIT
 
+[INFO] 19:23:32:505 CONSOLA/(24907:24907): Se leyo el archivo correctamente
+[INFO] 19:23:32:522 CONSOLA/(24907:24907): instruccion: NO_OP
+
+[INFO] 19:23:32:522 CONSOLA/(24907:24907): instruccion: NO_OP
+
+[INFO] 19:23:32:522 CONSOLA/(24907:24907): instruccion: EXIT
+

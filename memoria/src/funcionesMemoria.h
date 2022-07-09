@@ -20,7 +20,8 @@
 typedef enum
 {
 	MENSAJE,
-	PAQUETE
+	PAQUETE,
+	PAQUETE2
 }op_code;
 
 typedef struct
@@ -38,22 +39,31 @@ typedef struct
 t_log* logger;
 
 void* recibir_buffer(int*, int);
+void recibir_mensaje(int);
 
 //Para recibir de kernel y cpu
 int iniciar_servidor(void);
 int esperar_cliente(int);
-t_list* recibir_paquete(int);
+
+t_list* recibir_pedido_deTamPagYCantEntradas(int);
+t_list* recibir_nroTabla1erNivel_entradaTabla1erNivel(int);
+
 void recibir_mensaje(int);
 int recibir_operacion(int);
 //---------------------------
 
 //Para enviar a cpu(tam_paginas y cant_entradas) y a kernel(nro de tabla de pags de 1er nivel)
-t_list* enviarACpu;
+void enviarTamanioDePaginaYCantidadDeEntradas(int socket_cliente);
+void enviarNroTabla2doNivel(int,int);
+
 t_paquete* crear_paquete(void);
+t_paquete* crear_otro_paquete(void);
+
 void agregar_a_paquete(t_paquete* paquete, void* valor,int tamanio);
 void enviar_paquete(t_paquete* paquete, int socket_cliente);
 void liberar_conexion(int socket_cliente);
 void eliminar_paquete(t_paquete* paquete);
+
 //-----------------------------
 
 //Funcion propia de Memoria como servidor
@@ -69,6 +79,10 @@ char* algoritmoDeReemplazo;
 int marcosPorProceso;
 int retardoSwap; //Tiempo en milisegundos que se deberá esperar para cada operación del SWAP (leer/escribir)
 
+int nroTablaDePaginas1erNivel;
+int entradaTablaDePaginas1erNivel;
+t_list* nroTabla1erNivelYentrada;
+
 //Tabla de paginas
 typedef struct{
 	int numeroDePagina;//depnde en que linea ponga esta variable cambia su valor(basura, memory leak)
@@ -81,6 +95,7 @@ typedef struct{
 
 typedef struct{// capaz usar diccionario
 	t_list* paginas;
+	int numeroTabla;
 }t_segundoNivel;
 
 typedef struct{// capaz usar diccionario
@@ -88,12 +103,22 @@ typedef struct{// capaz usar diccionario
 	int pid;
 }t_primerNivel;
 
+typedef struct{
+	int numeroDeMarco;//Hacer lista de marcos, el indice en la lista es el numero de marco, la cantidad de marcos es
+	uint32_t valor;
+	int marcoLibre;// tam memoria/tam pagina
+}marco;
+
 
 void crearConfiguraciones();
 void inicializarEstructuras();
+void inicializarMarcos();
+int numeroTabla2doNivelSegunIndice(int,int);
 int buscarNroTablaDe1erNivel(int);
+int buscarNroTablaDe2doNivel(int);
 void escribirEnSwap(int);
 void cargarPaginas(t_segundoNivel*);
+int leerYRetornarNroTabla2doNivel(t_list*);
 
 #endif /* FUNCIONES_MEMORIA_H_*/
 
