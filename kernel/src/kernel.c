@@ -31,7 +31,7 @@ void inicializar_configuracion(){
 	estimacionInicial = atoi(config_get_string_value(config, "ESTIMACION_INICIAL"));
 	alfa = atoi(config_get_string_value(config, "ALFA"));
 	gradoMultiprogramacionTotal = atoi(config_get_string_value(config, "GRADO_MULTIPROGRAMACION"));
-	tiempoMaximoBloqueado = config_get_string_value(config, "TIEMPO_MAXIMO_BLOQUEADO");
+	tiempoMaximoBloqueado = atoi(config_get_string_value(config, "TIEMPO_MAXIMO_BLOQUEADO"));
 	gradoMultiprogramacionActual = 0; //Arranca en 0 porque no hay procesos en memoria
 }
 

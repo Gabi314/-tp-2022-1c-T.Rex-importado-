@@ -15,6 +15,7 @@
 #include<assert.h>
 #include<stdbool.h>
 #include<semaphore.h>
+#include<time.h>
 
 #define IP_KERNEL "127.0.0.1"
 #define PUERTO_KERNEL "8000"
@@ -35,7 +36,7 @@ int alfa;
 int gradoMultiprogramacionTotal;
 int gradoMultiprogramacionActual;
 bool procesoEjecutando;
-char* tiempoMaximoBloqueado;
+int tiempoMaximoBloqueado;
 int socketMemoria;
 char* ipMemoria;
 char* puertoMemoria;
@@ -43,6 +44,9 @@ int tamanioTotalIdentificadores;
 int contadorInstrucciones;
 int desplazamiento;
 char* tamanioDelProceso;
+
+typedef enum estado { NEW, READY, BLOCKED, EXEC, SUSP_READY, SUSP_BLOCKED, TERMINATED } t_estado;
+
 
 t_queue* colaNew;
 t_queue* colaReady;
@@ -63,7 +67,9 @@ typedef struct
 	int tabla_paginas; // el tipo ???
 	float estimacion_rafaga;
 	float estimacion_anterior;
-	bool suspendido;
+	clock_t rafagaAnterior;
+	clock_t horaDeIngresoAExe;
+	t_estado estado;
 	int socket_cliente;
 	int socketMemoria;
 

@@ -408,6 +408,9 @@ t_pcb* obtenerSiguienteSRT(){
 	//sem_wait(&contadorReady);
 	//pthread_mutex_lock(&mutexReady);
 
+	log_info(logger,"PROCESOS EN READY: %d \n", list_size(colaReady));
+
+
 	for(i=1;i<list_size(colaReady);i++){
 	   	procesoAux = list_get(colaReady,i);
 		if(shortestJob > procesoAux->estimacion_rafaga){
@@ -421,6 +424,8 @@ t_pcb* obtenerSiguienteSRT(){
 
 	return procesoPlanificado;
 }
+
+
 
 
   //--------------------TRANSICIONES---------------
@@ -457,9 +462,9 @@ t_pcb* sacarDeNew(){
 
 void agregarAReady(t_pcb* proceso){
 
-	//time_t a = time(NULL);
-	//proceso->horaDeIngresoAReady = ((float) a)*1000;
-	//proceso->tiempoEspera = 0;
+	time_t a = time(NULL);
+	proceso->horaDeIngresoAReady = ((float) a)*1000;
+	proceso->tiempoEspera = 0;
 	//sem_wait(&multiprogramacion); Lo sacamos de aca para usarlo en el contexto en el que se llama a la funcion, porque no siempre que se agrega a ready, se toca la multiprogramacion
 	//pthread_mutex_lock(&mutexReady);
 
@@ -527,7 +532,8 @@ void agregarASuspendedBlocked(t_pcb* proceso){
 
 	//pthread_mutex_lock(&mutexBlockSuspended);
 
-	proceso->suspendido = true;
+	/*proceso->suspendido = true;*/ proceso->estado = SUSP_BLOCKED;
+
 	list_add(colaSuspendedBlocked, proceso);
 
 	log_info(logger, "[SUSPENDEDBLOCKED] Ingresa el proceso de PID: %d a la cola.", proceso->idProceso);
@@ -587,7 +593,7 @@ t_pcb* sacarDeSuspendedReady(){
 	//pthread_mutex_lock(&mutexReadySuspended);
 
 	t_pcb* proceso = queue_pop(colaSuspendedReady);
-	proceso->suspendido = false;
+	/*proceso->suspendido = false;*/
 	log_info(logger, "[SUSPENDEDREADY] Sale el proceso de PID: %d de la cola.", proceso->idProceso);
 
 	//pthread_mutex_unlock(&mutexReadySuspended);
@@ -634,7 +640,7 @@ void readyAExe(){
 		if(procesoAEjecutar != NULL) {
 
 			//pthread_mutex_lock(&mutexExe);
-			list_add(colaExe, procesoAEjecutar);// monoprocesador
+			list_add(colaExe, procesoAEjecutar);// monoprocesador -> deberiamos tener algo como ejecutar(proceso);
 			//tenemos que mandar el proceso a cpu y ver cuanto tarda su rafaga
 			//pthread_mutex_unlock(&mutexExe);
 
