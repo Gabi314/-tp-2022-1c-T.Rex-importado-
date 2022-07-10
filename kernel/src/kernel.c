@@ -28,7 +28,7 @@ void inicializar_configuracion(){
 	puertoCpuInterrupt = config_get_string_value(config, "PUERTO_CPU_INTERRUPT");
 	puertoKernel = config_get_string_value(config, "PUERTO_ESCUCHA");
 	algoritmoPlanificacion = config_get_string_value(config, "ALGORITMO_PLANIFICACION");
-	estimacionInicial = config_get_string_value(config, "ESTIMACION_INICIAL");
+	estimacionInicial = atoi(config_get_string_value(config, "ESTIMACION_INICIAL"));
 	alfa = atoi(config_get_string_value(config, "ALFA"));
 	gradoMultiprogramacionTotal = atoi(config_get_string_value(config, "GRADO_MULTIPROGRAMACION"));
 	tiempoMaximoBloqueado = config_get_string_value(config, "TIEMPO_MAXIMO_BLOQUEADO");
@@ -51,6 +51,7 @@ void generar_conexiones(){
      log_info(logger, "Servidor listo para recibir al cliente");
      socketMemoria = crear_conexion(ipMemoria, puertoMemoria);
 	 socketCpuDispatch = crear_conexion(ipCpu, puertoCpuDispatch);
+	 socketCpuInterrupt = crear_conexion(ipCpu, puertoCpuInterrupt);
 	 //falta también las conexiones con cpu para interrupciones
 }
 

@@ -580,7 +580,7 @@ void agregarAReadySuspended(t_pcb* proceso){
 	//sem_post(&medianoPlazo);
 }
 
-t_pcb* sacarDeReadySuspended(){
+t_pcb* sacarDeSuspendedReady(){
 
 	//sem_wait(&contadorReadySuspended);
 
@@ -596,4 +596,132 @@ t_pcb* sacarDeReadySuspended(){
 }
 
 
+// Las funciones siguientes son hilos del planificador
+
+void newAReady(){
+
+	while(1){
+
+		//sem_wait(&largoPlazo);
+
+		if(queue_size(colaSuspendedReady) != 0){
+
+			//sem_post(&medianoPlazo);
+		}else{
+
+			t_pcb* proceso = sacarDeNew();
+
+			//carpincho->rafagaAnterior = 0;
+			proceso->estimacion_anterior = estimacionInicial;
+			proceso->estimacion_rafaga = estimacionInicial;	//"estimacio_inicial" va a ser una variable que vamos a obtener del cfg
+
+			//sem_wait(&multiprogramacion);
+			agregarAReady(proceso);
+			//sem_post(&contadorProcesosEnMemoria);
+		}
+	} //aca hay que replanificar en caso de SRT?
+}
+
+void readyAExe(){
+
+	while(1){
+
+		//sem_wait(&multiprocesamiento);
+
+		t_pcb* procesoAEjecutar = obtenerSiguienteDeReady();
+
+
+		if(procesoAEjecutar != NULL) {
+
+			//pthread_mutex_lock(&mutexExe);
+			list_add(colaExe, procesoAEjecutar);// monoprocesador
+			//tenemos que mandar el proceso a cpu y ver cuanto tarda su rafaga
+			//pthread_mutex_unlock(&mutexExe);
+
+			if(algoritmoPlanificacion == SRT){
+				log_info(logger, "[EXEC] Ingresa el carpincho de PID: %d con una rafaga de ejecucion estimada de %f milisegundos.", procesoAEjecutar->idProceso, procesoAEjecutar->estimacion_rafaga);
+			}else{
+				log_info(logger, "[EXEC] Ingresa el carpincho de PID: %d", procesoAEjecutar->idProceso);
+			} //ver bien para el caso FIFO
+
+
+			//sem_post(&analizarSuspension); // Despues de que un proceso se va de Ready y hace su transicion, se analiza la suspension
+			//sem_wait(&suspensionFinalizada);
+
+		}else{
+			//sem_post(&multiprocesamiento);
+		}
+	}
+}
+
+void blockedASuspension(){
+
+	while(1){
+
+		//sem_wait(&analizarSuspension);
+
+		if(condiciones_de_suspension()){
+
+			//sem_wait(&contadorProcesosEnMemoria);
+
+			t_pcb* proceso = list_get(colaBlocked, list_size(colaBlocked) - 1);
+			sacarDeBlocked(proceso);
+
+			agregarASuspendedBlocked(proceso);
+
+			//sem_post(&multiprogramacion);
+		}
+
+		//sem_post(&suspensionFinalizada);
+	}
+}
+
+
+void suspensionAReady(){
+
+	while(1){
+
+		//sem_wait(&medianoPlazo);
+
+		if(queue_size(colaSuspendedReady) == 0){
+
+			//sem_post(&largoPlazo);
+		}else{
+
+		t_pcb* proceso = sacarDeSuspendedReady();
+
+		//sem_wait(&multiprogramacion);
+
+		agregarAReady(proceso);
+
+		//sem_post(&contadorProcesosEnMemoria);
+		}
+	}
+}
+
+
+int condiciones_de_suspension(){
+
+	//para que un proceso entre en suspensión se debe cumplir que el mismo esté bloqueado
+	//por un tiempo mayor al límite definido por archivo de configuración
+
+	return 1;
+}
+
+
+
+
+
+void terminarEjecucion(t_pcb* proceso){
+
+	//pthread_mutex_lock(&mutexExit);
+
+	list_add(colaExit, proceso);
+	log_info(logger, "[EXIT] Finaliza el proceso de PID: %d", proceso->idProceso);
+
+	//pthread_mutex_unlock(&mutexExit);
+
+
+	//Cuando termino que hago con el proceso?
+}
 

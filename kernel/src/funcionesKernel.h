@@ -24,12 +24,13 @@
 int pidKernel;
 int socketServidor;
 int socketCpuDispatch;
+int socketCpuInterrupt;
 char* ipCpu;
 char* puertoCpuDispatch;
 char* puertoCpuInterrupt;
 char* puertoKernel;
 char* algoritmoPlanificacion;
-char* estimacionInicial;
+float estimacionInicial;
 int alfa;
 int gradoMultiprogramacionTotal;
 int gradoMultiprogramacionActual;
@@ -61,9 +62,11 @@ typedef struct
 	int program_counter;
 	int tabla_paginas; // el tipo ???
 	float estimacion_rafaga;
+	float estimacion_anterior;
 	bool suspendido;
 	int socket_cliente;
 	int socketMemoria;
+
 } t_pcb;
 
 typedef enum
@@ -165,6 +168,9 @@ void agregarASuspendedBlocked(t_pcb* proceso);
 void sacarDeSuspendedBlocked(t_pcb* proceso);
 void agregarAReadySuspended(t_pcb* proceso);
 t_pcb* sacarDeReadySuspended();
+
+
+
 
 
 #endif /* FUNCIONES_KERNEL_H_ */
