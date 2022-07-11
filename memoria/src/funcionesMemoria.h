@@ -123,7 +123,7 @@ void cargarEntradasDeTabla2doNivel(t_segundoNivel*);// con esta funcion que ante
 //void cargarPaginas(t_segundoNivel*);
 int leerYRetornarNroTabla2doNivel(t_list*);
 void modificarPaginaACargar(entradaTabla2doNivel*, int); //Antes estaba pagina en entrada
-int siguienteMarcoLibre();
+marco* siguienteMarcoLibre();
 void sacarMarcoAPagina(entradaTabla2doNivel*);//Antes estaba pagina en entrada
 int algoritmoClock(t_list*);
 int algoritmoClockM(t_list*);

@@ -26,9 +26,10 @@ int main(void) {
 	listaDeMarcos = list_create();
 	listaT2Nivel = list_create();
 	listaDePaginasEnMemoria = list_create();
-	listaDeEntradasDe2doNivel = list_create();
+	//listaDeEntradasDe2doNivel = list_create();
 
 
+/*
 	entradaTabla2doNivel* unaEntrada1 = malloc(sizeof(entradaTabla2doNivel));
 	unaEntrada1->uso = 1;
 	unaEntrada1->numeroMarco = 123;
@@ -51,17 +52,19 @@ int main(void) {
 	list_add(listaDeEntradasDe2doNivel,unaEntrada3);
 	list_add(listaDeEntradasDe2doNivel,unaEntrada4);
 
-
-	inicializarEstructuras();
-
-	//conexionConCpu();
-
-	inicializarMarcos();
-
 	int nroDeMarco = algoritmoClockM(listaDeEntradasDe2doNivel);
 
 	log_info(logger,"nro de marco %d", nroDeMarco);
-	//log_info(logger,"nro de marco %d",25);
+
+*/
+	inicializarEstructuras();
+
+	//Comento para no epserar a CPU conexionConCpu();
+
+	inicializarMarcos();
+
+
+	log_info(logger,"nro de marco %d",25);
 
 
 }
@@ -217,7 +220,7 @@ int buscarNroTablaDe1erNivel(int pid){
 }
 
 //Funcion para obtener el primer marco libre
-int siguienteMarcoLibre(){
+marco* siguienteMarcoLibre(){
 	marco* unMarco = malloc(sizeof(marco));
 
 	for(int i=0;i < list_size(listaDeMarcos);i++){
@@ -225,16 +228,19 @@ int siguienteMarcoLibre(){
 		unMarco = list_get(listaDeMarcos,i);
 
 		if(unMarco->marcoLibre == 0){
-			return unMarco->numeroDeMarco;
+			return unMarco;
 		}
 	}
 }
 
 
+/* QUIZAS TIENE UTILIDAD A FUTURO
 int busquedaDePaginaConUsoCero(t_list* listaDePaginas){
 
 	return 0;
 }
+*/
+
 
 void reemplazarTodosLosUsoACero(t_list* listaDeEntradasDe2doNivel){
 	entradaTabla2doNivel* unaEntrada = malloc(sizeof(entradaTabla2doNivel));
@@ -242,11 +248,8 @@ void reemplazarTodosLosUsoACero(t_list* listaDeEntradasDe2doNivel){
 	for(int i = 0; i<list_size(listaDeEntradasDe2doNivel);i++){
 		unaEntrada = list_get(listaDeEntradasDe2doNivel,i);
 		unaEntrada->uso = 0;
-				}
+			}
 }
-
-
-
 
 
 int algoritmoClock(t_list* listaDeEntradasDe2doNivel){
@@ -277,6 +280,8 @@ int algoritmoClock(t_list* listaDeEntradasDe2doNivel){
 	}
 
 }
+// delegar funciones del if y hacer funcion de retorno
+
 int algoritmoClockM (t_list* listaDeEntradasDe2doNivel){
 	entradaTabla2doNivel* unaEntrada = malloc(sizeof(entradaTabla2doNivel));
 
@@ -333,7 +338,7 @@ int algoritmoClockM (t_list* listaDeEntradasDe2doNivel){
 			sacarMarcoAPagina(unaEntrada);
 			return numeroDeMarcoAReemplazar;
 			}
-			}
+		}
 }
 
 marco* buscarMarco(int nroDeMarco){
@@ -358,26 +363,27 @@ void cargarPagina(entradaTabla2doNivel* unaEntrada){
 		marcoAAsignar = siguienteMarcoLibre();
 		modificarPaginaACargar(unaEntrada,marcoAAsignar->numeroDeMarco);
 		list_add(listaDePaginasEnMemoria,unaEntrada);
-		contadorDeMarcosPorProceso++;
+		contadorDeMarcosPorProceso++; // ANALIZAR CONTADOR
 
 	}//Caso en el que ya el proceso tiene maxima cantidad de marcos por proceso y hay que desalojar 1
 
 	//PARA ESTOS CASOS NO ES LIST_ADD TENGO QUE REEMPLAZAR LA ENTRADA QUE SACO
 	else{
-		if(algoritmoDeReemplazo == "CLOCK"){
+		if(strcmp(algoritmoDeReemplazo,"CLOCK") == 0){
 			int marcoAAsignar = algoritmoClock(listaDePaginasEnMemoria);
 			modificarPaginaACargar(unaEntrada,marcoAAsignar);
 			list_add(listaDePaginasEnMemoria,unaEntrada);
-	}else{
-		if(algoritmoDeReemplazo == "CLOCK M"){
+			//utilizar list_replace
+
+		}else if(strcmp(algoritmoDeReemplazo,"CLOCK M") == 0){
 			int marcoAAsignar = algoritmoClockM(listaDePaginasEnMemoria);
 			modificarPaginaACargar(unaEntrada,marcoAAsignar);
 			list_add(listaDePaginasEnMemoria,unaEntrada);
 
 	}
 	}
-	}
 }
+
 
 void modificarPaginaACargar(entradaTabla2doNivel* unaEntrada, int nroDeMarcoAASignar){
 	unaEntrada->numeroMarco = nroDeMarcoAASignar;
@@ -464,17 +470,20 @@ int marcoSegunIndice(int numeroTabla2doNivel,int indiceDeEntradaTabla2doNivel){
 	chequeoDeIndice(indiceDeEntradaTabla2doNivel);
 
 	if(flagDeEntradasPorTabla == 1){
-	int posicionDeLaTablaBuscada = buscarNroTablaDe2doNivel(numeroTabla2doNivel);
-	unaTablaDe2doNivel = list_get(listaT2Nivel,posicionDeLaTablaBuscada);
+		int posicionDeLaTablaBuscada = buscarNroTablaDe2doNivel(numeroTabla2doNivel);
+		unaTablaDe2doNivel = list_get(listaT2Nivel,posicionDeLaTablaBuscada);
 
-	unaEntradaTabla2doNivel = list_get(unaTablaDe2doNivel->entradas,indiceDeEntradaTabla2doNivel);// ya con esto puedo recuperar el marco
+		unaEntradaTabla2doNivel = list_get(unaTablaDe2doNivel->entradas,indiceDeEntradaTabla2doNivel);// ya con esto puedo recuperar el marco
 
-	flagDeEntradasPorTabla = 0;
+		flagDeEntradasPorTabla = 0;
 
 		if(unaEntradaTabla2doNivel->presencia == 1){
 			return unaEntradaTabla2doNivel->numeroMarco;
 	}
 		else{
+			cargarPagina(unaEntradaTabla2doNivel);
+			return unaEntradaTabla2doNivel->numeroMarco;
+
 	//En el caso en que no este cargada en memoria, tengo que cargarla asignando numero de marco y cambiando bit de presencia a 1
 	//Tengo que analizar caso en que no haya paginas por cargar, tengo que hacer contador por proceso
 	//ver tema de si es una pagina con info para swap
