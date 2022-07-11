@@ -15,7 +15,7 @@ t_list* listaT1nivel;
 t_list* listaDeMarcos;
 t_list* listaT2Nivel;
 t_list* listaDePaginasEnMemoria;
-t_list* listaDePaginas;
+t_list* listaDeEntradasDe2doNivel;
 
 
 int main(void) {
@@ -26,34 +26,30 @@ int main(void) {
 	listaDeMarcos = list_create();
 	listaT2Nivel = list_create();
 	listaDePaginasEnMemoria = list_create();
-	listaDePaginas = list_create();
+	listaDeEntradasDe2doNivel = list_create();
 
 
-	pagina* unaPagina1 = malloc(sizeof(pagina));
-	unaPagina1->numeroDePagina = 1;
-	unaPagina1->uso = 1;
-	unaPagina1->numeroMarco = 123;
-	unaPagina1->modificado = 1;
-	pagina* unaPagina2 = malloc(sizeof(pagina));
-	unaPagina2->numeroDePagina = 2;
-	unaPagina2->uso = 1;
-	unaPagina2->numeroMarco = 100;
-	unaPagina2->modificado = 1;
-	pagina* unaPagina3 = malloc(sizeof(pagina));
-	unaPagina3->numeroDePagina = 3;
-	unaPagina3->uso = 1;
-	unaPagina3->numeroMarco = 142;
-	unaPagina3->modificado = 1;
-	pagina* unaPagina4 = malloc(sizeof(pagina));
-	unaPagina4->numeroDePagina = 4;
-	unaPagina4->uso = 1;
-	unaPagina4->numeroMarco = 36514;
-	unaPagina4->modificado = 1;
+	entradaTabla2doNivel* unaEntrada1 = malloc(sizeof(entradaTabla2doNivel));
+	unaEntrada1->uso = 1;
+	unaEntrada1->numeroMarco = 123;
+	unaEntrada1->modificado = 1;
+	entradaTabla2doNivel* unaEntrada2 = malloc(sizeof(entradaTabla2doNivel));
+	unaEntrada2->uso = 1;
+	unaEntrada2->numeroMarco = 100;
+	unaEntrada2->modificado = 1;
+	entradaTabla2doNivel* unaEntrada3 = malloc(sizeof(entradaTabla2doNivel));
+	unaEntrada3->uso = 1;
+	unaEntrada3->numeroMarco = 142;
+	unaEntrada3->modificado = 1;
+	entradaTabla2doNivel* unaEntrada4 = malloc(sizeof(entradaTabla2doNivel));
+	unaEntrada4->uso = 1;
+	unaEntrada4->numeroMarco = 36514;
+	unaEntrada4->modificado = 1;
 
-	list_add(listaDePaginas,unaPagina1);
-	list_add(listaDePaginas,unaPagina2);
-	list_add(listaDePaginas,unaPagina3);
-	list_add(listaDePaginas,unaPagina4);
+	list_add(listaDeEntradasDe2doNivel,unaEntrada1);
+	list_add(listaDeEntradasDe2doNivel,unaEntrada2);
+	list_add(listaDeEntradasDe2doNivel,unaEntrada3);
+	list_add(listaDeEntradasDe2doNivel,unaEntrada4);
 
 
 	inicializarEstructuras();
@@ -62,7 +58,7 @@ int main(void) {
 
 	inicializarMarcos();
 
-	int nroDeMarco = algoritmoClockM(listaDePaginas);
+	int nroDeMarco = algoritmoClockM(listaDeEntradasDe2doNivel);
 
 	log_info(logger,"nro de marco %d", nroDeMarco);
 	//log_info(logger,"nro de marco %d",25);
@@ -140,11 +136,11 @@ void inicializarEstructuras(){
 	for(int i=0;i<entradasPorTabla;i++){
 
 		t_segundoNivel* tablaDeSegundoNivel = malloc(sizeof(t_segundoNivel));
-		tablaDeSegundoNivel->paginas = list_create();
+		tablaDeSegundoNivel->entradas = list_create();
 		tablaDeSegundoNivel->numeroTabla = contTablas2doNivel;
 		contTablas2doNivel++; //Contador global que asigna el numero de tabla de 2do nivel a nivel global, igual al indice en la lista
 
-		cargarPaginas(tablaDeSegundoNivel);
+		cargarEntradasDeTabla2doNivel(tablaDeSegundoNivel);
 		//tablaDeSegundoNivel->marcos = contadorDeMarcos;
 
 		list_add(tablaPrimerNivel->tablasDeSegundoNivel, tablaDeSegundoNivel);
@@ -177,15 +173,14 @@ void inicializarMarcos(){
 	}
 }
 
-void cargarPaginas(t_segundoNivel* tablaDeSegundoNivel){
+void cargarEntradasDeTabla2doNivel(t_segundoNivel* tablaDeSegundoNivel){
 
 	for(int j=0;j<entradasPorTabla;j++){ //crear x cantidad de marcos y agregar de a 1 a la lista
-			pagina* unaPagina = malloc(sizeof(pagina));
+			entradaTabla2doNivel* unaEntradaDeTabla2doNivel = malloc(sizeof(entradaTabla2doNivel));
 
-			unaPagina->numeroDePagina = contPaginas;
-			contPaginas++;
+			//unaEntradaDeTabla2doNivel->numeroDeEntrada = j; no haria falta
 
-			list_add(tablaDeSegundoNivel->paginas,unaPagina);
+			list_add(tablaDeSegundoNivel->entradas,unaEntradaDeTabla2doNivel);
 
 		}
 }
@@ -241,12 +236,12 @@ int busquedaDePaginaConUsoCero(t_list* listaDePaginas){
 	return 0;
 }
 
-void reemplazarTodosLosUsoACero(t_list* unaListaDePaginas){
-	pagina* unaPagina = malloc(sizeof(pagina));
+void reemplazarTodosLosUsoACero(t_list* listaDeEntradasDe2doNivel){
+	entradaTabla2doNivel* unaEntrada = malloc(sizeof(entradaTabla2doNivel));
 
-	for(int i = 0; i<list_size(unaListaDePaginas);i++){
-					unaPagina = list_get(unaListaDePaginas,i);
-					unaPagina->uso = 0;
+	for(int i = 0; i<list_size(listaDeEntradasDe2doNivel);i++){
+		unaEntrada = list_get(listaDeEntradasDe2doNivel,i);
+		unaEntrada->uso = 0;
 				}
 }
 
@@ -254,44 +249,44 @@ void reemplazarTodosLosUsoACero(t_list* unaListaDePaginas){
 
 
 
-int algoritmoClock(t_list* unaListaDePaginas){
-	pagina* unaPagina = malloc(sizeof(pagina));
+int algoritmoClock(t_list* listaDeEntradasDe2doNivel){
+	entradaTabla2doNivel* unaEntrada = malloc(sizeof(entradaTabla2doNivel));
 
-	for(int i = 0; i<list_size(unaListaDePaginas);i++){
-	unaPagina = list_get(unaListaDePaginas,i);
+	for(int i = 0; i<list_size(listaDeEntradasDe2doNivel);i++){
+		unaEntrada = list_get(listaDeEntradasDe2doNivel,i);
 
-		if(unaPagina->uso == 0){
-				int numeroDeMarcoAReemplazar = unaPagina->numeroMarco;
-				sacarMarcoAPagina(unaPagina);
+		if(unaEntrada->uso == 0){
+				int numeroDeMarcoAReemplazar = unaEntrada->numeroMarco;
+				sacarMarcoAPagina(unaEntrada);
 				return numeroDeMarcoAReemplazar;
 		}
 	}
 
 	log_info(logger,"No hay ninguna pagina con bit de uso en 0");
 	log_info(logger,"Por algoritmo reemplazo todos los bit de uso a 0 y busco de nuevo");
-	reemplazarTodosLosUsoACero(unaListaDePaginas);
+	reemplazarTodosLosUsoACero(listaDeEntradasDe2doNivel);
 
-	for(int i = 0; i<list_size(unaListaDePaginas);i++){
-	unaPagina = list_get(unaListaDePaginas,i);
+	for(int i = 0; i<list_size(listaDeEntradasDe2doNivel);i++){
+		unaEntrada = list_get(listaDeEntradasDe2doNivel,i);
 
-		if(unaPagina->uso == 0){
-				int numeroDeMarcoAReemplazar = unaPagina->numeroMarco;
-				sacarMarcoAPagina(unaPagina);
+		if(unaEntrada->uso == 0){
+				int numeroDeMarcoAReemplazar = unaEntrada->numeroMarco;
+				sacarMarcoAPagina(unaEntrada);
 				return numeroDeMarcoAReemplazar;
 		}
 	}
 
 }
-int algoritmoClockM (t_list* unaListaDePaginas){
-	pagina* unaPagina = malloc(sizeof(pagina));
+int algoritmoClockM (t_list* listaDeEntradasDe2doNivel){
+	entradaTabla2doNivel* unaEntrada = malloc(sizeof(entradaTabla2doNivel));
 
-	for(int i = 0; i<list_size(unaListaDePaginas);i++){
-		unaPagina = list_get(unaListaDePaginas,i);
+	for(int i = 0; i<list_size(listaDeEntradasDe2doNivel);i++){
+		unaEntrada = list_get(listaDeEntradasDe2doNivel,i);
 
-		if(unaPagina->uso == 0 && unaPagina->modificado == 0){
+		if(unaEntrada->uso == 0 && unaEntrada->modificado == 0){
 
-			int numeroDeMarcoAReemplazar = unaPagina->numeroMarco;
-			sacarMarcoAPagina(unaPagina);
+			int numeroDeMarcoAReemplazar = unaEntrada->numeroMarco;
+			sacarMarcoAPagina(unaEntrada);
 			return numeroDeMarcoAReemplazar;
 
 		}
@@ -300,42 +295,42 @@ int algoritmoClockM (t_list* unaListaDePaginas){
 	log_info(logger,"No hay ninguna pagina con bit de uso y modificado en 0");
 	log_info(logger,"Busco con bit de uso en 0 y modificado en 1");
 
-	for(int i = 0; i<list_size(unaListaDePaginas);i++){
-		unaPagina = list_get(unaListaDePaginas,i);
+	for(int i = 0; i<list_size(listaDeEntradasDe2doNivel);i++){
+		unaEntrada = list_get(listaDeEntradasDe2doNivel,i);
 
-		if(unaPagina->uso == 0 && unaPagina->modificado == 1){
+		if(unaEntrada->uso == 0 && unaEntrada->modificado == 1){
 
-			int numeroDeMarcoAReemplazar = unaPagina->numeroMarco;
-			sacarMarcoAPagina(unaPagina);
+			int numeroDeMarcoAReemplazar = unaEntrada->numeroMarco;
+			sacarMarcoAPagina(unaEntrada);
 			return numeroDeMarcoAReemplazar;
 		}
 	}
 
 	log_info(logger,"No hay ninguna pagina con bit de uso en 0 y modificado en 1");
 	log_info(logger,"Reemplazo todos los bit de uso en 0");
-	reemplazarTodosLosUsoACero(unaListaDePaginas);
+	reemplazarTodosLosUsoACero(listaDeEntradasDe2doNivel);
 	log_info(logger,"Busco con bit de uso en 0 y modificado en 0 ");
 
-	for(int i = 0; i<list_size(unaListaDePaginas);i++){
-		unaPagina = list_get(unaListaDePaginas,i);
+	for(int i = 0; i<list_size(listaDeEntradasDe2doNivel);i++){
+		unaEntrada = list_get(listaDeEntradasDe2doNivel,i);
 
-		if(unaPagina->uso == 0 && unaPagina->modificado == 0){
+		if(unaEntrada->uso == 0 && unaEntrada->modificado == 0){
 
-			int numeroDeMarcoAReemplazar = unaPagina->numeroMarco;
-			sacarMarcoAPagina(unaPagina);
+			int numeroDeMarcoAReemplazar = unaEntrada->numeroMarco;
+			sacarMarcoAPagina(unaEntrada);
 			return numeroDeMarcoAReemplazar;
 		}
 	}
 	log_info(logger,"No hay ninguna pagina con bit de uso en 0 y modificado en 0");
 	log_info(logger,"Busco con bit de uso en 0 y modificado en 1");
 
-	for(int i = 0; i<list_size(unaListaDePaginas);i++){
-		unaPagina = list_get(unaListaDePaginas,i);
+	for(int i = 0; i<list_size(listaDeEntradasDe2doNivel);i++){
+		unaEntrada = list_get(listaDeEntradasDe2doNivel,i);
 
-		if(unaPagina->uso == 0 && unaPagina->modificado == 1){
+		if(unaEntrada->uso == 0 && unaEntrada->modificado == 1){
 
-			int numeroDeMarcoAReemplazar = unaPagina->numeroMarco;
-			sacarMarcoAPagina(unaPagina);
+			int numeroDeMarcoAReemplazar = unaEntrada->numeroMarco;
+			sacarMarcoAPagina(unaEntrada);
 			return numeroDeMarcoAReemplazar;
 			}
 			}
@@ -356,46 +351,47 @@ marco* buscarMarco(int nroDeMarco){
 }
 
 //Funcion de cargar una pagina, por ahora la hago global y en 1 proceso porque no se como funciona
-void cargarPagina(pagina* unaPagina){
+void cargarPagina(entradaTabla2doNivel* unaEntrada){
 	marco* marcoAAsignar;
 	//Caso en el que se puede asignar un marco a un proceso de manera libre
 	if(contadorDeMarcosPorProceso<marcosPorProceso){
 		marcoAAsignar = siguienteMarcoLibre();
-		modificarPaginaACargar(unaPagina,marcoAAsignar->numeroDeMarco);
-		list_add(listaDePaginasEnMemoria,unaPagina);
+		modificarPaginaACargar(unaEntrada,marcoAAsignar->numeroDeMarco);
+		list_add(listaDePaginasEnMemoria,unaEntrada);
 		contadorDeMarcosPorProceso++;
 
 	}//Caso en el que ya el proceso tiene maxima cantidad de marcos por proceso y hay que desalojar 1
 
+	//PARA ESTOS CASOS NO ES LIST_ADD TENGO QUE REEMPLAZAR LA ENTRADA QUE SACO
 	else{
 		if(algoritmoDeReemplazo == "CLOCK"){
 			int marcoAAsignar = algoritmoClock(listaDePaginasEnMemoria);
-			modificarPaginaACargar(unaPagina,marcoAAsignar);
-			list_add(listaDePaginasEnMemoria,unaPagina);
+			modificarPaginaACargar(unaEntrada,marcoAAsignar);
+			list_add(listaDePaginasEnMemoria,unaEntrada);
 	}else{
 		if(algoritmoDeReemplazo == "CLOCK M"){
 			int marcoAAsignar = algoritmoClockM(listaDePaginasEnMemoria);
-			modificarPaginaACargar(unaPagina,marcoAAsignar);
-			list_add(listaDePaginasEnMemoria,unaPagina);
+			modificarPaginaACargar(unaEntrada,marcoAAsignar);
+			list_add(listaDePaginasEnMemoria,unaEntrada);
 
 	}
 	}
 	}
 }
 
-void modificarPaginaACargar(pagina* unaPagina, int nroDeMarcoAASignar){
-	unaPagina->numeroMarco = nroDeMarcoAASignar;
-	unaPagina->presencia = 1;
-	unaPagina->uso = 1;
+void modificarPaginaACargar(entradaTabla2doNivel* unaEntrada, int nroDeMarcoAASignar){
+	unaEntrada->numeroMarco = nroDeMarcoAASignar;
+	unaEntrada->presencia = 1;
+	unaEntrada->uso = 1;
 	//unaPagina->modificado = 0; ANALIZAR CASO DE MODIFICADO EN 1
 	marco* marcoAsignado = buscarMarco(nroDeMarcoAASignar);
 	marcoAsignado->marcoLibre = 1;
 }
 
-void sacarMarcoAPagina(pagina* unaPagina){
-	unaPagina->presencia = 0;
-	unaPagina->uso = 0;
-	unaPagina->numeroMarco = -1;
+void sacarMarcoAPagina(entradaTabla2doNivel* unaEntrada){
+	unaEntrada->presencia = 0;
+	unaEntrada->uso = 0;
+	unaEntrada->numeroMarco = -1;
 
 }
 
@@ -459,24 +455,24 @@ int numeroTabla2doNivelSegunIndice(int numeroTabla1erNivel,int indiceDeEntrada){
 
 
 
-int marcoSegunIndice(int numeroTabla2doNivel,int indiceDeEntrada){
+int marcoSegunIndice(int numeroTabla2doNivel,int indiceDeEntradaTabla2doNivel){
 
-	pagina* unaPagina = malloc(sizeof(pagina));
-	marco* unMarco = malloc(sizeof(marco));
+	entradaTabla2doNivel* unaEntradaTabla2doNivel = malloc(sizeof(entradaTabla2doNivel));
+	//marco* unMarco = malloc(sizeof(marco)); para que esta?
 	t_segundoNivel* unaTablaDe2doNivel = malloc(sizeof(t_segundoNivel));
 
-	chequeoDeIndice(indiceDeEntrada);
+	chequeoDeIndice(indiceDeEntradaTabla2doNivel);
 
 	if(flagDeEntradasPorTabla == 1){
 	int posicionDeLaTablaBuscada = buscarNroTablaDe2doNivel(numeroTabla2doNivel);
 	unaTablaDe2doNivel = list_get(listaT2Nivel,posicionDeLaTablaBuscada);
 
-	unaPagina = list_get(unaTablaDe2doNivel->paginas,indiceDeEntrada);
+	unaEntradaTabla2doNivel = list_get(unaTablaDe2doNivel->entradas,indiceDeEntradaTabla2doNivel);// ya con esto puedo recuperar el marco
 
 	flagDeEntradasPorTabla = 0;
 
-		if(unaPagina->presencia == 1){
-			return unaPagina->numeroMarco;
+		if(unaEntradaTabla2doNivel->presencia == 1){
+			return unaEntradaTabla2doNivel->numeroMarco;
 	}
 		else{
 	//En el caso en que no este cargada en memoria, tengo que cargarla asignando numero de marco y cambiando bit de presencia a 1

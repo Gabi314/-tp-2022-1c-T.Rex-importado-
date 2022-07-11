@@ -626,4 +626,27 @@
 [INFO] 21:30:53:870 MEMORIA/(6654:6654): No hay ninguna pagina con bit de uso en 0 y modificado en 0
 [INFO] 21:30:53:870 MEMORIA/(6654:6654): Busco con bit de uso en 0 y modificado en 1
 [INFO] 21:30:53:871 MEMORIA/(6654:6654): nro de marco 123
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   [INFO] 12:29:13:065 MEMORIA/(6570:6570): No hay ninguna pagina con bit de uso y modificado en 0
+[INFO] 12:29:13:068 MEMORIA/(6570:6570): Busco con bit de uso en 0 y modificado en 1
+[INFO] 12:29:13:070 MEMORIA/(6570:6570): No hay ninguna pagina con bit de uso en 0 y modificado en 1
+[INFO] 12:29:13:072 MEMORIA/(6570:6570): Reemplazo todos los bit de uso en 0
+[INFO] 12:29:13:072 MEMORIA/(6570:6570): Busco con bit de uso en 0 y modificado en 0 
+[INFO] 12:29:13:072 MEMORIA/(6570:6570): No hay ninguna pagina con bit de uso en 0 y modificado en 0
+[INFO] 12:29:13:072 MEMORIA/(6570:6570): Busco con bit de uso en 0 y modificado en 1
+[INFO] 12:29:13:072 MEMORIA/(6570:6570): nro de marco 123
+[INFO] 15:01:59:948 MEMORIA/(19560:19560): No hay ninguna pagina con bit de uso y modificado en 0
+[INFO] 15:01:59:948 MEMORIA/(19560:19560): Busco con bit de uso en 0 y modificado en 1
+[INFO] 15:01:59:948 MEMORIA/(19560:19560): No hay ninguna pagina con bit de uso en 0 y modificado en 1
+[INFO] 15:01:59:948 MEMORIA/(19560:19560): Reemplazo todos los bit de uso en 0
+[INFO] 15:01:59:948 MEMORIA/(19560:19560): Busco con bit de uso en 0 y modificado en 0 
+[INFO] 15:01:59:948 MEMORIA/(19560:19560): No hay ninguna pagina con bit de uso en 0 y modificado en 0
+[INFO] 15:01:59:948 MEMORIA/(19560:19560): Busco con bit de uso en 0 y modificado en 1
+[INFO] 15:01:59:948 MEMORIA/(19560:19560): nro de marco 123
+[INFO] 15:07:25:447 MEMORIA/(20104:20104): No hay ninguna pagina con bit de uso y modificado en 0
+[INFO] 15:07:25:447 MEMORIA/(20104:20104): Busco con bit de uso en 0 y modificado en 1
+[INFO] 15:07:25:448 MEMORIA/(20104:20104): No hay ninguna pagina con bit de uso en 0 y modificado en 1
+[INFO] 15:07:25:448 MEMORIA/(20104:20104): Reemplazo todos los bit de uso en 0
+[INFO] 15:07:25:448 MEMORIA/(20104:20104): Busco con bit de uso en 0 y modificado en 0 
+[INFO] 15:07:25:448 MEMORIA/(20104:20104): No hay ninguna pagina con bit de uso en 0 y modificado en 0
+[INFO] 15:07:25:448 MEMORIA/(20104:20104): Busco con bit de uso en 0 y modificado en 1
+[INFO] 15:07:25:448 MEMORIA/(20104:20104): nro de marco 123

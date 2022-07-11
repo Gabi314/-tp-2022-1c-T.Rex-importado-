@@ -85,13 +85,13 @@ t_list* nroTabla1erNivelYentrada;
 
 //Tabla de paginas
 typedef struct{
-	int numeroDePagina;//depnde en que linea ponga esta variable cambia su valor(basura, memory leak)
+	//int numeroDeEntrada; no haria falta
 	int numeroMarco;
 	int presencia;
 	int uso;
 	int modificado;
 
-}pagina;
+}entradaTabla2doNivel;
 
 typedef struct{
 	int numeroDeMarco;//Hacer lista de marcos, el indice en la lista es el numero de marco, la cantidad de marcos es
@@ -100,7 +100,7 @@ typedef struct{
 }marco;
 
 typedef struct{// capaz usar diccionario
-	t_list* paginas;
+	t_list* entradas;
 	int numeroTabla;
 }t_segundoNivel;
 
@@ -119,11 +119,12 @@ int numeroTabla2doNivelSegunIndice(int,int);
 int buscarNroTablaDe1erNivel(int);
 int buscarNroTablaDe2doNivel(int);
 void escribirEnSwap(int);
-void cargarPaginas(t_segundoNivel*);
+void cargarEntradasDeTabla2doNivel(t_segundoNivel*);// con esta funcion que antes se llamaba cargar paginas
+//void cargarPaginas(t_segundoNivel*);
 int leerYRetornarNroTabla2doNivel(t_list*);
-void modificarPaginaACargar(pagina*, int);
+void modificarPaginaACargar(entradaTabla2doNivel*, int); //Antes estaba pagina en entrada
 int siguienteMarcoLibre();
-void sacarMarcoAPagina(pagina*);
+void sacarMarcoAPagina(entradaTabla2doNivel*);//Antes estaba pagina en entrada
 int algoritmoClock(t_list*);
 int algoritmoClockM(t_list*);
 
