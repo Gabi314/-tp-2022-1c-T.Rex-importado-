@@ -18,3 +18,13 @@
 [INFO] 15:14:27:988 CPU/(20197:20197): Le envio a cpu nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
 [INFO] 15:14:27:993 CPU/(20197:20197): numero de tabla de segundoNivel  0
 [INFO] 15:14:27:993 CPU/(20197:20197): cantidad entradas 4
+[INFO] 20:14:06:667 CPU/(5555:5555): Hola memoria, soy cpu
+[INFO] 20:14:06:670 CPU/(5555:5555): Me llegaron los siguientes valores:
+
+[INFO] 20:14:06:671 CPU/(5555:5555): tamanio de pagina: 64 
+
+[INFO] 20:14:06:671 CPU/(5555:5555): entradas por tabla: 4 
+
+[INFO] 20:14:06:671 CPU/(5555:5555): Le envio a cpu nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 20:14:06:672 CPU/(5555:5555): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 20:14:06:672 CPU/(5555:5555): cantidad entradas 4

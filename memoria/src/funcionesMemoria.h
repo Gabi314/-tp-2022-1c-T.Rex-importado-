@@ -93,6 +93,12 @@ typedef struct{
 
 }pagina;
 
+typedef struct{
+	int numeroDeMarco;//Hacer lista de marcos, el indice en la lista es el numero de marco, la cantidad de marcos es
+	uint32_t valor;
+	int marcoLibre;// tam memoria/tam pagina
+}marco;
+
 typedef struct{// capaz usar diccionario
 	t_list* paginas;
 	int numeroTabla;
@@ -103,11 +109,7 @@ typedef struct{// capaz usar diccionario
 	int pid;
 }t_primerNivel;
 
-typedef struct{
-	int numeroDeMarco;//Hacer lista de marcos, el indice en la lista es el numero de marco, la cantidad de marcos es
-	uint32_t valor;
-	int marcoLibre;// tam memoria/tam pagina
-}marco;
+
 
 
 void crearConfiguraciones();
@@ -119,6 +121,13 @@ int buscarNroTablaDe2doNivel(int);
 void escribirEnSwap(int);
 void cargarPaginas(t_segundoNivel*);
 int leerYRetornarNroTabla2doNivel(t_list*);
+void modificarPaginaACargar(pagina*, int);
+int siguienteMarcoLibre();
+void sacarMarcoAPagina(pagina*);
+int algoritmoClock(t_list*);
+int algoritmoClockM(t_list*);
+
+
 
 #endif /* FUNCIONES_MEMORIA_H_*/
 
