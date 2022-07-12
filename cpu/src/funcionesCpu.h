@@ -52,6 +52,12 @@ int puertoMemoria;
 int puertoDeEscuchaDispath;
 int puertoDeEscuchaInterrupt;
 
+//Variables direccion logica
+int numeroDePagina;
+int entradaTabla1erNivel;
+int entradaTabla2doNivel;
+int desplazamiento;
+
 
 t_list* tamanioDePagYEntradas;
 int tamanioDePagina;
@@ -83,9 +89,10 @@ typedef struct
 } t_paquete;
 
 int crear_conexion(char* ip, int puertoCpuDispatch);
-t_paquete* crear_paquete(void);
-void agregar_pedidoDeTamPagYCantEntradas_a_paquete(t_paquete* paquete, void* valor, int tamanio);
-void agregar_nroTabla1erNivelYEntrada_a_paquete(t_paquete* paquete, void* valor, int tamanio);
+t_paquete* crear_paqueteEntradaTabla1erNivel(void);
+t_paquete* crear_paqueteEntradaTabla2doNivel(void);
+void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio);
+//void agregar_nroTabla1erNivelYEntrada_a_paquete(t_paquete* paquete, void* valor, int tamanio);
 void enviar_paquete(t_paquete* paquete, int socket_cliente);
 void* serializar_paquete(t_paquete* paquete, int bytes);
 void enviar_mensaje(char* mensaje, int socket_cliente);
@@ -96,7 +103,8 @@ void eliminar_paquete(t_paquete* paquete);
 t_log* iniciar_logger(void);
 t_config* iniciar_config(void);
 
-void paqueteEntradaTabla1erNivel(int,int,int);
+void paqueteEntradaTabla1erNivel(int);
+void paqueteEntradaTabla2doNivel(int);
 
 void terminar_programa(int, t_log*, t_config*);
 
@@ -108,7 +116,8 @@ void generarListaCamposTLB(tlb*);
 void reiniciarTLB();
 int chequeoDePagina(int);
 
-void pedidoDeNroTabla2doNivel(int,int);
+void calculosDireccionLogica();
+void leerTamanioDePaginaYCantidadDeEntradas(t_list*);
 
 
 //Funciones propias de Cpu como cliente

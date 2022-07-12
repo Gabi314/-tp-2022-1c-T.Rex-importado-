@@ -129,3 +129,10 @@
 
 [INFO] 19:23:32:522 CONSOLA/(24907:24907): instruccion: EXIT
 
+[INFO] 19:23:53:745 CONSOLA/(4725:4725): Se leyo el archivo correctamente
+[INFO] 19:23:53:761 CONSOLA/(4725:4725): instruccion: NO_OP
+
+[INFO] 19:23:53:762 CONSOLA/(4725:4725): instruccion: NO_OP
+
+[INFO] 19:23:53:762 CONSOLA/(4725:4725): instruccion: EXIT
+

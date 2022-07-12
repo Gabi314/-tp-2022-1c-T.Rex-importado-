@@ -31,7 +31,7 @@ int conexionConMemoria(void){
 
 	enviar_mensaje("Dame el tamanio de pag y entradas por tabla",conexion);
 
-	tamanioDePagYEntradas = list_create();
+	t_list* listaQueContieneTamanioDePagYEntradas = list_create();
 	t_list* listaQueContieneNroTabla2doNivel = list_create();
 	int a = 1;
 	while (a == 1) {
@@ -39,24 +39,21 @@ int conexionConMemoria(void){
 
 		switch (cod_op){
 				case PAQUETE:
-					tamanioDePagYEntradas = recibir_paquete(conexion);
+					listaQueContieneTamanioDePagYEntradas = recibir_paquete(conexion);
 
-					log_info(logger, "Me llegaron los siguientes valores:\n");
+					leerTamanioDePaginaYCantidadDeEntradas(listaQueContieneTamanioDePagYEntradas);
 
-					tamanioDePagina = (int) list_get(tamanioDePagYEntradas,0);
-					entradasPorTabla = (int) list_get(tamanioDePagYEntradas,1);
+					calculosDireccionLogica();
 
-					log_info(logger,"tamanio de pagina: %d \n",tamanioDePagina);
-					log_info(logger,"entradas por tabla: %d \n",entradasPorTabla);
-
-
-					pedidoDeNroTabla2doNivel(nroTabla1erNivel,4);
+					paqueteEntradaTabla1erNivel(conexion);//1er acceso con esto memoria manda nroTabla2doNivel
 					break;
 				case PAQUETE2:
 
-					listaQueContieneNroTabla2doNivel = recibir_paquete(conexion);
+					listaQueContieneNroTabla2doNivel = recibir_paquete(conexion);//finaliza 1er acceso
 					int nroTabla2doNivel = (int) list_get(listaQueContieneNroTabla2doNivel,0);
 					log_info(logger,"Me llego el numero de tabla de segundoNivel que es % d",nroTabla2doNivel);
+
+					paqueteEntradaTabla2doNivel(conexion); //2do acceso a memoria
 
 					a = 0; //Para que salga del while
 					break;
@@ -83,6 +80,23 @@ void inicializarConfiguraciones(){
 	puertoDeEscuchaInterrupt = config_get_int_value(config,"PUERTO_ESCUCHA_INTERRUPT");
 }
 
+void calculosDireccionLogica(){
+	numeroDePagina = floor(direccionLogica/ tamanioDePagina);
+	entradaTabla1erNivel = floor(numeroDePagina / entradasPorTabla);
+	entradaTabla2doNivel = numeroDePagina % entradasPorTabla;
+	desplazamiento = direccionLogica - numeroDePagina * tamanioDePagina;
+}
+
+void leerTamanioDePaginaYCantidadDeEntradas(t_list* listaQueContieneTamanioDePagYEntradas){
+	log_info(logger, "Me llegaron los siguientes valores:");
+
+	tamanioDePagina = (int) list_get(listaQueContieneTamanioDePagYEntradas,0);
+	entradasPorTabla = (int) list_get(listaQueContieneTamanioDePagYEntradas,1);
+
+	log_info(logger,"tamanio de pagina: %d ",tamanioDePagina);
+	log_info(logger,"entradas por tabla: %d ",entradasPorTabla);
+
+}
 
 //Inicializar para poder utilizar la cahce
 tlb* inicializarTLB(){
@@ -129,26 +143,29 @@ void reemplazoDeCampoEnTLB(){
 
 }
 
-void paqueteEntradaTabla1erNivel(int conexion, int entradaTabla1erNivel,int nroTabla1erNivel){
-	t_paquete* paquete = crear_paquete();
+void paqueteEntradaTabla1erNivel(int conexion){
+	t_paquete* paquete = crear_paqueteEntradaTabla1erNivel();
 	// Leemos y esta vez agregamos las lineas al paquete
-	agregar_nroTabla1erNivelYEntrada_a_paquete(paquete,&entradaTabla1erNivel,sizeof(entradaTabla1erNivel));
-	agregar_nroTabla1erNivelYEntrada_a_paquete(paquete,&nroTabla1erNivel,sizeof(nroTabla1erNivel));
+	agregar_a_paquete(paquete,&entradaTabla1erNivel,sizeof(entradaTabla1erNivel));
+	agregar_a_paquete(paquete,&nroTabla1erNivel,sizeof(nroTabla1erNivel));
 
-	log_info(logger,"Le envio a cpu nro tabla 1er nivel y entrada de 1er nivel (que son %d y %d)",nroTabla1erNivel,entradaTabla1erNivel);
+	log_info(logger,"Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son %d y %d)",nroTabla1erNivel,entradaTabla1erNivel);
 	enviar_paquete(paquete,conexion);
 	eliminar_paquete(paquete);
 }
 
-void pedidoDeNroTabla2doNivel(int nroTabla1erNivel, int entradaTabla1erNivel){
+void paqueteEntradaTabla2doNivel(int conexion){
+	t_paquete* paquete = crear_paqueteEntradaTabla2doNivel();
+	// Leemos y esta vez agregamos las lineas al paquete
+	agregar_a_paquete(paquete,&entradaTabla2doNivel,sizeof(entradaTabla2doNivel));
 
-	int numeroDePagina = floor(direccionLogica/ tamanioDePagina);
-	entradaTabla1erNivel = floor(numeroDePagina / entradasPorTabla);
-	//int entradaTabla2doNivel = numeroDePagina % entradasPorTabla;
-
-	paqueteEntradaTabla1erNivel(conexion,entradaTabla1erNivel,nroTabla1erNivel);
-
+	log_info(logger,"Le envio a memoria entrada de tabla de 2do nivel que es %d)",entradaTabla2doNivel);
+	enviar_paquete(paquete,conexion);
+	eliminar_paquete(paquete);
 }
+
+
+
 
 void terminar_programa(int conexion, t_log* logger, t_config* config){
 	/* Y por ultimo, hay que liberar lo que utilizamos (conexion, log y config)

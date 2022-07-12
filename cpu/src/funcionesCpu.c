@@ -164,7 +164,7 @@ void crear_buffer(t_paquete* paquete)
 }
 
 
-t_paquete* crear_paquete(void)
+t_paquete* crear_paqueteEntradaTabla1erNivel(void)
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
 	paquete->codigo_operacion = PAQUETE;
@@ -172,7 +172,14 @@ t_paquete* crear_paquete(void)
 	return paquete;
 }
 
-void agregar_pedidoDeTamPagYCantEntradas_a_paquete(t_paquete* paquete, void* valor, int tamanio)
+t_paquete* crear_paqueteEntradaTabla2doNivel(void)
+{
+	t_paquete* paquete = malloc(sizeof(t_paquete));
+	paquete->codigo_operacion = PAQUETE2;
+	crear_buffer(paquete);
+	return paquete;
+}
+/*void agregar_pedidoDeTamPagYCantEntradas_a_paquete(t_paquete* paquete, void* valor, int tamanio)
 {
 	paquete->buffer->stream = realloc(paquete->buffer->stream, paquete->buffer->size + tamanio + sizeof(int));
 
@@ -180,9 +187,9 @@ void agregar_pedidoDeTamPagYCantEntradas_a_paquete(t_paquete* paquete, void* val
 	memcpy(paquete->buffer->stream + paquete->buffer->size + sizeof(int), valor, tamanio);
 
 	paquete->buffer->size += tamanio + sizeof(int);
-}
+}*/
 
-void agregar_nroTabla1erNivelYEntrada_a_paquete(t_paquete* paquete, void* valor, int tamanio)
+void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio)
 {
 	paquete->buffer->stream = realloc(paquete->buffer->stream, paquete->buffer->size + tamanio + sizeof(int));
 

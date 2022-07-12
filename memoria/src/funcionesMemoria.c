@@ -72,33 +72,7 @@ void* recibir_buffer(int* size, int socket_cliente)
 }
 
 
-// falta recibir recibir de kernel el pid y luego de cpu entradaDeTabla2doNivel
-// al recibir de kernel el pid creo las estructuras y devuelvo  el nro de tabla de 1er nivel
 
-t_list* recibir_pedido_deTamPagYCantEntradas(int socket_cliente)
-{
-	int size;
-	int desplazamiento = 0;
-	void * buffer;
-	t_list* valores = list_create();
-	int tamanio;
-
-	buffer = recibir_buffer(&size, socket_cliente);
-	while(desplazamiento < size)
-	{
-		memcpy(&tamanio, buffer + desplazamiento, sizeof(int));
-		desplazamiento+=sizeof(int);
-		char* valor = malloc(tamanio);
-		memcpy(valor, buffer+desplazamiento, tamanio);
-		desplazamiento+=tamanio;
-		list_add(valores, valor);
-
-	}
-	free(buffer);
-
-
-	return valores;
-}
 void enviarTamanioDePaginaYCantidadDeEntradas(int socket_cliente){
 	t_paquete* paquete = crear_paquete();
 	log_info(logger,"Envio el tamanio de pag y cant entradas");
@@ -122,7 +96,7 @@ void enviarNroTabla2doNivel(int socket_cliente,int nroTabla2doNivel){
 	eliminar_paquete(paquete);
 }
 
-t_list* recibir_nroTabla1erNivel_entradaTabla1erNivel(int socket_cliente)
+t_list* recibir_paquete_int(int socket_cliente)
 {
 	int size;
 	int desplazamiento = 0;

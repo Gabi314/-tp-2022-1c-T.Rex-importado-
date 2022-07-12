@@ -46,7 +46,7 @@ int iniciar_servidor(void);
 int esperar_cliente(int);
 
 t_list* recibir_pedido_deTamPagYCantEntradas(int);
-t_list* recibir_nroTabla1erNivel_entradaTabla1erNivel(int);
+t_list* recibir_paquete_int(int);
 
 void recibir_mensaje(int);
 int recibir_operacion(int);

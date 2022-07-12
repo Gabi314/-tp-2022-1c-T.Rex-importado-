@@ -59,12 +59,12 @@ int main(void) {
 */
 	inicializarEstructuras();
 
-	//Comento para no epserar a CPU conexionConCpu();
+	conexionConCpu();
 
 	inicializarMarcos();
 
 
-	log_info(logger,"nro de marco %d",25);
+	//log_info(logger,"nro de marco %d",25);
 
 
 }
@@ -76,7 +76,8 @@ int conexionConCpu(void){
 	log_info(logger, "Memoria lista para recibir a Cpu o Kernel");
 	int cliente_fd = esperar_cliente(server_fd);
 
-	nroTabla1erNivelYentrada = list_create();
+	t_list* listaQueContieneNroTabla1erNivelYentrada = list_create();
+	t_list* listaQueContieneEntradaDeTabla2doNivel = list_create();
 
 	int a = 1;
 	while (a == 1) {
@@ -87,13 +88,21 @@ int conexionConCpu(void){
 				enviarTamanioDePaginaYCantidadDeEntradas(cliente_fd);
 				break;
 			case PAQUETE:
-				nroTabla1erNivelYentrada = recibir_nroTabla1erNivel_entradaTabla1erNivel(cliente_fd); // lista con valores de nro y entrada de tabla
+				listaQueContieneNroTabla1erNivelYentrada = recibir_paquete_int(cliente_fd); // lista con valores de nro y entrada de tabla
 
-				int nroTabla2doNivel = leerYRetornarNroTabla2doNivel(nroTabla1erNivelYentrada);
+				int nroTabla2doNivel = leerYRetornarNroTabla2doNivel(listaQueContieneNroTabla1erNivelYentrada);
 
 				enviarNroTabla2doNivel(cliente_fd,nroTabla2doNivel);
+				break;
+
+			case PAQUETE2://poner cases mas expresivos
+				listaQueContieneEntradaDeTabla2doNivel = recibir_paquete_int(cliente_fd);
+				int entradaTabla2doNivel = (int) list_get(listaQueContieneEntradaDeTabla2doNivel,0);
+				log_info(logger,"Me llego  la entrada de segundo nivel %d",entradaTabla2doNivel);
+
 				a = 0;
 				break;
+
 			case -1:
 				log_error(logger, "Se desconecto el cliente. Terminando conexion");
 				return EXIT_FAILURE;
