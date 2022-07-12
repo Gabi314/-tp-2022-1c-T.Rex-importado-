@@ -13,6 +13,7 @@
 #include<string.h>
 #include<assert.h>
 #include<math.h>
+#include <sys/time.h>
 
 #define IP_CPU "127.0.0.1"
 #define PUERTO_CPU_DISPATCH 8001 // por ahora este faltan los otros puertos para conectar a kernel
@@ -21,7 +22,8 @@ typedef enum
 {
 	MENSAJE,
 	PAQUETE,
-	PAQUETE2
+	PAQUETE2,
+	PAQUETE3
 }op_code;
 
 t_log* logger;
@@ -64,17 +66,16 @@ int tamanioDePagina;
 int entradasPorTabla;
 
 //Estructuras
-typedef struct
-{
-	t_list* listaDeCampos;
-} tlb;
+
+t_list* tlb;
+
 
 typedef struct
 {
 	int nroDePagina;
 	int nroDeMarco;
 	int instanteDeUltimaCarga;
-} campoTLB;
+} entradaTLB;
 
 typedef struct
 {
@@ -103,18 +104,19 @@ void eliminar_paquete(t_paquete* paquete);
 t_log* iniciar_logger(void);
 t_config* iniciar_config(void);
 
-void paqueteEntradaTabla1erNivel(int);
-void paqueteEntradaTabla2doNivel(int);
+void enviarEntradaTabla1erNivel(int);
+void enviarEntradaTabla2doNivel(int);
 
 void terminar_programa(int, t_log*, t_config*);
 
 int conexionConMemoria(void);
 void inicializarConfiguraciones();
 
-tlb* inicializarTLB();
-void generarListaCamposTLB(tlb*);
+t_list* inicializarTLB();
+void generarListaCamposTLB(t_list*);
 void reiniciarTLB();
 int chequeoDePagina(int);
+void agregarEntradaATLB(int,int);
 
 void calculosDireccionLogica();
 void leerTamanioDePaginaYCantidadDeEntradas(t_list*);

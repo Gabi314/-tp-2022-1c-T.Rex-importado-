@@ -21,7 +21,8 @@ typedef enum
 {
 	MENSAJE,
 	PAQUETE,
-	PAQUETE2
+	PAQUETE2,
+	PAQUETE3
 }op_code;
 
 typedef struct
@@ -52,12 +53,13 @@ void recibir_mensaje(int);
 int recibir_operacion(int);
 //---------------------------
 
-//Para enviar a cpu(tam_paginas y cant_entradas) y a kernel(nro de tabla de pags de 1er nivel)
+//Para envios a cpu
 void enviarTamanioDePaginaYCantidadDeEntradas(int socket_cliente);
 void enviarNroTabla2doNivel(int,int);
+void enviarMarco(int, int);
 
-t_paquete* crear_paquete(void);
-t_paquete* crear_otro_paquete(void);
+t_paquete* crear_paquete_tamanioDePagYCantEntradas(void);
+t_paquete* crear_paquete_nroTabla2doNivel(void);
 
 void agregar_a_paquete(t_paquete* paquete, void* valor,int tamanio);
 void enviar_paquete(t_paquete* paquete, int socket_cliente);
@@ -95,7 +97,7 @@ typedef struct{
 
 typedef struct{
 	int numeroDeMarco;//Hacer lista de marcos, el indice en la lista es el numero de marco, la cantidad de marcos es
-	uint32_t valor;
+	uint32_t valor;//no haria falta
 	int marcoLibre;// tam memoria/tam pagina
 }marco;
 
@@ -108,9 +110,6 @@ typedef struct{// capaz usar diccionario
 	t_list* tablasDeSegundoNivel; // int tablasDeSegundoNivel[entradas]
 	int pid;
 }t_primerNivel;
-
-
-
 
 void crearConfiguraciones();
 void inicializarEstructuras();
@@ -125,6 +124,7 @@ int leerYRetornarNroTabla2doNivel(t_list*);
 void modificarPaginaACargar(entradaTabla2doNivel*, int); //Antes estaba pagina en entrada
 marco* siguienteMarcoLibre();
 void sacarMarcoAPagina(entradaTabla2doNivel*);//Antes estaba pagina en entrada
+int marcoSegunIndice(int,int);
 int algoritmoClock(t_list*);
 int algoritmoClockM(t_list*);
 

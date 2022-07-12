@@ -73,29 +73,6 @@ void* recibir_buffer(int* size, int socket_cliente)
 
 
 
-void enviarTamanioDePaginaYCantidadDeEntradas(int socket_cliente){
-	t_paquete* paquete = crear_paquete();
-	log_info(logger,"Envio el tamanio de pag y cant entradas");
-
-	agregar_a_paquete(paquete,&tamanioDePagina,sizeof(tamanioDePagina));
-	agregar_a_paquete(paquete,&entradasPorTabla,sizeof(entradasPorTabla));
-
-
-	enviar_paquete(paquete,socket_cliente);
-	eliminar_paquete(paquete);
-}
-
-void enviarNroTabla2doNivel(int socket_cliente,int nroTabla2doNivel){
-	t_paquete* paquete = crear_otro_paquete();
-	log_info(logger,"Envio el numero de tabla de 2do nivel");
-
-	agregar_a_paquete(paquete,&nroTabla2doNivel,sizeof(tamanioDePagina));
-
-
-	enviar_paquete(paquete,socket_cliente);
-	eliminar_paquete(paquete);
-}
-
 t_list* recibir_paquete_int(int socket_cliente)
 {
 	int size;
@@ -146,7 +123,7 @@ void crear_buffer(t_paquete* paquete)
 }
 
 
-t_paquete* crear_paquete(void)
+t_paquete* crear_paquete_tamanioDePagYCantEntradas(void)
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
 	paquete->codigo_operacion = PAQUETE;
@@ -154,13 +131,55 @@ t_paquete* crear_paquete(void)
 	return paquete;
 }
 
-t_paquete* crear_otro_paquete(void)
+t_paquete* crear_paquete_nroTabla2doNivel(void)
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
 	paquete->codigo_operacion = PAQUETE2;
 	crear_buffer(paquete);
 	return paquete;
 }
+
+t_paquete* crear_paquete_marco(void)
+{
+	t_paquete* paquete = malloc(sizeof(t_paquete));
+	paquete->codigo_operacion = PAQUETE3;
+	crear_buffer(paquete);
+	return paquete;
+}
+
+void enviarTamanioDePaginaYCantidadDeEntradas(int socket_cliente){
+	t_paquete* paquete = crear_paquete_tamanioDePagYCantEntradas();
+	log_info(logger,"Envio el tamanio de pag y cant entradas");
+
+	agregar_a_paquete(paquete,&tamanioDePagina,sizeof(tamanioDePagina));
+	agregar_a_paquete(paquete,&entradasPorTabla,sizeof(entradasPorTabla));
+
+
+	enviar_paquete(paquete,socket_cliente);
+	eliminar_paquete(paquete);
+}
+
+void enviarNroTabla2doNivel(int socket_cliente,int nroTabla2doNivel){
+	t_paquete* paquete = crear_paquete_nroTabla2doNivel();
+	log_info(logger,"Envio el numero de tabla de 2do nivel");
+
+	agregar_a_paquete(paquete,&nroTabla2doNivel,sizeof(nroTabla2doNivel));
+
+
+	enviar_paquete(paquete,socket_cliente);
+	eliminar_paquete(paquete);
+}
+
+void enviarMarco(int socket_cliente, int marco){
+	t_paquete* paquete = crear_paquete_marco();
+	log_info(logger,"Envio el marco correspondiente el cual es %d",marco);
+
+	agregar_a_paquete(paquete,&marco,sizeof(marco));
+
+	enviar_paquete(paquete,socket_cliente);
+	eliminar_paquete(paquete);
+}
+
 
 void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio)
 {

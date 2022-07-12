@@ -3,21 +3,21 @@
 int direccionLogica = 0; //harcodeada: esto en realidad viene del pcb -> instrucciones -> (read,write,copy) -> parametro[0]
 int nroTabla1erNivel = 0; //harcodeada: esto en realidad viene del pcb -> tabla_de_paginas
 
-tlb* unaTlb;
 
 int main(void) {
 	//conexionConKernel();
 	logger = log_create("cpu.log", "CPU", 1, LOG_LEVEL_DEBUG);
 	inicializarConfiguraciones();
+	tlb = inicializarTLB();
 	conexionConMemoria();
 
-	unaTlb = inicializarTLB();
+
 
 	//Funciones de prueba
-	reiniciarTLB();
+	//reiniciarTLB();
 
 
-	log_info(logger,"cantidad entradas %d", list_size(unaTlb->listaDeCampos));
+	log_info(logger,"Cantidad de entradas de la TLB: %d", list_size(tlb));
 
 
 	terminar_programa(conexion, logger, config);
@@ -33,6 +33,7 @@ int conexionConMemoria(void){
 
 	t_list* listaQueContieneTamanioDePagYEntradas = list_create();
 	t_list* listaQueContieneNroTabla2doNivel = list_create();
+	t_list* listaQueContieneMarco = list_create();
 	int a = 1;
 	while (a == 1) {
 		int cod_op = recibir_operacion(conexion);
@@ -45,7 +46,7 @@ int conexionConMemoria(void){
 
 					calculosDireccionLogica();
 
-					paqueteEntradaTabla1erNivel(conexion);//1er acceso con esto memoria manda nroTabla2doNivel
+					enviarEntradaTabla1erNivel(conexion);//1er acceso con esto memoria manda nroTabla2doNivel
 					break;
 				case PAQUETE2:
 
@@ -53,12 +54,24 @@ int conexionConMemoria(void){
 					int nroTabla2doNivel = (int) list_get(listaQueContieneNroTabla2doNivel,0);
 					log_info(logger,"Me llego el numero de tabla de segundoNivel que es % d",nroTabla2doNivel);
 
-					paqueteEntradaTabla2doNivel(conexion); //2do acceso a memoria
+					enviarEntradaTabla2doNivel(conexion); //2do acceso a memoria
+					break;
+				case PAQUETE3:
+					listaQueContieneMarco = recibir_paquete(conexion);//Finaliza el 2do acceso recibiendo el marco
+					int marco = (int) list_get(listaQueContieneMarco,0);
 
-					a = 0; //Para que salga del while
+					log_info(logger,"Me llego el marco que es %d",marco);
+
+					if(list_size(tlb) < cantidadEntradasTlb){
+						agregarEntradaATLB(marco,numeroDePagina);
+					}else{
+						//algoritmo de reemplazo
+					}
+					a = 0;//salga del while
 					break;
 				default:
 					log_warning(logger,"Operacion desconocida. No quieras meter la pata");
+					a = 0;//salga del while
 					break;
 				}
 		}
@@ -99,43 +112,40 @@ void leerTamanioDePaginaYCantidadDeEntradas(t_list* listaQueContieneTamanioDePag
 }
 
 //Inicializar para poder utilizar la cahce
-tlb* inicializarTLB(){
-	unaTlb = malloc(sizeof(tlb));
-	unaTlb->listaDeCampos = list_create();
+t_list* inicializarTLB(){
 
-	generarListaCamposTLB(unaTlb);
-
-	return unaTlb;
-}
-
-//Cargar lista de campos
-void generarListaCamposTLB(tlb* unaTlb){
-
-	for(int i = 0; i<cantidadEntradasTlb;i++){
-			campoTLB* unCampo = malloc(sizeof(campoTLB));
-			list_add(unaTlb->listaDeCampos,unCampo);
-		}
+	tlb = list_create();
+	return tlb;
 }
 
 //Reiniciar la TLB cuando se hace process switch
 void reiniciarTLB(){
-	list_clean(unaTlb->listaDeCampos);
-	generarListaCamposTLB(unaTlb);
-
+	list_clean(tlb);
 }
 
 //Busqueda de pagina en la TLB
 int chequeoDePagina(int numeroDePagina){
-	campoTLB* unCampo = malloc(sizeof(campoTLB));
+	entradaTLB* unaEntradaTLB = malloc(sizeof(entradaTLB));
 
-	for(int i=0;i < list_size(unaTlb->listaDeCampos);i++){
-		unCampo = list_get(unaTlb->listaDeCampos,i);
+	for(int i=0;i < list_size(tlb);i++){
+		unaEntradaTLB = list_get(tlb,i);
 
-			if(unCampo->nroDePagina == numeroDePagina){
-				return unCampo->nroDeMarco; // se puede almacenar este valor en una variable y retornarlo fuera del for
+			if(unaEntradaTLB->nroDePagina == numeroDePagina){
+				return unaEntradaTLB->nroDeMarco; // se puede almacenar este valor en una variable y retornarlo fuera del for
 			}
 	}
-	free(unCampo);
+	free(unaEntradaTLB);
+
+}
+
+void agregarEntradaATLB(int marco,int pagina){
+
+	entradaTLB* unaEntrada = malloc(sizeof(entradaTLB));
+
+	unaEntrada->nroDeMarco = marco;
+	unaEntrada->nroDePagina = pagina;
+
+	list_add(tlb,unaEntrada);
 
 }
 //En el caso en el que no este, tiene que ir a memoria y buscar la pagina y el marco y etc.
@@ -143,7 +153,7 @@ void reemplazoDeCampoEnTLB(){
 
 }
 
-void paqueteEntradaTabla1erNivel(int conexion){
+void enviarEntradaTabla1erNivel(int conexion){
 	t_paquete* paquete = crear_paqueteEntradaTabla1erNivel();
 	// Leemos y esta vez agregamos las lineas al paquete
 	agregar_a_paquete(paquete,&entradaTabla1erNivel,sizeof(entradaTabla1erNivel));
@@ -154,7 +164,7 @@ void paqueteEntradaTabla1erNivel(int conexion){
 	eliminar_paquete(paquete);
 }
 
-void paqueteEntradaTabla2doNivel(int conexion){
+void enviarEntradaTabla2doNivel(int conexion){
 	t_paquete* paquete = crear_paqueteEntradaTabla2doNivel();
 	// Leemos y esta vez agregamos las lineas al paquete
 	agregar_a_paquete(paquete,&entradaTabla2doNivel,sizeof(entradaTabla2doNivel));

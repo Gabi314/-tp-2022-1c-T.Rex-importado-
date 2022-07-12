@@ -14,3 +14,89 @@
 [INFO] 22:10:54:117 MEMORIA/(13457:13457): Me llego el nroTabla1erNivel 0 y con la entrada 0
 [INFO] 22:10:54:117 MEMORIA/(13457:13457): Envio el numero de tabla de 2do nivel
 [INFO] 22:10:54:118 MEMORIA/(13457:13457): Me llego  la entrada de segundo nivel 0
+[INFO] 12:21:11:723 MEMORIA/(8909:8909): Memoria lista para recibir a Cpu o Kernel
+[INFO] 12:21:20:029 MEMORIA/(8909:8909): Se conecto un cliente!
+[INFO] 12:21:20:047 MEMORIA/(8909:8909): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 12:21:20:047 MEMORIA/(8909:8909): Envio el tamanio de pag y cant entradas
+[INFO] 12:21:20:049 MEMORIA/(8909:8909): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:21:20:049 MEMORIA/(8909:8909): Envio el numero de tabla de 2do nivel
+[INFO] 12:21:20:052 MEMORIA/(8909:8909): Me llego  la entrada de segundo nivel 0
+[INFO] 12:22:22:900 MEMORIA/(9078:9078): Memoria lista para recibir a Cpu o Kernel
+[INFO] 12:22:26:499 MEMORIA/(9078:9078): Se conecto un cliente!
+[INFO] 12:22:26:504 MEMORIA/(9078:9078): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 12:22:26:504 MEMORIA/(9078:9078): Envio el tamanio de pag y cant entradas
+[INFO] 12:22:26:504 MEMORIA/(9078:9078): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:22:26:504 MEMORIA/(9078:9078): Envio el numero de tabla de 2do nivel
+[INFO] 12:22:26:505 MEMORIA/(9078:9078): Me llego  la entrada de segundo nivel 0
+[INFO] 12:27:31:102 MEMORIA/(9641:9641): Memoria lista para recibir a Cpu o Kernel
+[INFO] 12:28:00:815 MEMORIA/(9641:9641): Se conecto un cliente!
+[INFO] 12:28:03:288 MEMORIA/(9641:9641): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 12:28:03:288 MEMORIA/(9641:9641): Envio el tamanio de pag y cant entradas
+[INFO] 12:28:22:532 MEMORIA/(9641:9641): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:28:22:533 MEMORIA/(9641:9641): Envio el numero de tabla de 2do nivel
+[INFO] 12:28:42:994 MEMORIA/(9641:9641): Me llego  la entrada de segundo nivel 0
+[INFO] 12:31:06:050 MEMORIA/(10075:10075): Memoria lista para recibir a Cpu o Kernel
+[INFO] 12:31:11:186 MEMORIA/(10075:10075): Se conecto un cliente!
+[INFO] 12:31:11:207 MEMORIA/(10075:10075): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 12:31:11:207 MEMORIA/(10075:10075): Envio el tamanio de pag y cant entradas
+[INFO] 12:31:11:208 MEMORIA/(10075:10075): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:31:11:208 MEMORIA/(10075:10075): Envio el numero de tabla de 2do nivel
+[INFO] 12:31:11:208 MEMORIA/(10075:10075): Me llego  la entrada de segundo nivel 0
+[INFO] 12:34:41:792 MEMORIA/(10453:10453): Memoria lista para recibir a Cpu o Kernel
+[INFO] 12:34:56:110 MEMORIA/(10453:10453): Se conecto un cliente!
+[INFO] 12:35:03:722 MEMORIA/(10453:10453): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 12:35:04:260 MEMORIA/(10453:10453): Envio el tamanio de pag y cant entradas
+[INFO] 12:35:09:031 MEMORIA/(10453:10453): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:35:09:926 MEMORIA/(10453:10453): Envio el numero de tabla de 2do nivel
+[INFO] 12:35:19:652 MEMORIA/(10453:10453): Me llego  la entrada de segundo nivel 0
+[INFO] 12:44:07:427 MEMORIA/(11471:11471): Memoria lista para recibir a Cpu o Kernel
+[INFO] 12:44:12:613 MEMORIA/(11471:11471): Se conecto un cliente!
+[INFO] 12:44:12:619 MEMORIA/(11471:11471): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 12:44:12:619 MEMORIA/(11471:11471): Envio el tamanio de pag y cant entradas
+[INFO] 12:44:12:619 MEMORIA/(11471:11471): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:44:12:619 MEMORIA/(11471:11471): Envio el numero de tabla de 2do nivel
+[INFO] 12:44:12:619 MEMORIA/(11471:11471): Me llego  la entrada de segundo nivel 0
+[INFO] 12:44:12:620 MEMORIA/(11471:11471): Envio el marco correspondiente el cual es 0
+[INFO] 15:51:32:698 MEMORIA/(25431:25431): Memoria lista para recibir a Cpu o Kernel
+[INFO] 15:51:37:852 MEMORIA/(25431:25431): Se conecto un cliente!
+[INFO] 15:51:37:855 MEMORIA/(25431:25431): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 15:51:37:855 MEMORIA/(25431:25431): Envio el tamanio de pag y cant entradas
+[INFO] 15:51:37:856 MEMORIA/(25431:25431): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 15:51:37:856 MEMORIA/(25431:25431): Envio el numero de tabla de 2do nivel
+[INFO] 15:51:37:856 MEMORIA/(25431:25431): Me llego  la entrada de segundo nivel 0
+[INFO] 15:51:37:856 MEMORIA/(25431:25431): Envio el marco correspondiente el cual es 0
+[INFO] 15:52:27:800 MEMORIA/(25513:25513): Memoria lista para recibir a Cpu o Kernel
+[INFO] 15:53:03:298 MEMORIA/(25593:25593): Memoria lista para recibir a Cpu o Kernel
+[INFO] 15:53:06:505 MEMORIA/(25593:25593): Se conecto un cliente!
+[INFO] 15:53:06:511 MEMORIA/(25593:25593): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 15:53:06:511 MEMORIA/(25593:25593): Envio el tamanio de pag y cant entradas
+[INFO] 15:53:06:512 MEMORIA/(25593:25593): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 15:53:06:512 MEMORIA/(25593:25593): Envio el numero de tabla de 2do nivel
+[INFO] 15:53:06:512 MEMORIA/(25593:25593): Me llego  la entrada de segundo nivel 0
+[INFO] 15:53:06:512 MEMORIA/(25593:25593): Envio el marco correspondiente el cual es 0
+[INFO] 16:01:44:433 MEMORIA/(26103:26103): Memoria lista para recibir a Cpu o Kernel
+[INFO] 16:01:50:206 MEMORIA/(26103:26103): Se conecto un cliente!
+[INFO] 16:01:50:207 MEMORIA/(26103:26103): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 16:01:50:207 MEMORIA/(26103:26103): Envio el tamanio de pag y cant entradas
+[INFO] 16:01:50:208 MEMORIA/(26103:26103): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 16:01:50:208 MEMORIA/(26103:26103): Envio el numero de tabla de 2do nivel
+[INFO] 16:01:50:208 MEMORIA/(26103:26103): Me llego  la entrada de segundo nivel 0
+[INFO] 16:01:50:208 MEMORIA/(26103:26103): Envio el marco correspondiente el cual es 0
+[INFO] 16:03:09:664 MEMORIA/(26214:26214): Memoria lista para recibir a Cpu o Kernel
+[INFO] 16:03:26:221 MEMORIA/(26214:26214): Se conecto un cliente!
+[INFO] 16:03:26:583 MEMORIA/(26214:26214): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 16:03:26:583 MEMORIA/(26214:26214): Envio el tamanio de pag y cant entradas
+[INFO] 16:03:30:075 MEMORIA/(26214:26214): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 16:03:30:076 MEMORIA/(26214:26214): Envio el numero de tabla de 2do nivel
+[INFO] 16:03:32:944 MEMORIA/(26214:26214): Me llego  la entrada de segundo nivel 0
+[INFO] 16:03:32:944 MEMORIA/(26214:26214): Envio el marco correspondiente el cual es 0
+[INFO] 16:04:41:988 MEMORIA/(26376:26376): Memoria lista para recibir a Cpu o Kernel
+[INFO] 16:04:56:482 MEMORIA/(26424:26424): Memoria lista para recibir a Cpu o Kernel
+[INFO] 16:05:29:143 MEMORIA/(26469:26469): Memoria lista para recibir a Cpu o Kernel
+[INFO] 16:05:32:983 MEMORIA/(26469:26469): Se conecto un cliente!
+[INFO] 16:05:32:984 MEMORIA/(26469:26469): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 16:05:32:984 MEMORIA/(26469:26469): Envio el tamanio de pag y cant entradas
+[INFO] 16:05:32:984 MEMORIA/(26469:26469): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 16:05:32:984 MEMORIA/(26469:26469): Envio el numero de tabla de 2do nivel
+[INFO] 16:05:32:984 MEMORIA/(26469:26469): Me llego  la entrada de segundo nivel 0
+[INFO] 16:05:32:984 MEMORIA/(26469:26469): Envio el marco correspondiente el cual es 0

@@ -58,15 +58,10 @@ int main(void) {
 
 */
 	inicializarEstructuras();
-
+	inicializarMarcos();
 	conexionConCpu();
 
-	inicializarMarcos();
-
-
 	//log_info(logger,"nro de marco %d",25);
-
-
 }
 
 int conexionConCpu(void){
@@ -82,6 +77,8 @@ int conexionConCpu(void){
 	int a = 1;
 	while (a == 1) {
 		int cod_op = recibir_operacion(cliente_fd);
+
+		int nroTabla2doNivel;
 		switch (cod_op) {
 			case MENSAJE:
 				recibir_mensaje(cliente_fd);//recibe el pedido de tam_pag y cant_entradas
@@ -90,7 +87,7 @@ int conexionConCpu(void){
 			case PAQUETE:
 				listaQueContieneNroTabla1erNivelYentrada = recibir_paquete_int(cliente_fd); // lista con valores de nro y entrada de tabla
 
-				int nroTabla2doNivel = leerYRetornarNroTabla2doNivel(listaQueContieneNroTabla1erNivelYentrada);
+				nroTabla2doNivel = leerYRetornarNroTabla2doNivel(listaQueContieneNroTabla1erNivelYentrada);
 
 				enviarNroTabla2doNivel(cliente_fd,nroTabla2doNivel);
 				break;
@@ -99,6 +96,10 @@ int conexionConCpu(void){
 				listaQueContieneEntradaDeTabla2doNivel = recibir_paquete_int(cliente_fd);
 				int entradaTabla2doNivel = (int) list_get(listaQueContieneEntradaDeTabla2doNivel,0);
 				log_info(logger,"Me llego  la entrada de segundo nivel %d",entradaTabla2doNivel);
+
+				int marco =  marcoSegunIndice(nroTabla2doNivel,entradaTabla2doNivel);
+
+				enviarMarco(cliente_fd,marco);
 
 				a = 0;
 				break;
@@ -369,16 +370,14 @@ void cargarPagina(entradaTabla2doNivel* unaEntrada){
 	marco* marcoAAsignar;
 	//Caso en el que se puede asignar un marco a un proceso de manera libre
 	if(contadorDeMarcosPorProceso<marcosPorProceso){
+
 		marcoAAsignar = siguienteMarcoLibre();
 		modificarPaginaACargar(unaEntrada,marcoAAsignar->numeroDeMarco);
 		list_add(listaDePaginasEnMemoria,unaEntrada);
 		contadorDeMarcosPorProceso++; // ANALIZAR CONTADOR
 
-	}//Caso en el que ya el proceso tiene maxima cantidad de marcos por proceso y hay que desalojar 1
-
-	//PARA ESTOS CASOS NO ES LIST_ADD TENGO QUE REEMPLAZAR LA ENTRADA QUE SACO
-	else{
-		if(strcmp(algoritmoDeReemplazo,"CLOCK") == 0){
+	}else{//Caso en el que ya el proceso tiene maxima cantidad de marcos por proceso y hay que desalojar 1
+		if(strcmp(algoritmoDeReemplazo,"CLOCK") == 0){//PARA ESTOS CASOS NO ES LIST_ADD TENGO QUE REEMPLAZAR LA ENTRADA QUE SACO
 			int marcoAAsignar = algoritmoClock(listaDePaginasEnMemoria);
 			modificarPaginaACargar(unaEntrada,marcoAAsignar);
 			list_add(listaDePaginasEnMemoria,unaEntrada);
@@ -389,7 +388,7 @@ void cargarPagina(entradaTabla2doNivel* unaEntrada){
 			modificarPaginaACargar(unaEntrada,marcoAAsignar);
 			list_add(listaDePaginasEnMemoria,unaEntrada);
 
-	}
+		}
 	}
 }
 
@@ -460,9 +459,6 @@ int numeroTabla2doNivelSegunIndice(int numeroTabla1erNivel,int indiceDeEntrada){
 //Ahora tengo que agarrar la lista de tablas de 2do, buscar el primero que tenga el pid de la tablaDe1erNive
 //A ese indice sumarla el indiceDeEntrada y esa es la tablaDe2doNivel que necesito
 //Si el indice = 2, en la lista de tablas de 2do nivel, agarro posicion 2, que es la tabla numero 2, entonces es redundante
-
-
-
 
 //contador de marcos por proceso, asigno sumo 1, hasta maximo de marcos por procesos y ahi empiezo a reemplazar
 
