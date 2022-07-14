@@ -81,13 +81,15 @@ char* algoritmoDeReemplazo;
 int marcosPorProceso;
 int retardoSwap; //Tiempo en milisegundos que se deberá esperar para cada operación del SWAP (leer/escribir)
 
+void* memoria; // espacio de usuario de la memoria
+
 int nroTablaDePaginas1erNivel;
 int entradaTablaDePaginas1erNivel;
 t_list* nroTabla1erNivelYentrada;
 
 //Tabla de paginas
 typedef struct{
-	//int numeroDeEntrada; no haria falta
+	int numeroDeEntradaPorProceso;
 	int numeroMarco;
 	int presencia;
 	int uso;
@@ -114,19 +116,32 @@ typedef struct{// capaz usar diccionario
 void crearConfiguraciones();
 void inicializarEstructuras();
 void inicializarMarcos();
+
 int numeroTabla2doNivelSegunIndice(int,int);
 int buscarNroTablaDe1erNivel(int);
 int buscarNroTablaDe2doNivel(int);
-void escribirEnSwap(int);
+marco* buscarMarco(int);
+
+void crearSwap(int);
+
+void escribirElPedido(uint32_t* escribir,int posicionDeDatoAEscribir);
+uint32_t* leerElPedido(int);
+void copiar(int,int);
+
 void cargarEntradasDeTabla2doNivel(t_segundoNivel*);// con esta funcion que antes se llamaba cargar paginas
 //void cargarPaginas(t_segundoNivel*);
 int leerYRetornarNroTabla2doNivel(t_list*);
 void modificarPaginaACargar(entradaTabla2doNivel*, int); //Antes estaba pagina en entrada
+
 marco* siguienteMarcoLibre();
 void sacarMarcoAPagina(entradaTabla2doNivel*);//Antes estaba pagina en entrada
 int marcoSegunIndice(int,int);
 int algoritmoClock(t_list*);
 int algoritmoClockM(t_list*);
+int indiceDeEntradaAReemplazar(int);
+
+char* nombreArchivoProceso(int);
+void escribirEnSwap(int,int,int,int);
 
 
 

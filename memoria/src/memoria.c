@@ -1,6 +1,5 @@
 #include "funcionesMemoria.h"
 
-int marcosTotales = 0;
 //Antes de esto debo mandarle a cpu tam_Pagina y cant_entradas_por_pagina
 int pid = 0;//Viene de Kernel, para devolver nroDeTabla1erNivel
 //int entradaDeTablaDe1erNivel = 2;  Viene de cpu(calculado con la dir logica), con esto devuelvo nroTablaDe2doNivel
@@ -10,12 +9,12 @@ int contTablas2doNivel = 0;
 int flagDeEntradasPorTabla = 0;
 int contadorDeMarcosPorProceso = 0;
 
+int contadorDeEntradasPorProceso = 0;
 
 t_list* listaT1nivel;
 t_list* listaDeMarcos;
 t_list* listaT2Nivel;
 t_list* listaDePaginasEnMemoria;
-t_list* listaDeEntradasDe2doNivel;
 
 
 int main(void) {
@@ -26,42 +25,17 @@ int main(void) {
 	listaDeMarcos = list_create();
 	listaT2Nivel = list_create();
 	listaDePaginasEnMemoria = list_create();
-	//listaDeEntradasDe2doNivel = list_create();
 
 
-/*
-	entradaTabla2doNivel* unaEntrada1 = malloc(sizeof(entradaTabla2doNivel));
-	unaEntrada1->uso = 1;
-	unaEntrada1->numeroMarco = 123;
-	unaEntrada1->modificado = 1;
-	entradaTabla2doNivel* unaEntrada2 = malloc(sizeof(entradaTabla2doNivel));
-	unaEntrada2->uso = 1;
-	unaEntrada2->numeroMarco = 100;
-	unaEntrada2->modificado = 1;
-	entradaTabla2doNivel* unaEntrada3 = malloc(sizeof(entradaTabla2doNivel));
-	unaEntrada3->uso = 1;
-	unaEntrada3->numeroMarco = 142;
-	unaEntrada3->modificado = 1;
-	entradaTabla2doNivel* unaEntrada4 = malloc(sizeof(entradaTabla2doNivel));
-	unaEntrada4->uso = 1;
-	unaEntrada4->numeroMarco = 36514;
-	unaEntrada4->modificado = 1;
-
-	list_add(listaDeEntradasDe2doNivel,unaEntrada1);
-	list_add(listaDeEntradasDe2doNivel,unaEntrada2);
-	list_add(listaDeEntradasDe2doNivel,unaEntrada3);
-	list_add(listaDeEntradasDe2doNivel,unaEntrada4);
-
-	int nroDeMarco = algoritmoClockM(listaDeEntradasDe2doNivel);
-
-	log_info(logger,"nro de marco %d", nroDeMarco);
-
-*/
 	inicializarEstructuras();
 	inicializarMarcos();
-	conexionConCpu();
+	//conexionConCpu();
 
-	//log_info(logger,"nro de marco %d",25);
+	//escribirElPedido(3,0);
+
+	//escribirEnSwap(0,0,0,0);
+
+	log_info(logger,"Fin de memoria");
 }
 
 int conexionConCpu(void){
@@ -73,6 +47,7 @@ int conexionConCpu(void){
 
 	t_list* listaQueContieneNroTabla1erNivelYentrada = list_create();
 	t_list* listaQueContieneEntradaDeTabla2doNivel = list_create();
+	t_list* listaQueContieneDireccionFiscaYValorAEscribir = list_create();
 
 	int a = 1;
 	while (a == 1) {
@@ -101,9 +76,23 @@ int conexionConCpu(void){
 
 				enviarMarco(cliente_fd,marco);
 
+				break;
+			case PAQUETE3:
+				listaQueContieneDireccionFiscaYValorAEscribir = recibir_paquete_int(cliente_fd);
+
+				marco = (int) list_get(listaQueContieneDireccionFiscaYValorAEscribir,0); // por ahora piso la variable de arriba despues ver como manejar el tema de marco que envio y marco que recibo
+				int desplazamiento = (int) list_get(listaQueContieneDireccionFiscaYValorAEscribir,1);
+				uint32_t valorAEscribir = (uint32_t) list_get(listaQueContieneDireccionFiscaYValorAEscribir,2);
+
+				log_info(logger,"Me llego el marco %d con desplazamiento %d y valor a escribir %u",marco,desplazamiento,valorAEscribir);
+
+				int posicionDeDatoAEscribir = marco * tamanioDePagina + sizeof(uint32_t)*desplazamiento;
+				escribirElPedido(&valorAEscribir,posicionDeDatoAEscribir);
+
+				uint32_t* numeroALeer = leerElPedido(posicionDeDatoAEscribir);
+				log_info(logger, "Numero leido: %u",*numeroALeer);
 				a = 0;
 				break;
-
 			case -1:
 				log_error(logger, "Se desconecto el cliente. Terminando conexion");
 				return EXIT_FAILURE;
@@ -113,15 +102,6 @@ int conexionConCpu(void){
 		}
 	}
 	return EXIT_SUCCESS;
-}
-
-int leerYRetornarNroTabla2doNivel(t_list* nroTabla1erNivelYentrada){
-	nroTablaDePaginas1erNivel = (int) list_get(nroTabla1erNivelYentrada,0);
-	entradaTablaDePaginas1erNivel = (int) list_get(nroTabla1erNivelYentrada,1);
-
-	log_info(logger,"Me llego el nroTabla1erNivel %d y con la entrada %d",nroTablaDePaginas1erNivel,entradaTablaDePaginas1erNivel);
-
-	return numeroTabla2doNivelSegunIndice(nroTablaDePaginas1erNivel,entradaTablaDePaginas1erNivel);
 }
 
 void crearConfiguraciones(){
@@ -139,7 +119,7 @@ void crearConfiguraciones(){
 }
 
 void inicializarEstructuras(){
-
+	memoria = malloc(tamanioDeMemoria); // inicializo el espacio de usuario en memoria
 
 	t_primerNivel* tablaPrimerNivel = malloc(sizeof(t_primerNivel));
 	tablaPrimerNivel->pid = pid;
@@ -156,21 +136,21 @@ void inicializarEstructuras(){
 		cargarEntradasDeTabla2doNivel(tablaDeSegundoNivel);
 		//tablaDeSegundoNivel->marcos = contadorDeMarcos;
 
+
 		list_add(tablaPrimerNivel->tablasDeSegundoNivel, tablaDeSegundoNivel);
 		list_add(listaT2Nivel,tablaDeSegundoNivel);
 
 
 		//free(tablaDeSegundoNivel);
 	}
-
-	contPaginas = 0;
+	contadorDeEntradasPorProceso = 0;
 
 
 	list_add(listaT1nivel,tablaPrimerNivel);
 
 	//free(tablaPrimerNivel);
 
-	escribirEnSwap(pid);
+	crearSwap(pid);
 }
 
 void inicializarMarcos(){
@@ -191,14 +171,15 @@ void cargarEntradasDeTabla2doNivel(t_segundoNivel* tablaDeSegundoNivel){
 	for(int j=0;j<entradasPorTabla;j++){ //crear x cantidad de marcos y agregar de a 1 a la lista
 			entradaTabla2doNivel* unaEntradaDeTabla2doNivel = malloc(sizeof(entradaTabla2doNivel));
 
-			//unaEntradaDeTabla2doNivel->numeroDeEntrada = j; no haria falta
+			unaEntradaDeTabla2doNivel->numeroDeEntradaPorProceso = contadorDeEntradasPorProceso;
+			contadorDeEntradasPorProceso++;
 
 			list_add(tablaDeSegundoNivel->entradas,unaEntradaDeTabla2doNivel);
 
 		}
 }
 
-void escribirEnSwap(int pid){
+void crearSwap(int pid){
 
 	char* nombreArchivo = string_new();
 
@@ -209,8 +190,121 @@ void escribirEnSwap(int pid){
 
 	FILE* archivoSwap = fopen(nombreArchivo, "a+");
 
+	for(int i=0; i<(tamanioDePagina/sizeof(uint32_t))*entradasPorTabla*entradasPorTabla;i++){
+
+		uint32_t* datoAEscribir = 0;
+		char* datoAEscribirEnChar = string_itoa((uint32_t) datoAEscribir);
+		string_append(&datoAEscribirEnChar,"\n");
+
+		fputs (datoAEscribirEnChar, archivoSwap);
+	}
+
+
 	fclose(archivoSwap);
 
+}
+
+void escribirElPedido(uint32_t* escribir,int posicionDeDatoAEscribir){
+	uint32_t* datoAEscribir = malloc(sizeof(uint32_t));
+	*datoAEscribir = (uint32_t) escribir;
+	memcpy(&memoria+posicionDeDatoAEscribir,&datoAEscribir, sizeof(uint32_t));
+// TENGO QUE DEVOLVER UN MENSAJE "OK"
+}
+
+uint32_t* leerElPedido(int posicion){
+	uint32_t* datoALeer = malloc(sizeof(uint32_t));
+	memcpy(&datoALeer,&memoria+posicion,sizeof(uint32_t));
+
+	if(datoALeer != 0){
+		return (uint32_t*) *datoALeer;
+	}
+
+
+}
+
+void copiar(int posicionDondeSeCopia,int posicionACopiar){
+	uint32_t* datoACopiar = malloc(sizeof(uint32_t));
+	memcpy(&datoACopiar,&memoria+posicionDondeSeCopia,sizeof(uint32_t));
+	memcpy(&memoria+posicionACopiar,&datoACopiar,sizeof(uint32_t));
+}
+
+void liberarEspacioEnMemoria(t_primerNivel* unaTablaDe1erNivel){
+	t_segundoNivel* tablaDe2doNivel = malloc(sizeof(t_segundoNivel));
+	entradaTabla2doNivel* unaEntrada = malloc(sizeof(entradaTabla2doNivel));
+	marco* marcoAsignado = malloc(sizeof(marco));
+
+	for(int i = 0; i<entradasPorTabla;i++){
+		tablaDe2doNivel = list_get(unaTablaDe1erNivel->tablasDeSegundoNivel,i);
+		for(int j = 0;i<entradasPorTabla;j++){
+			unaEntrada = list_get(tablaDe2doNivel->entradas,j);
+			if(unaEntrada->presencia == 1 && unaEntrada->modificado ==0){
+				sacarMarcoAPagina(unaEntrada);
+				marcoAsignado = buscarMarco(unaEntrada->numeroMarco);
+				marcoAsignado->marcoLibre=0;
+
+			}
+			if(unaEntrada->presencia == 1 && unaEntrada->modificado ==1){
+				//escribirEnSwap(unaEntrada->numeroMarco,unaTablaDe1erNivel->pid);
+				sacarMarcoAPagina(unaEntrada);
+				marcoAsignado = buscarMarco(unaEntrada->numeroMarco);
+				marcoAsignado->marcoLibre=0;
+			}
+		}
+
+	}
+
+list_clean(listaDePaginasEnMemoria);
+}
+
+char* nombreArchivoProceso(int pid){
+	char* nombreArchivo = string_new();
+
+	char* pidString = string_itoa(pid);
+	nombreArchivo = pidString;
+
+	string_append(&nombreArchivo,".swap");
+	return nombreArchivo;
+}
+
+void escribirEnSwap(int numeroDeMarco,int pid,int desplazamiento,int numeroDePagina){//no funca bien
+
+	char* nombreDelArchivo = nombreArchivoProceso(pid);
+	FILE* archivoSwap = fopen(nombreDelArchivo, "r+");
+
+	for(int i=0; i<(tamanioDePagina/sizeof(uint32_t));i++){
+		int posicionDeValorEnMemoria = numeroDeMarco*tamanioDePagina + i*sizeof(uint32_t);
+
+		uint32_t* datoAEscribir = leerElPedido(posicionDeValorEnMemoria);
+
+		char* datoAEscribirEnChar = string_itoa((uint32_t) datoAEscribir);
+		string_append(&datoAEscribirEnChar,"\n");
+
+		int posicionDeLaPaginaEnSwap = numeroDePagina* tamanioDePagina + i;
+
+		fseek(archivoSwap, posicionDeLaPaginaEnSwap, SEEK_SET);
+
+		fwrite(datoAEscribirEnChar, sizeof(datoAEscribirEnChar), 1, archivoSwap);
+	}
+
+	fclose(archivoSwap);
+}
+
+void suspensionDeProceso(int pid){
+	int nroTabla1ernivel = buscarNroTablaDe1erNivel(pid);
+	t_primerNivel* tablaDe1erNivel = malloc(sizeof(t_primerNivel));
+	tablaDe1erNivel = list_get(listaT1nivel,nroTabla1ernivel);
+	liberarEspacioEnMemoria(tablaDe1erNivel);
+
+}
+
+void finalizacionDeProceso(int pid){
+	char* nombreDelArchivo = nombreArchivoProceso(pid);
+	int nroTabla1ernivel = buscarNroTablaDe1erNivel(pid);
+	t_primerNivel* tablaDe1erNivel = malloc(sizeof(t_primerNivel));
+	tablaDe1erNivel = list_get(listaT1nivel,nroTabla1ernivel);
+	liberarEspacioEnMemoria(tablaDe1erNivel);
+
+	remove(nombreDelArchivo);
 }
 
 
@@ -242,14 +336,6 @@ marco* siguienteMarcoLibre(){
 		}
 	}
 }
-
-
-/* QUIZAS TIENE UTILIDAD A FUTURO
-int busquedaDePaginaConUsoCero(t_list* listaDePaginas){
-
-	return 0;
-}
-*/
 
 
 void reemplazarTodosLosUsoACero(t_list* listaDeEntradasDe2doNivel){
@@ -380,16 +466,29 @@ void cargarPagina(entradaTabla2doNivel* unaEntrada){
 		if(strcmp(algoritmoDeReemplazo,"CLOCK") == 0){//PARA ESTOS CASOS NO ES LIST_ADD TENGO QUE REEMPLAZAR LA ENTRADA QUE SACO
 			int marcoAAsignar = algoritmoClock(listaDePaginasEnMemoria);
 			modificarPaginaACargar(unaEntrada,marcoAAsignar);
-			list_add(listaDePaginasEnMemoria,unaEntrada);
-			//utilizar list_replace
+			int posicionAReemplazar = indiceDeEntradaAReemplazar(marcoAAsignar);
+			list_replace(listaDePaginasEnMemoria, posicionAReemplazar, unaEntrada);
+
 
 		}else if(strcmp(algoritmoDeReemplazo,"CLOCK M") == 0){
 			int marcoAAsignar = algoritmoClockM(listaDePaginasEnMemoria);
 			modificarPaginaACargar(unaEntrada,marcoAAsignar);
-			list_add(listaDePaginasEnMemoria,unaEntrada);
+			int posicionAReemplazar = indiceDeEntradaAReemplazar(marcoAAsignar);
+			list_replace(listaDePaginasEnMemoria, posicionAReemplazar, unaEntrada);
 
 		}
 	}
+}
+
+int indiceDeEntradaAReemplazar(int numeroDeMarco){
+	entradaTabla2doNivel* unaEntrada = malloc(sizeof(entradaTabla2doNivel));
+	for(int i=0;i < list_size(listaDePaginasEnMemoria);i++){
+		unaEntrada=list_get(listaDePaginasEnMemoria,i);
+		if(unaEntrada->numeroMarco == numeroDeMarco){
+			return i;
+		}
+	}
+
 }
 
 
@@ -409,32 +508,35 @@ void sacarMarcoAPagina(entradaTabla2doNivel* unaEntrada){
 
 }
 
-//Funcion para chequear cantidad de marcos. CREO QUE NO ES UTIL PORQUE LO HAGO EN EL IF DE CARGAR PAGINA
-void chequeoCantidadDeMarcosPorProceso(){
-
-}
-
-//Funcion para reemplazar una pagina, tener en cuenta info de la pagina
-void reemplazoDePagina(){
-
-}
-
-
-
-
-/*Entra proceso, inicializa y devuelvo tabla de primer nivel, cpu pide pagina se chequea si esta cargada y sino voy a
- *ir asignanco marcos, cambio bit de presencia, hasta el maximo definido por archivo config
- *
- *Cpu viene con tabla de 1er nivel y con la entrada de tabla de primer nivel, le devuelvo tabla de 2do nivel
- *Cpu viene con tabla de 2do nivel y con la entrada de tabla de 2do nivel, le devuelvo el marco si esta cargado sino, cargo y etc
- *
- *Estructura de memoria, con todos los marcos y los valores que les vamos escribiendo.
- */
-
 void chequeoDeIndice(int indice){
 	if(indice<entradasPorTabla){
 		flagDeEntradasPorTabla = 1;
 	}
+}
+
+
+int buscarNroTablaDe2doNivel(int numeroDeTabla2doNivel){
+	t_segundoNivel* unaTablaDe2doNivel = malloc(sizeof(t_segundoNivel));
+
+	for(int i=0;i < list_size(listaT2Nivel);i++){
+
+		unaTablaDe2doNivel = list_get(listaT2Nivel,i);
+
+		if(unaTablaDe2doNivel->numeroTabla == numeroDeTabla2doNivel){
+			return i;
+		}
+	}
+	// return 4;//Puse 4 para que no me confunda si retorno 0
+	free(unaTablaDe2doNivel);
+}
+
+int leerYRetornarNroTabla2doNivel(t_list* nroTabla1erNivelYentrada){
+	nroTablaDePaginas1erNivel = (int) list_get(nroTabla1erNivelYentrada,0);
+	entradaTablaDePaginas1erNivel = (int) list_get(nroTabla1erNivelYentrada,1);
+
+	log_info(logger,"Me llego el nroTabla1erNivel %d y con la entrada %d",nroTablaDePaginas1erNivel,entradaTablaDePaginas1erNivel);
+
+	return numeroTabla2doNivelSegunIndice(nroTablaDePaginas1erNivel,entradaTablaDePaginas1erNivel);
 }
 
 
@@ -455,21 +557,11 @@ int numeroTabla2doNivelSegunIndice(int numeroTabla1erNivel,int indiceDeEntrada){
 	}
 
 }
-//numeroTabla1erNivel es igual al indice en la lista de tablas de primer nivel
-//Ahora tengo que agarrar la lista de tablas de 2do, buscar el primero que tenga el pid de la tablaDe1erNive
-//A ese indice sumarla el indiceDeEntrada y esa es la tablaDe2doNivel que necesito
-//Si el indice = 2, en la lista de tablas de 2do nivel, agarro posicion 2, que es la tabla numero 2, entonces es redundante
-
-//contador de marcos por proceso, asigno sumo 1, hasta maximo de marcos por procesos y ahi empiezo a reemplazar
-
-//Funcion de cargar pagina en memoria
-
-
 
 int marcoSegunIndice(int numeroTabla2doNivel,int indiceDeEntradaTabla2doNivel){
 
 	entradaTabla2doNivel* unaEntradaTabla2doNivel = malloc(sizeof(entradaTabla2doNivel));
-	//marco* unMarco = malloc(sizeof(marco)); para que esta?
+
 	t_segundoNivel* unaTablaDe2doNivel = malloc(sizeof(t_segundoNivel));
 
 	chequeoDeIndice(indiceDeEntradaTabla2doNivel);
@@ -488,36 +580,10 @@ int marcoSegunIndice(int numeroTabla2doNivel,int indiceDeEntradaTabla2doNivel){
 		else{
 			cargarPagina(unaEntradaTabla2doNivel);
 			return unaEntradaTabla2doNivel->numeroMarco;
-
-	//En el caso en que no este cargada en memoria, tengo que cargarla asignando numero de marco y cambiando bit de presencia a 1
-	//Tengo que analizar caso en que no haya paginas por cargar, tengo que hacer contador por proceso
 	//ver tema de si es una pagina con info para swap
 
 		}
 	}
-
-}
-
-int buscarNroTablaDe2doNivel(int numeroDeTabla2doNivel){
-	t_segundoNivel* unaTablaDe2doNivel = malloc(sizeof(t_segundoNivel));
-
-	for(int i=0;i < list_size(listaT2Nivel);i++){
-
-		unaTablaDe2doNivel = list_get(listaT2Nivel,i);
-
-		if(unaTablaDe2doNivel->numeroTabla == numeroDeTabla2doNivel){
-			return i;
-		}
-	}
-	// return 4;//Puse 4 para que no me confunda si retorno 0
-	free(unaTablaDe2doNivel);
-}
-
-void leerElPedido(int posicion){
-
-}
-
-void escribirElPedido(char* loQueSeEscribe,int posicion){
 
 }
 

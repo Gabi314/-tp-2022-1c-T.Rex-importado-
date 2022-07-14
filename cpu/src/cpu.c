@@ -1,6 +1,7 @@
 #include "funcionesCpu.h"
 
 int direccionLogica = 0; //harcodeada: esto en realidad viene del pcb -> instrucciones -> (read,write,copy) -> parametro[0]
+uint32_t valorAEscribir = 42; //harcodeada: esto en realidad viene del pcb -> instrucciones ->  identificador = WRITE -> parametro[1]
 int nroTabla1erNivel = 0; //harcodeada: esto en realidad viene del pcb -> tabla_de_paginas
 
 
@@ -10,15 +11,8 @@ int main(void) {
 	inicializarConfiguraciones();
 	tlb = inicializarTLB();
 	conexionConMemoria();
-
-
-
 	//Funciones de prueba
 	//reiniciarTLB();
-
-
-	log_info(logger,"Cantidad de entradas de la TLB: %d", list_size(tlb));
-
 
 	terminar_programa(conexion, logger, config);
 }
@@ -32,49 +26,64 @@ int conexionConMemoria(void){
 	enviar_mensaje("Dame el tamanio de pag y entradas por tabla",conexion);
 
 	t_list* listaQueContieneTamanioDePagYEntradas = list_create();
-	t_list* listaQueContieneNroTabla2doNivel = list_create();
-	t_list* listaQueContieneMarco = list_create();
-	int a = 1;
-	while (a == 1) {
-		int cod_op = recibir_operacion(conexion);
 
-		switch (cod_op){
-				case PAQUETE:
-					listaQueContieneTamanioDePagYEntradas = recibir_paquete(conexion);
+	int cod_op = recibir_operacion(conexion);
 
-					leerTamanioDePaginaYCantidadDeEntradas(listaQueContieneTamanioDePagYEntradas);
+	if(cod_op == PAQUETE){
+		listaQueContieneTamanioDePagYEntradas = recibir_paquete(conexion);
+	}
 
-					calculosDireccionLogica();
+	leerTamanioDePaginaYCantidadDeEntradas(listaQueContieneTamanioDePagYEntradas);
 
-					enviarEntradaTabla1erNivel(conexion);//1er acceso con esto memoria manda nroTabla2doNivel
-					break;
-				case PAQUETE2:
+	calculosDireccionLogica(direccionLogica);
 
-					listaQueContieneNroTabla2doNivel = recibir_paquete(conexion);//finaliza 1er acceso
-					int nroTabla2doNivel = (int) list_get(listaQueContieneNroTabla2doNivel,0);
-					log_info(logger,"Me llego el numero de tabla de segundoNivel que es % d",nroTabla2doNivel);
+	int marco = chequearMarcoEnTLB(numeroDePagina);
 
-					enviarEntradaTabla2doNivel(conexion); //2do acceso a memoria
-					break;
-				case PAQUETE3:
-					listaQueContieneMarco = recibir_paquete(conexion);//Finaliza el 2do acceso recibiendo el marco
-					int marco = (int) list_get(listaQueContieneMarco,0);
+	if(marco == -1){
+		log_info(logger,"La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)");
+		enviarEntradaTabla1erNivel(conexion);//1er acceso con esto memoria manda nroTabla2doNivel
 
-					log_info(logger,"Me llego el marco que es %d",marco);
+		int seAccedeAMemoria = 1;
+		while (seAccedeAMemoria == 1) {
+			int cod_op = recibir_operacion(conexion);
 
-					if(list_size(tlb) < cantidadEntradasTlb){
-						agregarEntradaATLB(marco,numeroDePagina);
-					}else{
-						//algoritmo de reemplazo
+			t_list* listaQueContieneNroTabla2doNivel = list_create();
+			t_list* listaQueContieneMarco = list_create();
+
+			switch (cod_op){
+					case PAQUETE2:
+
+						listaQueContieneNroTabla2doNivel = recibir_paquete(conexion);//finaliza 1er acceso
+						int nroTabla2doNivel = (int) list_get(listaQueContieneNroTabla2doNivel,0);
+						log_info(logger,"Me llego el numero de tabla de segundoNivel que es % d",nroTabla2doNivel);
+
+						enviarEntradaTabla2doNivel(conexion); //2do acceso a memoria
+						break;
+					case PAQUETE3:
+						listaQueContieneMarco = recibir_paquete(conexion);//Finaliza el 2do acceso recibiendo el marco
+						marco = (int) list_get(listaQueContieneMarco,0);
+
+						log_info(logger,"Me llego el marco que es %d",marco);
+
+						if(list_size(tlb) < cantidadEntradasTlb){
+							agregarEntradaATLB(marco,numeroDePagina);
+							sleep(1);// Para que espere haya 1 seg de diferencia( a veces pasa que se agregan en el mismo seg y jode los algoritmos)
+						}else{
+							algoritmosDeReemplazoTLB(4,5);
+						}
+						seAccedeAMemoria = 0;//salga del while
+						break;
+					default:
+						log_warning(logger,"Operacion desconocida. No quieras meter la pata");
+						seAccedeAMemoria = 0;//salga del while
+						break;
 					}
-					a = 0;//salga del while
-					break;
-				default:
-					log_warning(logger,"Operacion desconocida. No quieras meter la pata");
-					a = 0;//salga del while
-					break;
-				}
-		}
+			}
+	}
+
+	//ya tengo el marco -> tengo direccion fisica -> puedo leer/escribir/copiar -> la tengo que enviar a memoria(3er acceso)
+	//Pruebo un WRITE
+	enviarDireccionFisicaYValorAEscribir(conexion,marco,desplazamiento,valorAEscribir);
 
 	return EXIT_SUCCESS;
 }
@@ -93,7 +102,7 @@ void inicializarConfiguraciones(){
 	puertoDeEscuchaInterrupt = config_get_int_value(config,"PUERTO_ESCUCHA_INTERRUPT");
 }
 
-void calculosDireccionLogica(){
+void calculosDireccionLogica(int direccionLogica){
 	numeroDePagina = floor(direccionLogica/ tamanioDePagina);
 	entradaTabla1erNivel = floor(numeroDePagina / entradasPorTabla);
 	entradaTabla2doNivel = numeroDePagina % entradasPorTabla;
@@ -124,16 +133,19 @@ void reiniciarTLB(){
 }
 
 //Busqueda de pagina en la TLB
-int chequeoDePagina(int numeroDePagina){
+int chequearMarcoEnTLB(int numeroDePagina){
 	entradaTLB* unaEntradaTLB = malloc(sizeof(entradaTLB));
 
 	for(int i=0;i < list_size(tlb);i++){
 		unaEntradaTLB = list_get(tlb,i);
 
 			if(unaEntradaTLB->nroDePagina == numeroDePagina){
+				unaEntradaTLB->ultimaReferencia = time(NULL);// se referencio a esa pagina
 				return unaEntradaTLB->nroDeMarco; // se puede almacenar este valor en una variable y retornarlo fuera del for
 			}
 	}
+
+	return -1;
 	free(unaEntradaTLB);
 
 }
@@ -144,12 +156,62 @@ void agregarEntradaATLB(int marco,int pagina){
 
 	unaEntrada->nroDeMarco = marco;
 	unaEntrada->nroDePagina = pagina;
+	unaEntrada->instanteGuardada = time(NULL);
+	unaEntrada->ultimaReferencia = time(NULL);
 
 	list_add(tlb,unaEntrada);
 
 }
-//En el caso en el que no este, tiene que ir a memoria y buscar la pagina y el marco y etc.
-void reemplazoDeCampoEnTLB(){
+
+void algoritmosDeReemplazoTLB(int pagina,int marco){//probarrrr-----------------------------------
+	if(! strcmp(algoritmoReemplazoTlb,"FIFO")){
+		entradaTLB* unaEntradaTLB = malloc(sizeof(entradaTLB));
+		entradaTLB* otraEntradaTLB = malloc(sizeof(entradaTLB));
+
+		int indiceConInstanteGuardadoMayor = 1;
+
+		for(int i = 0; i<cantidadEntradasTlb;i++){
+			unaEntradaTLB = list_get(tlb,i);
+			otraEntradaTLB = list_get(tlb,indiceConInstanteGuardadoMayor);
+
+			if(unaEntradaTLB->instanteGuardada < otraEntradaTLB->instanteGuardada){
+				indiceConInstanteGuardadoMayor = i;
+			}
+		}
+
+		reemplazarPagina(pagina,marco,indiceConInstanteGuardadoMayor);
+
+	}else if (! strcmp(algoritmoReemplazoTlb,"LRU")){
+		entradaTLB* unaEntradaTLB = malloc(sizeof(entradaTLB)); //repito logica por la ultimaReferencia
+		entradaTLB* otraEntradaTLB = malloc(sizeof(entradaTLB));
+
+		int indiceConUltimaReferenciaMayor = 1;
+
+		for(int i = 0; i<cantidadEntradasTlb;i++){
+			unaEntradaTLB = list_get(tlb,i);
+			otraEntradaTLB = list_get(tlb,indiceConUltimaReferenciaMayor);
+
+			if(unaEntradaTLB->ultimaReferencia < otraEntradaTLB->ultimaReferencia){
+				indiceConUltimaReferenciaMayor = i;
+			}
+		}
+
+		reemplazarPagina(pagina,marco,indiceConUltimaReferenciaMayor);
+	}
+}
+
+void reemplazarPagina(int pagina,int marco ,int indice){//Repito logica con agregarEntradaTLB
+	entradaTLB* unaEntradaTLB = malloc(sizeof(entradaTLB));
+	unaEntradaTLB = list_get(tlb,indice);
+
+	log_info(logger,"Reemplazo la pagina %d en el marco %d cuya entrada es %d",pagina,marco,indice);
+
+	unaEntradaTLB->nroDePagina = pagina;
+	unaEntradaTLB->nroDeMarco = marco;
+	unaEntradaTLB->instanteGuardada = time(NULL);
+	unaEntradaTLB->ultimaReferencia = time(NULL);
+
+	list_replace(tlb,indice,unaEntradaTLB);
 
 }
 
@@ -169,7 +231,19 @@ void enviarEntradaTabla2doNivel(int conexion){
 	// Leemos y esta vez agregamos las lineas al paquete
 	agregar_a_paquete(paquete,&entradaTabla2doNivel,sizeof(entradaTabla2doNivel));
 
-	log_info(logger,"Le envio a memoria entrada de tabla de 2do nivel que es %d)",entradaTabla2doNivel);
+	log_info(logger,"Le envio a memoria entrada de tabla de 2do nivel que es %d",entradaTabla2doNivel);
+	enviar_paquete(paquete,conexion);
+	eliminar_paquete(paquete);
+}
+
+void enviarDireccionFisicaYValorAEscribir(int conexion, int marco, int desplazamiento,uint32_t valorAEscribir){
+	t_paquete* paquete = crear_paqueteDireccionFisica();
+
+	agregar_a_paquete(paquete,&marco,sizeof(marco));
+	agregar_a_paquete(paquete,&desplazamiento,sizeof(desplazamiento));
+	agregar_a_paquete(paquete,&valorAEscribir,sizeof(uint32_t));
+
+	log_info(logger,"Le envio a memoria direccion fisica: Marco:%d y Offset: %d, para escribir: %d",marco,desplazamiento,valorAEscribir);
 	enviar_paquete(paquete,conexion);
 	eliminar_paquete(paquete);
 }

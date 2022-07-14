@@ -180,6 +180,12 @@ t_paquete* crear_paqueteEntradaTabla2doNivel(void)
 	return paquete;
 }
 
+t_paquete* crear_paqueteDireccionFisica(void){
+	t_paquete* paquete = malloc(sizeof(t_paquete));
+		paquete->codigo_operacion = PAQUETE3;
+		crear_buffer(paquete);
+		return paquete;
+}
 
 void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio)
 {

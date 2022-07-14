@@ -13,7 +13,7 @@
 #include<string.h>
 #include<assert.h>
 #include<math.h>
-#include <sys/time.h>
+#include <time.h>
 
 #define IP_CPU "127.0.0.1"
 #define PUERTO_CPU_DISPATCH 8001 // por ahora este faltan los otros puertos para conectar a kernel
@@ -74,7 +74,8 @@ typedef struct
 {
 	int nroDePagina;
 	int nroDeMarco;
-	int instanteDeUltimaCarga;
+	time_t instanteGuardada;
+	time_t ultimaReferencia;
 } entradaTLB;
 
 typedef struct
@@ -92,6 +93,7 @@ typedef struct
 int crear_conexion(char* ip, int puertoCpuDispatch);
 t_paquete* crear_paqueteEntradaTabla1erNivel(void);
 t_paquete* crear_paqueteEntradaTabla2doNivel(void);
+t_paquete* crear_paqueteDireccionFisica(void);
 void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio);
 //void agregar_nroTabla1erNivelYEntrada_a_paquete(t_paquete* paquete, void* valor, int tamanio);
 void enviar_paquete(t_paquete* paquete, int socket_cliente);
@@ -106,6 +108,7 @@ t_config* iniciar_config(void);
 
 void enviarEntradaTabla1erNivel(int);
 void enviarEntradaTabla2doNivel(int);
+void enviarDireccionFisicaYValorAEscribir(int,int,int,uint32_t);
 
 void terminar_programa(int, t_log*, t_config*);
 
@@ -115,10 +118,12 @@ void inicializarConfiguraciones();
 t_list* inicializarTLB();
 void generarListaCamposTLB(t_list*);
 void reiniciarTLB();
-int chequeoDePagina(int);
+int chequearMarcoEnTLB(int);
 void agregarEntradaATLB(int,int);
+void algoritmosDeReemplazoTLB(int,int);
+void reemplazarPagina(int,int,int);
 
-void calculosDireccionLogica();
+void calculosDireccionLogica(int);
 void leerTamanioDePaginaYCantidadDeEntradas(t_list*);
 
 
