@@ -67,7 +67,7 @@ typedef struct
 	int tabla_paginas; // el tipo ???
 	float estimacion_rafaga;
 	float estimacion_anterior;
-	clock_t rafagaAnterior;
+	clock_t rafagaMs;
 	clock_t horaDeIngresoAExe;
 	t_estado estado;
 	int socket_cliente;
