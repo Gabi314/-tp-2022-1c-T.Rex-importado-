@@ -65,7 +65,7 @@ void* recibir_buffer(int* size, int socket_cliente)
 	return buffer;
 }
 
-void recibir_mensaje(int socket_cliente) //No creo que haga falta
+void recibir_mensaje(int socket_cliente) //No creo que haga falta (estoy de acuerdo! atte: Gabi)
 {
 	int size;
 	char* buffer = recibir_buffer(&size, socket_cliente);
@@ -730,4 +730,49 @@ void terminarEjecucion(t_pcb* proceso){
 
 	//Cuando termino que hago con el proceso?
 }
+
+
+
+//------------------------HILOS-------------------------------
+
+
+// * MULTIHILOS DE EJECUCION PARA ATENDER N CONSOLAS: esperan a recibir una consola y sus
+// instrucciones para generar el pcb y asignar el proceso a NEW
+
+void  recibir_consola(int servidor) {
+
+		while(1) {
+		pthread_t hilo1;
+
+		int nuevo_cliente = esperar_cliente(servidor);
+		int hiloCreado = pthread_create(&hilo1, NULL,&atender_consola,nuevo_cliente);
+
+		pthread_detach(hiloCreado);
+		}
+		//int ultimo_cliente = nuevo_cliente; ---> en caso de que repita siempre la misma consola habria que hacer algo asi (creo)
+
+	}
+
+	void atender_consola(int nuevo_cliente) {
+			t_pcb* PCB;
+			t_list* listaDeInstrucciones = recibir_paquete(nuevo_cliente);
+			// no las devuelve pero la idea es que lo haga o  en su defecto crear una funcion que lo haga
+			t_list* proximaInstruccion = listaDeInstrucciones;
+
+			PCB->idProceso = 1000; // esto después va a ser un numero random por cada consola conectada
+			PCB->tamanioProceso = 512; // idem
+			PCB->instrucciones = listaDeInstrucciones;
+			PCB->program_counter = proximaInstruccion;
+			PCB->estimacion_rafaga= estimacionInicial;
+			PCB->estado = NEW;
+			PCB->socket_cliente = nuevo_cliente; // acá guardamos el socket
+			PCB->tiempoEjecucionRealInicial = 0 ;
+			PCB->tiempoEjecucionAcumulado = 0;
+
+
+			agregarANew(PCB);
+
+		}
+
+
 

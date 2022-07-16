@@ -16,6 +16,7 @@
 #include<stdbool.h>
 #include<semaphore.h>
 #include<time.h>
+#include<pthread.h>
 
 #define IP_KERNEL "127.0.0.1"
 #define PUERTO_KERNEL "8000"
@@ -69,9 +70,13 @@ typedef struct
 	float estimacion_anterior;
 	clock_t rafagaAnterior;
 	clock_t horaDeIngresoAExe;
+	clock_t horaDeIngresoAReady;
+	int tiempoEspera;
 	t_estado estado;
 	int socket_cliente;
 	int socketMemoria;
+	float tiempoEjecucionRealInicial;
+	float tiempoEjecucionAcumulado;
 
 } t_pcb;
 
@@ -175,7 +180,18 @@ void sacarDeSuspendedBlocked(t_pcb* proceso);
 void agregarAReadySuspended(t_pcb* proceso);
 t_pcb* sacarDeReadySuspended();
 
+//------------------HILOS--------------------
+//MULTIHILOS DE EJECUCION PARA ATENDER N CONSOLAS: esperan a recibir una consola y sus
+ //          instrucciones para generar el pcb y asignar el proceso a NEW
+void recibir_consola(int servidor) ;
+void atender_consola(int cliente);
 
+/*
+ASIGNAR_MEMORIA(): si el grado de multiprogramacion lo permite, pasa el primer proceso de colaNew a READY, envia
+un mensaje al módulo Memoria para que inicialice sus estructuras necesarias y obtener el valor de la tabla de páginas
+del PCB. Además, si el algoritmo es SRT envía una interrupcion a cpu.
+ */
+void asignar_memoria(t_pcb proceso);
 
 
 

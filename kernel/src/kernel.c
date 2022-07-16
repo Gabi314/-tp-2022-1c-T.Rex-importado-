@@ -1,15 +1,51 @@
 #include "funcionesKernel.h"
 
+
+
 int main(void) {
 
 	inicializar_configuracion();
 	inicializar_colas();
-    generar_conexiones();
+	generar_conexiones();
 
-	//conexionConConsola();
-	//conexionConCpu();
-	//conexionConMemoria();
-}
+
+	    /*HILOS A CREAR:
+
+	         * FINALIZAR_PROCESO_Y_AVISAR_A_CPU(): Recibe un PCB con motivo de finalizar el mismo, pasa al proceso al estado EXIT y
+	           da aviso al módulo Memoria para que éste libere sus estructuras. La idea sería tener un semaforo o algo que controle que la ejecucion del proceso sea la última
+	         * FINALIZAR_PROCESO_Y_AVISAR_A_CONSOLA(): Una vez liberadas las estructuras de CPU, se dará aviso a la Consola
+	           de la finalización del proceso. La idea seria que espere el pcb de cpu con un mensaje que avise la liberación
+	           de las estructuras
+	         * PLANIFICAR(): Llama constantemente al planificador.
+	         * SUSPENDER(): si un proceso está bloqueado por un tiempo mayor al límite se llamará a una transición para
+	           suspenderlo y se enviará un mensaje a memoria con la informacion necesaria.
+	         * DESBLOQUEAR_SUSPENDIDO(): espera a que termine la entrada/salida de un proceso SUSPENDED-BLOCKED y llama
+	           a las transiciones necesarias para que pase a ser SUSPENDED-READY
+
+	        TOTAL DE HILOS: N (consolas) + 6
+
+	        */
+
+	 pthread_t hilo0;
+
+	 	int servidor = iniciar_servidor();
+
+	 	int hiloCreado = pthread_create(&hilo0, NULL,&recibir_consola,servidor);
+	 	pthread_detach(hiloCreado);
+
+
+
+	 	while(1);
+		//conexionConConsola();
+		//conexionConCpu();
+		//conexionConMemoria();
+	}
+
+
+
+
+
+
 
 
 void inicializar_configuracion(){
