@@ -315,6 +315,21 @@ void liberar_conexion(int socket_cliente)
 	close(socket_cliente);
 }
 
+/*
+t_pcb* crearProceso(int id, int socket, double estimate){
+    t_pcb* proceso = malloc(sizeof(t_pcb));
+    proceso->idProceso = id;
+    proceso->estado = NEW;
+    proceso->estimacion_rafaga = estimate;
+    return proceso;
+}
+*/
+void destruirProceso(t_pcb* proceso){
+    close(proceso->socket_cliente);
+    free(proceso);
+}
+
+
 //-----------------PLANIFICADOR---------------
 
 
@@ -425,7 +440,11 @@ t_pcb* obtenerSiguienteSRT(){
 	return procesoPlanificado;
 }
 
+void estimarRafaga(t_pcb* proceso){
+	proceso->estimacion_anterior=proceso->estimacion_rafaga;
+	proceso->estimacion_rafaga = alfa * proceso->rafagaMs + (1 - alfa) * proceso->estimacion_rafaga;
 
+}
 
 
   //--------------------TRANSICIONES---------------
@@ -462,16 +481,33 @@ t_pcb* sacarDeNew(){
 
 void agregarAReady(t_pcb* proceso){
 
-	time_t a = time(NULL);
-	proceso->horaDeIngresoAReady = ((float) a)*1000;
-	proceso->tiempoEspera = 0;
 	//sem_wait(&multiprogramacion); Lo sacamos de aca para usarlo en el contexto en el que se llama a la funcion, porque no siempre que se agrega a ready, se toca la multiprogramacion
 	//pthread_mutex_lock(&mutexReady);
 
-	//proceso->suspendido = false;
-	list_add(colaReady, proceso);
-	log_info(logger, "[READY] Entra el proceso de PID: %d a la cola.", proceso->idProceso);
+	if (gradoMultiprogramacionActual <= gradoMultiprogramacionTotal){
 
+		switch(algoritmoPlanificacionActual){
+
+			//CASO FIFO
+			case FIFO:
+				list_add(colaReady, proceso);
+				log_info(logger, "[READY] Entra el proceso de PID: %d a la cola.", proceso->idProceso);
+				gradoMultiprogramacionActual ++;
+				break;
+
+			//CASO SJF con desalojo
+			case SRT:
+				//mandar interrupcion a cpu a traves de la conexxion interrupt para indicar que debe desalojar el proceso que esta ejecutando
+				list_add(colaReady, proceso);
+				log_info(logger, "[READY] Entra el proceso de PID: %d a la cola.", proceso->idProceso);
+				gradoMultiprogramacionActual ++;
+				break;
+
+				//Aca hay que mandar un mensaje a memoria para que inicialice sus estructuras
+			}
+	}else{
+		log_info(logger, "No se pueden agregar más procesos a READY  se alcanzó el grado de multiprogramácion maximo");
+	}
 	//pthread_mutex_unlock(&mutexReady);
 	//sem_post(&contadorReady);
 	//sem_post(&contadorProcesosEnMemoria); Lo sacamos de aca para usarlo en el contexto en el que se llama a la funcion, porque no siempre que se agrega a ready, se toca la multiprogramacion
@@ -602,6 +638,18 @@ t_pcb* sacarDeSuspendedReady(){
 }
 
 
+
+void ejecutar(t_pcb* proceso){
+
+
+	time_t a = time(NULL);
+	proceso->horaDeIngresoAExe = ((float) a)*1000;
+
+	//send(proceso)
+
+	//Aca mando el proceso a cpu y guardo el momento en el que arranca a ejecutar para el calculo de la estimacion
+}
+
 // Las funciones siguientes son hilos del planificador
 
 void newAReady(){
@@ -640,7 +688,7 @@ void readyAExe(){
 		if(procesoAEjecutar != NULL) {
 
 			//pthread_mutex_lock(&mutexExe);
-			list_add(colaExe, procesoAEjecutar);// monoprocesador -> deberiamos tener algo como ejecutar(proceso);
+			ejecutar(procesoAEjecutar);// monoprocesador -> deberiamos tener algo como ejecutar(proceso);
 			//tenemos que mandar el proceso a cpu y ver cuanto tarda su rafaga
 			//pthread_mutex_unlock(&mutexExe);
 
@@ -728,7 +776,8 @@ void terminarEjecucion(t_pcb* proceso){
 	//pthread_mutex_unlock(&mutexExit);
 
 
-	//Cuando termino que hago con el proceso?
+	//Aca hay que mandar un mensaje a memoria para que libere sus estructuras
+	//Y tambien avisar a consola que termino su ejecucion
 }
 
 
