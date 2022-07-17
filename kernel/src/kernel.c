@@ -9,31 +9,27 @@ int main(void) {
 	generar_conexiones();
 
 
-	    /*HILOS A CREAR:
-
-	         * FINALIZAR_PROCESO_Y_AVISAR_A_CPU(): Recibe un PCB con motivo de finalizar el mismo, pasa al proceso al estado EXIT y
-	           da aviso al módulo Memoria para que éste libere sus estructuras. La idea sería tener un semaforo o algo que controle que la ejecucion del proceso sea la última
-	         * FINALIZAR_PROCESO_Y_AVISAR_A_CONSOLA(): Una vez liberadas las estructuras de CPU, se dará aviso a la Consola
-	           de la finalización del proceso. La idea seria que espere el pcb de cpu con un mensaje que avise la liberación
-	           de las estructuras
-	         * PLANIFICAR(): Llama constantemente al planificador.
-	         * SUSPENDER(): si un proceso está bloqueado por un tiempo mayor al límite se llamará a una transición para
-	           suspenderlo y se enviará un mensaje a memoria con la informacion necesaria.
-	         * DESBLOQUEAR_SUSPENDIDO(): espera a que termine la entrada/salida de un proceso SUSPENDED-BLOCKED y llama
-	           a las transiciones necesarias para que pase a ser SUSPENDED-READY
-
-	        TOTAL DE HILOS: N (consolas) + 6
-
-	        */
-
-	 pthread_t hilo0;
+	 pthread_t hilo0, hiloAdmin[6];
+	 int hiloAdminCreado[6];
 
 	 	int servidor = iniciar_servidor();
 
 	 	int hiloCreado = pthread_create(&hilo0, NULL,&recibir_consola,servidor);
 	 	pthread_detach(hiloCreado);
 
+	 	hiloAdminCreado[0] = pthread_create(&hiloAdmin[0],NULL,&asignar_memoria,NULL);
+	 	hiloAdminCreado[1] = pthread_create(&hiloAdmin[1],NULL,&finalizar_proceso_y_avisar_a_memoria,NULL);
+	 	hiloAdminCreado[2] = pthread_create(&hiloAdmin[2],NULL,&finalizar_proceso_y_avisar_a_consola,NULL);
+	 	hiloAdminCreado[3] = pthread_create(&hiloAdmin[3],NULL,&planificar,NULL);
+	 	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&suspender,NULL);
+		hiloAdminCreado[5] = pthread_create(&hiloAdmin[5],NULL,&desbloquear_suspendido,NULL);
 
+	 	pthread_detach(hiloAdmin[0]);
+	 	pthread_detach(hiloAdmin[1]);
+	 	pthread_detach(hiloAdmin[2]);
+	 	pthread_detach(hiloAdmin[3]);
+		pthread_detach(hiloAdmin[4]);
+		pthread_detach(hiloAdmin[5]);
 
 	 	while(1);
 		//conexionConConsola();

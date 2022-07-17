@@ -143,6 +143,7 @@ void liberar_conexion(int socket_cliente);
 void eliminar_paquete(t_paquete* paquete);
 void eliminar_paquete_mensaje(t_paquete* paqueteMensaje);
 
+
 //Funciones propias del Kernel como cliente
 t_log* iniciar_logger(void);
 t_config* iniciar_config(void);
@@ -152,6 +153,20 @@ t_config* config;
 void terminar_programa(int, t_log*, t_config*);
 void conexionConCpu(void);
 //Funciones propias del Kernel como cliente
+
+
+//Funciones para Kernel como cliente de Memoria
+
+//Funciones que usan los hilos
+
+void enviarMensajeAMemoria(char* mensaje); // falta desarrollar
+void enviarProcesoAMemoria(t_pcb* proceso); // falta desarrollar
+int obtenerValorDeTP();  // falta desarrollar
+void enviarInterrupcionACpu(); // falta desarrollar
+t_pcb * recibirProcesoAFinalizar(); // falta desarrollar
+void enviarMensajeAConsola(char* mensaje); // falta desarrollar
+
+
 
 //-------------PLANIFICADOR---------------
 
@@ -191,8 +206,41 @@ ASIGNAR_MEMORIA(): si el grado de multiprogramacion lo permite, pasa el primer p
 un mensaje al módulo Memoria para que inicialice sus estructuras necesarias y obtener el valor de la tabla de páginas
 del PCB. Además, si el algoritmo es SRT envía una interrupcion a cpu.
  */
-void asignar_memoria(t_pcb proceso);
+void asignar_memoria();
 
+/*
+  * FINALIZAR_PROCESO_Y_AVISAR_A_CPU(): Recibe un PCB con motivo de finalizar el mismo, pasa al proceso al estado EXIT y
+	da aviso al módulo Memoria para que éste libere sus estructuras. La idea sería tener un semaforo o algo que
+	controle que la ejecucion del proceso sea la última
+ */
+
+void finalizar_proceso_y_avisar_a_memoria();
+
+/*
+ * FINALIZAR_PROCESO_Y_AVISAR_A_CONSOLA(): Una vez liberadas las estructuras de CPU, se dará aviso a la Consola
+	           de la finalización del proceso. La idea seria que espere el pcb de cpu con un mensaje que avise la liberación
+	           de las estructuras
+ */
+
+void finalizar_proceso_y_avisar_a_consola();
+
+//* PLANIFICAR(): Llama constantemente al planificador.
+
+void planificar();
+
+/*
+ * SUSPENDER(): si un proceso está bloqueado por un tiempo mayor al límite se llamará a una transición para
+	           suspenderlo y se enviará un mensaje a memoria con la informacion necesaria.
+ */
+
+void suspender();
+
+/*
+ * DESBLOQUEAR_SUSPENDIDO(): espera a que termine la entrada/salida de un proceso SUSPENDED-BLOCKED y llama
+	a las transiciones necesarias para que pase a ser SUSPENDED-READY
+ */
+
+void desbloquear_suspendido();
 
 
 #endif /* FUNCIONES_KERNEL_H_ */

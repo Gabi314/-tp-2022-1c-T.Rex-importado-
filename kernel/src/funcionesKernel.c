@@ -447,6 +447,34 @@ void estimarRafaga(t_pcb* proceso){
 }
 
 
+void enviarInterrupcionACpu(){
+	//falta desarrollar
+}
+
+
+void enviarMensajeAMemoria(char* mensaje){
+// falta desarrollar
+}
+void enviarProcesoAMemoria(t_pcb* proceso){
+	// falta desarrollar
+}
+int obtenerValorDeTP(){
+	return 1;
+	// falta desarrollar
+}
+
+t_pcb * recibirProcesoAFinalizar(){
+	t_pcb* pcb;
+	return pcb;
+	// falta desarrollar
+}
+
+void enviarMensajeAConsola(char* mensaje){
+	// falta desarrollar
+}
+
+
+
   //--------------------TRANSICIONES---------------
 
 void agregarANew(t_pcb* proceso) {
@@ -823,5 +851,82 @@ void  recibir_consola(int servidor) {
 
 		}
 
+	/*
+	ASIGNAR_MEMORIA(): si el grado de multiprogramacion lo permite, pasa el primer proceso de colaNew a READY, envia
+	un mensaje al módulo Memoria para que inicialice sus estructuras necesarias y obtener el valor de la tabla de páginas
+	del PCB. Además, si el algoritmo es SRT envía una interrupcion a cpu.
+	 */
+	void asignar_memoria() {
 
+		while(1){
+
+		t_pcb* proceso = sacarDeNew();
+		agregarAReady(proceso);
+		enviarMensajeAMemoria("Inicializar estructuras"); // falta desarrollar
+		enviarProcesoAMemoria(proceso); // falta desarrollar
+		int NroTP = obtenerValorDeTP();  // falta desarrollar
+
+		if(algoritmoPlanificacion == SRT)
+			enviarInterrupcionACpu(); // falta desarrollar
+		}
+	}
+
+	/*
+	  * FINALIZAR_PROCESO_Y_AVISAR_A_MEMORIA(): Recibe un PCB con motivo de finalizar el mismo, pasa al
+		proceso al estado EXIT y da aviso al módulo Memoria para que éste libere sus estructuras. La idea sería tener
+	  	un semaforo o algo que controle que la ejecucion del proceso sea la última
+	 */
+
+	void finalizar_proceso_y_avisar_a_memoria() {
+		while(1){
+		t_pcb * proceso = recibirProcesoAFinalizar(); //falta desarrollar
+		terminarEjecucion(proceso);
+
+		enviarMensajeAMemoria("Liberar estructuras"); // falta desarrollar
+		}
+	}
+
+	/*
+	 * FINALIZAR_PROCESO_Y_AVISAR_A_CONSOLA(): Una vez liberadas las estructuras de CPU, se dará aviso a la Consola
+		de la finalización del proceso. La idea seria que espere el pcb de cpu con un mensaje que avise la liberación
+		de las estructuras
+	 */
+
+	void finalizar_proceso_y_avisar_a_consola() {
+		while(1){
+		enviarMensajeAConsola("Fin del proceso"); // falta desarrollar
+		}
+
+	}
+
+	//* PLANIFICAR(): Llama constantemente al planificador.
+
+	void planificar() {
+		while(1) {
+			readyAExe(); //en principio llama a esta transicion ya que es la única que invoca a los planificadores y además se encuentra aislada del resto
+		}				// igual ojo porque parece que falta actualizarla
+	}
+
+	/*
+	 * SUSPENDER(): si un proceso está bloqueado por un tiempo mayor al límite se llamará a una transición para
+		           suspenderlo y se enviará un mensaje a memoria con la informacion necesaria.
+	 */
+
+	void suspender(){
+		while(1){
+		blockedASuspension(); // modificar: la idea sería que solo tome el primer elemento de la lista y lo pase a bloqueado y suspendido
+		}
+	}
+
+	/*
+	 * DESBLOQUEAR_SUSPENDIDO(): espera a que termine la entrada/salida de un proceso SUSPENDED-BLOCKED y llama
+		a las transiciones necesarias para que pase a ser SUSPENDED-READY
+	 */
+
+	void desbloquear_suspendido(){
+		while(1){
+		t_pcb * proceso = queue_pop(colaSuspendedBlocked);
+		agregarAReadySuspended(proceso);
+		}
+	}
 
