@@ -29,7 +29,27 @@ typedef enum
 t_log* logger;
 t_config* config;
 
-//-------------- Funciones para Cpu como servidor de Kernel ---------
+//--------------  Cpu como servidor de Kernel ---------
+//Estructuras
+
+typedef struct
+{
+	int idProceso;
+	int tamanioProceso;
+	t_list* instrucciones;
+	int programCounter;
+	int nroTabla1erNivel;
+	float estimacionRafaga;
+	//int socket_cliente;
+} t_pcb;
+
+typedef struct
+{
+	char* identificador;
+	int parametros[2];
+} instrucciones;
+
+
 void* recibir_buffer(int*, int);
 
 int iniciar_servidor(void);
@@ -43,7 +63,7 @@ void iterator(int value);
 int conexionConKernel(void);
 //Funcion propia de cpu como servidor
 
-//-------------- Funciones para Cpu como cliente de Memoria -------------
+//--------------  Cpu como cliente de Memoria -------------
 int conexion;
 //Variables globales de config
 int cantidadEntradasTlb;
@@ -60,15 +80,12 @@ int entradaTabla1erNivel;
 int entradaTabla2doNivel;
 int desplazamiento;
 
-
 t_list* tamanioDePagYEntradas;
 int tamanioDePagina;
 int entradasPorTabla;
 
 //Estructuras
-
 t_list* tlb;
-
 
 typedef struct
 {

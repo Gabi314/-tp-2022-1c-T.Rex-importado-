@@ -220,3 +220,7 @@ void liberar_conexion(int socket_cliente)
 	close(socket_cliente);
 }
 
+void iterator(int value) {
+	log_info(logger,"%d", value);
+}
+

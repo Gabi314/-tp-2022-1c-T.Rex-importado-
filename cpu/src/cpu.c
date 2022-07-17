@@ -44,6 +44,7 @@ int conexionConMemoria(void){
 		enviarEntradaTabla1erNivel(conexion);//1er acceso con esto memoria manda nroTabla2doNivel
 
 		int seAccedeAMemoria = 1;
+
 		while (seAccedeAMemoria == 1) {
 			int cod_op = recibir_operacion(conexion);
 
@@ -71,6 +72,13 @@ int conexionConMemoria(void){
 						}else{
 							algoritmosDeReemplazoTLB(4,5);
 						}
+
+						//ya tengo el marco -> tengo direccion fisica -> puedo leer/escribir/copiar -> la tengo que enviar a memoria(3er acceso)
+						//Pruebo un WRITE
+						enviarDireccionFisicaYValorAEscribir(conexion,marco,desplazamiento,valorAEscribir);
+						break;
+					case MENSAJE:
+						recibir_mensaje(conexion);
 						seAccedeAMemoria = 0;//salga del while
 						break;
 					default:
@@ -78,12 +86,19 @@ int conexionConMemoria(void){
 						seAccedeAMemoria = 0;//salga del while
 						break;
 					}
+
+
 			}
+	}else{
+		//ya tengo el marco -> tengo direccion fisica -> puedo leer/escribir/copiar -> la tengo que enviar a memoria(3er acceso)
+		//Pruebo un WRITE
+		enviarDireccionFisicaYValorAEscribir(conexion,marco,desplazamiento,valorAEscribir);
+
+		if(cod_op == MENSAJE){// Recibe que se escribio correctamente el valor en memoria
+			recibir_mensaje(conexion);
+		}
 	}
 
-	//ya tengo el marco -> tengo direccion fisica -> puedo leer/escribir/copiar -> la tengo que enviar a memoria(3er acceso)
-	//Pruebo un WRITE
-	enviarDireccionFisicaYValorAEscribir(conexion,marco,desplazamiento,valorAEscribir);
 
 	return EXIT_SUCCESS;
 }
@@ -248,6 +263,15 @@ void enviarDireccionFisicaYValorAEscribir(int conexion, int marco, int desplazam
 	eliminar_paquete(paquete);
 }
 
+//------------------CICLO DE INSTRUCCION--------------------------
+instrucciones* buscarInstruccionAEjecutar(t_pcb* unPCB){//FETCH
+	unPCB = malloc(sizeof(t_pcb));
+
+	instrucciones* unaInstruccion = list_get(unPCB->instrucciones,unPCB->programCounter);
+	unPCB->programCounter++;
+
+	return unaInstruccion;
+}
 
 
 
@@ -290,7 +314,3 @@ int conexionConKernel(void){
 	return EXIT_SUCCESS;
 }
 
-
-void iterator(int value) {
-	log_info(logger,"%d", value);
-}

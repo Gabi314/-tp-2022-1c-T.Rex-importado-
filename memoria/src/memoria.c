@@ -29,9 +29,12 @@ int main(void) {
 
 	inicializarEstructuras();
 	inicializarMarcos();
-	//conexionConCpu();
+	conexionConCpu();
 
-	//escribirElPedido(3,0);
+	uint32_t datoAEscribir;
+	datoAEscribir = leerElPedido(0);
+
+	log_info(logger,"leer: %u",datoAEscribir);
 
 	//escribirEnSwap(0,0,0,0);
 
@@ -39,7 +42,6 @@ int main(void) {
 }
 
 int conexionConCpu(void){
-
 
 	int server_fd = iniciar_servidor();
 	log_info(logger, "Memoria lista para recibir a Cpu o Kernel");
@@ -87,10 +89,10 @@ int conexionConCpu(void){
 				log_info(logger,"Me llego el marco %d con desplazamiento %d y valor a escribir %u",marco,desplazamiento,valorAEscribir);
 
 				int posicionDeDatoAEscribir = marco * tamanioDePagina + sizeof(uint32_t)*desplazamiento;
-				escribirElPedido(&valorAEscribir,posicionDeDatoAEscribir);
+				escribirElPedido((uint32_t) &valorAEscribir,posicionDeDatoAEscribir,cliente_fd); //casteo para que no joda el warning
 
-				uint32_t* numeroALeer = leerElPedido(posicionDeDatoAEscribir);
-				log_info(logger, "Numero leido: %u",*numeroALeer);
+				uint32_t numeroALeer = leerElPedido(posicionDeDatoAEscribir);
+				log_info(logger, "Numero leido: %u",numeroALeer);
 				a = 0;
 				break;
 			case -1:
@@ -188,7 +190,7 @@ void crearSwap(int pid){
 
 	string_append(&nombreArchivo,".swap");
 
-	FILE* archivoSwap = fopen(nombreArchivo, "a+");
+	FILE* archivoSwap = fopen(nombreArchivo, "w+");
 
 	for(int i=0; i<(tamanioDePagina/sizeof(uint32_t))*entradasPorTabla*entradasPorTabla;i++){
 
@@ -204,19 +206,18 @@ void crearSwap(int pid){
 
 }
 
-void escribirElPedido(uint32_t* escribir,int posicionDeDatoAEscribir){
-	uint32_t* datoAEscribir = malloc(sizeof(uint32_t));
-	*datoAEscribir = (uint32_t) escribir;
-	memcpy(&memoria+posicionDeDatoAEscribir,&datoAEscribir, sizeof(uint32_t));
-// TENGO QUE DEVOLVER UN MENSAJE "OK"
+void escribirElPedido(uint32_t datoAEscribir,int posicionDeDatoAEscribir,int conexion){
+	memcpy(&memoria+posicionDeDatoAEscribir,(uint32_t*) datoAEscribir, sizeof(uint32_t)); //casteo para que no joda el warning
+
+	enviar_mensaje("Se escribio el valor correctamente",conexion);
 }
 
-uint32_t* leerElPedido(int posicion){
-	uint32_t* datoALeer = malloc(sizeof(uint32_t));
+uint32_t leerElPedido(int posicion){
+	uint32_t datoALeer;
 	memcpy(&datoALeer,&memoria+posicion,sizeof(uint32_t));
 
 	if(datoALeer != 0){
-		return (uint32_t*) *datoALeer;
+		return datoALeer;
 	}
 
 
@@ -269,22 +270,28 @@ char* nombreArchivoProceso(int pid){
 void escribirEnSwap(int numeroDeMarco,int pid,int desplazamiento,int numeroDePagina){//no funca bien
 
 	char* nombreDelArchivo = nombreArchivoProceso(pid);
-	FILE* archivoSwap = fopen(nombreDelArchivo, "r+");
+	FILE* archivoSwap = fopen(nombreDelArchivo, "a+");
 
-	for(int i=0; i<(tamanioDePagina/sizeof(uint32_t));i++){
-		int posicionDeValorEnMemoria = numeroDeMarco*tamanioDePagina + i*sizeof(uint32_t);
+	int posicionDeValorEnMemoria = numeroDeMarco*tamanioDePagina + sizeof(uint32_t)*desplazamiento;
 
-		uint32_t* datoAEscribir = leerElPedido(posicionDeValorEnMemoria);
+	uint32_t* datoAEscribir = leerElPedido(posicionDeValorEnMemoria);
 
-		char* datoAEscribirEnChar = string_itoa((uint32_t) datoAEscribir);
-		string_append(&datoAEscribirEnChar,"\n");
+	log_info(logger,"leer: %u",*datoAEscribir);
 
-		int posicionDeLaPaginaEnSwap = numeroDePagina* tamanioDePagina + i;
-
-		fseek(archivoSwap, posicionDeLaPaginaEnSwap, SEEK_SET);
-
-		fwrite(datoAEscribirEnChar, sizeof(datoAEscribirEnChar), 1, archivoSwap);
-	}
+//	for(int i=0; i<(tamanioDePagina/sizeof(uint32_t));i++){
+//		int posicionDeValorEnMemoria = numeroDeMarco*tamanioDePagina + i*sizeof(uint32_t);
+//
+//		uint32_t* datoAEscribir = leerElPedido(posicionDeValorEnMemoria);
+//
+//		//char* datoAEscribirEnChar = string_itoa((uint32_t) datoAEscribir);
+//		//string_append(&datoAEscribirEnChar,"\n");
+//
+//		//int posicionDeLaPaginaEnSwap = numeroDePagina* tamanioDePagina + i;
+//
+//		//fseek(archivoSwap, posicionDeLaPaginaEnSwap, SEEK_SET);
+//
+//		//fputs(datoAEscribirEnChar,archivoSwap);
+//	}
 
 	fclose(archivoSwap);
 }

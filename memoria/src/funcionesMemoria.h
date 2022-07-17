@@ -57,6 +57,7 @@ int recibir_operacion(int);
 void enviarTamanioDePaginaYCantidadDeEntradas(int socket_cliente);
 void enviarNroTabla2doNivel(int,int);
 void enviarMarco(int, int);
+void enviar_mensaje(char*,int);
 
 t_paquete* crear_paquete_tamanioDePagYCantEntradas(void);
 t_paquete* crear_paquete_nroTabla2doNivel(void);
@@ -124,8 +125,8 @@ marco* buscarMarco(int);
 
 void crearSwap(int);
 
-void escribirElPedido(uint32_t* escribir,int posicionDeDatoAEscribir);
-uint32_t* leerElPedido(int);
+void escribirElPedido(uint32_t,int,int);
+uint32_t leerElPedido(int);
 void copiar(int,int);
 
 void cargarEntradasDeTabla2doNivel(t_segundoNivel*);// con esta funcion que antes se llamaba cargar paginas
