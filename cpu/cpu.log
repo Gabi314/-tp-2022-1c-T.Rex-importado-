@@ -781,3 +781,28 @@
 [INFO] 15:37:18:361 CPU/(6444:6444): Me llego el marco que es 0
 [INFO] 15:37:19:361 CPU/(6444:6444): Le envio a memoria direccion fisica: Marco:0 y Offset: 0, para escribir: 42
 [INFO] 15:37:19:361 CPU/(6444:6444): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 19:28:32:286 CPU/(2626:2626): Hola memoria, soy cpu
+[INFO] 19:28:32:287 CPU/(2626:2626): Me llegaron los siguientes valores:
+[INFO] 19:28:32:287 CPU/(2626:2626): tamanio de pagina: 64 
+[INFO] 19:28:32:287 CPU/(2626:2626): entradas por tabla: 4 
+[INFO] 19:28:32:287 CPU/(2626:2626): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 19:28:32:287 CPU/(2626:2626): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 19:28:32:288 CPU/(2626:2626): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 19:28:32:288 CPU/(2626:2626): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 19:28:32:288 CPU/(2626:2626): Me llego el marco que es 0
+[INFO] 19:28:33:289 CPU/(2626:2626): Le envio a memoria direccion fisica: Marco:0 y Offset: 0, para escribir: 42
+[INFO] 19:28:33:289 CPU/(2626:2626): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 19:28:33:290 CPU/(2626:2626): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 19:28:33:290 CPU/(2626:2626): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[WARNING] 19:28:33:290 CPU/(2626:2626): Operacion desconocida. No quieras meter la pata
+[INFO] 19:31:24:353 CPU/(3024:3024): Hola memoria, soy cpu
+[INFO] 19:31:24:353 CPU/(3024:3024): Me llegaron los siguientes valores:
+[INFO] 19:31:24:353 CPU/(3024:3024): tamanio de pagina: 64 
+[INFO] 19:31:24:354 CPU/(3024:3024): entradas por tabla: 4 
+[INFO] 19:31:24:354 CPU/(3024:3024): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 19:31:24:354 CPU/(3024:3024): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 19:31:24:358 CPU/(3024:3024): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 19:31:24:358 CPU/(3024:3024): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 19:31:24:359 CPU/(3024:3024): Me llego el marco que es 0
+[INFO] 19:31:25:388 CPU/(3024:3024): Le envio a memoria direccion fisica: Marco:0 y Offset: 0, para escribir: 42
+[INFO] 19:31:25:389 CPU/(3024:3024): Me llego el mensaje Se escribio el valor correctamente

@@ -38,6 +38,7 @@ typedef struct
 } t_paquete;
 
 t_log* logger;
+int clienteCpu;
 
 void* recibir_buffer(int*, int);
 void recibir_mensaje(int);
@@ -125,7 +126,7 @@ marco* buscarMarco(int);
 
 void crearSwap(int);
 
-void escribirElPedido(uint32_t,int,int);
+void escribirElPedido(uint32_t,int);
 uint32_t leerElPedido(int);
 void copiar(int,int);
 

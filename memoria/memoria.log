@@ -813,3 +813,27 @@
 [INFO] 15:37:19:361 MEMORIA/(6420:6420): Numero leido: 42
 [INFO] 15:37:19:361 MEMORIA/(6420:6420): leer: 42
 [INFO] 15:37:19:361 MEMORIA/(6420:6420): Fin de memoria
+[INFO] 19:28:26:995 MEMORIA/(2590:2590): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:28:32:286 MEMORIA/(2590:2590): Se conecto un cliente!
+[INFO] 19:28:32:287 MEMORIA/(2590:2590): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 19:28:32:287 MEMORIA/(2590:2590): Envio el tamanio de pag y cant entradas
+[INFO] 19:28:32:288 MEMORIA/(2590:2590): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 19:28:32:288 MEMORIA/(2590:2590): Envio el numero de tabla de 2do nivel
+[INFO] 19:28:32:288 MEMORIA/(2590:2590): Me llego  la entrada de segundo nivel 0
+[INFO] 19:28:32:288 MEMORIA/(2590:2590): Envio el marco correspondiente el cual es 0
+[INFO] 19:28:33:289 MEMORIA/(2590:2590): Me llego el marco 0 con desplazamiento 0 y valor a escribir 42
+[INFO] 19:28:33:289 MEMORIA/(2590:2590): Numero leido: 42
+[INFO] 19:28:33:289 MEMORIA/(2590:2590): leer: 42
+[INFO] 19:28:33:289 MEMORIA/(2590:2590): Fin de memoria
+[INFO] 19:31:20:744 MEMORIA/(2992:2992): Memoria lista para recibir a Cpu o Kernel
+[INFO] 19:31:24:352 MEMORIA/(2992:2992): Se conecto un cliente!
+[INFO] 19:31:24:353 MEMORIA/(2992:2992): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 19:31:24:353 MEMORIA/(2992:2992): Envio el tamanio de pag y cant entradas
+[INFO] 19:31:24:354 MEMORIA/(2992:2992): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 19:31:24:354 MEMORIA/(2992:2992): Envio el numero de tabla de 2do nivel
+[INFO] 19:31:24:358 MEMORIA/(2992:2992): Me llego  la entrada de segundo nivel 0
+[INFO] 19:31:24:358 MEMORIA/(2992:2992): Envio el marco correspondiente el cual es 0
+[INFO] 19:31:25:388 MEMORIA/(2992:2992): Me llego el marco 0 con desplazamiento 0 y valor a escribir 42
+[INFO] 19:31:25:389 MEMORIA/(2992:2992): Numero leido: 42
+[INFO] 19:31:25:389 MEMORIA/(2992:2992): leer: 42
+[INFO] 19:31:25:389 MEMORIA/(2992:2992): Fin de memoria

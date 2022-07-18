@@ -34,73 +34,121 @@ int conexionConMemoria(void){
 	}
 
 	leerTamanioDePaginaYCantidadDeEntradas(listaQueContieneTamanioDePagYEntradas);
-
-	calculosDireccionLogica(direccionLogica);
-
-	int marco = chequearMarcoEnTLB(numeroDePagina);
+//------------------- Para probar que el marco no esta en TLB------------
+	int marco = buscarDireccionFisica(direccionLogica);
 
 	if(marco == -1){
-		log_info(logger,"La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)");
-		enviarEntradaTabla1erNivel(conexion);//1er acceso con esto memoria manda nroTabla2doNivel
+		marco = accederAMemoria(marco);
+	}
+	return EXIT_SUCCESS;
+}
 
-		int seAccedeAMemoria = 1;
+int accederAMemoria(int marco){
 
-		while (seAccedeAMemoria == 1) {
-			int cod_op = recibir_operacion(conexion);
+	log_info(logger,"La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)");
+	enviarEntradaTabla1erNivel(conexion);//1er acceso con esto memoria manda nroTabla2doNivel
 
-			t_list* listaQueContieneNroTabla2doNivel = list_create();
-			t_list* listaQueContieneMarco = list_create();
+	int seAccedeAMemoria = 1;
 
-			switch (cod_op){
-					case PAQUETE2:
+	while (seAccedeAMemoria == 1) {
+		int cod_op = recibir_operacion(conexion);
 
-						listaQueContieneNroTabla2doNivel = recibir_paquete(conexion);//finaliza 1er acceso
-						int nroTabla2doNivel = (int) list_get(listaQueContieneNroTabla2doNivel,0);
-						log_info(logger,"Me llego el numero de tabla de segundoNivel que es % d",nroTabla2doNivel);
+		t_list* listaQueContieneNroTabla2doNivel = list_create();
+		t_list* listaQueContieneMarco = list_create();
 
-						enviarEntradaTabla2doNivel(conexion); //2do acceso a memoria
-						break;
-					case PAQUETE3:
-						listaQueContieneMarco = recibir_paquete(conexion);//Finaliza el 2do acceso recibiendo el marco
-						marco = (int) list_get(listaQueContieneMarco,0);
+		switch (cod_op){
+			case PAQUETE2:
 
-						log_info(logger,"Me llego el marco que es %d",marco);
+				listaQueContieneNroTabla2doNivel = recibir_paquete(conexion);//finaliza 1er acceso
+				int nroTabla2doNivel = (int) list_get(listaQueContieneNroTabla2doNivel,0);
+				log_info(logger,"Me llego el numero de tabla de segundoNivel que es % d",nroTabla2doNivel);
 
-						if(list_size(tlb) < cantidadEntradasTlb){
-							agregarEntradaATLB(marco,numeroDePagina);
-							sleep(1);// Para que espere haya 1 seg de diferencia( a veces pasa que se agregan en el mismo seg y jode los algoritmos)
-						}else{
-							algoritmosDeReemplazoTLB(4,5);
-						}
+				enviarEntradaTabla2doNivel(conexion); //2do acceso a memoria
+				break;
+			case PAQUETE3:
+				listaQueContieneMarco = recibir_paquete(conexion);//Finaliza el 2do acceso recibiendo el marco
+				marco = (int) list_get(listaQueContieneMarco,0);
 
-						//ya tengo el marco -> tengo direccion fisica -> puedo leer/escribir/copiar -> la tengo que enviar a memoria(3er acceso)
-						//Pruebo un WRITE
-						enviarDireccionFisicaYValorAEscribir(conexion,marco,desplazamiento,valorAEscribir);
-						break;
-					case MENSAJE:
-						recibir_mensaje(conexion);
-						seAccedeAMemoria = 0;//salga del while
-						break;
-					default:
-						log_warning(logger,"Operacion desconocida. No quieras meter la pata");
-						seAccedeAMemoria = 0;//salga del while
-						break;
-					}
+				log_info(logger,"Me llego el marco que es %d",marco);
 
+				if(list_size(tlb) < cantidadEntradasTlb){
+					agregarEntradaATLB(marco,numeroDePagina);
+					sleep(1);// Para que espere haya 1 seg de diferencia( a veces pasa que se agregan en el mismo seg y jode los algoritmos)
+				}else{
+					algoritmosDeReemplazoTLB(numeroDePagina,marco);
+				}
 
-			}
-	}else{
-		//ya tengo el marco -> tengo direccion fisica -> puedo leer/escribir/copiar -> la tengo que enviar a memoria(3er acceso)
-		//Pruebo un WRITE
-		enviarDireccionFisicaYValorAEscribir(conexion,marco,desplazamiento,valorAEscribir);
-
-		if(cod_op == MENSAJE){// Recibe que se escribio correctamente el valor en memoria
-			recibir_mensaje(conexion);
+			//ya tengo el marco -> tengo direccion fisica -> puedo leer/escribir/copiar -> la tengo que enviar a memoria(3er acceso)
+			//Pruebo un WRITE (esto iria en ejecutar(cuando sea un write))
+				enviarDireccionFisicaYValorAEscribir(conexion,marco,desplazamiento,valorAEscribir);
+				break;
+			case MENSAJE:
+				recibir_mensaje(conexion);
+				seAccedeAMemoria = 0;//salga del while
+				break;
+			default:
+				log_warning(logger,"Operacion desconocida. No quieras meter la pata");
+				seAccedeAMemoria = 0;//salga del while
+				break;
 		}
 	}
 
+	return marco;
+}
 
-	return EXIT_SUCCESS;
+//------------------CICLO DE INSTRUCCION--------------------------
+instrucciones buscarInstruccionAEjecutar(t_pcb* unPCB){//FETCH
+	unPCB = malloc(sizeof(t_pcb));
+
+	instrucciones* unaInstruccion = list_get(unPCB->instrucciones,unPCB->programCounter);
+	unPCB->programCounter++;
+
+	return *unaInstruccion;
+}
+
+void decode(instrucciones* unaInstruccion){//capaz esta al pedo
+	if(! strcmp(unaInstruccion->identificador,"COPY")){
+		buscarDireccionFisica(unaInstruccion->parametros[1]);//la segunda dir logica
+		//ejecutar(unaInstruccion);
+	}else{
+		//ejecutar(unaInstruccion);
+	}
+}
+
+void ejecutar(instrucciones* unaInstruccion){
+	if(! strcmp(unaInstruccion->identificador,"WRITE")){
+		int marco = buscarDireccionFisica(unaInstruccion->parametros[0]);
+		enviarDireccionFisicaYValorAEscribir(conexion,marco,desplazamiento,unaInstruccion->parametros[1]);
+
+		int cod_op = recibir_operacion(conexion);
+		if(cod_op == MENSAJE){// Recibe que se escribio correctamente el valor en memoria
+			recibir_mensaje(conexion);
+		}
+
+	}else if(! strcmp(unaInstruccion->identificador,"READ")){
+		int marco = buscarDireccionFisica(unaInstruccion->parametros[0]);
+		//mandar dir fisica(hay una funcion pero tambien manda un valor(pensar en cambiarla))
+	}else if(! strcmp(unaInstruccion->identificador,"COPY")){
+
+	}else if(! strcmp(unaInstruccion->identificador,"NO_OP")){
+		sleep(retardoDeNOOP/1000);// miliseg
+	}else if(! strcmp(unaInstruccion->identificador,"I_O")){
+		//enviar pcb actualizado y unaInstruccion->parametros[0] que es el tiempo que se bloquea en miliseg
+	}else if(! strcmp(unaInstruccion->identificador,"EXIT")){
+		// enviar pcb actualizado finaliza el proceso
+	}
+}
+
+int buscarDireccionFisica(int direccionLogica){
+	calculosDireccionLogica(direccionLogica);
+	int marco = chequearMarcoEnTLB(numeroDePagina);
+
+	if (marco == -1){
+		marco = accederAMemoria(marco);
+	}
+
+	return marco;
+
 }
 
 void inicializarConfiguraciones(){
@@ -262,17 +310,6 @@ void enviarDireccionFisicaYValorAEscribir(int conexion, int marco, int desplazam
 	enviar_paquete(paquete,conexion);
 	eliminar_paquete(paquete);
 }
-
-//------------------CICLO DE INSTRUCCION--------------------------
-instrucciones* buscarInstruccionAEjecutar(t_pcb* unPCB){//FETCH
-	unPCB = malloc(sizeof(t_pcb));
-
-	instrucciones* unaInstruccion = list_get(unPCB->instrucciones,unPCB->programCounter);
-	unPCB->programCounter++;
-
-	return unaInstruccion;
-}
-
 
 
 void terminar_programa(int conexion, t_log* logger, t_config* config){

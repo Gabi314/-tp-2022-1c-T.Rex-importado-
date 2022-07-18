@@ -45,7 +45,7 @@ int conexionConCpu(void){
 
 	int server_fd = iniciar_servidor();
 	log_info(logger, "Memoria lista para recibir a Cpu o Kernel");
-	int cliente_fd = esperar_cliente(server_fd);
+	clienteCpu = esperar_cliente(server_fd);
 
 	t_list* listaQueContieneNroTabla1erNivelYentrada = list_create();
 	t_list* listaQueContieneEntradaDeTabla2doNivel = list_create();
@@ -53,34 +53,34 @@ int conexionConCpu(void){
 
 	int a = 1;
 	while (a == 1) {
-		int cod_op = recibir_operacion(cliente_fd);
+		int cod_op = recibir_operacion(clienteCpu);
 
 		int nroTabla2doNivel;
 		switch (cod_op) {
 			case MENSAJE:
-				recibir_mensaje(cliente_fd);//recibe el pedido de tam_pag y cant_entradas
-				enviarTamanioDePaginaYCantidadDeEntradas(cliente_fd);
+				recibir_mensaje(clienteCpu);//recibe el pedido de tam_pag y cant_entradas
+				enviarTamanioDePaginaYCantidadDeEntradas(clienteCpu);
 				break;
 			case PAQUETE:
-				listaQueContieneNroTabla1erNivelYentrada = recibir_paquete_int(cliente_fd); // lista con valores de nro y entrada de tabla
+				listaQueContieneNroTabla1erNivelYentrada = recibir_paquete_int(clienteCpu); // lista con valores de nro y entrada de tabla
 
 				nroTabla2doNivel = leerYRetornarNroTabla2doNivel(listaQueContieneNroTabla1erNivelYentrada);
 
-				enviarNroTabla2doNivel(cliente_fd,nroTabla2doNivel);
+				enviarNroTabla2doNivel(clienteCpu,nroTabla2doNivel);
 				break;
 
 			case PAQUETE2://poner cases mas expresivos
-				listaQueContieneEntradaDeTabla2doNivel = recibir_paquete_int(cliente_fd);
+				listaQueContieneEntradaDeTabla2doNivel = recibir_paquete_int(clienteCpu);
 				int entradaTabla2doNivel = (int) list_get(listaQueContieneEntradaDeTabla2doNivel,0);
 				log_info(logger,"Me llego  la entrada de segundo nivel %d",entradaTabla2doNivel);
 
 				int marco =  marcoSegunIndice(nroTabla2doNivel,entradaTabla2doNivel);
 
-				enviarMarco(cliente_fd,marco);
+				enviarMarco(clienteCpu,marco);
 
 				break;
 			case PAQUETE3:
-				listaQueContieneDireccionFiscaYValorAEscribir = recibir_paquete_int(cliente_fd);
+				listaQueContieneDireccionFiscaYValorAEscribir = recibir_paquete_int(clienteCpu);
 
 				marco = (int) list_get(listaQueContieneDireccionFiscaYValorAEscribir,0); // por ahora piso la variable de arriba despues ver como manejar el tema de marco que envio y marco que recibo
 				int desplazamiento = (int) list_get(listaQueContieneDireccionFiscaYValorAEscribir,1);
@@ -89,7 +89,7 @@ int conexionConCpu(void){
 				log_info(logger,"Me llego el marco %d con desplazamiento %d y valor a escribir %u",marco,desplazamiento,valorAEscribir);
 
 				int posicionDeDatoAEscribir = marco * tamanioDePagina + sizeof(uint32_t)*desplazamiento;
-				escribirElPedido((uint32_t) &valorAEscribir,posicionDeDatoAEscribir,cliente_fd); //casteo para que no joda el warning
+				escribirElPedido((uint32_t) &valorAEscribir,posicionDeDatoAEscribir); //casteo para que no joda el warning
 
 				uint32_t numeroALeer = leerElPedido(posicionDeDatoAEscribir);
 				log_info(logger, "Numero leido: %u",numeroALeer);
@@ -206,10 +206,10 @@ void crearSwap(int pid){
 
 }
 
-void escribirElPedido(uint32_t datoAEscribir,int posicionDeDatoAEscribir,int conexion){
+void escribirElPedido(uint32_t datoAEscribir,int posicionDeDatoAEscribir){
 	memcpy(&memoria+posicionDeDatoAEscribir,(uint32_t*) datoAEscribir, sizeof(uint32_t)); //casteo para que no joda el warning
 
-	enviar_mensaje("Se escribio el valor correctamente",conexion);
+	enviar_mensaje("Se escribio el valor correctamente",clienteCpu);
 }
 
 uint32_t leerElPedido(int posicion){
@@ -219,8 +219,6 @@ uint32_t leerElPedido(int posicion){
 	if(datoALeer != 0){
 		return datoALeer;
 	}
-
-
 }
 
 void copiar(int posicionDondeSeCopia,int posicionACopiar){

@@ -142,9 +142,12 @@ void reemplazarPagina(int,int,int);
 
 void calculosDireccionLogica(int);
 void leerTamanioDePaginaYCantidadDeEntradas(t_list*);
+int buscarDireccionFisica(int);
+int accederAMemoria(int);
 
-
-//Funciones propias de Cpu como cliente
+//Ciclo de instruccion
+instrucciones buscarInstruccionAEjecutar(t_pcb*);
+void decode(instrucciones*);
 
 
 #endif /*FUNCIONES_CPU_H_*/
