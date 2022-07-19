@@ -315,15 +315,8 @@ void liberar_conexion(int socket_cliente)
 	close(socket_cliente);
 }
 
-/*
-t_pcb* crearProceso(int id, int socket, double estimate){
-    t_pcb* proceso = malloc(sizeof(t_pcb));
-    proceso->idProceso = id;
-    proceso->estado = NEW;
-    proceso->estimacion_rafaga = estimate;
-    return proceso;
-}
-*/
+
+
 void destruirProceso(t_pcb* proceso){
     close(proceso->socket_cliente);
     free(proceso);
@@ -354,7 +347,7 @@ t_algoritmo_planificacion obtener_algoritmo(){
 	        log_info(logger, "El algoritmo de planificacion elegido es SJF.");
 	    }
 	    return switcher;
-}
+}// No se usa al final
 
 
 
@@ -695,7 +688,7 @@ void newAReady(){
 
 			//carpincho->rafagaAnterior = 0;
 			proceso->estimacion_anterior = estimacionInicial;
-			proceso->estimacion_rafaga = estimacionInicial;	//"estimacio_inicial" va a ser una variable que vamos a obtener del cfg
+			proceso->estimacion_rafaga = estimacionInicial;	//"estimacionInicial" va a ser una variable que vamos a obtener del cfg
 
 			//sem_wait(&multiprogramacion);
 			agregarAReady(proceso);
@@ -739,20 +732,18 @@ void blockedASuspension(){
 
 		//sem_wait(&analizarSuspension);
 
-		listaProcesosASuspender = list_create();
 
-		listaProcesosASuspender = list_filter(colaBlocked,supera_tiempo_maximo_bloqueado);
+		t_pcb* procesoASuspender = list_find(colaBlocked,supera_tiempo_maximo_bloqueado);
 
-		if(!list_is_empty(listaProcesosASuspender)){
+		if(procesoASuspender != NULL){
 
 			//sem_wait(&contadorProcesosEnMemoria);
 
-			t_pcb* proceso = list_get(listaProcesosASuspender, list_size(listaProcesosASuspender) - 1);
-			sacarDeBlocked(proceso);
+			sacarDeBlocked(procesoASuspender);
 
-			agregarASuspendedBlocked(proceso);
+			agregarASuspendedBlocked(procesoASuspender);
 
-			usleep((tiempoMaximoBloqueado+(obtenerTiempoDeBloqueo(proceso) - tiempoMaximoBloqueado))/1000); //divido por 1000 para pasar a milisegundos
+			usleep((tiempoMaximoBloqueado+(obtenerTiempoDeBloqueo(procesoASuspender) - tiempoMaximoBloqueado))/1000); //divido por 1000 para pasar a milisegundos
 
 			//sem_post(&multiprogramacion);
 		}
