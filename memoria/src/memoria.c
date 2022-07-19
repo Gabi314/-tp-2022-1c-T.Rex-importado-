@@ -30,11 +30,13 @@ int main(void) {
 	inicializarEstructuras();
 	inicializarMarcos();
 	conexionConCpu();
+	//escribirElPedido(12,0,0);
+	//copiar(3,2,0,0);
 
-	uint32_t datoAEscribir;
-	datoAEscribir = leerElPedido(0);
-
-	log_info(logger,"leer: %u",datoAEscribir);
+//	uint32_t datoALeer;
+//	datoALeer = leerElPedido(3,2);
+//
+//	log_info(logger,"leer: %u",datoALeer);
 
 	//escribirEnSwap(0,0,0,0);
 
@@ -49,10 +51,12 @@ int conexionConCpu(void){
 
 	t_list* listaQueContieneNroTabla1erNivelYentrada = list_create();
 	t_list* listaQueContieneEntradaDeTabla2doNivel = list_create();
-	t_list* listaQueContieneDireccionFiscaYValorAEscribir = list_create();
+	t_list* listaQueContieneDireccionFisca = list_create();
+	t_list* listaQueContieneValorAEscribir = list_create();
+	t_list* listaQueContieneDirFisica1YDirFisica2 = list_create();
 
-	int a = 1;
-	while (a == 1) {
+//	int a = 1;
+	while (1) {
 		int cod_op = recibir_operacion(clienteCpu);
 
 		int nroTabla2doNivel;
@@ -79,21 +83,42 @@ int conexionConCpu(void){
 				enviarMarco(clienteCpu,marco);
 
 				break;
-			case PAQUETE3:
-				listaQueContieneDireccionFiscaYValorAEscribir = recibir_paquete_int(clienteCpu);
+			case PAQUETE3://caso: me envia dir fisica y leo el valor de esa direccion
+				listaQueContieneDireccionFisca = recibir_paquete_int(clienteCpu);
 
-				marco = (int) list_get(listaQueContieneDireccionFiscaYValorAEscribir,0); // por ahora piso la variable de arriba despues ver como manejar el tema de marco que envio y marco que recibo
-				int desplazamiento = (int) list_get(listaQueContieneDireccionFiscaYValorAEscribir,1);
-				uint32_t valorAEscribir = (uint32_t) list_get(listaQueContieneDireccionFiscaYValorAEscribir,2);
+				marco = (int) list_get(listaQueContieneDireccionFisca,0); // por ahora piso la variable de arriba despues ver como manejar el tema de marco que envio y marco que recibo
+				int desplazamiento = (int) list_get(listaQueContieneDireccionFisca,1);
+				int leer = (int) list_get(listaQueContieneDireccionFisca,2);
 
-				log_info(logger,"Me llego el marco %d con desplazamiento %d y valor a escribir %u",marco,desplazamiento,valorAEscribir);
+				log_info(logger,"Me llego el marco %d con desplazamiento %d",marco,desplazamiento);
 
-				int posicionDeDatoAEscribir = marco * tamanioDePagina + sizeof(uint32_t)*desplazamiento;
-				escribirElPedido((uint32_t) &valorAEscribir,posicionDeDatoAEscribir); //casteo para que no joda el warning
+				if(leer == 1){
+					uint32_t numeroALeer = leerElPedido(marco,desplazamiento);
+					log_info(logger, "Valor leido: %u",numeroALeer);
+				}
 
-				uint32_t numeroALeer = leerElPedido(posicionDeDatoAEscribir);
-				log_info(logger, "Numero leido: %u",numeroALeer);
-				a = 0;
+				break;
+			case PAQUETE4://caso: me envia dir fisica y escribo el valor en esa direccion
+				listaQueContieneValorAEscribir = recibir_paquete_int(clienteCpu);
+				uint32_t valorAEscribir = (uint32_t) list_get(listaQueContieneValorAEscribir,0);
+
+				escribirElPedido((uint32_t) valorAEscribir,marco,desplazamiento); //casteo para que no joda el warning
+				log_info(logger,"Me llego el valor a escribir: %u",valorAEscribir);
+
+
+				break;
+			case PAQUETE5://caso copiar
+				listaQueContieneDirFisica1YDirFisica2 = recibir_paquete_int(clienteCpu);
+
+				int marcoDeDestino = list_get(listaQueContieneDirFisica1YDirFisica2,0);
+				int desplazamientoDestino = list_get(listaQueContieneDirFisica1YDirFisica2,1);
+				int marcoDeOrigen = list_get(listaQueContieneDirFisica1YDirFisica2,2);
+				int desplazamientoOrigen = list_get(listaQueContieneDirFisica1YDirFisica2,3);
+
+				copiar(marcoDeDestino,desplazamientoDestino,marcoDeOrigen,desplazamientoOrigen);
+				uint32_t datoALeer = leerElPedido(marcoDeDestino,desplazamientoDestino);
+
+				log_info(logger,"Se copio el valor %u en la dir fisica:(marco %d offset %d)",datoALeer,marcoDeDestino,desplazamientoDestino);
 				break;
 			case -1:
 				log_error(logger, "Se desconecto el cliente. Terminando conexion");
@@ -206,14 +231,16 @@ void crearSwap(int pid){
 
 }
 
-void escribirElPedido(uint32_t datoAEscribir,int posicionDeDatoAEscribir){
-	memcpy(&memoria+posicionDeDatoAEscribir,(uint32_t*) datoAEscribir, sizeof(uint32_t)); //casteo para que no joda el warning
+void escribirElPedido(uint32_t datoAEscribir,int marco,int desplazamiento){
+	int posicionDeDatoAEscribir = marco * tamanioDePagina + sizeof(uint32_t)*desplazamiento;// se repite siempre
+	memcpy(&memoria+posicionDeDatoAEscribir, &datoAEscribir, sizeof(uint32_t)); //casteo para que no joda el warning
 
 	enviar_mensaje("Se escribio el valor correctamente",clienteCpu);
 }
 
-uint32_t leerElPedido(int posicion){
+uint32_t leerElPedido(int marco,int desplazamiento){
 	uint32_t datoALeer;
+	int posicion = marco * tamanioDePagina + sizeof(uint32_t)*desplazamiento;
 	memcpy(&datoALeer,&memoria+posicion,sizeof(uint32_t));
 
 	if(datoALeer != 0){
@@ -221,8 +248,11 @@ uint32_t leerElPedido(int posicion){
 	}
 }
 
-void copiar(int posicionDondeSeCopia,int posicionACopiar){
-	uint32_t* datoACopiar = malloc(sizeof(uint32_t));
+void copiar(int marcoDeDestino,int desplazamientoDestino,int marcoDeOrigen,int desplazamientoOrigen){
+	uint32_t datoACopiar;
+	int posicionACopiar = marcoDeDestino * tamanioDePagina + sizeof(uint32_t)*desplazamientoDestino;
+	int posicionDondeSeCopia = marcoDeOrigen * tamanioDePagina + sizeof(uint32_t)*desplazamientoOrigen;
+
 	memcpy(&datoACopiar,&memoria+posicionDondeSeCopia,sizeof(uint32_t));
 	memcpy(&memoria+posicionACopiar,&datoACopiar,sizeof(uint32_t));
 }
@@ -270,11 +300,9 @@ void escribirEnSwap(int numeroDeMarco,int pid,int desplazamiento,int numeroDePag
 	char* nombreDelArchivo = nombreArchivoProceso(pid);
 	FILE* archivoSwap = fopen(nombreDelArchivo, "a+");
 
-	int posicionDeValorEnMemoria = numeroDeMarco*tamanioDePagina + sizeof(uint32_t)*desplazamiento;
+	uint32_t datoAEscribir = leerElPedido(numeroDeMarco,desplazamiento);
 
-	uint32_t* datoAEscribir = leerElPedido(posicionDeValorEnMemoria);
-
-	log_info(logger,"leer: %u",*datoAEscribir);
+	log_info(logger,"leer: %u",datoAEscribir);
 
 //	for(int i=0; i<(tamanioDePagina/sizeof(uint32_t));i++){
 //		int posicionDeValorEnMemoria = numeroDeMarco*tamanioDePagina + i*sizeof(uint32_t);
@@ -556,7 +584,7 @@ int numeroTabla2doNivelSegunIndice(int numeroTabla1erNivel,int indiceDeEntrada){
 		flagDeEntradasPorTabla = 0;
 
 		free(unaTablaDe1erNivel);
-		return unaTablaDe2doNivel->numeroTabla; //El indice de entrada es igual al numero de tabla de 2do nivel
+		return unaTablaDe2doNivel->numeroTabla;
 	}else{
 		return -1;//Si da -1 printeo un error
 	}

@@ -123,32 +123,17 @@ void crear_buffer(t_paquete* paquete)
 }
 
 
-t_paquete* crear_paquete_tamanioDePagYCantEntradas(void)
+t_paquete* crear_paquete(int cod_op) //paquete: paginas y entradas, paquete2 nroTabla2doNivel, paquete3 marco
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
-	paquete->codigo_operacion = PAQUETE;
+	paquete->codigo_operacion = cod_op;
 	crear_buffer(paquete);
 	return paquete;
 }
 
-t_paquete* crear_paquete_nroTabla2doNivel(void)
-{
-	t_paquete* paquete = malloc(sizeof(t_paquete));
-	paquete->codigo_operacion = PAQUETE2;
-	crear_buffer(paquete);
-	return paquete;
-}
-
-t_paquete* crear_paquete_marco(void)
-{
-	t_paquete* paquete = malloc(sizeof(t_paquete));
-	paquete->codigo_operacion = PAQUETE3;
-	crear_buffer(paquete);
-	return paquete;
-}
 
 void enviarTamanioDePaginaYCantidadDeEntradas(int socket_cliente){
-	t_paquete* paquete = crear_paquete_tamanioDePagYCantEntradas();
+	t_paquete* paquete = crear_paquete(PAQUETE);
 	log_info(logger,"Envio el tamanio de pag y cant entradas");
 
 	agregar_a_paquete(paquete,&tamanioDePagina,sizeof(tamanioDePagina));
@@ -160,7 +145,7 @@ void enviarTamanioDePaginaYCantidadDeEntradas(int socket_cliente){
 }
 
 void enviarNroTabla2doNivel(int socket_cliente,int nroTabla2doNivel){
-	t_paquete* paquete = crear_paquete_nroTabla2doNivel();
+	t_paquete* paquete = crear_paquete(PAQUETE2);
 	log_info(logger,"Envio el numero de tabla de 2do nivel");
 
 	agregar_a_paquete(paquete,&nroTabla2doNivel,sizeof(nroTabla2doNivel));
@@ -171,7 +156,7 @@ void enviarNroTabla2doNivel(int socket_cliente,int nroTabla2doNivel){
 }
 
 void enviarMarco(int socket_cliente, int marco){
-	t_paquete* paquete = crear_paquete_marco();
+	t_paquete* paquete = crear_paquete(PAQUETE3);
 	log_info(logger,"Envio el marco correspondiente el cual es %d",marco);
 
 	agregar_a_paquete(paquete,&marco,sizeof(marco));

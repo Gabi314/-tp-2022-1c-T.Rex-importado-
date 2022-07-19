@@ -23,7 +23,9 @@ typedef enum
 	MENSAJE,
 	PAQUETE,
 	PAQUETE2,
-	PAQUETE3
+	PAQUETE3,
+	PAQUETE4,
+	PAQUETE5
 }op_code;
 
 t_log* logger;
@@ -47,7 +49,7 @@ typedef struct
 {
 	char* identificador;
 	int parametros[2];
-} instrucciones;
+} instruccion;
 
 
 void* recibir_buffer(int*, int);
@@ -108,9 +110,8 @@ typedef struct
 } t_paquete;
 
 int crear_conexion(char* ip, int puertoCpuDispatch);
-t_paquete* crear_paqueteEntradaTabla1erNivel(void);
-t_paquete* crear_paqueteEntradaTabla2doNivel(void);
-t_paquete* crear_paqueteDireccionFisica(void);
+t_paquete* crear_paquete(int cod_op);
+
 void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio);
 //void agregar_nroTabla1erNivelYEntrada_a_paquete(t_paquete* paquete, void* valor, int tamanio);
 void enviar_paquete(t_paquete* paquete, int socket_cliente);
@@ -123,9 +124,11 @@ void eliminar_paquete(t_paquete* paquete);
 t_log* iniciar_logger(void);
 t_config* iniciar_config(void);
 
-void enviarEntradaTabla1erNivel(int);
-void enviarEntradaTabla2doNivel(int);
-void enviarDireccionFisicaYValorAEscribir(int,int,int,uint32_t);
+void enviarEntradaTabla1erNivel();
+void enviarEntradaTabla2doNivel();
+void enviarDireccionFisica(int,int,int);
+void enviarValorAEscribir(uint32_t);
+void enviarDireccionesFisicasParaCopia(int,int,int,int);
 
 void terminar_programa(int, t_log*, t_config*);
 
@@ -146,8 +149,9 @@ int buscarDireccionFisica(int);
 int accederAMemoria(int);
 
 //Ciclo de instruccion
-instrucciones buscarInstruccionAEjecutar(t_pcb*);
-void decode(instrucciones*);
+instruccion buscarInstruccionAEjecutar(t_pcb*);
+void decode(instruccion*);
+void ejecutar(instruccion*);
 
 
 #endif /*FUNCIONES_CPU_H_*/

@@ -22,7 +22,9 @@ typedef enum
 	MENSAJE,
 	PAQUETE,
 	PAQUETE2,
-	PAQUETE3
+	PAQUETE3,
+	PAQUETE4,
+	PAQUETE5
 }op_code;
 
 typedef struct
@@ -60,8 +62,7 @@ void enviarNroTabla2doNivel(int,int);
 void enviarMarco(int, int);
 void enviar_mensaje(char*,int);
 
-t_paquete* crear_paquete_tamanioDePagYCantEntradas(void);
-t_paquete* crear_paquete_nroTabla2doNivel(void);
+t_paquete* crear_paquete(int);
 
 void agregar_a_paquete(t_paquete* paquete, void* valor,int tamanio);
 void enviar_paquete(t_paquete* paquete, int socket_cliente);
@@ -126,9 +127,9 @@ marco* buscarMarco(int);
 
 void crearSwap(int);
 
-void escribirElPedido(uint32_t,int);
-uint32_t leerElPedido(int);
-void copiar(int,int);
+void escribirElPedido(uint32_t,int,int);
+uint32_t leerElPedido(int,int);
+void copiar(int,int,int,int);
 
 void cargarEntradasDeTabla2doNivel(t_segundoNivel*);// con esta funcion que antes se llamaba cargar paginas
 //void cargarPaginas(t_segundoNivel*);
