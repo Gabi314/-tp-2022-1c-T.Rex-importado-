@@ -748,11 +748,15 @@ void blockedASuspension(){
 
 			//sem_wait(&contadorProcesosEnMemoria);
 
+			usleep(tiempoMaximoBloqueado*1000);
+
 			sacarDeBlocked(procesoASuspender);
 
 			agregarASuspendedBlocked(procesoASuspender);
 
-			usleep((tiempoMaximoBloqueado+(obtenerTiempoDeBloqueo(procesoASuspender) - tiempoMaximoBloqueado))/1000); //divido por 1000 para pasar a milisegundos
+			//Avisar a memoria
+
+			usleep((obtenerTiempoDeBloqueo(procesoASuspender) - tiempoMaximoBloqueado)*1000); //multiplico por 1000 para pasar de milisegundos a microsegundos
 
 			//sem_post(&multiprogramacion);
 		}
