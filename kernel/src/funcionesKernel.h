@@ -57,6 +57,8 @@ t_queue* colaBlocked;
 t_queue* colaSuspendedBlocked;
 t_queue* colaExit;
 
+t_list* listaProcesosASuspender;
+
 t_log* logger;
 
 typedef struct
@@ -201,6 +203,9 @@ void agregarASuspendedBlocked(t_pcb* proceso);
 void sacarDeSuspendedBlocked(t_pcb* proceso);
 void agregarAReadySuspended(t_pcb* proceso);
 t_pcb* sacarDeReadySuspended();
+
+
+bool supera_tiempo_maximo_bloqueado(t_pcb* proceso);
 
 //------------------HILOS--------------------
 //MULTIHILOS DE EJECUCION PARA ATENDER N CONSOLAS: esperan a recibir una consola y sus

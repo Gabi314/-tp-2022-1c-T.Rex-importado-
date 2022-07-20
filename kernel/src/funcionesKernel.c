@@ -315,15 +315,8 @@ void liberar_conexion(int socket_cliente)
 	close(socket_cliente);
 }
 
-/*
-t_pcb* crearProceso(int id, int socket, double estimate){
-    t_pcb* proceso = malloc(sizeof(t_pcb));
-    proceso->idProceso = id;
-    proceso->estado = NEW;
-    proceso->estimacion_rafaga = estimate;
-    return proceso;
-}
-*/
+
+
 void destruirProceso(t_pcb* proceso){
     close(proceso->socket_cliente);
     free(proceso);
@@ -354,7 +347,7 @@ t_algoritmo_planificacion obtener_algoritmo(){
 	        log_info(logger, "El algoritmo de planificacion elegido es SJF.");
 	    }
 	    return switcher;
-}
+}// No se usa al final
 
 
 
@@ -673,7 +666,7 @@ void ejecutar(t_pcb* proceso){
 	time_t a = time(NULL);
 	proceso->horaDeIngresoAExe = ((float) a)*1000;
 
-	//send(proceso)
+	send(socketCpuDispatch, proceso, proceso->tamanioProceso, 0);
 
 	//Aca mando el proceso a cpu y guardo el momento en el que arranca a ejecutar para el calculo de la estimacion
 }
@@ -695,7 +688,7 @@ void newAReady(){
 
 			//carpincho->rafagaAnterior = 0;
 			proceso->estimacion_anterior = estimacionInicial;
-			proceso->estimacion_rafaga = estimacionInicial;	//"estimacio_inicial" va a ser una variable que vamos a obtener del cfg
+			proceso->estimacion_rafaga = estimacionInicial;	//"estimacionInicial" va a ser una variable que vamos a obtener del cfg
 
 			//sem_wait(&multiprogramacion);
 			agregarAReady(proceso);
@@ -708,22 +701,19 @@ void readyAExe(){
 
 	while(1){
 
-		//sem_wait(&multiprocesamiento);
-
 		t_pcb* procesoAEjecutar = obtenerSiguienteDeReady();
 
 
 		if(procesoAEjecutar != NULL) {
 
 			//pthread_mutex_lock(&mutexExe);
-			ejecutar(procesoAEjecutar);// monoprocesador -> deberiamos tener algo como ejecutar(proceso);
-			//tenemos que mandar el proceso a cpu y ver cuanto tarda su rafaga
+			ejecutar(procesoAEjecutar);
 			//pthread_mutex_unlock(&mutexExe);
 
 			if(algoritmoPlanificacion == SRT){
-				log_info(logger, "[EXEC] Ingresa el carpincho de PID: %d con una rafaga de ejecucion estimada de %f milisegundos.", procesoAEjecutar->idProceso, procesoAEjecutar->estimacion_rafaga);
+				log_info(logger, "[EXEC] Ingresa el proceso de PID: %d con una rafaga de ejecucion estimada de %f milisegundos.", procesoAEjecutar->idProceso, procesoAEjecutar->estimacion_rafaga);
 			}else{
-				log_info(logger, "[EXEC] Ingresa el carpincho de PID: %d", procesoAEjecutar->idProceso);
+				log_info(logger, "[EXEC] Ingresa el proceso de PID: %d", procesoAEjecutar->idProceso);
 			} //ver bien para el caso FIFO
 
 
@@ -731,7 +721,7 @@ void readyAExe(){
 			//sem_wait(&suspensionFinalizada);
 
 		}else{
-			//sem_post(&multiprocesamiento);
+			log_info(logger, "[EXEC] No se logró encontrar un proceso para ejecutar");
 		}
 	}
 }
@@ -742,14 +732,18 @@ void blockedASuspension(){
 
 		//sem_wait(&analizarSuspension);
 
-		if(condiciones_de_suspension()){
+
+		t_pcb* procesoASuspender = list_find(colaBlocked,supera_tiempo_maximo_bloqueado);
+
+		if(procesoASuspender != NULL){
 
 			//sem_wait(&contadorProcesosEnMemoria);
 
-			t_pcb* proceso = list_get(colaBlocked, list_size(colaBlocked) - 1);
-			sacarDeBlocked(proceso);
+			sacarDeBlocked(procesoASuspender);
 
-			agregarASuspendedBlocked(proceso);
+			agregarASuspendedBlocked(procesoASuspender);
+
+			usleep((tiempoMaximoBloqueado+(obtenerTiempoDeBloqueo(procesoASuspender) - tiempoMaximoBloqueado))/1000); //divido por 1000 para pasar a milisegundos
 
 			//sem_post(&multiprogramacion);
 		}
@@ -782,14 +776,22 @@ void suspensionAReady(){
 }
 
 
-int condiciones_de_suspension(){
 
-	//para que un proceso entre en suspensión se debe cumplir que el mismo esté bloqueado
-	//por un tiempo mayor al límite definido por archivo de configuración
 
-	return 1;
+int obtenerTiempoDeBloqueo(t_pcb* proceso){
+	instrucciones* primeraInstruccion;
+	primeraInstruccion = list_get(proceso->instrucciones,0);
+	return primeraInstruccion->parametros[0];
+
 }
 
+bool supera_tiempo_maximo_bloqueado(t_pcb* proceso){
+	if (obtenerTiempoDeBloqueo(proceso) > tiempoMaximoBloqueado)
+		return true;
+	else
+		return false;
+
+}
 
 
 
