@@ -513,20 +513,29 @@ void agregarAReady(t_pcb* proceso){
 			case FIFO:
 				list_add(colaReady, proceso);
 				log_info(logger, "[READY] Entra el proceso de PID: %d a la cola.", proceso->idProceso);
-				gradoMultiprogramacionActual ++;
+				gradoMultiprogramacionActual ++; //vean si conviene más esto o el semáforo
+				sem_post(&gradoDeMultiprogramacion); //yo en principio me decanto por el semáforo
 				break;
 
 			//CASO SJF con desalojo
 			case SRT:
 				//mandar interrupcion a cpu a traves de la conexxion interrupt para indicar que debe desalojar el proceso que esta ejecutando
+				//	if(hay un proceso en ejecucion){ encolar el proceso} // puede que esto sirva tambien
 				list_add(colaReady, proceso);
 				log_info(logger, "[READY] Entra el proceso de PID: %d a la cola.", proceso->idProceso);
 				gradoMultiprogramacionActual ++;
+				sem_post(&gradoDeMultiprogramacion);
 				break;
 
+			default:
+				break;
+		}
+
+
+
 				//Aca hay que mandar un mensaje a memoria para que inicialice sus estructuras
-			}
-	}else{
+	}
+	else{
 		log_info(logger, "No se pueden agregar más procesos a READY  se alcanzó el grado de multiprogramácion maximo");
 	}
 	//pthread_mutex_unlock(&mutexReady);
@@ -854,7 +863,7 @@ void atender_consola(int nuevo_cliente) {
 
 			agregarANew(PCB);
 
-	//		sem_post(pcbEnNew);
+			sem_post(&pcbEnNew);
 		}
 
 	/*
@@ -866,18 +875,22 @@ void asignar_memoria() {
 
 		while(1){
 
-	//	sem_wait(pcbEnNew);
+		sem_wait(&pcbEnNew);
 
+		pthread_mutex_lock(&asignarMemoria);
 		t_pcb* proceso = sacarDeNew();
+		sem_wait(&gradoDeMultiprogramacion);
 		agregarAReady(proceso);
-		enviarMensajeAMemoria("Inicializar estructuras"); // falta desarrollar
-		enviarProcesoAMemoria(proceso); // falta desarrollar
-		int NroTP = obtenerValorDeTP();  // falta desarrollar
+		pthread_mutex_unlock(&asignarMemoria);
+		//enviarMensajeAMemoria("Inicializar estructuras"); // falta desarrollar
+		//enviarProcesoAMemoria(proceso); // falta desarrollar // la seccion critica llegaria hasta aca pero en las pruebas no // solo se manda el PID
+		//int NroTP = obtenerValorDeTP();  // falta desarrollar
 
-		if(algoritmoPlanificacion == SRT)
-			enviarInterrupcionACpu(); // falta desarrollar
+		//if(algoritmoPlanificacion == SRT)
+			//enviarInterrupcionACpu(); // falta desarrollar
 
-//		sem_post(pcbEnReady);
+
+		sem_post(&pcbEnReady);
 		}
 
 
@@ -1133,14 +1146,14 @@ void atender_consola_prueba(int nuevo_cliente) {
 						break;
 
 					default:
-					printf("Se acepto una consola invalida!");
+					log_info(logger,"Se acepto una consola invalida!");
 					break;
 					}
 
 
-				log_info(logger,"inicializamos el pcb");
+				log_info(logger,"Tenemos lista de instrucciones!");
 
-				PCB->idProceso = rand () % 30001 + 20000; // esto por ahora es un numero random por cada consola conectada
+				PCB->idProceso = nuevo_cliente;
 				PCB->tamanioProceso = rand() % 985 + 16; // esto igual hay que calcularlo despues. Aunque no se cómo
 				PCB->instrucciones = listaDeInstrucciones;
 				PCB->program_counter = 1;
@@ -1152,14 +1165,17 @@ void atender_consola_prueba(int nuevo_cliente) {
 				PCB->horaDeIngresoAReady = 0;
 				PCB->tiempoEspera = 0;
 				PCB->estado = NEW;
-				PCB->socket_cliente = nuevo_cliente; // acá guardamos el socket
+				PCB->socket_cliente = nuevo_cliente;
 				PCB->socketMemoria = 0;
 				PCB->tiempoEjecucionRealInicial = 0 ;
 				PCB->tiempoEjecucionAcumulado = 0;
 
-				log_info(logger,"agregamos el pcb a new");
+				log_info(logger,"inicializamos el pcb");
+
 
 				agregarANew(PCB);
+
+				log_info(logger,"agregamos el pcb a new");
 
 				sem_post(&pcbEnNew);
 			}

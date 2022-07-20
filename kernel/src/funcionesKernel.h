@@ -18,6 +18,7 @@
 #include<time.h>
 #include<pthread.h>
 
+
 #define IP_KERNEL "127.0.0.1"
 #define PUERTO_KERNEL "8000"
 
@@ -259,6 +260,9 @@ void desbloquear_suspendido();
 
 sem_t pcbEnNew;
 sem_t pcbEnReady;
+sem_t gradoDeMultiprogramacion;
+
+pthread_mutex_t asignarMemoria;
 
 
 

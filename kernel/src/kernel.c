@@ -104,6 +104,10 @@ void generar_conexiones(){
 
 void inicializar_semaforos(){
 	sem_init(&pcbEnNew,0,0);
+	sem_init(&pcbEnReady,0,0);
+	sem_init(&gradoDeMultiprogramacion,0,gradoMultiprogramacionTotal);
+	pthread_mutex_init(&asignarMemoria,NULL);
+
 
 }
 
