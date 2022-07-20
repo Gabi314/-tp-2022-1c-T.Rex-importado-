@@ -206,7 +206,7 @@ t_pcb* sacarDeReadySuspended();
 
 
 bool supera_tiempo_maximo_bloqueado(t_pcb* proceso);
-
+int obtenerTiempoDeBloqueo(t_pcb* proceso);
 //------------------HILOS--------------------
 //MULTIHILOS DE EJECUCION PARA ATENDER N CONSOLAS: esperan a recibir una consola y sus
  //          instrucciones para generar el pcb y asignar el proceso a NEW
