@@ -1,9 +1,6 @@
 #include "funcionesCpu.h"
 
-int direccionLogica = 0; //harcodeada: esto en realidad viene del pcb -> instruccion -> (read,write,copy) -> parametro[0]
-uint32_t valorAEscribir = 42; //harcodeada: esto en realidad viene del pcb -> instruccion ->  identificador = WRITE -> parametro[1]
 int nroTabla1erNivel = 0; //harcodeada: esto en realidad viene del pcb -> tabla_de_paginas
-
 
 int main(void) {
 	//conexionConKernel();
@@ -27,14 +24,14 @@ int main(void) {
 
 	instruccion* instruccion3 = malloc(sizeof(instruccion));
 	instruccion3->identificador = "COPY";
-	instruccion3->parametros[0] = 128;
+	instruccion3->parametros[0] = 132;
 	instruccion3->parametros[1] = 0;
 
 	ejecutar(instruccion3);
 
 	instruccion* instruccion4 = malloc(sizeof(instruccion));
 	instruccion4->identificador = "READ";
-	instruccion4->parametros[0] = 128;
+	instruccion4->parametros[0] = 132;
 
 	ejecutar(instruccion4);
 
@@ -132,7 +129,7 @@ void ejecutar(instruccion* unaInstruccion){
 	if(! strcmp(unaInstruccion->identificador,"WRITE")){
 		log_info(logger,"----------------EXECUTE WRITE----------------");
 
-		int marco = buscarDireccionFisica(unaInstruccion->parametros[0]);
+		int marco = buscarDireccionFisica(unaInstruccion->parametros[0]);// se podria enviar la pagina para saber en memoria cual se modifica
 		enviarDireccionFisica(marco,desplazamiento,0);//con 0 envia la dir fisica para escribir
 		enviarValorAEscribir(unaInstruccion->parametros[1]);
 
@@ -153,7 +150,7 @@ void ejecutar(instruccion* unaInstruccion){
 
 	}else if(! strcmp(unaInstruccion->identificador,"COPY")){
 		log_info(logger,"----------------EXECUTE COPY----------------");
-		int marcoDeOrigen = buscarDireccionFisica(unaInstruccion->parametros[1]);//DEBUGGEAR dice que no esta en tlb
+		int marcoDeOrigen = buscarDireccionFisica(unaInstruccion->parametros[1]);//DEBUGGEAR
 		int desplazamientoOrigen = desplazamiento;
 
 		int marcoDeDestino = buscarDireccionFisica(unaInstruccion->parametros[0]);

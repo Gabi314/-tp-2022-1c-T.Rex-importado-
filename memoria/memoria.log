@@ -428,3 +428,238 @@
 [INFO] 22:54:23:750 MEMORIA/(11242:11242): Valor leido: 12
 [ERROR] 22:54:23:751 MEMORIA/(11242:11242): Se desconecto el cliente. Terminando conexion
 [INFO] 22:54:23:751 MEMORIA/(11242:11242): Fin de memoria
+[INFO] 12:05:42:342 MEMORIA/(4767:4767): Memoria lista para recibir a Cpu o Kernel
+[INFO] 12:06:05:054 MEMORIA/(4767:4767): Se conecto un cliente!
+[INFO] 12:06:05:055 MEMORIA/(4767:4767): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 12:06:05:055 MEMORIA/(4767:4767): Envio el tamanio de pag y cant entradas
+[INFO] 12:06:13:786 MEMORIA/(4767:4767): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:06:13:786 MEMORIA/(4767:4767): Envio el numero de tabla de 2do nivel
+[INFO] 12:06:13:787 MEMORIA/(4767:4767): Me llego  la entrada de segundo nivel 0
+[INFO] 12:06:13:787 MEMORIA/(4767:4767): Envio el marco correspondiente el cual es 0
+[INFO] 12:06:14:792 MEMORIA/(4767:4767): Me llego el marco 0 con desplazamiento 0
+[INFO] 12:06:14:831 MEMORIA/(4767:4767): Me llego el valor a escribir: 12
+[INFO] 12:06:21:830 MEMORIA/(4767:4767): Me llego el marco 0 con desplazamiento 0
+[INFO] 12:06:21:830 MEMORIA/(4767:4767): Valor leido: 12
+[INFO] 12:20:46:452 MEMORIA/(4767:4767): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:22:18:876 MEMORIA/(7159:7159): Memoria lista para recibir a Cpu o Kernel
+[INFO] 12:22:33:450 MEMORIA/(7159:7159): Se conecto un cliente!
+[INFO] 12:22:33:450 MEMORIA/(7159:7159): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 12:22:33:450 MEMORIA/(7159:7159): Envio el tamanio de pag y cant entradas
+[INFO] 12:22:33:451 MEMORIA/(7159:7159): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:22:33:451 MEMORIA/(7159:7159): Envio el numero de tabla de 2do nivel
+[INFO] 12:22:33:452 MEMORIA/(7159:7159): Me llego  la entrada de segundo nivel 0
+[INFO] 12:22:33:452 MEMORIA/(7159:7159): Envio el marco correspondiente el cual es 0
+[INFO] 12:22:34:454 MEMORIA/(7159:7159): Me llego el marco 0 con desplazamiento 0
+[INFO] 12:22:34:494 MEMORIA/(7159:7159): Me llego el valor a escribir: 12
+[INFO] 12:22:34:496 MEMORIA/(7159:7159): Me llego el marco 0 con desplazamiento 0
+[INFO] 12:22:34:496 MEMORIA/(7159:7159): Valor leido: 12
+[INFO] 12:22:34:534 MEMORIA/(7159:7159): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:24:46:525 MEMORIA/(7699:7699): Memoria lista para recibir a Cpu o Kernel
+[INFO] 12:24:50:227 MEMORIA/(7699:7699): Se conecto un cliente!
+[INFO] 12:24:50:227 MEMORIA/(7699:7699): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 12:24:50:227 MEMORIA/(7699:7699): Envio el tamanio de pag y cant entradas
+[INFO] 12:24:50:233 MEMORIA/(7699:7699): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:24:50:233 MEMORIA/(7699:7699): Envio el numero de tabla de 2do nivel
+[INFO] 12:24:50:234 MEMORIA/(7699:7699): Me llego  la entrada de segundo nivel 0
+[INFO] 12:24:50:234 MEMORIA/(7699:7699): Envio el marco correspondiente el cual es 0
+[INFO] 12:24:51:234 MEMORIA/(7699:7699): Me llego el marco 0 con desplazamiento 0
+[INFO] 12:24:51:273 MEMORIA/(7699:7699): Me llego el valor a escribir: 12
+[INFO] 12:24:51:274 MEMORIA/(7699:7699): Me llego el marco 0 con desplazamiento 0
+[INFO] 12:24:51:274 MEMORIA/(7699:7699): Valor leido: 12
+[INFO] 12:24:51:313 MEMORIA/(7699:7699): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:24:51:313 MEMORIA/(7699:7699): Envio el numero de tabla de 2do nivel
+[INFO] 12:24:51:313 MEMORIA/(7699:7699): Me llego  la entrada de segundo nivel 2
+[INFO] 12:24:51:313 MEMORIA/(7699:7699): Envio el marco correspondiente el cual es 1
+[INFO] 12:24:52:314 MEMORIA/(7699:7699): Se copio el valor 12 en la dir fisica:(marco 1 offset 0)
+[INFO] 12:24:52:315 MEMORIA/(7699:7699): Me llego el marco 1 con desplazamiento 0
+[INFO] 12:24:52:316 MEMORIA/(7699:7699): Valor leido: 12
+[ERROR] 12:24:52:316 MEMORIA/(7699:7699): Se desconecto el cliente. Terminando conexion
+[INFO] 12:24:52:317 MEMORIA/(7699:7699): Fin de memoria
+[INFO] 12:32:23:726 MEMORIA/(8701:8701): Memoria lista para recibir a Cpu o Kernel
+[INFO] 12:32:28:985 MEMORIA/(8701:8701): Se conecto un cliente!
+[INFO] 12:32:28:990 MEMORIA/(8701:8701): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 12:32:28:990 MEMORIA/(8701:8701): Envio el tamanio de pag y cant entradas
+[INFO] 12:32:28:992 MEMORIA/(8701:8701): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:32:28:992 MEMORIA/(8701:8701): Envio el numero de tabla de 2do nivel
+[INFO] 12:32:28:993 MEMORIA/(8701:8701): Me llego  la entrada de segundo nivel 0
+[INFO] 12:32:28:993 MEMORIA/(8701:8701): Envio el marco correspondiente el cual es 0
+[INFO] 12:32:29:994 MEMORIA/(8701:8701): Me llego el marco 0 con desplazamiento 0
+[INFO] 12:32:30:029 MEMORIA/(8701:8701): Me llego el valor a escribir: 12
+[INFO] 12:32:30:031 MEMORIA/(8701:8701): Me llego el marco 0 con desplazamiento 0
+[INFO] 12:32:30:031 MEMORIA/(8701:8701): Valor leido: 12
+[INFO] 12:32:30:069 MEMORIA/(8701:8701): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:32:30:070 MEMORIA/(8701:8701): Envio el numero de tabla de 2do nivel
+[INFO] 12:32:30:070 MEMORIA/(8701:8701): Me llego  la entrada de segundo nivel 2
+[INFO] 12:32:30:070 MEMORIA/(8701:8701): Envio el marco correspondiente el cual es 1
+[INFO] 12:32:31:071 MEMORIA/(8701:8701): Se copio el valor 12 en la dir fisica:(marco 1 offset 0)
+[INFO] 12:32:31:074 MEMORIA/(8701:8701): Me llego el marco 1 con desplazamiento 0
+[INFO] 12:32:31:074 MEMORIA/(8701:8701): Valor leido: 12
+[ERROR] 12:32:31:074 MEMORIA/(8701:8701): Se desconecto el cliente. Terminando conexion
+[INFO] 12:32:31:074 MEMORIA/(8701:8701): Fin de memoria
+[INFO] 12:33:48:678 MEMORIA/(8874:8874): Memoria lista para recibir a Cpu o Kernel
+[INFO] 12:36:05:923 MEMORIA/(8874:8874): Se conecto un cliente!
+[INFO] 12:36:05:924 MEMORIA/(8874:8874): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 12:36:05:924 MEMORIA/(8874:8874): Envio el tamanio de pag y cant entradas
+[INFO] 12:36:12:435 MEMORIA/(8874:8874): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:36:12:435 MEMORIA/(8874:8874): Envio el numero de tabla de 2do nivel
+[INFO] 12:36:12:435 MEMORIA/(8874:8874): Me llego  la entrada de segundo nivel 0
+[INFO] 12:36:12:435 MEMORIA/(8874:8874): Envio el marco correspondiente el cual es 0
+[INFO] 12:36:13:437 MEMORIA/(8874:8874): Me llego el marco 0 con desplazamiento 0
+[INFO] 12:36:13:473 MEMORIA/(8874:8874): Me llego el valor a escribir: 12
+[INFO] 12:36:21:055 MEMORIA/(8874:8874): Me llego el marco 0 con desplazamiento 0
+[INFO] 12:36:21:055 MEMORIA/(8874:8874): Valor leido: 12
+[INFO] 12:37:13:700 MEMORIA/(8874:8874): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:37:13:700 MEMORIA/(8874:8874): Envio el numero de tabla de 2do nivel
+[INFO] 12:37:43:436 MEMORIA/(8874:8874): Me llego  la entrada de segundo nivel 2
+[INFO] 12:37:43:436 MEMORIA/(8874:8874): Envio el marco correspondiente el cual es 1
+[INFO] 12:39:57:483 MEMORIA/(8874:8874): Se copio el valor 12 en la dir fisica:(marco 1 offset 0)
+[ERROR] 12:40:50:847 MEMORIA/(8874:8874): Se desconecto el cliente. Terminando conexion
+[INFO] 12:40:50:847 MEMORIA/(8874:8874): Fin de memoria
+[INFO] 12:44:05:047 MEMORIA/(10120:10120): Memoria lista para recibir a Cpu o Kernel
+[INFO] 12:44:12:834 MEMORIA/(10120:10120): Se conecto un cliente!
+[INFO] 12:44:12:841 MEMORIA/(10120:10120): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 12:44:12:841 MEMORIA/(10120:10120): Envio el tamanio de pag y cant entradas
+[INFO] 12:44:12:844 MEMORIA/(10120:10120): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:44:12:844 MEMORIA/(10120:10120): Envio el numero de tabla de 2do nivel
+[INFO] 12:44:12:845 MEMORIA/(10120:10120): Me llego  la entrada de segundo nivel 0
+[INFO] 12:44:12:845 MEMORIA/(10120:10120): Envio el marco correspondiente el cual es 0
+[INFO] 12:44:13:845 MEMORIA/(10120:10120): Me llego el marco 0 con desplazamiento 0
+[INFO] 12:44:13:884 MEMORIA/(10120:10120): Me llego el valor a escribir: 12
+[INFO] 12:44:13:885 MEMORIA/(10120:10120): Me llego el marco 0 con desplazamiento 0
+[INFO] 12:44:13:885 MEMORIA/(10120:10120): Valor leido: 12
+[INFO] 12:44:13:925 MEMORIA/(10120:10120): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:44:13:925 MEMORIA/(10120:10120): Envio el numero de tabla de 2do nivel
+[INFO] 12:44:13:925 MEMORIA/(10120:10120): Me llego  la entrada de segundo nivel 2
+[INFO] 12:44:13:926 MEMORIA/(10120:10120): Envio el marco correspondiente el cual es 1
+[INFO] 12:44:14:926 MEMORIA/(10120:10120): Se copio el valor 12 en la dir fisica:(marco 1 offset 4)
+[INFO] 12:44:14:927 MEMORIA/(10120:10120): Me llego el marco 1 con desplazamiento 4
+[INFO] 12:44:14:927 MEMORIA/(10120:10120): Valor leido: 12
+[ERROR] 12:44:14:927 MEMORIA/(10120:10120): Se desconecto el cliente. Terminando conexion
+[INFO] 12:44:14:928 MEMORIA/(10120:10120): Fin de memoria
+[INFO] 12:53:57:174 MEMORIA/(11496:11496): Memoria lista para recibir a Cpu o Kernel
+[INFO] 12:54:04:010 MEMORIA/(11496:11496): Se conecto un cliente!
+[INFO] 12:54:04:014 MEMORIA/(11496:11496): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 12:54:04:014 MEMORIA/(11496:11496): Envio el tamanio de pag y cant entradas
+[INFO] 12:54:04:017 MEMORIA/(11496:11496): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:54:04:017 MEMORIA/(11496:11496): Envio el numero de tabla de 2do nivel
+[INFO] 12:54:04:018 MEMORIA/(11496:11496): Me llego  la entrada de segundo nivel 0
+[INFO] 12:54:04:018 MEMORIA/(11496:11496): Envio el marco correspondiente el cual es 0
+[INFO] 12:54:05:018 MEMORIA/(11496:11496): Me llego el marco 0 con desplazamiento 0
+[INFO] 12:54:05:057 MEMORIA/(11496:11496): 
+-------------------WRITE-------------------
+[INFO] 12:54:05:061 MEMORIA/(11496:11496): Me llego el valor a escribir: 12
+[INFO] 12:54:05:061 MEMORIA/(11496:11496): -------------------WRITE-------------------
+
+[INFO] 12:54:05:062 MEMORIA/(11496:11496): Me llego el marco 0 con desplazamiento 0
+[INFO] 12:54:05:062 MEMORIA/(11496:11496): 
+-------------------READ-------------------
+[INFO] 12:54:05:062 MEMORIA/(11496:11496): Valor leido: 12
+[INFO] 12:54:05:062 MEMORIA/(11496:11496): -------------------READ-------------------
+
+[INFO] 12:54:05:105 MEMORIA/(11496:11496): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:54:05:105 MEMORIA/(11496:11496): Envio el numero de tabla de 2do nivel
+[INFO] 12:54:05:106 MEMORIA/(11496:11496): Me llego  la entrada de segundo nivel 2
+[INFO] 12:54:05:106 MEMORIA/(11496:11496): Envio el marco correspondiente el cual es 1
+[INFO] 12:54:06:107 MEMORIA/(11496:11496): 
+-------------------COPIAR-------------------
+[INFO] 12:54:06:107 MEMORIA/(11496:11496): Se copio el valor 12 en la dir fisica:(marco 1 offset 4)
+[INFO] 12:54:06:107 MEMORIA/(11496:11496): -------------------COPIAR-------------------
+
+[INFO] 12:54:06:108 MEMORIA/(11496:11496): Me llego el marco 1 con desplazamiento 4
+[INFO] 12:54:06:108 MEMORIA/(11496:11496): 
+-------------------READ-------------------
+[INFO] 12:54:06:108 MEMORIA/(11496:11496): Valor leido: 12
+[INFO] 12:54:06:108 MEMORIA/(11496:11496): -------------------READ-------------------
+
+[ERROR] 12:54:06:108 MEMORIA/(11496:11496): Se desconecto el cliente. Terminando conexion
+[INFO] 12:54:06:108 MEMORIA/(11496:11496): Fin de memoria
+[INFO] 12:55:31:768 MEMORIA/(11743:11743): Memoria lista para recibir a Cpu o Kernel
+[INFO] 12:55:36:113 MEMORIA/(11743:11743): Se conecto un cliente!
+[INFO] 12:55:36:120 MEMORIA/(11743:11743): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 12:55:36:120 MEMORIA/(11743:11743): Envio el tamanio de pag y cant entradas
+[INFO] 12:55:36:121 MEMORIA/(11743:11743): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:55:36:121 MEMORIA/(11743:11743): Envio el numero de tabla de 2do nivel
+[INFO] 12:55:36:122 MEMORIA/(11743:11743): Me llego  la entrada de segundo nivel 0
+[INFO] 12:55:36:122 MEMORIA/(11743:11743): Envio el marco correspondiente el cual es 0
+[INFO] 12:55:37:123 MEMORIA/(11743:11743): Me llego el marco 0 con desplazamiento 0
+[INFO] 12:55:37:161 MEMORIA/(11743:11743): -------------------WRITE-------------------
+[INFO] 12:55:37:161 MEMORIA/(11743:11743): Me llego el valor a escribir: 12
+[INFO] 12:55:37:161 MEMORIA/(11743:11743): -------------------WRITE-------------------
+
+[INFO] 12:55:37:162 MEMORIA/(11743:11743): Me llego el marco 0 con desplazamiento 0
+[INFO] 12:55:37:162 MEMORIA/(11743:11743): -------------------READ-------------------
+[INFO] 12:55:37:162 MEMORIA/(11743:11743): Valor leido: 12
+[INFO] 12:55:37:162 MEMORIA/(11743:11743): -------------------READ-------------------
+
+[INFO] 12:55:37:201 MEMORIA/(11743:11743): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 12:55:37:201 MEMORIA/(11743:11743): Envio el numero de tabla de 2do nivel
+[INFO] 12:55:37:202 MEMORIA/(11743:11743): Me llego  la entrada de segundo nivel 2
+[INFO] 12:55:37:202 MEMORIA/(11743:11743): Envio el marco correspondiente el cual es 1
+[INFO] 12:55:38:205 MEMORIA/(11743:11743): -------------------COPIAR-------------------
+[INFO] 12:55:38:205 MEMORIA/(11743:11743): Se copio el valor 12 en la dir fisica:(marco 1 offset 4)
+[INFO] 12:55:38:205 MEMORIA/(11743:11743): -------------------COPIAR-------------------
+
+[INFO] 12:55:38:206 MEMORIA/(11743:11743): Me llego el marco 1 con desplazamiento 4
+[INFO] 12:55:38:206 MEMORIA/(11743:11743): -------------------READ-------------------
+[INFO] 12:55:38:206 MEMORIA/(11743:11743): Valor leido: 12
+[INFO] 12:55:38:207 MEMORIA/(11743:11743): -------------------READ-------------------
+
+[ERROR] 12:55:38:207 MEMORIA/(11743:11743): Se desconecto el cliente. Terminando conexion
+[INFO] 12:55:38:207 MEMORIA/(11743:11743): Fin de memoria
+[INFO] 15:31:19:239 MEMORIA/(28549:28549): Memoria lista para recibir a Cpu o Kernel
+[INFO] 15:31:25:363 MEMORIA/(28549:28549): Se conecto un cliente!
+[INFO] 15:31:25:373 MEMORIA/(28549:28549): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 15:31:25:373 MEMORIA/(28549:28549): Envio el tamanio de pag y cant entradas
+[INFO] 15:31:25:375 MEMORIA/(28549:28549): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 15:31:25:375 MEMORIA/(28549:28549): Envio el numero de tabla de 2do nivel
+[INFO] 15:31:25:378 MEMORIA/(28549:28549): Me llego  la entrada de segundo nivel 0
+[INFO] 15:31:25:378 MEMORIA/(28549:28549): Envio el marco correspondiente el cual es 0
+[INFO] 15:31:26:379 MEMORIA/(28549:28549): Me llego el marco 0 con desplazamiento 0
+[INFO] 15:31:26:417 MEMORIA/(28549:28549): -------------------WRITE-------------------
+[INFO] 15:31:26:418 MEMORIA/(28549:28549): Me llego el valor a escribir: 12
+[INFO] 15:31:26:418 MEMORIA/(28549:28549): -------------------WRITE-------------------
+
+[INFO] 15:31:26:418 MEMORIA/(28549:28549): Me llego el marco 0 con desplazamiento 0
+[INFO] 15:31:26:419 MEMORIA/(28549:28549): -------------------READ-------------------
+[INFO] 15:31:26:419 MEMORIA/(28549:28549): Valor leido: 12
+[INFO] 15:31:26:419 MEMORIA/(28549:28549): -------------------READ-------------------
+
+[INFO] 15:31:26:461 MEMORIA/(28549:28549): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 15:31:26:461 MEMORIA/(28549:28549): Envio el numero de tabla de 2do nivel
+[INFO] 15:31:26:461 MEMORIA/(28549:28549): Me llego  la entrada de segundo nivel 2
+[INFO] 15:31:26:461 MEMORIA/(28549:28549): Envio el marco correspondiente el cual es 1
+[INFO] 15:31:27:462 MEMORIA/(28549:28549): -------------------COPIAR-------------------
+[INFO] 15:31:27:462 MEMORIA/(28549:28549): Se copio el valor 12 en la dir fisica:(marco 1 offset 4)
+[INFO] 15:31:27:462 MEMORIA/(28549:28549): -------------------COPIAR-------------------
+
+[INFO] 15:31:27:464 MEMORIA/(28549:28549): Me llego el marco 1 con desplazamiento 4
+[INFO] 15:31:27:464 MEMORIA/(28549:28549): -------------------READ-------------------
+[INFO] 15:31:27:464 MEMORIA/(28549:28549): Valor leido: 12
+[INFO] 15:31:27:464 MEMORIA/(28549:28549): -------------------READ-------------------
+
+[ERROR] 15:31:27:464 MEMORIA/(28549:28549): Se desconecto el cliente. Terminando conexion
+[INFO] 15:31:27:465 MEMORIA/(28549:28549): Fin de memoria
+[INFO] 19:25:17:030 MEMORIA/(13220:13220): Fin de memoria
+[INFO] 19:31:11:404 MEMORIA/(13603:13603): Fin de memoria
+[INFO] 19:33:16:537 MEMORIA/(13748:13748): Fin de memoria
+[INFO] 19:34:47:589 MEMORIA/(13875:13875): Fin de memoria
+[INFO] 19:35:12:655 MEMORIA/(13924:13924): Fin de memoria
+[INFO] 19:36:30:101 MEMORIA/(14073:14073): Fin de memoria
+[INFO] 19:36:56:085 MEMORIA/(14123:14123): Fin de memoria
+[INFO] 19:37:47:248 MEMORIA/(14218:14218): Fin de memoria
+[INFO] 19:38:11:337 MEMORIA/(14276:14276): Fin de memoria
+[INFO] 19:39:33:532 MEMORIA/(14389:14389): Fin de memoria
+[INFO] 19:40:09:765 MEMORIA/(14455:14455): Fin de memoria
+[INFO] 19:43:11:602 MEMORIA/(14688:14688): Fin de memoria
+[INFO] 19:43:43:328 MEMORIA/(14752:14752): Fin de memoria
+[INFO] 19:44:12:125 MEMORIA/(14812:14812): Fin de memoria
+[INFO] 19:44:30:580 MEMORIA/(14856:14856): Fin de memoria
+[INFO] 19:47:49:009 MEMORIA/(15109:15109): Fin de memoria
+[INFO] 19:49:21:963 MEMORIA/(15261:15261): Fin de memoria
+[INFO] 19:49:39:333 MEMORIA/(15307:15307): Fin de memoria
+[INFO] 19:50:01:290 MEMORIA/(15360:15360): Fin de memoria
+[INFO] 19:51:07:347 MEMORIA/(15449:15449): Fin de memoria
+[INFO] 19:51:26:359 MEMORIA/(15507:15507): Fin de memoria
+[INFO] 19:54:15:893 MEMORIA/(15733:15733): Fin de memoria
+[INFO] 19:55:29:719 MEMORIA/(15843:15843): Fin de memoria
+[INFO] 19:56:33:634 MEMORIA/(15930:15930): Fin de memoria

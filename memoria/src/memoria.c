@@ -29,7 +29,9 @@ int main(void) {
 
 	inicializarEstructuras();
 	inicializarMarcos();
-	conexionConCpu();
+
+	crearSwap(pid);
+	//conexionConCpu();
 	//escribirElPedido(12,0,0);
 	//copiar(3,2,0,0);
 
@@ -65,7 +67,7 @@ int conexionConCpu(void){
 				recibir_mensaje(clienteCpu);//recibe el pedido de tam_pag y cant_entradas
 				enviarTamanioDePaginaYCantidadDeEntradas(clienteCpu);
 				break;
-			case PAQUETE:
+			case PAQUETE://envio de nro tabla 2do nivel
 				listaQueContieneNroTabla1erNivelYentrada = recibir_paquete_int(clienteCpu); // lista con valores de nro y entrada de tabla
 
 				nroTabla2doNivel = leerYRetornarNroTabla2doNivel(listaQueContieneNroTabla1erNivelYentrada);
@@ -73,7 +75,7 @@ int conexionConCpu(void){
 				enviarNroTabla2doNivel(clienteCpu,nroTabla2doNivel);
 				break;
 
-			case PAQUETE2://poner cases mas expresivos
+			case PAQUETE2://poner cases mas expresivos envio de marco
 				listaQueContieneEntradaDeTabla2doNivel = recibir_paquete_int(clienteCpu);
 				int entradaTabla2doNivel = (int) list_get(listaQueContieneEntradaDeTabla2doNivel,0);
 				log_info(logger,"Me llego  la entrada de segundo nivel %d",entradaTabla2doNivel);
@@ -93,8 +95,12 @@ int conexionConCpu(void){
 				log_info(logger,"Me llego el marco %d con desplazamiento %d",marco,desplazamiento);
 
 				if(leer == 1){
+					log_info(logger,"-------------------READ-------------------");
+
 					uint32_t numeroALeer = leerElPedido(marco,desplazamiento);
 					log_info(logger, "Valor leido: %u",numeroALeer);
+
+					log_info(logger,"-------------------READ-------------------\n");
 				}
 
 				break;
@@ -102,10 +108,12 @@ int conexionConCpu(void){
 				listaQueContieneValorAEscribir = recibir_paquete_int(clienteCpu);
 				uint32_t valorAEscribir = (uint32_t) list_get(listaQueContieneValorAEscribir,0);
 
-				escribirElPedido((uint32_t) valorAEscribir,marco,desplazamiento); //casteo para que no joda el warning
+				log_info(logger,"-------------------WRITE-------------------");
+
 				log_info(logger,"Me llego el valor a escribir: %u",valorAEscribir);
+				escribirElPedido((uint32_t) valorAEscribir,marco,desplazamiento); //casteo para que no joda el warning
 
-
+				log_info(logger,"-------------------WRITE-------------------\n");
 				break;
 			case PAQUETE5://caso copiar
 				listaQueContieneDirFisica1YDirFisica2 = recibir_paquete_int(clienteCpu);
@@ -115,10 +123,13 @@ int conexionConCpu(void){
 				int marcoDeOrigen = list_get(listaQueContieneDirFisica1YDirFisica2,2);
 				int desplazamientoOrigen = list_get(listaQueContieneDirFisica1YDirFisica2,3);
 
+				log_info(logger,"-------------------COPIAR-------------------");
+
 				copiar(marcoDeDestino,desplazamientoDestino,marcoDeOrigen,desplazamientoOrigen);
 				uint32_t datoALeer = leerElPedido(marcoDeDestino,desplazamientoDestino);
-
 				log_info(logger,"Se copio el valor %u en la dir fisica:(marco %d offset %d)",datoALeer,marcoDeDestino,desplazamientoDestino);
+
+				log_info(logger,"-------------------COPIAR-------------------\n");
 				break;
 			case -1:
 				log_error(logger, "Se desconecto el cliente. Terminando conexion");
@@ -215,16 +226,24 @@ void crearSwap(int pid){
 
 	string_append(&nombreArchivo,".swap");
 
-	FILE* archivoSwap = fopen(nombreArchivo, "w+");
+	FILE *archivoSwap = fopen(nombreArchivo, "w+");
+	fclose(archivoSwap);
 
-	for(int i=0; i<(tamanioDePagina/sizeof(uint32_t))*entradasPorTabla*entradasPorTabla;i++){
+	archivoSwap = fopen(nombreArchivo, "r+");
+	fseek(archivoSwap,2,SEEK_SET);
+	fwrite("holaa",1,3,archivoSwap);
 
-		uint32_t* datoAEscribir = 0;
-		char* datoAEscribirEnChar = string_itoa((uint32_t) datoAEscribir);
-		string_append(&datoAEscribirEnChar,"\n");
 
-		fputs (datoAEscribirEnChar, archivoSwap);
-	}
+
+
+//	for(int i=0; i<(tamanioDePagina/sizeof(uint32_t))*entradasPorTabla*entradasPorTabla;i++){
+//
+//		uint32_t* datoAEscribir = 0;
+//		char* datoAEscribirEnChar = string_itoa((uint32_t) datoAEscribir);
+//		string_append(&datoAEscribirEnChar,"\n");
+//
+//		fputs (datoAEscribirEnChar, archivoSwap);
+//	}
 
 
 	fclose(archivoSwap);
@@ -521,9 +540,7 @@ int indiceDeEntradaAReemplazar(int numeroDeMarco){
 			return i;
 		}
 	}
-
 }
-
 
 void modificarPaginaACargar(entradaTabla2doNivel* unaEntrada, int nroDeMarcoAASignar){
 	unaEntrada->numeroMarco = nroDeMarcoAASignar;
@@ -583,7 +600,7 @@ int numeroTabla2doNivelSegunIndice(int numeroTabla1erNivel,int indiceDeEntrada){
 		unaTablaDe2doNivel = list_get(unaTablaDe1erNivel->tablasDeSegundoNivel,indiceDeEntrada);
 		flagDeEntradasPorTabla = 0;
 
-		free(unaTablaDe1erNivel);
+		//free(unaTablaDe1erNivel);
 		return unaTablaDe2doNivel->numeroTabla;
 	}else{
 		return -1;//Si da -1 printeo un error
