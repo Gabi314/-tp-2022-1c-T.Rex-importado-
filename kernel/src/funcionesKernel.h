@@ -65,7 +65,7 @@ typedef struct
 	int tamanioProceso;
 	t_list* instrucciones;
 	int program_counter;
-	int tabla_paginas; // el tipo ???
+	int tabla_paginas;
 	float estimacion_rafaga;
 	float estimacion_anterior;
 	clock_t rafagaMs;
@@ -93,6 +93,13 @@ typedef enum
 	PAQUETE
 }op_code;
 
+typedef enum{
+	NO_OP,
+	I_O_, //despues le sacamos un guion
+	WRITE,
+	COPY ,
+	READ
+}nroDeInstruccion;
 //-------------- Funciones para Kernel como servidor de consola ---------
 typedef struct
 {
@@ -242,6 +249,60 @@ void suspender();
 
 void desbloquear_suspendido();
 
+
+//----------------------------SEMAFOROS--------------------------
+
+sem_t pcbEnNew;
+sem_t pcbEnReady;
+
+
+
+
+//-------------VARIABLES Y FUNCIONES DE PRUEBA -------------------------
+
+// int clientesDePrueba[4]={4,50,60,270};
+int servidorPrueba;
+t_list * lista3;
+t_list * lista50;
+t_list * lista60;
+t_list * lista270;
+instrucciones * instruccion1;
+instrucciones * instruccion2;
+instrucciones * instruccion3;
+instrucciones * instruccion4;
+instrucciones * instruccion5;
+instrucciones * instruccion6;
+instrucciones * instruccion7;
+instrucciones * instruccion8;
+instrucciones * instruccion9;
+instrucciones * instruccion10;
+instrucciones * instruccion11;
+instrucciones * instruccion12;
+instrucciones * instruccion13;
+instrucciones * instruccion14;
+instrucciones * instruccion15;
+instrucciones * instruccion16;
+instrucciones * instruccion17;
+instrucciones * instruccion18;
+instrucciones * instruccion19;
+instrucciones * instruccion20;
+
+/*
+instrucciones instruccionesDePrueba[20] = {
+{"EXIT",{-1,-1}},
+{"NO_OP",{5,-1}},{"NO_OP",{1,-1}},{"NO_OP",{2,-1}},
+{"I/O",{3000,-1}},{"I/O",{10000,-1}},{"I/O",{1000,-1}},{"I/O",{6000,-1}},
+{"WRITE",{4,42}},{"WRITE",{2,70}},{"WRITE",{1,20}},{"WRITE",{5,10}},{"WRITE",{12,102}},
+{"COPY",{3,4}},{"COPY",{5,2}},{"COPY",{8,1}},{"COPY",{5,15}},{"COPY",{30,12}},
+{"READ",{3,-1}},{"READ",{5,-1}}
+};
+*/
+
+void recibir_consola_prueba(int servidor);
+int esperar_cliente_prueba(int i);
+void atender_consola_prueba(int nuevo_cliente);
+void inicializar_lista_de_prueba();
+void inicializar_instrucciones_de_prueba();
 
 #endif /* FUNCIONES_KERNEL_H_ */
 

@@ -6,16 +6,25 @@ int main(void) {
 
 	inicializar_configuracion();
 	inicializar_colas();
+	inicializar_semaforos();
 	generar_conexiones();
 
 
 	 pthread_t hilo0, hiloAdmin[6];
 	 int hiloAdminCreado[6];
 
-	 	int servidor = iniciar_servidor();
+
+	 	/*int servidor = iniciar_servidor();
 
 	 	int hiloCreado = pthread_create(&hilo0, NULL,&recibir_consola,servidor);
 	 	pthread_detach(hiloCreado);
+		*/
+
+	 	 servidorPrueba = 1;
+
+	 	int hiloCreado = pthread_create(&hilo0, NULL,&recibir_consola_prueba,servidorPrueba);
+	 	pthread_detach(hiloCreado);
+
 
 	 	hiloAdminCreado[0] = pthread_create(&hiloAdmin[0],NULL,&asignar_memoria,NULL);
 	 	hiloAdminCreado[1] = pthread_create(&hiloAdmin[1],NULL,&finalizar_proceso_y_avisar_a_memoria,NULL);
@@ -23,6 +32,12 @@ int main(void) {
 	 	hiloAdminCreado[3] = pthread_create(&hiloAdmin[3],NULL,&planificar,NULL);
 	 	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&suspender,NULL);
 		hiloAdminCreado[5] = pthread_create(&hiloAdmin[5],NULL,&desbloquear_suspendido,NULL);
+
+
+// TRANSICIONES QUE FALTAN EN HILOS
+// exec a blocked
+// blocked a ready
+// readySuspended a ready
 
 	 	pthread_detach(hiloAdmin[0]);
 	 	pthread_detach(hiloAdmin[1]);
@@ -85,6 +100,11 @@ void generar_conexiones(){
 	 socketCpuDispatch = crear_conexion(ipCpu, puertoCpuDispatch);
 	 socketCpuInterrupt = crear_conexion(ipCpu, puertoCpuInterrupt);
 	 //falta también las conexiones con cpu para interrupciones
+}
+
+void inicializar_semaforos(){
+	sem_init(&pcbEnNew,0,0);
+
 }
 
 t_log* iniciar_logger(void){

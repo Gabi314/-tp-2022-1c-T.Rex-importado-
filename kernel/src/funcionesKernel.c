@@ -821,16 +821,19 @@ void  recibir_consola(int servidor) {
 		while(1) {
 		pthread_t hilo1;
 
-		int nuevo_cliente = esperar_cliente(servidor);
+		int nuevo_cliente = esperar_cliente(servidor); // hay que averiguar si esperar_cliente controla que cada vez que acepta uno ese cliente es nuevo y no se repite.
 		int hiloCreado = pthread_create(&hilo1, NULL,&atender_consola,nuevo_cliente);
 
-		pthread_detach(hiloCreado);
+		pthread_join(hilo1,NULL);
+
 		}
-		//int ultimo_cliente = nuevo_cliente; ---> en caso de que repita siempre la misma consola habria que hacer algo asi (creo)
+
 
 	}
 
-	void atender_consola(int nuevo_cliente) {
+
+
+void atender_consola(int nuevo_cliente) {
 			t_pcb* PCB;
 			t_list* listaDeInstrucciones = recibir_paquete(nuevo_cliente);
 			// no las devuelve pero la idea es que lo haga o  en su defecto crear una funcion que lo haga
@@ -849,6 +852,7 @@ void  recibir_consola(int servidor) {
 
 			agregarANew(PCB);
 
+	//		sem_post(pcbEnNew);
 		}
 
 	/*
@@ -856,9 +860,11 @@ void  recibir_consola(int servidor) {
 	un mensaje al módulo Memoria para que inicialice sus estructuras necesarias y obtener el valor de la tabla de páginas
 	del PCB. Además, si el algoritmo es SRT envía una interrupcion a cpu.
 	 */
-	void asignar_memoria() {
+void asignar_memoria() {
 
 		while(1){
+
+	//	sem_wait(pcbEnNew);
 
 		t_pcb* proceso = sacarDeNew();
 		agregarAReady(proceso);
@@ -868,7 +874,11 @@ void  recibir_consola(int servidor) {
 
 		if(algoritmoPlanificacion == SRT)
 			enviarInterrupcionACpu(); // falta desarrollar
+
+//		sem_post(pcbEnReady);
 		}
+
+
 	}
 
 	/*
@@ -877,7 +887,7 @@ void  recibir_consola(int servidor) {
 	  	un semaforo o algo que controle que la ejecucion del proceso sea la última
 	 */
 
-	void finalizar_proceso_y_avisar_a_memoria() {
+void finalizar_proceso_y_avisar_a_memoria() {
 		while(1){
 		t_pcb * proceso = recibirProcesoAFinalizar(); //falta desarrollar
 		terminarEjecucion(proceso);
@@ -892,7 +902,7 @@ void  recibir_consola(int servidor) {
 		de las estructuras
 	 */
 
-	void finalizar_proceso_y_avisar_a_consola() {
+void finalizar_proceso_y_avisar_a_consola() {
 		while(1){
 		enviarMensajeAConsola("Fin del proceso"); // falta desarrollar
 		}
@@ -901,9 +911,10 @@ void  recibir_consola(int servidor) {
 
 	//* PLANIFICAR(): Llama constantemente al planificador.
 
-	void planificar() {
+void planificar() {
 		while(1) {
-			readyAExe(); //en principio llama a esta transicion ya que es la única que invoca a los planificadores y además se encuentra aislada del resto
+			readyAExe(); //en principio llama a esta transicion ya que es la única que invoca a los planificadores y
+						//además se encuentra aislada del resto
 		}				// igual ojo porque parece que falta actualizarla
 	}
 
@@ -912,9 +923,10 @@ void  recibir_consola(int servidor) {
 		           suspenderlo y se enviará un mensaje a memoria con la informacion necesaria.
 	 */
 
-	void suspender(){
+void suspender(){
 		while(1){
-		blockedASuspension(); // modificar: la idea sería que solo tome el primer elemento de la lista y lo pase a bloqueado y suspendido
+		blockedASuspension(); // modificar: la idea sería que solo tome el primer elemento de la lista y
+								//lo pase a bloqueado y suspendido
 		}
 	}
 
@@ -923,10 +935,281 @@ void  recibir_consola(int servidor) {
 		a las transiciones necesarias para que pase a ser SUSPENDED-READY
 	 */
 
-	void desbloquear_suspendido(){
+void desbloquear_suspendido(){
 		while(1){
 		t_pcb * proceso = queue_pop(colaSuspendedBlocked);
 		agregarAReadySuspended(proceso);
 		}
 	}
+
+
+//-------------------------FUNCIONES DE PRUEBA------------------------------------
+
+void inicializar_instrucciones_de_prueba() {
+	/*
+	instrucciones instruccionesDePrueba[20] = {
+	{"EXIT",{-1,-1}},
+	{"NO_OP",{5,-1}},{"NO_OP",{1,-1}},{"NO_OP",{2,-1}},
+	{"I/O",{3000,-1}},{"I/O",{10000,-1}},{"I/O",{1000,-1}},{"I/O",{6000,-1}},
+	{"WRITE",{4,42}},{"WRITE",{2,70}},{"WRITE",{1,20}},{"WRITE",{5,10}},{"WRITE",{12,102}},
+	{"COPY",{3,4}},{"COPY",{5,2}},{"COPY",{8,1}},{"COPY",{5,15}},{"COPY",{30,12}},
+	{"READ",{3,-1}},{"READ",{5,-1}}
+	};
+	*/
+/*
+	instrucciones * instruccion1 = malloc(sizeof(instrucciones));
+	instrucciones * instruccion2 = malloc(sizeof(instrucciones));
+	instrucciones * instruccion3 = malloc(sizeof(instrucciones));
+	instrucciones * instruccion4 = malloc(sizeof(instrucciones));
+	instrucciones * instruccion5 = malloc(sizeof(instrucciones));
+*/
+
+	instruccion1 = malloc(sizeof(instrucciones));
+	instruccion2 = malloc(sizeof(instrucciones));
+	instruccion3 = malloc(sizeof(instrucciones));
+	instruccion4 = malloc(sizeof(instrucciones));
+	instruccion5 = malloc(sizeof(instrucciones));
+	instruccion6 = malloc(sizeof(instrucciones));
+	instruccion7 = malloc(sizeof(instrucciones));
+	instruccion8 = malloc(sizeof(instrucciones));
+	instruccion9 = malloc(sizeof(instrucciones));
+	instruccion10 = malloc(sizeof(instrucciones));
+	instruccion11 = malloc(sizeof(instrucciones));
+	instruccion12 = malloc(sizeof(instrucciones));
+	instruccion13 = malloc(sizeof(instrucciones));
+	instruccion14 = malloc(sizeof(instrucciones));
+	instruccion15 = malloc(sizeof(instrucciones));
+	instruccion16 = malloc(sizeof(instrucciones));
+	instruccion17 = malloc(sizeof(instrucciones));
+	instruccion18 = malloc(sizeof(instrucciones));
+	instruccion19 = malloc(sizeof(instrucciones));
+	instruccion20 = malloc(sizeof(instrucciones));
+
+
+	instruccion1->identificador = "WRITE";
+	instruccion1->parametros[0] = 4;
+	instruccion1->parametros[1] = 42;
+
+	instruccion2->identificador = "WRITE";
+	instruccion2->parametros[0] = 2;
+	instruccion2->parametros[1] = 70;
+
+	instruccion3->identificador = "WRITE";
+	instruccion3->parametros[0] = 1;
+	instruccion3->parametros[1] = 20;
+
+	instruccion4->identificador = "WRITE";
+	instruccion4->parametros[0] = 5;
+	instruccion4->parametros[1] = 10;
+
+	instruccion5->identificador = "WRITE";
+	instruccion5->parametros[0] = 12;
+	instruccion5->parametros[1] = 102;
+
+	instruccion6->identificador = "COPY";
+	instruccion6->parametros[0] = 3;
+	instruccion6->parametros[1] = 4;
+
+	instruccion7->identificador = "COPY";
+	instruccion7->parametros[0] = 5;
+	instruccion7->parametros[1] = 2;
+
+	instruccion8->identificador = "COPY";
+	instruccion8->parametros[0] = 8;
+	instruccion8->parametros[1] = 1;
+
+	instruccion9->identificador = "COPY";
+	instruccion9->parametros[0] = 5;
+	instruccion9->parametros[1] = 15;
+
+	instruccion10->identificador = "COPY";
+	instruccion10->parametros[0] = 30;
+	instruccion10->parametros[1] = 12;
+
+	instruccion11->identificador = "READ";
+	instruccion11->parametros[0] = 3;
+	instruccion11->parametros[1] = -1;
+
+	instruccion12->identificador = "READ";
+	instruccion12->parametros[0] = 5;
+	instruccion12->parametros[1] = -1;
+
+	instruccion13->identificador = "I/O";
+	instruccion13->parametros[0] = 3000;
+	instruccion13->parametros[1] = -1;
+
+	instruccion14->identificador = "I/O";
+	instruccion14->parametros[0] = 10000;
+	instruccion14->parametros[1] = -1;
+
+	instruccion15->identificador = "I/O";
+	instruccion15->parametros[0] = 1000;
+	instruccion15->parametros[1] = -1;
+
+	instruccion16->identificador = "I/O";
+	instruccion16->parametros[0] = 6000;
+	instruccion16->parametros[1] = -1;
+
+	instruccion17->identificador = "NO_OP";
+	instruccion17->parametros[0] = 5;
+	instruccion17->parametros[1] = -1;
+
+	instruccion18->identificador = "NO_OP";
+	instruccion18->parametros[0] = 1;
+	instruccion18->parametros[1] = -1;
+
+	instruccion19->identificador = "NO_OP";
+	instruccion19->parametros[0] = 2;
+	instruccion19->parametros[1] = -1;
+
+	instruccion19->identificador = "EXIT";
+	instruccion19->parametros[0] = -1;
+	instruccion19->parametros[1] = -1;
+
+//
+
+}
+
+void inicializar_lista_de_prueba() {
+
+//[1-5]: WRITE
+//[6-10]: COPY
+//[11-12]: READ
+//[13-16]: I/O
+//[17-19]: NO_OP
+// 20: EXIT
+
+
+lista3 = malloc(sizeof(t_list));
+lista50 = malloc(sizeof(t_list));
+lista60 = malloc(sizeof(t_list));
+lista270 = malloc(sizeof(t_list));
+
+list_add(lista3,instruccion1);
+list_add(lista3,instruccion18);
+list_add(lista3,instruccion20);
+
+list_add(lista50,instruccion2);
+list_add(lista50,instruccion15);
+list_add(lista50,instruccion7);
+list_add(lista50,instruccion5);
+list_add(lista50,instruccion20);
+
+list_add(lista60,instruccion12);
+list_add(lista60,instruccion20);
+
+list_add(lista270,instruccion4);
+list_add(lista270,instruccion13);
+list_add(lista270,instruccion10);
+list_add(lista270,instruccion20);
+
+
+
+
+
+}
+
+void atender_consola_prueba(int nuevo_cliente) {
+				t_pcb* PCB = malloc(sizeof(t_pcb));
+				inicializar_instrucciones_de_prueba();
+				inicializar_lista_de_prueba();
+				t_list * listaDeInstrucciones = malloc(sizeof(t_list));
+
+
+				switch (nuevo_cliente){
+					case 3:
+						listaDeInstrucciones = lista3;
+						break;
+					case 50:
+						listaDeInstrucciones = lista50;
+						break;
+					case 60:
+						listaDeInstrucciones = lista60;
+						break;
+					case 270:
+						listaDeInstrucciones = lista270;
+						break;
+
+					default:
+					printf("Se acepto una consola invalida!");
+					break;
+					}
+
+
+				log_info(logger,"inicializamos el pcb");
+
+				PCB->idProceso = rand () % 30001 + 20000; // esto por ahora es un numero random por cada consola conectada
+				PCB->tamanioProceso = rand() % 985 + 16; // esto igual hay que calcularlo despues. Aunque no se cómo
+				PCB->instrucciones = listaDeInstrucciones;
+				PCB->program_counter = 1;
+				PCB->tabla_paginas = -1;
+				PCB->estimacion_rafaga = estimacionInicial;
+				PCB->estimacion_anterior = -1;
+				PCB->rafagaMs = 0;
+				PCB->horaDeIngresoAExe = 0 ;
+				PCB->horaDeIngresoAReady = 0;
+				PCB->tiempoEspera = 0;
+				PCB->estado = NEW;
+				PCB->socket_cliente = nuevo_cliente; // acá guardamos el socket
+				PCB->socketMemoria = 0;
+				PCB->tiempoEjecucionRealInicial = 0 ;
+				PCB->tiempoEjecucionAcumulado = 0;
+
+				log_info(logger,"agregamos el pcb a new");
+
+				agregarANew(PCB);
+
+				sem_post(&pcbEnNew);
+			}
+
+void recibir_consola_prueba(int servidor){
+	int i = 1;
+
+	while(1){
+	pthread_t hilo1;
+	log_info(logger,"esperamos una nueva consola");
+	int nuevo_cliente = esperar_cliente_prueba(i); // es bloqueante. Si no llega el cliente, se bloquea el hilo.
+
+		if (nuevo_cliente > 0) {
+
+		int hiloCreado = pthread_create(&hilo1, NULL,&atender_consola_prueba,nuevo_cliente);
+		pthread_join(hilo1,NULL);
+
+		}
+
+		else {
+			break;
+		}
+
+	i++;
+	}
+
+}
+
+int esperar_cliente_prueba(int i){
+	switch (i){
+	case 1:
+		usleep(300);
+		log_info(logger, "Se conecto la consola 3!");
+		return 3;
+	case 2:
+		usleep(4700);
+		log_info(logger, "Se conecto la consola 50!");
+		return 50;
+	case 3:
+		usleep(1000);
+		log_info(logger, "Se conecto la consola 60!");
+		return 60;
+	case 4:
+		usleep(21000);
+		log_info(logger, "Se conecto la consola 270!");
+		return 270;
+	default:
+		printf("No hay mas consolas");
+	return -1;
+
+	}
+
+
+}
 
