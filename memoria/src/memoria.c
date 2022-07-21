@@ -1,4 +1,7 @@
 #include "funcionesMemoria.h"
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <errno.h>
 
 //Antes de esto debo mandarle a cpu tam_Pagina y cant_entradas_por_pagina
 int pid = 0;//Viene de Kernel, para devolver nroDeTabla1erNivel
@@ -11,6 +14,8 @@ int contadorDeMarcosPorProceso = 0;
 
 int contadorDeEntradasPorProceso = 0;
 
+char* pathDeArchivos;
+
 t_list* listaT1nivel;
 t_list* listaDeMarcos;
 t_list* listaT2Nivel;
@@ -18,8 +23,12 @@ t_list* listaDePaginasEnMemoria;
 
 
 int main(void) {
+	pathDeArchivos = string_new();
+	pathDeArchivos = "/home/utnso/swap";
+
 	logger = log_create("memoria.log", "MEMORIA", 1, LOG_LEVEL_INFO);
 	crearConfiguraciones();
+	crearDirectorio();
 
 	listaT1nivel = list_create();
 	listaDeMarcos = list_create();
@@ -35,6 +44,27 @@ int main(void) {
 
 	log_info(logger,"Fin de memoria");
 }
+
+void crearDirectorio(){
+
+	errno = 0;
+	int ret = mkdir(pathDeArchivos,S_IRWXU);
+	if (ret == -1) {
+		switch (errno) {
+			case EACCES :
+				printf("No permite escribir");
+				exit(EXIT_FAILURE);
+			case EEXIST:
+				printf("Ya existe la direccion");
+				exit(EXIT_FAILURE);
+			default:
+				perror("default");
+				exit(EXIT_FAILURE);
+			}
+	}
+
+}
+
 
 int conexionConCpu(void){
 
@@ -240,11 +270,23 @@ void crearSwap(int pid){
 	fclose(archivoSwap);
 
 }
+entradaTabla2doNivel* entradaCargadaConMarcoAsignado(int nroDemarco){
+	entradaTabla2doNivel* unaEntrada = malloc(sizeof(entradaTabla2doNivel));
+	for(int i = 0; i<list_size(listaDePaginasEnMemoria);i++){
+		unaEntrada = list_get(listaDePaginasEnMemoria,i);
+
+		if(unaEntrada->numeroMarco == nroDemarco){
+			return unaEntrada;
+		}
+	}
+}
 
 void escribirElPedido(uint32_t datoAEscribir,int marco,int desplazamiento){
 	int posicionDeDatoAEscribir = marco * tamanioDePagina + sizeof(uint32_t)*desplazamiento;// se repite siempre
 	memcpy(&memoria+posicionDeDatoAEscribir, &datoAEscribir, sizeof(uint32_t)); //casteo para que no joda el warning
 
+	entradaTabla2doNivel* entradaAEscribir = entradaCargadaConMarcoAsignado(marco);
+	entradaAEscribir->modificado = 1;
 	enviar_mensaje("Se escribio el valor correctamente",clienteCpu);
 }
 
@@ -305,31 +347,48 @@ char* nombreArchivoProceso(int pid){
 	return nombreArchivo;
 }
 
-void escribirEnSwap(int numeroDeMarco,int pid,int desplazamiento,int numeroDePagina){//no funca bien
+void escribirEnSwap(int numeroDeMarco,int pid,int numeroDePagina){
 
 	char* nombreDelArchivo = nombreArchivoProceso(pid);
-	FILE* archivoSwap = fopen(nombreDelArchivo, "a+");
+	FILE* archivoSwap = fopen(nombreDelArchivo, "r+");
 
-	uint32_t datoAEscribir = leerElPedido(numeroDeMarco,desplazamiento);
+	int posicionDeLaPaginaEnSwapInicial = (entradasPorTabla*(tamanioDePagina/sizeof(int))*numeroDePagina) + numeroDePagina;
 
-	log_info(logger,"leer: %u",datoAEscribir);
+	for(int i=0; i<(tamanioDePagina/sizeof(uint32_t));i++){
+	fseek(archivoSwap, posicionDeLaPaginaEnSwapInicial, SEEK_SET);
+	//int posicionDeValorEnMemoria = numeroDeMarco*tamanioDePagina;
+	fseek(archivoSwap, i*4, SEEK_CUR);
 
-//	for(int i=0; i<(tamanioDePagina/sizeof(uint32_t));i++){
-//		int posicionDeValorEnMemoria = numeroDeMarco*tamanioDePagina + i*sizeof(uint32_t);
-//
-//		uint32_t* datoAEscribir = leerElPedido(posicionDeValorEnMemoria);
-//
-//		//char* datoAEscribirEnChar = string_itoa((uint32_t) datoAEscribir);
-//		//string_append(&datoAEscribirEnChar,"\n");
-//
-//		//int posicionDeLaPaginaEnSwap = numeroDePagina* tamanioDePagina + i;
-//
-//		//fseek(archivoSwap, posicionDeLaPaginaEnSwap, SEEK_SET);
-//
-//		//fputs(datoAEscribirEnChar,archivoSwap);
-//	}
+	int posicionDeValorEnMemoria = numeroDeMarco*tamanioDePagina + i*sizeof(uint32_t);
+	uint32_t* datoAEscribir = leerElPedido(numeroDeMarco,posicionDeValorEnMemoria);//Aca le agregue el numero de marco como primer parametro, revisar si esta bien
+	char* datoAEscribirEnChar = string_itoa((uint32_t) datoAEscribir);
+	fputs(datoAEscribirEnChar,archivoSwap);
+
+	}
 
 	fclose(archivoSwap);
+}
+void leerDeSwap(int numeroDePagina,int numeroDeMarco){
+	char* parteDePagina = string_new();
+
+	char* nombreDelArchivo = nombreArchivoProceso(pid);
+	FILE* archivoSwap = fopen(nombreDelArchivo, "r");
+
+	int posicionDeLaPaginaALeer = (entradasPorTabla*(tamanioDePagina/sizeof(int))*numeroDePagina) + numeroDePagina;
+
+
+	for(int i = 0; i<entradasPorTabla*entradasPorTabla;i++){
+	fseek(archivoSwap, posicionDeLaPaginaALeer, SEEK_SET);
+	fseek(archivoSwap, i*4, SEEK_CUR);
+
+	fgets(parteDePagina,sizeof(uint32_t)+1,archivoSwap);
+
+	uint32_t* parteDePaginaEnInt = atoi(parteDePagina);
+
+	memcpy(&memoria+(tamanioDePagina*numeroDeMarco)+i*sizeof(uint32_t),&parteDePaginaEnInt, sizeof(uint32_t));
+//	log_info(logger,parteDePagina);
+
+	}
 }
 
 void suspensionDeProceso(int pid){

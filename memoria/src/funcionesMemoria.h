@@ -144,9 +144,11 @@ int algoritmoClockM(t_list*);
 int indiceDeEntradaAReemplazar(int);
 
 char* nombreArchivoProceso(int);
-void escribirEnSwap(int,int,int,int);
+void escribirEnSwap(int,int,int);
+void leerDeSwap(int,int);
 
 
+entradaTabla2doNivel* entradaCargadaConMarcoAsignado(int);
 
 #endif /* FUNCIONES_MEMORIA_H_*/
 
