@@ -243,33 +243,33 @@ void crearSwap(int pid){
 	char* nombreArchivo = string_new();
 
 	char* pidString = string_itoa(pid);
-	nombreArchivo = pidString;
 
-	string_append(&nombreArchivo,".swap");
+	nombreArchivo = pathDeArchivos;
+	strcat(&nombreArchivo,"/");
+	strcat(&nombreArchivo,pidString);
+	strcat(&nombreArchivo,".swap");
 
-	FILE *archivoSwap = fopen(nombreArchivo, "w+");
-	fclose(archivoSwap);
+	//string_append(&nombreArchivo,"/");
+	//string_append(&nombreArchivo,"0");
+	//string_append(&nombreArchivo,".swap");
 
-	archivoSwap = fopen(nombreArchivo, "r+");
-	fseek(archivoSwap,2,SEEK_SET);
-	fwrite("holaa",1,3,archivoSwap);
-
-
+	FILE* archivoSwap = fopen(&nombreArchivo, "w+");
+	//ftruncate(archivoSwap,(entradasPorTabla*entradasPorTabla*tamanioDePagina));
 
 
-//	for(int i=0; i<(tamanioDePagina/sizeof(uint32_t))*entradasPorTabla*entradasPorTabla;i++){
-//
-//		uint32_t* datoAEscribir = 0;
-//		char* datoAEscribirEnChar = string_itoa((uint32_t) datoAEscribir);
-//		string_append(&datoAEscribirEnChar,"\n");
-//
-//		fputs (datoAEscribirEnChar, archivoSwap);
-//	}
+	for(int i=0; i<(entradasPorTabla*entradasPorTabla);i++){
 
+		for(int i=0; i<(entradasPorTabla*entradasPorTabla);i++){
+			fwrite("0000",sizeof(int),1,archivoSwap);
+		}
+	//	fwrite("\n",tamanioDePagina,1,archivoSwap);
+		fputs ("\n", archivoSwap);
+	}
 
 	fclose(archivoSwap);
 
 }
+
 entradaTabla2doNivel* entradaCargadaConMarcoAsignado(int nroDemarco){
 	entradaTabla2doNivel* unaEntrada = malloc(sizeof(entradaTabla2doNivel));
 	for(int i = 0; i<list_size(listaDePaginasEnMemoria);i++){
@@ -563,21 +563,27 @@ void cargarPagina(entradaTabla2doNivel* unaEntrada){
 		modificarPaginaACargar(unaEntrada,marcoAAsignar->numeroDeMarco);
 		list_add(listaDePaginasEnMemoria,unaEntrada);
 		contadorDeMarcosPorProceso++; // ANALIZAR CONTADOR
-
+		if(unaEntrada->modificado == 1){
+					leerDeSwap(unaEntrada->numeroDeEntradaPorProceso,marcoAAsignar);
+				}
 	}else{//Caso en el que ya el proceso tiene maxima cantidad de marcos por proceso y hay que desalojar 1
 		if(strcmp(algoritmoDeReemplazo,"CLOCK") == 0){//PARA ESTOS CASOS NO ES LIST_ADD TENGO QUE REEMPLAZAR LA ENTRADA QUE SACO
 			int marcoAAsignar = algoritmoClock(listaDePaginasEnMemoria);
 			modificarPaginaACargar(unaEntrada,marcoAAsignar);
 			int posicionAReemplazar = indiceDeEntradaAReemplazar(marcoAAsignar);
 			list_replace(listaDePaginasEnMemoria, posicionAReemplazar, unaEntrada);
-
+			if(unaEntrada->modificado == 1){
+						leerDeSwap(unaEntrada->numeroDeEntradaPorProceso,marcoAAsignar);
+					}
 
 		}else if(strcmp(algoritmoDeReemplazo,"CLOCK M") == 0){
 			int marcoAAsignar = algoritmoClockM(listaDePaginasEnMemoria);
 			modificarPaginaACargar(unaEntrada,marcoAAsignar);
 			int posicionAReemplazar = indiceDeEntradaAReemplazar(marcoAAsignar);
 			list_replace(listaDePaginasEnMemoria, posicionAReemplazar, unaEntrada);
-
+			if(unaEntrada->modificado == 1){
+						leerDeSwap(unaEntrada->numeroDeEntradaPorProceso,marcoAAsignar);
+					}
 		}
 	}
 }
@@ -604,7 +610,7 @@ void modificarPaginaACargar(entradaTabla2doNivel* unaEntrada, int nroDeMarcoAASi
 void sacarMarcoAPagina(entradaTabla2doNivel* unaEntrada){
 	unaEntrada->presencia = 0;
 	unaEntrada->uso = 0;
-	unaEntrada->numeroMarco = -1;
+	//unaEntrada->numeroMarco = -1;
 
 }
 
