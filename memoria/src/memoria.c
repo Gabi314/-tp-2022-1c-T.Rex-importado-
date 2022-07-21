@@ -30,17 +30,8 @@ int main(void) {
 	inicializarEstructuras();
 	inicializarMarcos();
 
-	crearSwap(pid);
-	//conexionConCpu();
-	//escribirElPedido(12,0,0);
-	//copiar(3,2,0,0);
-
-//	uint32_t datoALeer;
-//	datoALeer = leerElPedido(3,2);
-//
-//	log_info(logger,"leer: %u",datoALeer);
-
-	//escribirEnSwap(0,0,0,0);
+	//crearSwap(pid);
+	conexionConCpu();
 
 	log_info(logger,"Fin de memoria");
 }

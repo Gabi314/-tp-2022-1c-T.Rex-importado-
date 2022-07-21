@@ -181,7 +181,54 @@ void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio)
 
 	paquete->buffer->size += tamanio + sizeof(int);
 }
+//ESTO ES PARA MANDAR UN PCB A KERNEL-------------------------------------------------------------------------------------
+t_paquete* agregar_a_paquete_kernel_cpu(t_pcb* pcb)
+{
+	tamanioTotalIdentificadores = 0;
+	contadorInstrucciones = 0;
+	desplazamiento = 0;
+	paquete = crear_paquete(PAQUETE);//despues vemos cual usar
+	list_iterate(pcb->instrucciones, (void*) obtenerTamanioIdentificadores);
+	paquete->buffer->stream = realloc(paquete->buffer->stream, paquete->buffer->size + tamanioTotalIdentificadores + contadorInstrucciones*sizeof(int[2]) + contadorInstrucciones*sizeof(int) + 6*sizeof(int) + sizeof(float));
+	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->idProceso), sizeof(int));
+	desplazamiento+=sizeof(int);
+	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->tamanioProceso), sizeof(int));
+	desplazamiento+=sizeof(int);
+	memcpy(paquete->buffer->stream + desplazamiento, &contadorInstrucciones, sizeof(int));
+	desplazamiento+=sizeof(int);
+	list_iterate(pcb->instrucciones, (void*) agregarInstruccionesAlPaquete);
+	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->programCounter), sizeof(int));
+	desplazamiento+=sizeof(int);
+	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->nroTabla1erNivel), sizeof(int));
+	desplazamiento+=sizeof(int);
+	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->estimacionRafaga), sizeof(float));
+	desplazamiento+=sizeof(float);
+//	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->socket_cliente), sizeof(int)); No se para que esta
+//	desplazamiento+=sizeof(int);
+	paquete->buffer->size = desplazamiento;
+	free(pcb);
 
+	return paquete;
+}
+
+void obtenerTamanioIdentificadores(instruccion* unaInstruccion) {
+	tamanioTotalIdentificadores += (strlen(unaInstruccion -> identificador)+1);
+	contadorInstrucciones++;
+}
+
+void agregarInstruccionesAlPaquete(instruccion* unaInstruccion) {
+	void* id = unaInstruccion->identificador;
+	int longitudId = strlen(unaInstruccion->identificador)+1;
+	memcpy(paquete->buffer->stream + desplazamiento, &longitudId, sizeof(int));
+	desplazamiento+=sizeof(int);
+	memcpy(paquete->buffer->stream + desplazamiento, id, longitudId);
+	desplazamiento+=longitudId;
+	memcpy(paquete->buffer->stream + desplazamiento, &(unaInstruccion->parametros), sizeof(int[2]));
+	desplazamiento+=sizeof(int[2]);
+	free(unaInstruccion->identificador);
+	free(unaInstruccion);
+}
+//ESTO ES PARA MANDAR UN PCB A KERNEL--------------------------------------------------------------------------------------
 void enviar_paquete(t_paquete* paquete, int socket_cliente)
 {
 	int bytes = paquete->buffer->size + 2*sizeof(int);

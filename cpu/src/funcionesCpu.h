@@ -28,10 +28,29 @@ typedef enum
 	PAQUETE5
 }op_code;
 
+typedef struct
+{
+	int size;
+	void* stream;
+} t_buffer;
+
+typedef struct
+{
+	op_code codigo_operacion;
+	t_buffer* buffer;
+} t_paquete;
+
 t_log* logger;
 t_config* config;
+t_paquete* paquete;
 
 //--------------  Cpu como servidor de Kernel ---------
+int clienteKernel;
+
+int tamanioTotalIdentificadores;
+int contadorInstrucciones;
+int desplazamiento;
+char* tamanioDelProceso;
 //Estructuras
 
 typedef struct
@@ -63,10 +82,13 @@ int recibir_operacion(int);
 //Funcion propia de cpu como servidor
 void iterator(int value);
 int conexionConKernel(void);
+void obtenerTamanioIdentificadores(instruccion*);
+void agregarInstruccionesAlPaquete(instruccion*);
+t_paquete* agregar_a_paquete_kernel_cpu(t_pcb*);
 //Funcion propia de cpu como servidor
 
 //--------------  Cpu como cliente de Memoria -------------
-int conexion;
+int conexionMemoria;
 //Variables globales de config
 int cantidadEntradasTlb;
 char* algoritmoReemplazoTlb;
@@ -97,23 +119,10 @@ typedef struct
 	time_t ultimaReferencia;
 } entradaTLB;
 
-typedef struct
-{
-	int size;
-	void* stream;
-} t_buffer;
-
-typedef struct
-{
-	op_code codigo_operacion;
-	t_buffer* buffer;
-} t_paquete;
-
 int crear_conexion(char* ip, int puertoCpuDispatch);
 t_paquete* crear_paquete(int cod_op);
 
 void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio);
-//void agregar_nroTabla1erNivelYEntrada_a_paquete(t_paquete* paquete, void* valor, int tamanio);
 void enviar_paquete(t_paquete* paquete, int socket_cliente);
 void* serializar_paquete(t_paquete* paquete, int bytes);
 void enviar_mensaje(char* mensaje, int socket_cliente);
@@ -149,7 +158,7 @@ int buscarDireccionFisica(int);
 int accederAMemoria(int);
 
 //Ciclo de instruccion
-instruccion buscarInstruccionAEjecutar(t_pcb*);
+instruccion* buscarInstruccionAEjecutar(t_pcb*);
 void decode(instruccion*);
 void ejecutar(instruccion*);
 

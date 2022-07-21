@@ -1,58 +1,73 @@
 #include "funcionesCpu.h"
 
 int nroTabla1erNivel = 0; //harcodeada: esto en realidad viene del pcb -> tabla_de_paginas
-
+t_pcb* unPcb;  // viene de kernel
+int hayInstrucciones;
 int main(void) {
-	//conexionConKernel();
 	logger = log_create("cpu.log", "CPU", 1, LOG_LEVEL_DEBUG);
 	inicializarConfiguraciones();
+	//conexionConKernel(); recibo el pcb
+	unPcb = malloc(sizeof(t_pcb));
+	unPcb->programCounter = 0;
+
 	tlb = inicializarTLB();
 	conexionConMemoria();
+
+	//lo que verdadermente se hace: ejecutar(buscarInstruccionAEjecutar(unPCB))
 
 	instruccion* instruccion1 = malloc(sizeof(instruccion));
 	instruccion1->identificador = "WRITE";
 	instruccion1->parametros[0] = 0;
 	instruccion1->parametros[1] = 12;
 
-	ejecutar(instruccion1);
-
 	instruccion* instruccion2 = malloc(sizeof(instruccion));
 	instruccion2->identificador = "READ";
 	instruccion2->parametros[0] = 0;
-
-	ejecutar(instruccion2);
 
 	instruccion* instruccion3 = malloc(sizeof(instruccion));
 	instruccion3->identificador = "COPY";
 	instruccion3->parametros[0] = 132;
 	instruccion3->parametros[1] = 0;
 
-	ejecutar(instruccion3);
-
 	instruccion* instruccion4 = malloc(sizeof(instruccion));
 	instruccion4->identificador = "READ";
 	instruccion4->parametros[0] = 132;
 
-	ejecutar(instruccion4);
+	instruccion* instruccion5 = malloc(sizeof(instruccion));
+	instruccion4->identificador = "EXIT";
 
+	unPcb->instrucciones = list_create();
 
+	list_add_in_index(unPcb->instrucciones,0,instruccion1);
+	list_add_in_index(unPcb->instrucciones,1,instruccion2);
+	list_add_in_index(unPcb->instrucciones,2,instruccion3);
+	list_add_in_index(unPcb->instrucciones,3,instruccion4);
+	list_add_in_index(unPcb->instrucciones,4,instruccion5);
+
+	//list_iterate(unPcb->instrucciones, ejecutar);
+	hayInstrucciones = 1;
+	while(hayInstrucciones){
+		ejecutar(buscarInstruccionAEjecutar(unPcb));
+	}
+
+	log_info(logger,"Termino cpu");
 	//terminar_programa(conexion, logger, config);
 }
 
 int conexionConMemoria(void){
 
 	// Creamos una conexión hacia el servidor
-    conexion = crear_conexion(ipMemoria, puertoMemoria);
+    conexionMemoria = crear_conexion(ipMemoria, puertoMemoria);
 	log_info(logger,"Hola memoria, soy cpu");
 
-	enviar_mensaje("Dame el tamanio de pag y entradas por tabla",conexion);
+	enviar_mensaje("Dame el tamanio de pag y entradas por tabla",conexionMemoria);
 
 	t_list* listaQueContieneTamanioDePagYEntradas = list_create();
 
-	int cod_op = recibir_operacion(conexion);
+	int cod_op = recibir_operacion(conexionMemoria);
 
 	if(cod_op == PAQUETE){
-		listaQueContieneTamanioDePagYEntradas = recibir_paquete(conexion);
+		listaQueContieneTamanioDePagYEntradas = recibir_paquete(conexionMemoria);
 	}
 
 	leerTamanioDePaginaYCantidadDeEntradas(listaQueContieneTamanioDePagYEntradas);
@@ -68,7 +83,7 @@ int accederAMemoria(int marco){
 	int seAccedeAMemoria = 1;
 
 	while (seAccedeAMemoria == 1) {
-		int cod_op = recibir_operacion(conexion);
+		int cod_op = recibir_operacion(conexionMemoria);
 
 		t_list* listaQueContieneNroTabla2doNivel = list_create();
 		t_list* listaQueContieneMarco = list_create();
@@ -76,14 +91,14 @@ int accederAMemoria(int marco){
 		switch (cod_op){
 			case PAQUETE2:
 
-				listaQueContieneNroTabla2doNivel = recibir_paquete(conexion);//finaliza 1er acceso
+				listaQueContieneNroTabla2doNivel = recibir_paquete(conexionMemoria);//finaliza 1er acceso
 				int nroTabla2doNivel = (int) list_get(listaQueContieneNroTabla2doNivel,0);
 				log_info(logger,"Me llego el numero de tabla de segundoNivel que es % d",nroTabla2doNivel);
 
 				enviarEntradaTabla2doNivel(); //2do acceso a memoria
 				break;
 			case PAQUETE3:
-				listaQueContieneMarco = recibir_paquete(conexion);//Finaliza el 2do acceso recibiendo el marco
+				listaQueContieneMarco = recibir_paquete(conexionMemoria);//Finaliza el 2do acceso recibiendo el marco
 				marco = (int) list_get(listaQueContieneMarco,0);
 
 				log_info(logger,"Me llego el marco que es %d",marco);
@@ -107,23 +122,22 @@ int accederAMemoria(int marco){
 }
 
 //------------------CICLO DE INSTRUCCION--------------------------
-instruccion buscarInstruccionAEjecutar(t_pcb* unPCB){//FETCH
-	unPCB = malloc(sizeof(t_pcb));
+instruccion* buscarInstruccionAEjecutar(t_pcb* unPCB){//FETCH
 
 	instruccion* unaInstruccion = list_get(unPCB->instrucciones,unPCB->programCounter);
 	unPCB->programCounter++;
 
-	return *unaInstruccion;
+	return unaInstruccion;
 }
 
-void decode(instruccion* unaInstruccion){//capaz esta al pedo
-	if(! strcmp(unaInstruccion->identificador,"COPY")){
-		buscarDireccionFisica(unaInstruccion->parametros[1]);//la segunda dir logica
-		//ejecutar(unaInstruccion);
-	}else{
-		//ejecutar(unaInstruccion);
-	}
-}
+//void decode(instruccion* unaInstruccion){//capaz esta al pedo
+//	if(! strcmp(unaInstruccion->identificador,"COPY")){
+//		buscarDireccionFisica(unaInstruccion->parametros[1]);//la segunda dir logica
+//		//ejecutar(unaInstruccion);
+//	}else{
+//		//ejecutar(unaInstruccion);
+//	}
+//}
 
 void ejecutar(instruccion* unaInstruccion){
 	if(! strcmp(unaInstruccion->identificador,"WRITE")){
@@ -133,10 +147,10 @@ void ejecutar(instruccion* unaInstruccion){
 		enviarDireccionFisica(marco,desplazamiento,0);//con 0 envia la dir fisica para escribir
 		enviarValorAEscribir(unaInstruccion->parametros[1]);
 
-		int cod_op = recibir_operacion(conexion);
+		int cod_op = recibir_operacion(conexionMemoria);
 
 		if(cod_op == MENSAJE){// Recibe que se escribio correctamente el valor en memoria
-			recibir_mensaje(conexion);
+			recibir_mensaje(conexionMemoria);
 			log_info(logger,"----------------FINALIZA WRITE----------------\n");
 		}
 
@@ -164,9 +178,16 @@ void ejecutar(instruccion* unaInstruccion){
 
 	}else if(! strcmp(unaInstruccion->identificador,"I_O")){
 		//enviar pcb actualizado y unaInstruccion->parametros[0] que es el tiempo que se bloquea en miliseg
+		log_info(logger,"----------------I/O----------------");
+		sleep(unaInstruccion->parametros[0]/1000);
+		log_info(logger,"----------------FIN DE I/O----------------");
+		//enviarPcb(unPcb);
 
 	}else if(! strcmp(unaInstruccion->identificador,"EXIT")){
 		// enviar pcb actualizado finaliza el proceso
+		//enviarPcb(unPcb);
+		log_info(logger,"Finalizo el proceso ");
+		hayInstrucciones = 0;
 	}
 }
 
@@ -316,7 +337,7 @@ void enviarEntradaTabla1erNivel(){//pasar entrada y nroTabla1ernivel
 	agregar_a_paquete(paquete,&nroTabla1erNivel,sizeof(nroTabla1erNivel));
 
 	log_info(logger,"Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son %d y %d)",nroTabla1erNivel,entradaTabla1erNivel);
-	enviar_paquete(paquete,conexion);
+	enviar_paquete(paquete,conexionMemoria);
 	eliminar_paquete(paquete);
 }
 
@@ -326,7 +347,7 @@ void enviarEntradaTabla2doNivel(){//pasar la entrada
 	agregar_a_paquete(paquete,&entradaTabla2doNivel,sizeof(entradaTabla2doNivel));
 
 	log_info(logger,"Le envio a memoria entrada de tabla de 2do nivel que es %d",entradaTabla2doNivel);
-	enviar_paquete(paquete,conexion);
+	enviar_paquete(paquete,conexionMemoria);
 	eliminar_paquete(paquete);
 }
 
@@ -338,7 +359,7 @@ void enviarDireccionFisica(int marco, int desplazamiento,int leer){
 	agregar_a_paquete(paquete,&leer,sizeof(leer));
 
 	log_info(logger,"Le envio a memoria direccion fisica: Marco:%d y Offset: %d",marco,desplazamiento);
-	enviar_paquete(paquete,conexion);
+	enviar_paquete(paquete,conexionMemoria);
 	eliminar_paquete(paquete);
 }
 
@@ -348,7 +369,7 @@ void enviarValorAEscribir(uint32_t valorAEscribir){
 	agregar_a_paquete(paquete,&valorAEscribir,sizeof(uint32_t));
 
 	log_info(logger,"Le envio a memoria el valor a escribir %u",valorAEscribir);
-	enviar_paquete(paquete,conexion);
+	enviar_paquete(paquete,conexionMemoria);
 	eliminar_paquete(paquete);
 }
 
@@ -361,17 +382,26 @@ void enviarDireccionesFisicasParaCopia(int marcoDeDestino,int desplazamientoDest
 	agregar_a_paquete(paquete,&desplazamientoOrigen,sizeof(int));
 
 	log_info(logger,"Le envio a memoria para que copie de dir fisica1: (marco: %d offset: %d) a dir fisica2: (marco: %d offset: %d)",marcoDeOrigen,desplazamientoOrigen,marcoDeDestino,desplazamientoDestino);
-	enviar_paquete(paquete,conexion);
+	enviar_paquete(paquete,conexionMemoria);
 	eliminar_paquete(paquete);
 }
 
-void terminar_programa(int conexion, t_log* logger, t_config* config){
-	/* Y por ultimo, hay que liberar lo que utilizamos (conexion, log y config)
+void enviarPcb(t_pcb* unPcb){
+
+	paquete = agregar_a_paquete_kernel_cpu(unPcb);
+
+	log_info(logger,"Envio el pcb actualizado a Kernel");
+	enviar_paquete(paquete,clienteKernel);
+	eliminar_paquete(paquete);
+}
+
+void terminar_programa(int conexionMemoria, t_log* logger, t_config* config){
+	/* Y por ultimo, hay que liberar lo que utilizamos (conexionMemoria, log y config)
 	  con las funciones de las commons y del TP mencionadas en el enunciado */
 	log_destroy(logger);
 	config_destroy(config);
 
-	liberar_conexion(conexion);
+	liberar_conexion(conexionMemoria);
 }
 
 int conexionConKernel(void){
