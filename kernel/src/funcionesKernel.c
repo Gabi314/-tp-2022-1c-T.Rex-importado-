@@ -357,19 +357,6 @@ t_pcb* obtenerSiguienteDeReady(){
 
 	t_pcb* procesoPlanificado = NULL;
 
-	int tamanioDeColaReady(){
-
-		int tamanio;
-
-		//pthread_mutex_lock(&mutexReady);
-		tamanio = list_size(colaReady);
-		//pthread_mutex_unlock(&mutexReady);
-
-		return tamanio;
-	}
-
-	if (tamanioDeColaReady() > 0){
-
 	// Aca dentro un SWITCH para los distintos algoritmos q llama a una funcion para cada uno
 	switch(algoritmoPlanificacionActual){
 
@@ -383,7 +370,7 @@ t_pcb* obtenerSiguienteDeReady(){
 			procesoPlanificado = obtenerSiguienteSRT();
 		break;
 
-		}
+
 	}
 
 	// Devuelve NULL si no hay nada en ready
@@ -505,7 +492,7 @@ void agregarAReady(t_pcb* proceso){
 	//sem_wait(&multiprogramacion); Lo sacamos de aca para usarlo en el contexto en el que se llama a la funcion, porque no siempre que se agrega a ready, se toca la multiprogramacion
 	//pthread_mutex_lock(&mutexReady);
 
-	if (gradoMultiprogramacionActual <= gradoMultiprogramacionTotal){
+	if (gradoMultiprogramacionActual <= gradoMultiprogramacionTotal){ // por las dudas queda aca, pero se supone que con semaforos no deberia haber problema
 		proceso->suspendido = false;
 		list_add(colaReady, proceso);
 		log_info(logger, "[READY] Entra el proceso de PID: %d a la cola.", proceso->idProceso);
@@ -536,7 +523,7 @@ void agregarABlocked(t_pcb* proceso){		//ver semaforos
 			return false;
 	}
 
-	list_remove_by_condition(colaExe, tienenMismoPID);
+//	list_remove_by_condition(colaExe, tienenMismoPID); NO HAY COLA DE EXE, SOLO SE EJECUTA UNO A LA VEZ
 
 	//pthread_mutex_lock(&mutexBlock);
 
@@ -654,7 +641,8 @@ void ejecutar(t_pcb* proceso){
 
 	time_t a = time(NULL);
 	proceso->horaDeIngresoAExe = ((float) a)*1000;
-
+	proceso->estado = EXEC;
+	procesoEnEjecucion = proceso;
 	send(socketCpuDispatch, proceso, proceso->tamanioProceso, 0);
 
 	//Aca mando el proceso a cpu y guardo el momento en el que arranca a ejecutar para el calculo de la estimacion
@@ -686,9 +674,10 @@ void atenderIO(){
 		estimarRafaga(proceso);
 
 		agregarABlocked(proceso);
-
+// IF (!supera tiempo maximo)
 		usleep(obtenerTiempoDeBloqueo(proceso)*1000);
-
+// ELSE
+		// BLOCKEDASUSPENSION
 		if(proceso->suspendido == true){
 			sacarDeSuspendedBlocked(proceso);
 			agregarAReadySuspended(proceso);
@@ -729,11 +718,12 @@ void newAReady(){
 void readyAExe(){
 
 	while(1){
+		sem_wait(&pcbEnReady);
+		sem_wait(&cpuDisponible);
+		procesoAEjecutar = obtenerSiguienteDeReady();
 
-		t_pcb* procesoAEjecutar = obtenerSiguienteDeReady();
 
-
-		if(procesoAEjecutar != NULL) {
+		if(procesoAEjecutar != NULL) { // por las dudas dejo este if, pero se supone que los semaforos garantizan que no sea NULL
 
 			//pthread_mutex_lock(&mutexExe);
 			ejecutar(procesoAEjecutar);
@@ -777,7 +767,7 @@ void blockedASuspension(){
 			//Avisar a memoria
 
 			usleep((obtenerTiempoDeBloqueo(procesoASuspender) - tiempoMaximoBloqueado)*1000); //multiplico por 1000 para pasar de milisegundos a microsegundos
-
+			// PASA A SUSPENDIDO Y LISTO
 			//sem_post(&multiprogramacion);
 		}
 
@@ -899,7 +889,7 @@ void asignar_memoria() {
 
 		sem_wait(&pcbEnNew);
 
-		pthread_mutex_lock(&asignarMemoria);
+		pthread_mutex_lock(&asignarMemoria); //falta dar prioridad a los de suspended and ready
 		t_pcb* proceso = sacarDeNew();
 		sem_wait(&gradoDeMultiprogramacion);
 		agregarAReady(proceso);
@@ -949,6 +939,7 @@ void finalizar_proceso_y_avisar_a_consola() {
 	//* PLANIFICAR(): Llama constantemente al planificador.
 
 void planificar() {
+
 		while(1) {
 			readyAExe(); //en principio llama a esta transicion ya que es la única que invoca a los planificadores y
 						//además se encuentra aislada del resto

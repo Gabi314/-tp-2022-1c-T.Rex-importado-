@@ -87,7 +87,6 @@ void inicializar_colas(){
 	colaNew = queue_create();
 	colaReady = list_create();
 	colaSuspendedReady = queue_create();
-	colaExe = list_create();
 	colaBlocked = list_create();
 	colaSuspendedBlocked = list_create();
 	colaExit = list_create();
@@ -105,6 +104,7 @@ void generar_conexiones(){
 void inicializar_semaforos(){
 	sem_init(&pcbEnNew,0,0);
 	sem_init(&pcbEnReady,0,0);
+	sem_init(&cpuDisponible,0,1);
 	sem_init(&gradoDeMultiprogramacion,0,gradoMultiprogramacionTotal);
 	pthread_mutex_init(&asignarMemoria,NULL);
 

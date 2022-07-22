@@ -47,19 +47,17 @@ int contadorInstrucciones;
 int desplazamiento;
 char* tamanioDelProceso;
 
+
 typedef enum estado { NEW, READY, BLOCKED, EXEC, SUSP_READY, SUSP_BLOCKED, TERMINATED } t_estado;
 
 
 t_queue* colaNew;
 t_queue* colaReady;
 t_queue* colaSuspendedReady;
-t_queue* colaExe;
 t_queue* colaBlocked;
 t_queue* colaSuspendedBlocked;
 t_queue* colaExit;
-
 t_list* listaProcesosASuspender;
-
 t_log* logger;
 
 typedef struct
@@ -185,7 +183,7 @@ typedef enum{
 
 
 t_algoritmo_planificacion algoritmoPlanificacionActual;
-
+t_pcb* procesoEnEjecucion;
 t_pcb* obtenerSiguienteFIFO();
 t_pcb* obtenerSiguienteSRT();
 
@@ -200,7 +198,7 @@ void agregarASuspendedBlocked(t_pcb* proceso);
 void sacarDeSuspendedBlocked(t_pcb* proceso);
 void agregarAReadySuspended(t_pcb* proceso);
 t_pcb* sacarDeReadySuspended();
-
+t_pcb* procesoAEjecutar;
 
 bool supera_tiempo_maximo_bloqueado(t_pcb* proceso);
 int obtenerTiempoDeBloqueo(t_pcb* proceso);
@@ -257,10 +255,9 @@ void desbloquear_suspendido();
 sem_t pcbEnNew;
 sem_t pcbEnReady;
 sem_t gradoDeMultiprogramacion;
+sem_t cpuDisponible;
 
 pthread_mutex_t asignarMemoria;
-
-
 
 
 //-------------VARIABLES Y FUNCIONES DE PRUEBA -------------------------
