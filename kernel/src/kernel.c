@@ -1,26 +1,33 @@
 #include "funcionesKernel.h"
 
 int main(void) {
-
+	logger = log_create("kernel.log", "KERNEL", 1, LOG_LEVEL_INFO);
 	cargar_pcb();
-	crear_colas();
-    generar_conexiones();
+	inicializarConfiguraciones();
+	//crear_colas();
+    //generar_conexiones();
 
 	//conexionConConsola();
 	//conexionConCpu();
-	//conexionConMemoria();
+	conexionConMemoria();
 }
 
 
 void cargar_pcb(){
-	t_config* config;
 
-	logger = log_create("log.log", "Servidor", 1, LOG_LEVEL_INFO);
-	if((config = config_create("kernel.config")) == NULL){
-			printf("Error leyendo archivo de configuración. \n");
-		}
+
 	//ipKernel = config_get_string_value(config, "IP");
 	pidKernel = 0; // ID del kernel
+
+	gradoMultiprogramacionActual = 0; //Arranca en 0 porque no hay procesos en memoria
+}
+
+void inicializarConfiguraciones(){
+	t_config* config = config_create("kernel.config");
+	if(config  == NULL){
+		printf("Error leyendo archivo de configuración. \n");
+	}
+
 	ipMemoria = config_get_string_value(config, "IP_MEMORIA");
 	puertoMemoria = config_get_int_value(config, "PUERTO_MEMORIA");//son intss
 	ipCpu = config_get_string_value(config, "IP_CPU");
@@ -30,11 +37,9 @@ void cargar_pcb(){
 	algoritmoPlanificacion = config_get_string_value(config, "ALGORITMO_PLANIFICACION");
 	estimacionInicial = config_get_string_value(config, "ESTIMACION_INICIAL");
 	alfa = atoi(config_get_string_value(config, "ALFA"));
-	gradoMultiprogramacionTotal = atoi(config_get_string_value(config, "GRADO_MULTIPROGRAMACION"));
+	gradoDeMultiprogramacion = atoi(config_get_string_value(config, "GRADO_MULTIPROGRAMACION"));
 	tiempoMaximoBloqueado = config_get_string_value(config, "TIEMPO_MAXIMO_BLOQUEADO");
-	gradoMultiprogramacionActual = 0; //Arranca en 0 porque no hay procesos en memoria
 }
-
 
 void crear_colas(){
 	colaNew = queue_create();
@@ -47,36 +52,49 @@ void crear_colas(){
 }
 
 void generar_conexiones(){
-     socketServidor = iniciar_servidor();
-     log_info(logger, "Servidor listo para recibir al cliente");
+     //socketServidor = iniciar_servidor();
+     //log_info(logger, "Servidor listo para recibir al cliente");
      socketMemoria = crear_conexion(ipMemoria, puertoMemoria);//estan pasando un string en los puertos
-	 socketCpuDispatch = crear_conexion(ipCpu, puertoCpuDispatch);//
+     //socketCpuDispatch = crear_conexion(ipCpu, puertoCpuDispatch);
 	 //falta también las conexiones con cpu para interrupciones
 }
 
 
-
 //---------------------------------------------------------------------------------------------
 
-/*void conexionConMemoria(void){
-	int conexion;
-	char* ip;
-	int puerto;
+int conexionConMemoria(void){
+	socketMemoria = crear_conexion(ipMemoria, puertoMemoria);
+	log_info(logger,"Hola memoria, soy Kernel");
+	//enviar_mensaje("hola kernel",socketMemoria,MENSAJE);
+	enviarPID();
 
-	t_log* logger = iniciar_logger();
-	t_config* config = iniciar_config();
+	t_list* listaQueContieneNroTabla1erNivel = list_create();
 
-	ip = config_get_string_value(config,"IP_MEMORIA");
-	puerto =  config_get_int_value(config,"PUERTO_MEMORIA");
+	int cod_op = recibir_operacion(socketMemoria);
 
-	// Creamos una conexión hacia el servidor
-	conexion = crear_conexion(ip, puerto);
+	if(cod_op == PAQUETE){
+		listaQueContieneNroTabla1erNivel = recibir_paquete_int(socketMemoria);
+	}
 
-    // Armamos y enviamos el paquete
-	paquete(conexion, "pido archivo configuracion de memoria");
+	//poner en pcb:
+	int nroTabla1erNivel = (int) list_get(listaQueContieneNroTabla1erNivel,0);
 
-	terminar_programa(conexion, logger, config);
-}*/
+	log_info(logger,"Me llego la tabla de primero nivel nro: %d",nroTabla1erNivel);
+
+	return EXIT_SUCCESS;
+}
+
+void enviarPID(){//pasar entrada y nroTabla1ernivel
+	t_paquete* paquete = crear_paquete(PAQUETE);
+	// Leemos y esta vez agregamos las lineas al paquete
+	agregar_a_paquete(paquete,&pidKernel,sizeof(pidKernel));
+
+
+	log_info(logger,"Le envio a memoria mi pid que es %d",pidKernel);
+	enviar_paquete(paquete,socketMemoria);
+	eliminar_paquete(paquete);
+}
+
 
 
 

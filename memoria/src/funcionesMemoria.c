@@ -146,9 +146,20 @@ void enviarTamanioDePaginaYCantidadDeEntradas(int socket_cliente){
 
 void enviarNroTabla2doNivel(int socket_cliente,int nroTabla2doNivel){
 	t_paquete* paquete = crear_paquete(PAQUETE2);
-	log_info(logger,"Envio el numero de tabla de 2do nivel");
+	log_info(logger,"Envio el numero de tabla de 2do nivel %d",nroTabla2doNivel);
 
 	agregar_a_paquete(paquete,&nroTabla2doNivel,sizeof(nroTabla2doNivel));
+
+
+	enviar_paquete(paquete,socket_cliente);
+	eliminar_paquete(paquete);
+}
+
+void enviarNroTabla1erNivel(int socket_cliente,int nroTabla1erNivel){
+	t_paquete* paquete = crear_paquete(PAQUETE);
+	log_info(logger,"Envio el numero de tabla de 1er nivel a Kernel que es %d",nroTabla1erNivel);
+
+	agregar_a_paquete(paquete,&nroTabla1erNivel,sizeof(nroTabla1erNivel));
 
 
 	enviar_paquete(paquete,socket_cliente);

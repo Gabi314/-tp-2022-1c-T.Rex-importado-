@@ -4,9 +4,9 @@
 #include <errno.h>
 
 //Antes de esto debo mandarle a cpu tam_Pagina y cant_entradas_por_pagina
-int pid = 0;//Viene de Kernel, para devolver nroDeTabla1erNivel
+int pidActual;//Viene de Kernel, para devolver nroDeTabla1erNivel
 //int entradaDeTablaDe1erNivel = 2;  Viene de cpu(calculado con la dir logica), con esto devuelvo nroTablaDe2doNivel
-
+int server_fd;
 int contPaginas = 0;
 int contTablas2doNivel = 0;
 int flagDeEntradasPorTabla = 0;
@@ -34,12 +34,10 @@ int main(void) {
 	listaDeMarcos = list_create();
 	listaT2Nivel = list_create();
 	listaDePaginasEnMemoria = list_create();
-
-
-	inicializarEstructuras();
-	inicializarMarcos();
-
-	//crearSwap(pid);
+	//inicializarMarcos();
+	//inicializarEstructuras(pidActual);//esto tiene que estar despues de recibir el pid de kernel
+	conexionConKernel();
+	liberar_conexion(clienteKernel);
 	conexionConCpu();
 
 	log_info(logger,"Fin de memoria");
@@ -52,24 +50,20 @@ void crearDirectorio(){
 	if (ret == -1) {
 		switch (errno) {
 			case EACCES :
-				printf("No permite escribir");
-				exit(EXIT_FAILURE);
+				log_info(logger,"No permite escribir");
+				break;
 			case EEXIST:
-				printf("Ya existe la direccion");
-				exit(EXIT_FAILURE);
-			default:
-				perror("default");
-				exit(EXIT_FAILURE);
+				log_info(logger,"Ya existe la direccion de swap");
+				break;
 			}
 	}
-
 }
 
 
 int conexionConCpu(void){
 
-	int server_fd = iniciar_servidor();
-	log_info(logger, "Memoria lista para recibir a Cpu o Kernel");
+	//int server_fd = iniciar_servidor(); // tendria que estar comentado porque viene despues de coenxion con kernel
+	log_info(logger, "Memoria lista para recibir a Cpu");
 	clienteCpu = esperar_cliente(server_fd);
 
 	t_list* listaQueContieneNroTabla1erNivelYentrada = list_create();
@@ -78,8 +72,8 @@ int conexionConCpu(void){
 	t_list* listaQueContieneValorAEscribir = list_create();
 	t_list* listaQueContieneDirFisica1YDirFisica2 = list_create();
 
-//	int a = 1;
-	while (1) {
+	//int a = 1;
+	while(1) {
 		int cod_op = recibir_operacion(clienteCpu);
 
 		int nroTabla2doNivel;
@@ -139,10 +133,10 @@ int conexionConCpu(void){
 			case PAQUETE5://caso copiar
 				listaQueContieneDirFisica1YDirFisica2 = recibir_paquete_int(clienteCpu);
 
-				int marcoDeDestino = list_get(listaQueContieneDirFisica1YDirFisica2,0);
-				int desplazamientoDestino = list_get(listaQueContieneDirFisica1YDirFisica2,1);
-				int marcoDeOrigen = list_get(listaQueContieneDirFisica1YDirFisica2,2);
-				int desplazamientoOrigen = list_get(listaQueContieneDirFisica1YDirFisica2,3);
+				int marcoDeDestino = (int) list_get(listaQueContieneDirFisica1YDirFisica2,0);
+				int desplazamientoDestino = (int) list_get(listaQueContieneDirFisica1YDirFisica2,1);
+				int marcoDeOrigen = (int) list_get(listaQueContieneDirFisica1YDirFisica2,2);
+				int desplazamientoOrigen = (int) list_get(listaQueContieneDirFisica1YDirFisica2,3);
 
 				log_info(logger,"-------------------COPIAR-------------------");
 
@@ -151,6 +145,16 @@ int conexionConCpu(void){
 				log_info(logger,"Se copio el valor %u en la dir fisica:(marco %d offset %d)",datoALeer,marcoDeDestino,desplazamientoDestino);
 
 				log_info(logger,"-------------------COPIAR-------------------\n");
+				break;
+//			case SUSPENSION:
+//
+//				recibir_mensaje(clienteCpu);
+//				suspensionDeProceso(pid);
+//
+//				break;
+//			case DESUSPENSION:
+//
+//				recibir_mensaje(clienteCpu);
 				break;
 			case -1:
 				log_error(logger, "Se desconecto el cliente. Terminando conexion");
@@ -166,6 +170,10 @@ int conexionConCpu(void){
 void crearConfiguraciones(){
 	t_config* config = config_create("memoria.config");
 
+	if(config  == NULL){
+		printf("Error leyendo archivo de configuración. \n");
+	}
+
 	tamanioDeMemoria = config_get_int_value(config,"TAM_MEMORIA");
 	tamanioDePagina = config_get_int_value(config,"TAM_PAGINA");
 
@@ -177,7 +185,7 @@ void crearConfiguraciones(){
 
 }
 
-void inicializarEstructuras(){
+void inicializarEstructuras(int pid){
 	memoria = malloc(tamanioDeMemoria); // inicializo el espacio de usuario en memoria
 
 	t_primerNivel* tablaPrimerNivel = malloc(sizeof(t_primerNivel));
@@ -231,6 +239,9 @@ void cargarEntradasDeTabla2doNivel(t_segundoNivel* tablaDeSegundoNivel){
 			entradaTabla2doNivel* unaEntradaDeTabla2doNivel = malloc(sizeof(entradaTabla2doNivel));
 
 			unaEntradaDeTabla2doNivel->numeroDeEntradaPorProceso = contadorDeEntradasPorProceso;
+			unaEntradaDeTabla2doNivel->presencia = 0;
+			unaEntradaDeTabla2doNivel->uso = 0;
+			unaEntradaDeTabla2doNivel->modificado = 0;
 			contadorDeEntradasPorProceso++;
 
 			list_add(tablaDeSegundoNivel->entradas,unaEntradaDeTabla2doNivel);
@@ -240,34 +251,40 @@ void cargarEntradasDeTabla2doNivel(t_segundoNivel* tablaDeSegundoNivel){
 
 void crearSwap(int pid){
 
+	char* nombrePathCompleto = nombreArchivoProceso(pid);
+
+		FILE* archivoSwap = fopen(nombrePathCompleto, "w+");
+
+		for(int i=0; i<(entradasPorTabla*entradasPorTabla);i++){
+
+			for(int i=0; i<(entradasPorTabla*entradasPorTabla);i++){
+				fwrite("0000",sizeof(int),1,archivoSwap);
+			}
+
+			fputs ("\n", archivoSwap);
+		}
+
+		fclose(archivoSwap);
+
+}
+
+char* nombreArchivoProceso(int pid){
+	char* nombrePathCompleto = string_new();
+	char* nombrePath = string_new();
 	char* nombreArchivo = string_new();
 
 	char* pidString = string_itoa(pid);
 
-	nombreArchivo = pathDeArchivos;
-	strcat(&nombreArchivo,"/");
-	strcat(&nombreArchivo,pidString);
-	strcat(&nombreArchivo,".swap");
+	nombrePath ="/home/utnso/swap/";
 
-	//string_append(&nombreArchivo,"/");
-	//string_append(&nombreArchivo,"0");
-	//string_append(&nombreArchivo,".swap");
+	nombreArchivo = pidString;
 
-	FILE* archivoSwap = fopen(&nombreArchivo, "w+");
-	//ftruncate(archivoSwap,(entradasPorTabla*entradasPorTabla*tamanioDePagina));
+	string_append(&nombreArchivo,".swap");
+	//string_append(&nombrePathCompleto,nombreArchivo);
 
-
-	for(int i=0; i<(entradasPorTabla*entradasPorTabla);i++){
-
-		for(int i=0; i<(entradasPorTabla*entradasPorTabla);i++){
-			fwrite("0000",sizeof(int),1,archivoSwap);
-		}
-	//	fwrite("\n",tamanioDePagina,1,archivoSwap);
-		fputs ("\n", archivoSwap);
-	}
-
-	fclose(archivoSwap);
-
+	string_append(&nombrePathCompleto,nombrePath);
+	string_append(&nombrePathCompleto,nombreArchivo);
+	return nombrePathCompleto;
 }
 
 entradaTabla2doNivel* entradaCargadaConMarcoAsignado(int nroDemarco){
@@ -316,8 +333,9 @@ void liberarEspacioEnMemoria(t_primerNivel* unaTablaDe1erNivel){
 
 	for(int i = 0; i<entradasPorTabla;i++){
 		tablaDe2doNivel = list_get(unaTablaDe1erNivel->tablasDeSegundoNivel,i);
-		for(int j = 0;i<entradasPorTabla;j++){
-			unaEntrada = list_get(tablaDe2doNivel->entradas,j);
+
+		for(int j = 0;j<entradasPorTabla;j++){
+			unaEntrada = list_get(tablaDe2doNivel->entradas,j);//acaa
 			if(unaEntrada->presencia == 1 && unaEntrada->modificado ==0){
 				sacarMarcoAPagina(unaEntrada);
 				marcoAsignado = buscarMarco(unaEntrada->numeroMarco);
@@ -325,7 +343,7 @@ void liberarEspacioEnMemoria(t_primerNivel* unaTablaDe1erNivel){
 
 			}
 			if(unaEntrada->presencia == 1 && unaEntrada->modificado ==1){
-				//escribirEnSwap(unaEntrada->numeroMarco,unaTablaDe1erNivel->pid);
+				escribirEnSwap(unaEntrada->numeroMarco,unaTablaDe1erNivel->pid,unaEntrada->numeroDeEntradaPorProceso);
 				sacarMarcoAPagina(unaEntrada);
 				marcoAsignado = buscarMarco(unaEntrada->numeroMarco);
 				marcoAsignado->marcoLibre=0;
@@ -337,15 +355,6 @@ void liberarEspacioEnMemoria(t_primerNivel* unaTablaDe1erNivel){
 list_clean(listaDePaginasEnMemoria);
 }
 
-char* nombreArchivoProceso(int pid){
-	char* nombreArchivo = string_new();
-
-	char* pidString = string_itoa(pid);
-	nombreArchivo = pidString;
-
-	string_append(&nombreArchivo,".swap");
-	return nombreArchivo;
-}
 
 void escribirEnSwap(int numeroDeMarco,int pid,int numeroDePagina){
 
@@ -360,7 +369,7 @@ void escribirEnSwap(int numeroDeMarco,int pid,int numeroDePagina){
 	fseek(archivoSwap, i*4, SEEK_CUR);
 
 	int posicionDeValorEnMemoria = numeroDeMarco*tamanioDePagina + i*sizeof(uint32_t);
-	uint32_t* datoAEscribir = leerElPedido(numeroDeMarco,posicionDeValorEnMemoria);//Aca le agregue el numero de marco como primer parametro, revisar si esta bien
+	uint32_t datoAEscribir = leerElPedido(numeroDeMarco,posicionDeValorEnMemoria);//Aca le agregue el numero de marco como primer parametro, revisar si esta bien
 	char* datoAEscribirEnChar = string_itoa((uint32_t) datoAEscribir);
 	fputs(datoAEscribirEnChar,archivoSwap);
 
@@ -368,10 +377,11 @@ void escribirEnSwap(int numeroDeMarco,int pid,int numeroDePagina){
 
 	fclose(archivoSwap);
 }
+
 void leerDeSwap(int numeroDePagina,int numeroDeMarco){
 	char* parteDePagina = string_new();
 
-	char* nombreDelArchivo = nombreArchivoProceso(pid);
+	char* nombreDelArchivo = nombreArchivoProceso(pidActual); // capaz hay que pasarselo
 	FILE* archivoSwap = fopen(nombreDelArchivo, "r");
 
 	int posicionDeLaPaginaALeer = (entradasPorTabla*(tamanioDePagina/sizeof(int))*numeroDePagina) + numeroDePagina;
@@ -383,7 +393,7 @@ void leerDeSwap(int numeroDePagina,int numeroDeMarco){
 
 	fgets(parteDePagina,sizeof(uint32_t)+1,archivoSwap);
 
-	uint32_t* parteDePaginaEnInt = atoi(parteDePagina);
+	uint32_t parteDePaginaEnInt = atoi(parteDePagina);
 
 	memcpy(&memoria+(tamanioDePagina*numeroDeMarco)+i*sizeof(uint32_t),&parteDePaginaEnInt, sizeof(uint32_t));
 //	log_info(logger,parteDePagina);
@@ -564,7 +574,7 @@ void cargarPagina(entradaTabla2doNivel* unaEntrada){
 		list_add(listaDePaginasEnMemoria,unaEntrada);
 		contadorDeMarcosPorProceso++; // ANALIZAR CONTADOR
 		if(unaEntrada->modificado == 1){
-					leerDeSwap(unaEntrada->numeroDeEntradaPorProceso,marcoAAsignar);
+					leerDeSwap(unaEntrada->numeroDeEntradaPorProceso,marcoAAsignar->numeroDeMarco);
 				}
 	}else{//Caso en el que ya el proceso tiene maxima cantidad de marcos por proceso y hay que desalojar 1
 		if(strcmp(algoritmoDeReemplazo,"CLOCK") == 0){//PARA ESTOS CASOS NO ES LIST_ADD TENGO QUE REEMPLAZAR LA ENTRADA QUE SACO
@@ -682,17 +692,52 @@ int marcoSegunIndice(int numeroTabla2doNivel,int indiceDeEntradaTabla2doNivel){
 
 		if(unaEntradaTabla2doNivel->presencia == 1){
 			return unaEntradaTabla2doNivel->numeroMarco;
-	}
-		else{
+		}else{
 			cargarPagina(unaEntradaTabla2doNivel);
 			return unaEntradaTabla2doNivel->numeroMarco;
 	//ver tema de si es una pagina con info para swap
-
 		}
 	}
 
 }
 
+int conexionConKernel(void){
+
+	server_fd = iniciar_servidor();
+	log_info(logger, "Memoria lista para recibir a Kernel");
+	clienteKernel = esperar_cliente(server_fd);
+
+	t_list* listaQueContienePID = list_create();
+
+	while(1) {
+		int cod_op = recibir_operacion(clienteKernel);
+
+		switch (cod_op) {
+
+			case PAQUETE:
+				listaQueContienePID = recibir_paquete_int(clienteKernel);
+				pidActual = (int) list_get(listaQueContienePID,0);
+
+				inicializarEstructuras(pidActual);//inicializo estructuras
+				inicializarMarcos();
+
+				int nroTabla1erNivel = buscarNroTablaDe1erNivel(pidActual);
+
+				enviarNroTabla1erNivel(clienteKernel,nroTabla1erNivel);
+
+				break;
+			case -1:
+				log_error(logger, "Se desconecto el cliente. Terminando conexion");
+				return EXIT_FAILURE;
+			default:
+				log_warning(logger,"Operacion desconocida. No quieras meter la pata");
+				break;
+			}
+
+	}
+
+	return EXIT_SUCCESS;
+}
 
 
 void iterator(char* value) {

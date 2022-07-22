@@ -1,6 +1,7 @@
 #ifndef FUNCIONES_CPU_H_
 #define FUNCIONES_CPU_H_
 
+#include "funcionesCpu.h"
 #include<stdio.h>
 #include<stdlib.h>
 #include<sys/socket.h>
@@ -25,7 +26,9 @@ typedef enum
 	PAQUETE2,
 	PAQUETE3,
 	PAQUETE4,
-	PAQUETE5
+	PAQUETE5,
+	SUSPENSION,
+	DESUSPENSION
 }op_code;
 
 typedef struct
@@ -125,7 +128,7 @@ t_paquete* crear_paquete(int cod_op);
 void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio);
 void enviar_paquete(t_paquete* paquete, int socket_cliente);
 void* serializar_paquete(t_paquete* paquete, int bytes);
-void enviar_mensaje(char* mensaje, int socket_cliente);
+void enviar_mensaje(char* mensaje, int socket_cliente,int cod_op);
 void liberar_conexion(int socket_cliente);
 void eliminar_paquete(t_paquete* paquete);
 

@@ -1,8 +1,10 @@
 #include "funcionesCpu.h"
+#include "tlb.h"
 
 int nroTabla1erNivel = 0; //harcodeada: esto en realidad viene del pcb -> tabla_de_paginas
 t_pcb* unPcb;  // viene de kernel
 int hayInstrucciones;
+int bloqueado = 0;
 int main(void) {
 	logger = log_create("cpu.log", "CPU", 1, LOG_LEVEL_DEBUG);
 	inicializarConfiguraciones();
@@ -15,43 +17,73 @@ int main(void) {
 
 	//lo que verdadermente se hace: ejecutar(buscarInstruccionAEjecutar(unPCB))
 
+	instruccion* instruccion0 = malloc(sizeof(instruccion));
+	instruccion0->identificador = "WRITE";
+	instruccion0->parametros[0] = 0;
+	instruccion0->parametros[1] = 1000;
+
 	instruccion* instruccion1 = malloc(sizeof(instruccion));
 	instruccion1->identificador = "WRITE";
-	instruccion1->parametros[0] = 0;
-	instruccion1->parametros[1] = 12;
+	instruccion1->parametros[0] = 4;
+	instruccion1->parametros[1] = 1001;
 
 	instruccion* instruccion2 = malloc(sizeof(instruccion));
-	instruccion2->identificador = "READ";
-	instruccion2->parametros[0] = 0;
+	instruccion2->identificador = "WRITE";
+	instruccion2->parametros[0] = 260;
+	instruccion2->parametros[1] = 2000;
 
 	instruccion* instruccion3 = malloc(sizeof(instruccion));
 	instruccion3->identificador = "COPY";
-	instruccion3->parametros[0] = 132;
-	instruccion3->parametros[1] = 0;
+	instruccion3->parametros[0] = 256;
+	instruccion3->parametros[1] = 260;
 
-	instruccion* instruccion4 = malloc(sizeof(instruccion));
-	instruccion4->identificador = "READ";
-	instruccion4->parametros[0] = 132;
+//	instruccion* instruccion4 = malloc(sizeof(instruccion));
+//	instruccion4->identificador = "I/O";
+//	instruccion4->parametros[0] = 6000;
 
 	instruccion* instruccion5 = malloc(sizeof(instruccion));
-	instruccion4->identificador = "EXIT";
+	instruccion5->identificador = "WRITE";
+	instruccion5->parametros[0] = 512;
+	instruccion5->parametros[1] = 3000;
+
+	instruccion* instruccion6 = malloc(sizeof(instruccion));
+	instruccion6->identificador = "EXIT";
 
 	unPcb->instrucciones = list_create();
 
-	list_add_in_index(unPcb->instrucciones,0,instruccion1);
-	list_add_in_index(unPcb->instrucciones,1,instruccion2);
-	list_add_in_index(unPcb->instrucciones,2,instruccion3);
-	list_add_in_index(unPcb->instrucciones,3,instruccion4);
+	list_add_in_index(unPcb->instrucciones,0,instruccion0);
+	list_add_in_index(unPcb->instrucciones,1,instruccion1);
+	list_add_in_index(unPcb->instrucciones,2,instruccion2);
+	list_add_in_index(unPcb->instrucciones,3,instruccion3);
+//	list_add_in_index(unPcb->instrucciones,4,instruccion4);
 	list_add_in_index(unPcb->instrucciones,4,instruccion5);
+	list_add_in_index(unPcb->instrucciones,5,instruccion6);
 
 	//list_iterate(unPcb->instrucciones, ejecutar);
 	hayInstrucciones = 1;
 	while(hayInstrucciones){
+//		if(bloqueado){
+//			nroTabla1erNivel = 1;//viene otro process
+//		}
 		ejecutar(buscarInstruccionAEjecutar(unPcb));
 	}
 
 	log_info(logger,"Termino cpu");
 	//terminar_programa(conexion, logger, config);
+}
+
+void inicializarConfiguraciones(){
+	config = config_create("cpu.config");// ver bien como recibir los path de config por parametros
+
+	ipMemoria = config_get_string_value(config,"IP_MEMORIA");
+	puertoMemoria = config_get_int_value(config,"PUERTO_MEMORIA");
+
+	cantidadEntradasTlb = config_get_int_value(config,"ENTRADAS_TLB");
+	algoritmoReemplazoTlb = config_get_string_value(config,"REEMPLAZO_TLB");
+	retardoDeNOOP = config_get_int_value(config,"RETARDO_NOOP");
+
+	puertoDeEscuchaDispath = config_get_int_value(config,"PUERTO_ESCUCHA_DISPATCH");
+	puertoDeEscuchaInterrupt = config_get_int_value(config,"PUERTO_ESCUCHA_INTERRUPT");
 }
 
 int conexionConMemoria(void){
@@ -60,7 +92,7 @@ int conexionConMemoria(void){
     conexionMemoria = crear_conexion(ipMemoria, puertoMemoria);
 	log_info(logger,"Hola memoria, soy cpu");
 
-	enviar_mensaje("Dame el tamanio de pag y entradas por tabla",conexionMemoria);
+	enviar_mensaje("Dame el tamanio de pag y entradas por tabla",conexionMemoria,MENSAJE);
 
 	t_list* listaQueContieneTamanioDePagYEntradas = list_create();
 
@@ -176,12 +208,20 @@ void ejecutar(instruccion* unaInstruccion){
 	}else if(! strcmp(unaInstruccion->identificador,"NO_OP")){
 		sleep(retardoDeNOOP/1000);// miliseg
 
-	}else if(! strcmp(unaInstruccion->identificador,"I_O")){
-		//enviar pcb actualizado y unaInstruccion->parametros[0] que es el tiempo que se bloquea en miliseg
-		log_info(logger,"----------------I/O----------------");
+	}else if(! strcmp(unaInstruccion->identificador,"I/O")){
+
+		log_info(logger,"----------------I/O-----------------------");
 		sleep(unaInstruccion->parametros[0]/1000);
-		log_info(logger,"----------------FIN DE I/O----------------");
+		enviar_mensaje("Se suspende el proceso",conexionMemoria,SUSPENSION);
 		//enviarPcb(unPcb);
+		bloqueado = 1;
+		// luego kernel le avisa a memoria que se suspende
+		reiniciarTLB();
+
+		log_info(logger,"----------------FIN DE I/O----------------");
+
+		//log_info(logger,"Se reanuda el proceso\n");
+
 
 	}else if(! strcmp(unaInstruccion->identificador,"EXIT")){
 		// enviar pcb actualizado finaliza el proceso
@@ -190,6 +230,7 @@ void ejecutar(instruccion* unaInstruccion){
 		hayInstrucciones = 0;
 	}
 }
+
 
 int buscarDireccionFisica(int direccionLogica){
 	calculosDireccionLogica(direccionLogica);
@@ -203,19 +244,6 @@ int buscarDireccionFisica(int direccionLogica){
 
 }
 
-void inicializarConfiguraciones(){
-	config = config_create("cpu.config");
-
-	ipMemoria = config_get_string_value(config,"IP_MEMORIA");
-	puertoMemoria = config_get_int_value(config,"PUERTO_MEMORIA");
-
-	cantidadEntradasTlb = config_get_int_value(config,"ENTRADAS_TLB");
-	algoritmoReemplazoTlb = config_get_string_value(config,"REEMPLAZO_TLB");
-	retardoDeNOOP = config_get_int_value(config,"RETARDO_NOOP");
-
-	puertoDeEscuchaDispath = config_get_int_value(config,"PUERTO_ESCUCHA_DISPATCH");
-	puertoDeEscuchaInterrupt = config_get_int_value(config,"PUERTO_ESCUCHA_INTERRUPT");
-}
 
 void calculosDireccionLogica(int direccionLogica){
 	numeroDePagina = floor(direccionLogica/ tamanioDePagina);
@@ -235,100 +263,6 @@ void leerTamanioDePaginaYCantidadDeEntradas(t_list* listaQueContieneTamanioDePag
 
 }
 
-//Inicializar para poder utilizar la cahce
-t_list* inicializarTLB(){
-
-	tlb = list_create();
-	return tlb;
-}
-
-//Reiniciar la TLB cuando se hace process switch
-void reiniciarTLB(){
-	list_clean(tlb);
-}
-
-//Busqueda de pagina en la TLB
-int chequearMarcoEnTLB(int numeroDePagina){
-	entradaTLB* unaEntradaTLB = malloc(sizeof(entradaTLB));
-
-	for(int i=0;i < list_size(tlb);i++){
-		unaEntradaTLB = list_get(tlb,i);
-
-			if(unaEntradaTLB->nroDePagina == numeroDePagina){
-				unaEntradaTLB->ultimaReferencia = time(NULL);// se referencio a esa pagina
-				return unaEntradaTLB->nroDeMarco; // se puede almacenar este valor en una variable y retornarlo fuera del for
-			}
-	}
-	free(unaEntradaTLB);
-	return -1;
-
-
-}
-
-void agregarEntradaATLB(int marco,int pagina){
-
-	entradaTLB* unaEntrada = malloc(sizeof(entradaTLB));
-
-	unaEntrada->nroDeMarco = marco;
-	unaEntrada->nroDePagina = pagina;
-	unaEntrada->instanteGuardada = time(NULL);
-	unaEntrada->ultimaReferencia = time(NULL);
-
-	list_add(tlb,unaEntrada);
-
-}
-
-void algoritmosDeReemplazoTLB(int pagina,int marco){//probarrrr-----------------------------------
-	if(! strcmp(algoritmoReemplazoTlb,"FIFO")){
-		entradaTLB* unaEntradaTLB = malloc(sizeof(entradaTLB));
-		entradaTLB* otraEntradaTLB = malloc(sizeof(entradaTLB));
-
-		int indiceConInstanteGuardadoMayor = 1;
-
-		for(int i = 0; i<cantidadEntradasTlb;i++){
-			unaEntradaTLB = list_get(tlb,i);
-			otraEntradaTLB = list_get(tlb,indiceConInstanteGuardadoMayor);
-
-			if(unaEntradaTLB->instanteGuardada < otraEntradaTLB->instanteGuardada){
-				indiceConInstanteGuardadoMayor = i;
-			}
-		}
-
-		reemplazarPagina(pagina,marco,indiceConInstanteGuardadoMayor);
-
-	}else if (! strcmp(algoritmoReemplazoTlb,"LRU")){
-		entradaTLB* unaEntradaTLB = malloc(sizeof(entradaTLB)); //repito logica por la ultimaReferencia
-		entradaTLB* otraEntradaTLB = malloc(sizeof(entradaTLB));
-
-		int indiceConUltimaReferenciaMayor = 1;
-
-		for(int i = 0; i<cantidadEntradasTlb;i++){
-			unaEntradaTLB = list_get(tlb,i);
-			otraEntradaTLB = list_get(tlb,indiceConUltimaReferenciaMayor);
-
-			if(unaEntradaTLB->ultimaReferencia < otraEntradaTLB->ultimaReferencia){
-				indiceConUltimaReferenciaMayor = i;
-			}
-		}
-
-		reemplazarPagina(pagina,marco,indiceConUltimaReferenciaMayor);
-	}
-}
-
-void reemplazarPagina(int pagina,int marco ,int indice){//Repito logica con agregarEntradaTLB
-	entradaTLB* unaEntradaTLB = malloc(sizeof(entradaTLB));
-	unaEntradaTLB = list_get(tlb,indice);
-
-	log_info(logger,"Reemplazo la pagina %d en el marco %d cuya entrada es %d",pagina,marco,indice);
-
-	unaEntradaTLB->nroDePagina = pagina;
-	unaEntradaTLB->nroDeMarco = marco;
-	unaEntradaTLB->instanteGuardada = time(NULL);
-	unaEntradaTLB->ultimaReferencia = time(NULL);
-
-	list_replace(tlb,indice,unaEntradaTLB);
-
-}
 
 void enviarEntradaTabla1erNivel(){//pasar entrada y nroTabla1ernivel
 	t_paquete* paquete = crear_paquete(PAQUETE);
@@ -404,6 +338,8 @@ void terminar_programa(int conexionMemoria, t_log* logger, t_config* config){
 	liberar_conexion(conexionMemoria);
 }
 
+
+//generico ver bien que recibe
 int conexionConKernel(void){
 	logger = log_create("cpu.log", "CPU", 1, LOG_LEVEL_DEBUG);
 

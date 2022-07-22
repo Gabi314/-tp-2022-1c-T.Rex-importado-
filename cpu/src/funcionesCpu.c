@@ -95,11 +95,11 @@ t_list* recibir_paquete(int socket_cliente)
 }
 
 //----------------------------- Para ser cliente de Memoria -------------------------------------------------
-void enviar_mensaje(char* mensaje, int socket_cliente)
+void enviar_mensaje(char* mensaje, int socket_cliente,int cod_op)
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
 
-	paquete->codigo_operacion = MENSAJE;
+	paquete->codigo_operacion = cod_op;
 	paquete->buffer = malloc(sizeof(t_buffer));
 	paquete->buffer->size = strlen(mensaje) + 1;
 	paquete->buffer->stream = malloc(paquete->buffer->size);
@@ -232,10 +232,9 @@ void agregarInstruccionesAlPaquete(instruccion* unaInstruccion) {
 void enviar_paquete(t_paquete* paquete, int socket_cliente)
 {
 	int bytes = paquete->buffer->size + 2*sizeof(int);
-	void* a_enviar = serializar_paquete(paquete, bytes);// void* se utiliza para mandar espacion de usuario a memoria a escribir
+	void* a_enviar = serializar_paquete(paquete, bytes);
 
-	send(socket_cliente, a_enviar, bytes, 0);// luego de esto, recibo el paquete de memoria tam_pagina y cant_entradas
-
+	send(socket_cliente, a_enviar, bytes, 0);
 
 	free(a_enviar);
 }

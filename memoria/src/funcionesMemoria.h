@@ -24,7 +24,9 @@ typedef enum
 	PAQUETE2,
 	PAQUETE3,
 	PAQUETE4,
-	PAQUETE5
+	PAQUETE5,
+	SUSPENSION,
+	DESUSPENSION
 }op_code;
 
 typedef struct
@@ -41,6 +43,7 @@ typedef struct
 
 t_log* logger;
 int clienteCpu;
+int clienteKernel;
 
 void* recibir_buffer(int*, int);
 void recibir_mensaje(int);
@@ -54,6 +57,9 @@ t_list* recibir_paquete_int(int);
 
 void recibir_mensaje(int);
 int recibir_operacion(int);
+//Para envios a Kernel
+int conexionConKernel();
+void enviarNroTabla1erNivel(int ,int);
 //---------------------------
 
 //Para envios a cpu
@@ -102,7 +108,6 @@ typedef struct{
 
 typedef struct{
 	int numeroDeMarco;//Hacer lista de marcos, el indice en la lista es el numero de marco, la cantidad de marcos es
-	uint32_t valor;//no haria falta
 	int marcoLibre;// tam memoria/tam pagina
 }marco;
 
@@ -125,7 +130,9 @@ int buscarNroTablaDe1erNivel(int);
 int buscarNroTablaDe2doNivel(int);
 marco* buscarMarco(int);
 
+void crearDirectorio();
 void crearSwap(int);
+char* nombreArchivoProceso(int);
 
 void escribirElPedido(uint32_t,int,int);
 uint32_t leerElPedido(int,int);
@@ -146,6 +153,8 @@ int indiceDeEntradaAReemplazar(int);
 char* nombreArchivoProceso(int);
 void escribirEnSwap(int,int,int);
 void leerDeSwap(int,int);
+
+void suspensionDeProceso(int);
 
 
 entradaTabla2doNivel* entradaCargadaConMarcoAsignado(int);
