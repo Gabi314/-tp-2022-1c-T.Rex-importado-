@@ -1,2 +1,5 @@
 [INFO] 14:06:08:958 Servidor/(8270:8270): Servidor listo para recibir al cliente
 [INFO] 16:52:52:852 Servidor/(9706:9706): Servidor listo para recibir al cliente
+[INFO] 11:07:25:092 Servidor/(4344:4344): Servidor listo para recibir al cliente
+[INFO] 11:07:25:099 Servidor/(4344:4347): [EXIT] Finaliza el proceso de PID: 106136
+[INFO] 11:07:25:103 Servidor/(4344:4349): [EXEC] No se logró encontrar un proceso para ejecutar

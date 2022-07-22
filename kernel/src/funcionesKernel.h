@@ -73,13 +73,9 @@ typedef struct
 	float estimacion_anterior;
 	clock_t rafagaMs;
 	clock_t horaDeIngresoAExe;
-	clock_t horaDeIngresoAReady;
-	int tiempoEspera;
 	t_estado estado;
+	bool suspendido;
 	int socket_cliente;
-	int socketMemoria;
-	float tiempoEjecucionRealInicial;
-	float tiempoEjecucionAcumulado;
 
 } t_pcb;
 

@@ -506,34 +506,14 @@ void agregarAReady(t_pcb* proceso){
 	//pthread_mutex_lock(&mutexReady);
 
 	if (gradoMultiprogramacionActual <= gradoMultiprogramacionTotal){
-
-		switch(algoritmoPlanificacionActual){
-
-			//CASO FIFO
-			case FIFO:
-				list_add(colaReady, proceso);
-				log_info(logger, "[READY] Entra el proceso de PID: %d a la cola.", proceso->idProceso);
-				gradoMultiprogramacionActual ++; //vean si conviene más esto o el semáforo
-				sem_post(&gradoDeMultiprogramacion); //yo en principio me decanto por el semáforo
-				break;
-
-			//CASO SJF con desalojo
-			case SRT:
-				//mandar interrupcion a cpu a traves de la conexxion interrupt para indicar que debe desalojar el proceso que esta ejecutando
-				//	if(hay un proceso en ejecucion){ encolar el proceso} // puede que esto sirva tambien
-				list_add(colaReady, proceso);
-				log_info(logger, "[READY] Entra el proceso de PID: %d a la cola.", proceso->idProceso);
-				gradoMultiprogramacionActual ++;
-				sem_post(&gradoDeMultiprogramacion);
-				break;
-
-			default:
-				break;
+		proceso->suspendido = false;
+		list_add(colaReady, proceso);
+		log_info(logger, "[READY] Entra el proceso de PID: %d a la cola.", proceso->idProceso);
+		gradoMultiprogramacionActual ++;
+		if(algoritmoPlanificacionActual == SRT){
+			//Mandar interrupcion a CPU
 		}
-
-
-
-				//Aca hay que mandar un mensaje a memoria para que inicialice sus estructuras
+		//Aca hay que mandar un mensaje a memoria para que inicialice sus estructuras
 	}
 	else{
 		log_info(logger, "No se pueden agregar más procesos a READY  se alcanzó el grado de multiprogramácion maximo");
@@ -598,7 +578,7 @@ void agregarASuspendedBlocked(t_pcb* proceso){
 
 	//pthread_mutex_lock(&mutexBlockSuspended);
 
-	/*proceso->suspendido = true;*/ proceso->estado = SUSP_BLOCKED;
+	proceso->suspendido = true;
 
 	list_add(colaSuspendedBlocked, proceso);
 
@@ -659,7 +639,7 @@ t_pcb* sacarDeSuspendedReady(){
 	//pthread_mutex_lock(&mutexReadySuspended);
 
 	t_pcb* proceso = queue_pop(colaSuspendedReady);
-	/*proceso->suspendido = false;*/
+	proceso->suspendido = false;
 	log_info(logger, "[SUSPENDEDREADY] Sale el proceso de PID: %d de la cola.", proceso->idProceso);
 
 	//pthread_mutex_unlock(&mutexReadySuspended);
@@ -680,6 +660,47 @@ void ejecutar(t_pcb* proceso){
 	//Aca mando el proceso a cpu y guardo el momento en el que arranca a ejecutar para el calculo de la estimacion
 }
 
+
+void atenderDesalojo(){
+	t_pcb* proceso;
+
+	while(recv(socketCpuInterrupt,&proceso,sizeof(t_pcb),0)){
+		time_t a = time(NULL);
+		float tiempoDeFin = ((float) a)*1000;
+		proceso->rafagaMs = proceso->horaDeIngresoAExe - tiempoDeFin;
+		estimarRafaga(proceso);
+
+		agregarAReady(proceso);
+
+
+	}
+}
+
+
+void atenderIO(){
+	t_pcb* proceso;
+	while(recv(socketCpuDispatch, &proceso,sizeof(t_pcb),0)){ // cuando reciba del cpu una interrupcion
+		time_t a = time(NULL);									//de I/O se encarga de atenderla
+		float tiempoDeFin = ((float) a)*1000;
+		proceso->rafagaMs = proceso->horaDeIngresoAExe - tiempoDeFin;
+		estimarRafaga(proceso);
+
+		agregarABlocked(proceso);
+
+		usleep(obtenerTiempoDeBloqueo(proceso)*1000);
+
+		if(proceso->suspendido == true){
+			sacarDeSuspendedBlocked(proceso);
+			agregarAReadySuspended(proceso);
+		}else{
+			sacarDeBlocked(proceso);
+			agregarAReady(proceso);
+		}
+
+	}
+}
+
+
 // Las funciones siguientes son hilos del planificador
 
 void newAReady(){
@@ -695,7 +716,6 @@ void newAReady(){
 
 			t_pcb* proceso = sacarDeNew();
 
-			//carpincho->rafagaAnterior = 0;
 			proceso->estimacion_anterior = estimacionInicial;
 			proceso->estimacion_rafaga = estimacionInicial;	//"estimacionInicial" va a ser una variable que vamos a obtener del cfg
 
@@ -861,8 +881,6 @@ void atender_consola(int nuevo_cliente) {
 			PCB->estimacion_rafaga= estimacionInicial;
 			PCB->estado = NEW;
 			PCB->socket_cliente = nuevo_cliente; // acá guardamos el socket
-			PCB->tiempoEjecucionRealInicial = 0 ;
-			PCB->tiempoEjecucionAcumulado = 0;
 
 
 			agregarANew(PCB);
@@ -1165,14 +1183,9 @@ void atender_consola_prueba(int nuevo_cliente) {
 				PCB->estimacion_rafaga = estimacionInicial;
 				PCB->estimacion_anterior = -1;
 				PCB->rafagaMs = 0;
-				PCB->horaDeIngresoAExe = 0 ;
-				PCB->horaDeIngresoAReady = 0;
-				PCB->tiempoEspera = 0;
+				PCB->horaDeIngresoAExe = 0;
 				PCB->estado = NEW;
 				PCB->socket_cliente = nuevo_cliente;
-				PCB->socketMemoria = 0;
-				PCB->tiempoEjecucionRealInicial = 0 ;
-				PCB->tiempoEjecucionAcumulado = 0;
 
 				log_info(logger,"inicializamos el pcb");
 
