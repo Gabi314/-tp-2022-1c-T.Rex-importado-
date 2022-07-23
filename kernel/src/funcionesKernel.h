@@ -196,7 +196,7 @@ void agregarABlocked(t_pcb* proceso);
 void sacarDeBlocked(t_pcb* proceso);
 void agregarASuspendedBlocked(t_pcb* proceso);
 void sacarDeSuspendedBlocked(t_pcb* proceso);
-void agregarAReadySuspended(t_pcb* proceso);
+void agregarASuspendedReady(t_pcb* proceso);
 t_pcb* sacarDeReadySuspended();
 t_pcb* procesoAEjecutar;
 

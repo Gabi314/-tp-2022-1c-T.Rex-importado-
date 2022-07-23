@@ -606,7 +606,7 @@ void sacarDeSuspendedBlocked(t_pcb* proceso){
 	//pthread_mutex_unlock(&mutexBlockSuspended);
 }
 
-void agregarAReadySuspended(t_pcb* proceso){
+void agregarASuspendedReady(t_pcb* proceso){
 
 	//pthread_mutex_lock(&mutexReadySuspended);
 
@@ -673,17 +673,29 @@ void atenderIO(){
 		proceso->rafagaMs = proceso->horaDeIngresoAExe - tiempoDeFin;
 		estimarRafaga(proceso);
 
+
 		agregarABlocked(proceso);
-// IF (!supera tiempo maximo)
-		usleep(obtenerTiempoDeBloqueo(proceso)*1000);
-// ELSE
-		// BLOCKEDASUSPENSION
-		if(proceso->suspendido == true){
-			sacarDeSuspendedBlocked(proceso);
-			agregarAReadySuspended(proceso);
-		}else{
+
+		if(!supera_tiempo_maximo_bloqueado(proceso)){
+
+			usleep(obtenerTiempoDeBloqueo(proceso)*1000);
 			sacarDeBlocked(proceso);
 			agregarAReady(proceso);
+
+		}else{
+
+			usleep(tiempoMaximoBloqueado*1000);
+
+			sacarDeBlocked(proceso);
+
+			agregarASuspendedBlocked(proceso);
+
+			//Avisar a memoria
+
+			usleep((obtenerTiempoDeBloqueo(proceso) - tiempoMaximoBloqueado)*1000);
+
+			agregarASuspendedReady(proceso);
+
 		}
 
 	}
@@ -745,36 +757,6 @@ void readyAExe(){
 	}
 }
 
-void blockedASuspension(){
-
-	while(1){
-
-		//sem_wait(&analizarSuspension);
-
-
-		t_pcb* procesoASuspender = list_find(colaBlocked,supera_tiempo_maximo_bloqueado);
-
-		if(procesoASuspender != NULL){
-
-			//sem_wait(&contadorProcesosEnMemoria);
-
-			usleep(tiempoMaximoBloqueado*1000);
-
-			sacarDeBlocked(procesoASuspender);
-
-			agregarASuspendedBlocked(procesoASuspender);
-
-			//Avisar a memoria
-
-			usleep((obtenerTiempoDeBloqueo(procesoASuspender) - tiempoMaximoBloqueado)*1000); //multiplico por 1000 para pasar de milisegundos a microsegundos
-			// PASA A SUSPENDIDO Y LISTO
-			//sem_post(&multiprogramacion);
-		}
-
-		//sem_post(&suspensionFinalizada);
-	}
-}
-
 
 void suspensionAReady(){
 
@@ -787,13 +769,13 @@ void suspensionAReady(){
 			//sem_post(&largoPlazo);
 		}else{
 
-		t_pcb* proceso = sacarDeSuspendedReady();
+			t_pcb* proceso = sacarDeSuspendedReady();
 
-		//sem_wait(&multiprogramacion);
+			//sem_wait(&multiprogramacion);
 
-		agregarAReady(proceso);
+			agregarAReady(proceso);
 
-		//sem_post(&contadorProcesosEnMemoria);
+			//sem_post(&contadorProcesosEnMemoria);
 		}
 	}
 }
@@ -966,7 +948,7 @@ void suspender(){
 void desbloquear_suspendido(){
 		while(1){
 		t_pcb * proceso = queue_pop(colaSuspendedBlocked);
-		agregarAReadySuspended(proceso);
+		agregarASuspendedReady(proceso);
 		}
 	}
 
