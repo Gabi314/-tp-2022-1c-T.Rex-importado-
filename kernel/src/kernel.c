@@ -14,9 +14,9 @@ int main(void) {
 	 int hiloAdminCreado[6];
 
 
-	 	/*int servidor = iniciar_servidor();
+	 	/*
 
-	 	int hiloCreado = pthread_create(&hilo0, NULL,&recibir_consola,servidor);
+	 	int hiloCreado = pthread_create(&hilo0, NULL,&recibir_consola,socketServidor);
 	 	pthread_detach(hiloCreado);
 		*/
 
@@ -107,6 +107,9 @@ void inicializar_semaforos(){
 	sem_init(&cpuDisponible,0,1);
 	sem_init(&gradoDeMultiprogramacion,0,gradoMultiprogramacionTotal);
 	pthread_mutex_init(&asignarMemoria,NULL);
+	pthread_mutex_init(&colaReadyFIFO,NULL);
+	pthread_mutex_init(&colaReadySRT,NULL);
+	pthread_mutex_init(&ejecucion,NULL);
 
 
 }

@@ -258,6 +258,9 @@ sem_t gradoDeMultiprogramacion;
 sem_t cpuDisponible;
 
 pthread_mutex_t asignarMemoria;
+pthread_mutex_t colaReadyFIFO;
+pthread_mutex_t colaReadySRT;
+pthread_mutex_t ejecucion;
 
 
 //-------------VARIABLES Y FUNCIONES DE PRUEBA -------------------------

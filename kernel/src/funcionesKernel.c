@@ -380,7 +380,9 @@ t_pcb* obtenerSiguienteDeReady(){
 
 
 t_pcb* obtenerSiguienteFIFO(){
+	pthread_mutex_lock(&colaReadyFIFO);
 	t_pcb* procesoPlanificado = list_get(colaReady,0);
+	pthread_mutex_unlock(&colaReadyFIFO);
 	return procesoPlanificado;
 }
 
@@ -392,9 +394,10 @@ t_pcb* obtenerSiguienteSRT(){
 	int indexARemover;
 	float shortestJob;
 
-	//pthread_mutex_lock(&mutexReady);
+	pthread_mutex_lock(&colaReadySRT); //----------------------------------
+
 	procesoAux = list_get(colaReady,0);
-	//pthread_mutex_unlock(&mutexReady);
+
 
 	indexARemover = 0;
 	shortestJob = procesoAux->estimacion_rafaga;
@@ -415,7 +418,8 @@ t_pcb* obtenerSiguienteSRT(){
 	}
 	procesoPlanificado = list_remove(colaReady, indexARemover);
 
-	//pthread_mutex_unlock(&mutexReady);
+	pthread_mutex_unlock(&colaReadySRT); //--------------------------------------
+
 
 	return procesoPlanificado;
 }
@@ -642,7 +646,9 @@ void ejecutar(t_pcb* proceso){
 	time_t a = time(NULL);
 	proceso->horaDeIngresoAExe = ((float) a)*1000;
 	proceso->estado = EXEC;
+	pthread_mutex_lock(&ejecucion);
 	procesoEnEjecucion = proceso;
+	pthread_mutex_unlock(&ejecucion);
 	send(socketCpuDispatch, proceso, proceso->tamanioProceso, 0);
 
 	//Aca mando el proceso a cpu y guardo el momento en el que arranca a ejecutar para el calculo de la estimacion
@@ -665,6 +671,8 @@ void atenderDesalojo(){
 }
 
 
+
+
 void atenderIO(){
 	t_pcb* proceso;
 	while(recv(socketCpuDispatch, &proceso,sizeof(t_pcb),0)){ // cuando reciba del cpu una interrupcion
@@ -683,6 +691,7 @@ void atenderIO(){
 			agregarAReadySuspended(proceso);
 		}else{
 			sacarDeBlocked(proceso);
+
 			agregarAReady(proceso);
 		}
 
@@ -725,19 +734,15 @@ void readyAExe(){
 
 		if(procesoAEjecutar != NULL) { // por las dudas dejo este if, pero se supone que los semaforos garantizan que no sea NULL
 
-			//pthread_mutex_lock(&mutexExe);
 			ejecutar(procesoAEjecutar);
-			//pthread_mutex_unlock(&mutexExe);
+
 
 			if(algoritmoPlanificacion == SRT){
 				log_info(logger, "[EXEC] Ingresa el proceso de PID: %d con una rafaga de ejecucion estimada de %f milisegundos.", procesoAEjecutar->idProceso, procesoAEjecutar->estimacion_rafaga);
 			}else{
 				log_info(logger, "[EXEC] Ingresa el proceso de PID: %d", procesoAEjecutar->idProceso);
-			} //ver bien para el caso FIFO
+			}
 
-
-			//sem_post(&analizarSuspension); // Despues de que un proceso se va de Ready y hace su transicion, se analiza la suspension
-			//sem_wait(&suspensionFinalizada);
 
 		}else{
 			log_info(logger, "[EXEC] No se logró encontrar un proceso para ejecutar");
@@ -919,7 +924,7 @@ void finalizar_proceso_y_avisar_a_memoria() {
 		t_pcb * proceso = recibirProcesoAFinalizar(); //falta desarrollar
 		terminarEjecucion(proceso);
 
-		enviarMensajeAMemoria("Liberar estructuras"); // falta desarrollar
+	//	enviarMensajeAMemoria("Liberar estructuras"); // falta desarrollar
 		}
 	}
 
