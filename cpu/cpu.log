@@ -2989,3 +2989,56 @@
 
 [INFO] 18:47:20:529 CPU/(3688:3688): Finalizo el proceso 
 [INFO] 18:47:20:529 CPU/(3688:3688): Termino cpu
+[INFO] 19:42:37:640 CPU/(7874:7874): Hola memoria, soy cpu
+[INFO] 19:43:42:231 CPU/(7959:7959): Hola memoria, soy cpu
+[INFO] 19:43:42:292 CPU/(7959:7959): Me llegaron los siguientes valores:
+[INFO] 19:43:42:292 CPU/(7959:7959): tamanio de pagina: 256 
+[INFO] 19:43:42:292 CPU/(7959:7959): entradas por tabla: 4 
+
+[INFO] 19:43:42:292 CPU/(7959:7959): ----------------EXECUTE WRITE----------------
+[INFO] 19:43:42:292 CPU/(7959:7959): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 19:43:42:292 CPU/(7959:7959): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 19:43:42:293 CPU/(7959:7959): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 19:43:42:293 CPU/(7959:7959): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 19:43:42:293 CPU/(7959:7959): Me llego el marco que es 0
+[INFO] 19:43:43:293 CPU/(7959:7959): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 19:43:43:293 CPU/(7959:7959): Le envio a memoria el valor a escribir 1000
+[INFO] 19:43:43:331 CPU/(7959:7959): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 19:43:43:331 CPU/(7959:7959): ----------------FINALIZA WRITE----------------
+
+[INFO] 19:43:43:331 CPU/(7959:7959): ----------------EXECUTE WRITE----------------
+[INFO] 19:43:43:331 CPU/(7959:7959): Le envio a memoria direccion fisica: Marco:0 y Offset: 4
+[INFO] 19:43:43:331 CPU/(7959:7959): Le envio a memoria el valor a escribir 1001
+[INFO] 19:43:43:371 CPU/(7959:7959): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 19:43:43:371 CPU/(7959:7959): ----------------FINALIZA WRITE----------------
+
+[INFO] 19:43:43:371 CPU/(7959:7959): ----------------EXECUTE WRITE----------------
+[INFO] 19:43:43:371 CPU/(7959:7959): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 19:43:43:371 CPU/(7959:7959): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 19:43:43:372 CPU/(7959:7959): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 19:43:43:372 CPU/(7959:7959): Le envio a memoria entrada de tabla de 2do nivel que es 1
+[INFO] 19:43:43:372 CPU/(7959:7959): Me llego el marco que es 1
+[INFO] 19:43:43:372 CPU/(7959:7959): TLB: Reemplazo la pagina 1 en el marco 1 cuya entrada es 0
+[INFO] 19:43:43:372 CPU/(7959:7959): Le envio a memoria direccion fisica: Marco:1 y Offset: 4
+[INFO] 19:43:43:372 CPU/(7959:7959): Le envio a memoria el valor a escribir 2000
+[INFO] 19:43:43:411 CPU/(7959:7959): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 19:43:43:411 CPU/(7959:7959): ----------------FINALIZA WRITE----------------
+
+[INFO] 19:43:43:411 CPU/(7959:7959): ----------------EXECUTE COPY----------------
+[INFO] 19:43:43:411 CPU/(7959:7959): Le envio a memoria para que copie de dir fisica1: (marco: 1 offset: 4) a dir fisica2: (marco: 1 offset: 0)
+[INFO] 19:43:43:412 CPU/(7959:7959): ----------------FINALIZA COPY----------------
+
+[INFO] 19:43:43:412 CPU/(7959:7959): ----------------EXECUTE WRITE----------------
+[INFO] 19:43:43:412 CPU/(7959:7959): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 19:43:43:412 CPU/(7959:7959): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 19:43:43:451 CPU/(7959:7959): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 19:43:43:451 CPU/(7959:7959): Le envio a memoria entrada de tabla de 2do nivel que es 2
+[INFO] 19:43:43:451 CPU/(7959:7959): Me llego el marco que es 2
+[INFO] 19:43:43:451 CPU/(7959:7959): TLB: Reemplazo la pagina 2 en el marco 2 cuya entrada es 0
+[INFO] 19:43:43:451 CPU/(7959:7959): Le envio a memoria direccion fisica: Marco:2 y Offset: 0
+[INFO] 19:43:43:451 CPU/(7959:7959): Le envio a memoria el valor a escribir 3000
+[INFO] 19:43:43:491 CPU/(7959:7959): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 19:43:43:491 CPU/(7959:7959): ----------------FINALIZA WRITE----------------
+
+[INFO] 19:43:43:491 CPU/(7959:7959): Finalizo el proceso 
+[INFO] 19:43:43:492 CPU/(7959:7959): Termino cpu

@@ -171,3 +171,8 @@
 [INFO] 18:47:14:021 KERNEL/(3672:3672): Hola memoria, soy Kernel
 [INFO] 18:47:14:024 KERNEL/(3672:3672): Le envio a memoria mi pid que es 0
 [INFO] 18:47:14:042 KERNEL/(3672:3672): Me llego la tabla de primero nivel nro: 0
+[INFO] 19:42:00:130 KERNEL/(7819:7819): Hola memoria, soy Kernel
+[INFO] 19:42:00:719 KERNEL/(7819:7819): Le envio a memoria mi pid que es 0
+[INFO] 19:43:34:478 KERNEL/(7945:7945): Hola memoria, soy Kernel
+[INFO] 19:43:34:479 KERNEL/(7945:7945): Le envio a memoria mi pid que es 0
+[INFO] 19:43:34:511 KERNEL/(7945:7945): Me llego la tabla de primero nivel nro: 0

@@ -2659,3 +2659,52 @@
 
 [ERROR] 18:47:20:530 MEMORIA/(3655:3655): Se desconecto el cliente. Terminando conexion
 [INFO] 18:47:20:530 MEMORIA/(3655:3655): Fin de memoria
+[INFO] 19:41:47:369 MEMORIA/(7800:7800): Ya existe la direccion de swap
+[INFO] 19:41:47:604 MEMORIA/(7800:7800): Memoria lista para recibir a Kernel
+[INFO] 19:43:27:622 MEMORIA/(7928:7928): Ya existe la direccion de swap
+[INFO] 19:43:27:677 MEMORIA/(7928:7928): Memoria lista para recibir a Kernel
+[INFO] 19:43:34:478 MEMORIA/(7928:7928): Se conecto un cliente!
+[INFO] 19:43:34:511 MEMORIA/(7928:7928): Envio el numero de tabla de 1er nivel a Kernel que es 0
+[ERROR] 19:43:34:512 MEMORIA/(7928:7928): Se desconecto el cliente. Terminando conexion
+[INFO] 19:43:34:512 MEMORIA/(7928:7928): Memoria lista para recibir a Cpu
+[INFO] 19:43:42:231 MEMORIA/(7928:7928): Se conecto un cliente!
+[INFO] 19:43:42:292 MEMORIA/(7928:7928): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 19:43:42:292 MEMORIA/(7928:7928): Envio el tamanio de pag y cant entradas
+[INFO] 19:43:42:292 MEMORIA/(7928:7928): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 19:43:42:292 MEMORIA/(7928:7928): Envio el numero de tabla de 2do nivel 0
+[INFO] 19:43:42:293 MEMORIA/(7928:7928): Me llego  la entrada de segundo nivel 0
+[INFO] 19:43:42:293 MEMORIA/(7928:7928): Envio el marco correspondiente el cual es 0
+[INFO] 19:43:43:293 MEMORIA/(7928:7928): Me llego el marco 0 con desplazamiento 0
+[INFO] 19:43:43:331 MEMORIA/(7928:7928): -------------------WRITE-------------------
+[INFO] 19:43:43:331 MEMORIA/(7928:7928): Me llego el valor a escribir: 1000
+[INFO] 19:43:43:331 MEMORIA/(7928:7928): -------------------WRITE-------------------
+
+[INFO] 19:43:43:331 MEMORIA/(7928:7928): Me llego el marco 0 con desplazamiento 4
+[INFO] 19:43:43:371 MEMORIA/(7928:7928): -------------------WRITE-------------------
+[INFO] 19:43:43:371 MEMORIA/(7928:7928): Me llego el valor a escribir: 1001
+[INFO] 19:43:43:371 MEMORIA/(7928:7928): -------------------WRITE-------------------
+
+[INFO] 19:43:43:371 MEMORIA/(7928:7928): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 19:43:43:371 MEMORIA/(7928:7928): Envio el numero de tabla de 2do nivel 0
+[INFO] 19:43:43:372 MEMORIA/(7928:7928): Me llego  la entrada de segundo nivel 1
+[INFO] 19:43:43:372 MEMORIA/(7928:7928): Envio el marco correspondiente el cual es 1
+[INFO] 19:43:43:372 MEMORIA/(7928:7928): Me llego el marco 1 con desplazamiento 4
+[INFO] 19:43:43:411 MEMORIA/(7928:7928): -------------------WRITE-------------------
+[INFO] 19:43:43:411 MEMORIA/(7928:7928): Me llego el valor a escribir: 2000
+[INFO] 19:43:43:411 MEMORIA/(7928:7928): -------------------WRITE-------------------
+
+[INFO] 19:43:43:412 MEMORIA/(7928:7928): -------------------COPIAR-------------------
+[INFO] 19:43:43:412 MEMORIA/(7928:7928): Se copio el valor 2000 en la dir fisica:(marco 1 offset 0)
+[INFO] 19:43:43:412 MEMORIA/(7928:7928): -------------------COPIAR-------------------
+
+[INFO] 19:43:43:451 MEMORIA/(7928:7928): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 19:43:43:451 MEMORIA/(7928:7928): Envio el numero de tabla de 2do nivel 0
+[INFO] 19:43:43:451 MEMORIA/(7928:7928): Me llego  la entrada de segundo nivel 2
+[INFO] 19:43:43:451 MEMORIA/(7928:7928): Envio el marco correspondiente el cual es 2
+[INFO] 19:43:43:452 MEMORIA/(7928:7928): Me llego el marco 2 con desplazamiento 0
+[INFO] 19:43:43:491 MEMORIA/(7928:7928): -------------------WRITE-------------------
+[INFO] 19:43:43:491 MEMORIA/(7928:7928): Me llego el valor a escribir: 3000
+[INFO] 19:43:43:491 MEMORIA/(7928:7928): -------------------WRITE-------------------
+
+[ERROR] 19:43:43:492 MEMORIA/(7928:7928): Se desconecto el cliente. Terminando conexion
+[INFO] 19:43:43:493 MEMORIA/(7928:7928): Fin de memoria
