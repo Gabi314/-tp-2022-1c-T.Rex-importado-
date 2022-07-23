@@ -72,7 +72,8 @@ typedef struct
 	clock_t rafagaMs;
 	clock_t horaDeIngresoAExe;
 	t_estado estado;
-	bool suspendido;
+	bool suspendido; //parece que ya no hace falta
+	bool aFinalizar;
 	int socket_cliente;
 
 } t_pcb;

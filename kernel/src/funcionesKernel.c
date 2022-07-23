@@ -673,37 +673,47 @@ void atenderDesalojo(){
 
 
 
-void atenderIO(){
+void atenderIOyEXIT(){
 	t_pcb* proceso;
-	while(recv(socketCpuDispatch, &proceso,sizeof(t_pcb),0)){ // cuando reciba del cpu una interrupcion
-		time_t a = time(NULL);									//de I/O se encarga de atenderla
-		float tiempoDeFin = ((float) a)*1000;
-		proceso->rafagaMs = proceso->horaDeIngresoAExe - tiempoDeFin;
-		estimarRafaga(proceso);
+	while(recv(socketCpuDispatch, &proceso,sizeof(t_pcb),0)){
+		// cuando reciba del cpu una interrupcion
+		if (!proceso->aFinalizar) {
+			time_t a = time(NULL);									//de I/O se encarga de atenderla
+			float tiempoDeFin = ((float) a)*1000;
+			proceso->rafagaMs = proceso->horaDeIngresoAExe - tiempoDeFin;
+			estimarRafaga(proceso);
 
 
-		agregarABlocked(proceso);
+			agregarABlocked(proceso);
 
-		if(!supera_tiempo_maximo_bloqueado(proceso)){
+			if(!supera_tiempo_maximo_bloqueado(proceso)){
 
-			usleep(obtenerTiempoDeBloqueo(proceso)*1000);
-			sacarDeBlocked(proceso);
+				usleep(obtenerTiempoDeBloqueo(proceso)*1000);
+				sacarDeBlocked(proceso);
 
-			agregarAReady(proceso);
+				agregarAReady(proceso);
 
-		}else{
+			}else{
 
-			usleep(tiempoMaximoBloqueado*1000);
+				usleep(tiempoMaximoBloqueado*1000);
 
-			sacarDeBlocked(proceso);
+				sacarDeBlocked(proceso);
 
-			agregarASuspendedBlocked(proceso);
+				agregarASuspendedBlocked(proceso);
 
-			//Avisar a memoria
+				//Avisar a memoria
 
-			usleep((obtenerTiempoDeBloqueo(proceso) - tiempoMaximoBloqueado)*1000);
+				usleep((obtenerTiempoDeBloqueo(proceso) - tiempoMaximoBloqueado)*1000);
 
-			agregarASuspendedReady(proceso);
+				agregarASuspendedReady(proceso);
+
+			}
+
+
+		}
+
+		else {
+			terminarEjecucion(proceso);
 
 		}
 

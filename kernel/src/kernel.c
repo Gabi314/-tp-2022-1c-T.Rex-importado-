@@ -29,7 +29,7 @@ int main(void) {
 	 	hiloAdminCreado[0] = pthread_create(&hiloAdmin[0],NULL,&asignar_memoria,NULL);
 	 	hiloAdminCreado[1] = pthread_create(&hiloAdmin[1],NULL,&finalizar_proceso_y_avisar_a_memoria,NULL);
 	 	hiloAdminCreado[2] = pthread_create(&hiloAdmin[2],NULL,&finalizar_proceso_y_avisar_a_consola,NULL);
-	 	hiloAdminCreado[3] = pthread_create(&hiloAdmin[3],NULL,&planificar,NULL);
+	 	hiloAdminCreado[3] = pthread_create(&hiloAdmin[3],NULL,&readyAExe,NULL);
 	 	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&suspender,NULL);
 		hiloAdminCreado[5] = pthread_create(&hiloAdmin[5],NULL,&desbloquear_suspendido,NULL);
 
