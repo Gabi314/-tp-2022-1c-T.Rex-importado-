@@ -1,21 +1,177 @@
-[INFO] 13:02:33:680 MEMORIA/(14325:14325): Memoria lista para recibir a Cpu
-[INFO] 13:04:21:619 MEMORIA/(14590:14590): Memoria lista para recibir a Cpu
-[INFO] 13:07:53:398 MEMORIA/(15118:15118): Memoria lista para recibir a Cpu
-[INFO] 13:08:04:828 MEMORIA/(15118:15118): Se conecto un cliente!
-[INFO] 13:08:04:828 MEMORIA/(15118:15118): Me llegaron los siguientes valores:
+[INFO] 21:18:08:653 MEMORIA/(23415:23415): Fin de memoria
+[INFO] 21:19:56:792 MEMORIA/(23712:23712): Fin de memoria
+[INFO] 21:20:10:312 MEMORIA/(23765:23765): Memoria lista para recibir a Cpu o Kernel
+[INFO] 21:20:29:657 MEMORIA/(23765:23765): Se conecto un cliente!
+[INFO] 21:20:29:661 MEMORIA/(23765:23765): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 21:20:29:662 MEMORIA/(23765:23765): Envio el tamanio de pag y cant entradas
+[INFO] 21:20:29:663 MEMORIA/(23765:23765): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 21:20:29:663 MEMORIA/(23765:23765): Envio el numero de tabla de 2do nivel
+[INFO] 21:20:29:664 MEMORIA/(23765:23765): Me llego  la entrada de segundo nivel 0
+[INFO] 21:20:29:664 MEMORIA/(23765:23765): Envio el marco correspondiente el cual es 0
+[INFO] 21:20:30:668 MEMORIA/(23765:23765): Me llego el marco 0 con desplazamiento 0
+[INFO] 21:20:30:706 MEMORIA/(23765:23765): -------------------WRITE-------------------
+[INFO] 21:20:30:706 MEMORIA/(23765:23765): Me llego el valor a escribir: 12
+[INFO] 21:20:30:706 MEMORIA/(23765:23765): -------------------WRITE-------------------
 
-[INFO] 13:08:04:828 MEMORIA/(15118:15118): pido archivo configuracion de memoria
-[ERROR] 13:08:04:828 MEMORIA/(15118:15118): Cpu se desconecto. Terminando conexion
-[INFO] 15:19:01:379 MEMORIA/(5233:5233): Memoria lista para recibir a Cpu
-[INFO] 15:21:16:037 MEMORIA/(5596:5596): Memoria lista para recibir a Cpu o Kernel
-[INFO] 15:21:24:497 MEMORIA/(5233:5233): Se conecto un cliente!
-[INFO] 15:21:24:508 MEMORIA/(5233:5233): Me llegaron los siguientes valores:
+[INFO] 21:20:30:706 MEMORIA/(23765:23765): Me llego el marco 0 con desplazamiento 0
+[INFO] 21:20:30:706 MEMORIA/(23765:23765): -------------------READ-------------------
+[INFO] 21:20:30:706 MEMORIA/(23765:23765): Valor leido: 12
+[INFO] 21:20:30:707 MEMORIA/(23765:23765): -------------------READ-------------------
 
-[INFO] 15:21:24:508 MEMORIA/(5233:5233): pido archivo configuracion de memoria
-[ERROR] 15:21:24:509 MEMORIA/(5233:5233): Cpu se desconecto. Terminando conexion
-[INFO] 15:23:31:766 MEMORIA/(5966:5966): Memoria lista para recibir a Cpu o Kernel
-[INFO] 15:23:36:590 MEMORIA/(5966:5966): Se conecto un cliente!
-[INFO] 15:23:36:606 MEMORIA/(5966:5966): Me llegaron los siguientes valores:
+[INFO] 21:20:30:745 MEMORIA/(23765:23765): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 21:20:30:745 MEMORIA/(23765:23765): Envio el numero de tabla de 2do nivel
+[INFO] 21:20:30:746 MEMORIA/(23765:23765): Me llego  la entrada de segundo nivel 2
+[INFO] 21:20:30:746 MEMORIA/(23765:23765): Envio el marco correspondiente el cual es 1
+[INFO] 21:20:31:747 MEMORIA/(23765:23765): -------------------COPIAR-------------------
+[INFO] 21:20:31:747 MEMORIA/(23765:23765): Se copio el valor 12 en la dir fisica:(marco 1 offset 4)
+[INFO] 21:20:31:747 MEMORIA/(23765:23765): -------------------COPIAR-------------------
 
-[INFO] 15:23:36:606 MEMORIA/(5966:5966): pido archivo configuracion de memoria
-[ERROR] 15:23:36:607 MEMORIA/(5966:5966): Se desconecto el cliente. Terminando conexion
+[INFO] 21:20:31:749 MEMORIA/(23765:23765): Me llego el marco 1 con desplazamiento 4
+[INFO] 21:20:31:779 MEMORIA/(23765:23765): -------------------READ-------------------
+[INFO] 21:20:31:779 MEMORIA/(23765:23765): Valor leido: 12
+[INFO] 21:20:31:779 MEMORIA/(23765:23765): -------------------READ-------------------
+
+[ERROR] 21:20:31:786 MEMORIA/(23765:23765): Se desconecto el cliente. Terminando conexion
+[INFO] 21:20:31:786 MEMORIA/(23765:23765): Fin de memoria
+[INFO] 19:38:57:855 MEMORIA/(7578:7578): Ya existe la direccion de swap
+[INFO] 19:38:57:859 MEMORIA/(7578:7578): Memoria lista para recibir a Kernel
+[INFO] 19:40:28:358 MEMORIA/(7578:7578): Se conecto un cliente!
+[INFO] 19:40:28:392 MEMORIA/(7578:7578): Envio el numero de tabla de 1er nivel a Kernel que es 0
+[ERROR] 19:40:28:395 MEMORIA/(7578:7578): Se desconecto el cliente. Terminando conexion
+[INFO] 19:40:28:395 MEMORIA/(7578:7578): Memoria lista para recibir a Cpu
+[INFO] 19:41:03:170 MEMORIA/(7578:7578): Se conecto un cliente!
+[INFO] 19:41:03:172 MEMORIA/(7578:7578): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 19:41:03:172 MEMORIA/(7578:7578): Envio el tamanio de pag y cant entradas
+[INFO] 19:41:03:173 MEMORIA/(7578:7578): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 19:41:03:173 MEMORIA/(7578:7578): Envio el numero de tabla de 2do nivel 0
+[INFO] 19:41:03:174 MEMORIA/(7578:7578): Me llego  la entrada de segundo nivel 0
+[INFO] 19:41:03:174 MEMORIA/(7578:7578): Envio el marco correspondiente el cual es 0
+[INFO] 19:41:04:175 MEMORIA/(7578:7578): Me llego el marco 0 con desplazamiento 0
+[INFO] 19:41:04:211 MEMORIA/(7578:7578): -------------------WRITE-------------------
+[INFO] 19:41:04:211 MEMORIA/(7578:7578): Me llego el valor a escribir: 1000
+[INFO] 19:41:04:211 MEMORIA/(7578:7578): -------------------WRITE-------------------
+
+[INFO] 19:41:04:212 MEMORIA/(7578:7578): Me llego el marco 0 con desplazamiento 4
+[INFO] 19:41:04:251 MEMORIA/(7578:7578): -------------------WRITE-------------------
+[INFO] 19:41:04:252 MEMORIA/(7578:7578): Me llego el valor a escribir: 1001
+[INFO] 19:41:04:252 MEMORIA/(7578:7578): -------------------WRITE-------------------
+
+[INFO] 19:41:04:252 MEMORIA/(7578:7578): Me llego el nroTabla1erNivel 1 y con la entrada 0
+[INFO] 19:47:28:413 MEMORIA/(8482:8482): Ya existe la direccion de swap
+[INFO] 19:47:28:414 MEMORIA/(8482:8482): Memoria lista para recibir a Kernel
+[INFO] 19:47:38:157 MEMORIA/(8482:8482): Se conecto un cliente!
+[INFO] 19:47:38:173 MEMORIA/(8482:8482): Envio el numero de tabla de 1er nivel a Kernel que es 0
+[ERROR] 19:47:38:175 MEMORIA/(8482:8482): Se desconecto el cliente. Terminando conexion
+[INFO] 19:47:38:175 MEMORIA/(8482:8482): Memoria lista para recibir a Cpu
+[INFO] 19:47:54:971 MEMORIA/(8482:8482): Se conecto un cliente!
+[INFO] 19:47:54:981 MEMORIA/(8482:8482): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 19:47:54:981 MEMORIA/(8482:8482): Envio el tamanio de pag y cant entradas
+[INFO] 19:47:54:983 MEMORIA/(8482:8482): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 19:47:54:983 MEMORIA/(8482:8482): Envio el numero de tabla de 2do nivel 0
+[INFO] 19:47:54:983 MEMORIA/(8482:8482): Me llego  la entrada de segundo nivel 0
+[INFO] 19:47:54:983 MEMORIA/(8482:8482): Envio el marco correspondiente el cual es 0
+[INFO] 19:47:55:985 MEMORIA/(8482:8482): Me llego el marco 0 con desplazamiento 0
+[INFO] 19:47:56:026 MEMORIA/(8482:8482): -------------------WRITE-------------------
+[INFO] 19:47:56:027 MEMORIA/(8482:8482): Me llego el valor a escribir: 1000
+[INFO] 19:47:56:028 MEMORIA/(8482:8482): -------------------WRITE-------------------
+
+[INFO] 19:47:56:028 MEMORIA/(8482:8482): Me llego el marco 0 con desplazamiento 4
+[INFO] 19:47:56:067 MEMORIA/(8482:8482): -------------------WRITE-------------------
+[INFO] 19:47:56:067 MEMORIA/(8482:8482): Me llego el valor a escribir: 1001
+[INFO] 19:47:56:067 MEMORIA/(8482:8482): -------------------WRITE-------------------
+
+[INFO] 19:47:56:068 MEMORIA/(8482:8482): Me llego el nroTabla1erNivel 1 y con la entrada 0
+[INFO] 19:50:36:118 MEMORIA/(8803:8803): Ya existe la direccion de swap
+[INFO] 19:50:36:124 MEMORIA/(8803:8803): Memoria lista para recibir a Kernel
+[INFO] 19:50:45:870 MEMORIA/(8803:8803): Se conecto un cliente!
+[INFO] 19:50:45:878 MEMORIA/(8803:8803): Envio el numero de tabla de 1er nivel a Kernel que es 0
+[ERROR] 19:50:45:879 MEMORIA/(8803:8803): Se desconecto el cliente. Terminando conexion
+[INFO] 19:50:45:879 MEMORIA/(8803:8803): Memoria lista para recibir a Cpu
+[INFO] 19:50:54:182 MEMORIA/(8803:8803): Se conecto un cliente!
+[INFO] 19:50:54:190 MEMORIA/(8803:8803): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 19:50:54:190 MEMORIA/(8803:8803): Envio el tamanio de pag y cant entradas
+[INFO] 19:50:54:193 MEMORIA/(8803:8803): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 19:50:54:193 MEMORIA/(8803:8803): Envio el numero de tabla de 2do nivel 0
+[INFO] 19:50:54:194 MEMORIA/(8803:8803): Me llego  la entrada de segundo nivel 0
+[INFO] 19:50:54:194 MEMORIA/(8803:8803): Envio el marco correspondiente el cual es 0
+[INFO] 19:50:55:198 MEMORIA/(8803:8803): Me llego el marco 0 con desplazamiento 0
+[INFO] 19:50:55:235 MEMORIA/(8803:8803): -------------------WRITE-------------------
+[INFO] 19:50:55:235 MEMORIA/(8803:8803): Me llego el valor a escribir: 1000
+[INFO] 19:50:55:235 MEMORIA/(8803:8803): -------------------WRITE-------------------
+
+[INFO] 19:50:55:236 MEMORIA/(8803:8803): Me llego el marco 0 con desplazamiento 4
+[INFO] 19:50:55:275 MEMORIA/(8803:8803): -------------------WRITE-------------------
+[INFO] 19:50:55:275 MEMORIA/(8803:8803): Me llego el valor a escribir: 1001
+[INFO] 19:50:55:275 MEMORIA/(8803:8803): -------------------WRITE-------------------
+
+[INFO] 19:50:55:276 MEMORIA/(8803:8803): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 19:50:55:276 MEMORIA/(8803:8803): Envio el numero de tabla de 2do nivel 0
+[INFO] 19:50:55:276 MEMORIA/(8803:8803): Me llego  la entrada de segundo nivel 1
+[INFO] 19:50:55:277 MEMORIA/(8803:8803): Envio el marco correspondiente el cual es 1
+[INFO] 19:50:55:278 MEMORIA/(8803:8803): Me llego el marco 1 con desplazamiento 4
+[INFO] 19:50:55:318 MEMORIA/(8803:8803): -------------------WRITE-------------------
+[INFO] 19:50:55:319 MEMORIA/(8803:8803): Me llego el valor a escribir: 2000
+[INFO] 19:50:55:319 MEMORIA/(8803:8803): -------------------WRITE-------------------
+
+[INFO] 19:50:55:320 MEMORIA/(8803:8803): -------------------COPIAR-------------------
+[INFO] 19:50:55:320 MEMORIA/(8803:8803): Se copio el valor 2000 en la dir fisica:(marco 1 offset 0)
+[INFO] 19:50:55:320 MEMORIA/(8803:8803): -------------------COPIAR-------------------
+
+[INFO] 19:50:55:359 MEMORIA/(8803:8803): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 19:50:55:360 MEMORIA/(8803:8803): Envio el numero de tabla de 2do nivel 0
+[INFO] 19:50:55:360 MEMORIA/(8803:8803): Me llego  la entrada de segundo nivel 2
+[INFO] 19:50:55:360 MEMORIA/(8803:8803): Envio el marco correspondiente el cual es 2
+[INFO] 19:50:55:361 MEMORIA/(8803:8803): Me llego el marco 2 con desplazamiento 0
+[INFO] 19:50:55:399 MEMORIA/(8803:8803): -------------------WRITE-------------------
+[INFO] 19:50:55:400 MEMORIA/(8803:8803): Me llego el valor a escribir: 3000
+[INFO] 19:50:55:400 MEMORIA/(8803:8803): -------------------WRITE-------------------
+
+[ERROR] 19:50:55:402 MEMORIA/(8803:8803): Se desconecto el cliente. Terminando conexion
+[INFO] 19:50:55:403 MEMORIA/(8803:8803): Fin de memoria
+[INFO] 21:48:06:437 MEMORIA/(13328:13328): Ya existe la direccion de swap
+[INFO] 21:48:06:444 MEMORIA/(13328:13328): Memoria lista para recibir a Kernel
+[INFO] 21:48:51:924 MEMORIA/(13328:13328): Se conecto un cliente!
+[INFO] 21:48:51:932 MEMORIA/(13328:13328): Envio el numero de tabla de 1er nivel a Kernel que es 0
+[ERROR] 21:48:51:934 MEMORIA/(13328:13328): Se desconecto el cliente. Terminando conexion
+[INFO] 21:48:51:934 MEMORIA/(13328:13328): Memoria lista para recibir a Cpu
+[INFO] 21:49:09:103 MEMORIA/(13328:13328): Se conecto un cliente!
+[INFO] 21:49:09:107 MEMORIA/(13328:13328): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 21:49:09:107 MEMORIA/(13328:13328): Envio el tamanio de pag y cant entradas
+[INFO] 21:49:09:110 MEMORIA/(13328:13328): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 21:49:09:110 MEMORIA/(13328:13328): Envio el numero de tabla de 2do nivel 0
+[INFO] 21:49:09:111 MEMORIA/(13328:13328): Me llego  la entrada de segundo nivel 0
+[INFO] 21:49:09:111 MEMORIA/(13328:13328): Envio el marco correspondiente el cual es 0
+[INFO] 21:49:10:113 MEMORIA/(13328:13328): Me llego el marco 0 con desplazamiento 0
+[INFO] 21:49:10:151 MEMORIA/(13328:13328): -------------------WRITE-------------------
+[INFO] 21:49:10:151 MEMORIA/(13328:13328): Me llego el valor a escribir: 1000
+[INFO] 21:49:10:151 MEMORIA/(13328:13328): -------------------WRITE-------------------
+
+[INFO] 21:49:10:153 MEMORIA/(13328:13328): Me llego el marco 0 con desplazamiento 4
+[INFO] 21:49:10:191 MEMORIA/(13328:13328): -------------------WRITE-------------------
+[INFO] 21:49:10:191 MEMORIA/(13328:13328): Me llego el valor a escribir: 1001
+[INFO] 21:49:10:192 MEMORIA/(13328:13328): -------------------WRITE-------------------
+
+[INFO] 21:49:10:192 MEMORIA/(13328:13328): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 21:49:10:192 MEMORIA/(13328:13328): Envio el numero de tabla de 2do nivel 0
+[INFO] 21:49:10:194 MEMORIA/(13328:13328): Me llego  la entrada de segundo nivel 1
+[INFO] 21:49:10:195 MEMORIA/(13328:13328): Envio el marco correspondiente el cual es 1
+[INFO] 21:49:10:195 MEMORIA/(13328:13328): Me llego el marco 1 con desplazamiento 4
+[INFO] 21:49:10:235 MEMORIA/(13328:13328): -------------------WRITE-------------------
+[INFO] 21:49:10:235 MEMORIA/(13328:13328): Me llego el valor a escribir: 2000
+[INFO] 21:49:10:235 MEMORIA/(13328:13328): -------------------WRITE-------------------
+
+[INFO] 21:49:10:237 MEMORIA/(13328:13328): -------------------COPIAR-------------------
+[INFO] 21:49:10:237 MEMORIA/(13328:13328): Se copio el valor 2000 en la dir fisica:(marco 1 offset 0)
+[INFO] 21:49:10:237 MEMORIA/(13328:13328): -------------------COPIAR-------------------
+
+[INFO] 21:49:10:275 MEMORIA/(13328:13328): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 21:49:10:276 MEMORIA/(13328:13328): Envio el numero de tabla de 2do nivel 0
+[INFO] 21:49:10:277 MEMORIA/(13328:13328): Me llego  la entrada de segundo nivel 2
+[INFO] 21:49:10:277 MEMORIA/(13328:13328): Envio el marco correspondiente el cual es 2
+[INFO] 21:49:10:277 MEMORIA/(13328:13328): Me llego el marco 2 con desplazamiento 0
+[INFO] 21:49:10:315 MEMORIA/(13328:13328): -------------------WRITE-------------------
+[INFO] 21:49:10:315 MEMORIA/(13328:13328): Me llego el valor a escribir: 3000
+[INFO] 21:49:10:315 MEMORIA/(13328:13328): -------------------WRITE-------------------
+
+[ERROR] 21:49:10:318 MEMORIA/(13328:13328): Se desconecto el cliente. Terminando conexion
+[INFO] 21:49:10:318 MEMORIA/(13328:13328): Fin de memoria

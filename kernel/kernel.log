@@ -1,73 +1,76 @@
-[INFO] 13:13:25:527 Kernel/(14808:14808): Kernel listo para recibir a consola
-[INFO] 13:13:34:792 Kernel/(14808:14808): Se conecto un cliente!
-[ERROR] 13:13:35:325 Kernel/(14808:14808): la consola se desconecto. Finalizando Kernel
-[INFO] 13:15:28:261 Kernel/(15014:15014): Kernel listo para recibir a consola
-[INFO] 13:15:46:485 Kernel/(15014:15014): Se conecto un cliente!
-[INFO] 13:15:46:485 Kernel/(15014:15014): Me llegaron los siguientes valores:
+[INFO] 19:40:28:366 KERNEL/(7681:7681): Hola memoria, soy Kernel
+[INFO] 19:40:28:368 KERNEL/(7681:7681): Le envio a memoria mi pid que es 0
+[INFO] 19:40:28:393 KERNEL/(7681:7681): Me llego la tabla de primero nivel nro: 0
+[INFO] 19:47:38:158 KERNEL/(8496:8496): Hola memoria, soy Kernel
+[INFO] 19:47:38:172 KERNEL/(8496:8496): Le envio a memoria mi pid que es 0
+[INFO] 19:47:38:173 KERNEL/(8496:8496): Me llego la tabla de primero nivel nro: 0
+[INFO] 19:50:45:875 KERNEL/(8818:8818): Hola memoria, soy Kernel
+[INFO] 19:50:45:878 KERNEL/(8818:8818): Le envio a memoria mi pid que es 0
+[INFO] 19:50:45:879 KERNEL/(8818:8818): Me llego la tabla de primero nivel nro: 0
+[INFO] 20:48:33:761 Kernel/(12744:12744): Kernel listo para recibir a consola
+[INFO] 20:48:44:577 Kernel/(12744:12744): Se conecto la consola!
+[INFO] 20:48:44:595 Kernel/(12744:12744): Me llegaron las siguientes instrucciones: 
 
-[INFO] 13:15:46:485 Kernel/(15014:15014): Consola saluda al Kernel
-[ERROR] 13:15:46:485 Kernel/(15014:15014): La consola se desconecto. Finalizando Kernel
-[INFO] 15:33:12:786 Kernel/(24685:24685): Kernel listo para recibir a consola
-[INFO] 15:33:20:412 Kernel/(24685:24685): Se conecto la consola!
-[INFO] 15:33:20:413 Kernel/(24685:24685): Me llegaron las siguientes instrucciones:
+[INFO] 20:48:44:595 Kernel/(12744:12744): WRITE
+[INFO] 20:48:44:595 Kernel/(12744:12744): WRITE
+[INFO] 20:48:44:595 Kernel/(12744:12744): WRITE
+[INFO] 20:48:44:595 Kernel/(12744:12744): COPY
+[INFO] 20:48:44:595 Kernel/(12744:12744): WRITE
+[INFO] 20:48:44:595 Kernel/(12744:12744): WRITE
+[INFO] 20:48:44:595 Kernel/(12744:12744): I/O
+[INFO] 20:48:44:595 Kernel/(12744:12744): READ
+[INFO] 20:48:44:595 Kernel/(12744:12744): WRITE
+[INFO] 20:48:44:596 Kernel/(12744:12744): READ
+[INFO] 20:48:44:596 Kernel/(12744:12744): READ
+[INFO] 20:48:44:596 Kernel/(12744:12744): WRITE
+[INFO] 20:48:44:596 Kernel/(12744:12744): READ
+[INFO] 20:48:44:596 Kernel/(12744:12744): READ
+[INFO] 20:48:44:596 Kernel/(12744:12744): EXIT
+[ERROR] 20:48:44:600 Kernel/(12744:12744): La consola se desconecto. Finalizando Kernel
+[INFO] 20:48:44:600 Kernel/(12744:12744): Hola memoria, soy Kernel
+[INFO] 20:48:44:600 Kernel/(12744:12744): Le envio a memoria mi pid que es 0
+[INFO] 20:51:36:726 Kernel/(12922:12922): Kernel listo para recibir a consola
+[INFO] 20:51:41:727 Kernel/(12922:12922): Se conecto la consola!
+[INFO] 20:51:41:743 Kernel/(12922:12922): Me llegaron las siguientes instrucciones: 
 
-[INFO] 15:33:20:413 Kernel/(24685:24685): aca iria el path de con las instrucciones
-[ERROR] 15:33:20:413 Kernel/(24685:24685): La consola se desconecto. Finalizando Kernel
-[INFO] 18:53:29:355 Kernel/(7722:7722): Kernel listo para recibir a consola
-[INFO] 18:53:40:744 Kernel/(7722:7722): Se conecto la consola!
-[INFO] 18:53:40:744 Kernel/(7722:7722): Me llegaron las siguientes instrucciones:
+[INFO] 20:51:41:743 Kernel/(12922:12922): WRITE
+[INFO] 20:51:41:743 Kernel/(12922:12922): WRITE
+[INFO] 20:51:41:743 Kernel/(12922:12922): WRITE
+[INFO] 20:51:41:743 Kernel/(12922:12922): COPY
+[INFO] 20:51:41:743 Kernel/(12922:12922): WRITE
+[INFO] 20:51:41:743 Kernel/(12922:12922): WRITE
+[INFO] 20:51:41:743 Kernel/(12922:12922): I/O
+[INFO] 20:51:41:743 Kernel/(12922:12922): READ
+[INFO] 20:51:41:743 Kernel/(12922:12922): WRITE
+[INFO] 20:51:41:743 Kernel/(12922:12922): READ
+[INFO] 20:51:41:744 Kernel/(12922:12922): READ
+[INFO] 20:51:41:744 Kernel/(12922:12922): WRITE
+[INFO] 20:51:41:744 Kernel/(12922:12922): READ
+[INFO] 20:51:41:744 Kernel/(12922:12922): READ
+[INFO] 20:51:41:744 Kernel/(12922:12922): EXIT
+[ERROR] 20:51:41:745 Kernel/(12922:12922): La consola se desconecto. Finalizando Kernel
+[INFO] 20:51:52:433 Kernel/(5035:5035): Kernel listo para recibir a consola
+[INFO] 20:52:38:543 Kernel/(5035:5035): Se conecto la consola!
+[INFO] 20:52:38:560 Kernel/(5035:5035): Me llegaron las siguientes instrucciones: 
 
-[INFO] 18:53:40:744 Kernel/(7722:7722): aca iria el path con las instrucciones
-[ERROR] 18:53:40:745 Kernel/(7722:7722): La consola se desconecto. Finalizando Kernel
-[INFO] 19:32:31:194 Kernel/(12983:12983): Kernel listo para recibir a consola
-[INFO] 19:32:45:388 Kernel/(12983:12983): Se conecto la consola!
-[INFO] 19:32:45:390 Kernel/(12983:12983): Me llegaron las siguientes instrucciones:
-
-[INFO] 19:32:45:390 Kernel/(12983:12983): aca iria el path con las instrucciones
-[ERROR] 19:32:45:390 Kernel/(12983:12983): La consola se desconecto. Finalizando Kernel
-[INFO] 19:35:09:339 Kernel/(13340:13340): Kernel listo para recibir a consola
-[INFO] 15:14:34:202 Kernel/(6309:6309): Kernel listo para recibir a consola
-[INFO] 15:14:51:492 Kernel/(6309:6309): Se conecto la consola!
-[INFO] 15:14:51:493 Kernel/(6309:6309): Me llegaron las siguientes instrucciones:
-
-[INFO] 15:14:51:493 Kernel/(6309:6309): aca iria el path con las instrucciones
-[ERROR] 15:14:51:493 Kernel/(6309:6309): La consola se desconecto. Finalizando Kernel
-[INFO] 15:15:28:034 Kernel/(6426:6426): Kernel listo para recibir a consola
-[INFO] 15:15:33:381 Kernel/(6426:6426): Se conecto la consola!
-[INFO] 15:15:33:382 Kernel/(6426:6426): Me llegaron las siguientes instrucciones:
-
-[INFO] 15:15:33:382 Kernel/(6426:6426): aca iria el path con las instrucciones
-[ERROR] 15:15:33:382 Kernel/(6426:6426): La consola se desconecto. Finalizando Kernel
-[INFO] 15:21:49:678 Kernel/(7155:7155): Kernel listo para recibir a consola
-[INFO] 15:23:02:273 Kernel/(7336:7336): Kernel listo para recibir a consola
-[INFO] 15:27:53:096 Kernel/(7895:7895): Kernel listo para recibir a consola
-[INFO] 15:28:36:823 Kernel/(8007:8007): Kernel listo para recibir a consola
-[INFO] 15:28:40:597 Kernel/(7155:7155): Se conecto la consola!
-[INFO] 15:28:40:597 Kernel/(7155:7155): Me llegaron las siguientes instrucciones:
-
-[INFO] 15:28:40:598 Kernel/(7155:7155): hola
-[ERROR] 15:28:40:999 Kernel/(7155:7155): La consola se desconecto. Finalizando Kernel
-[INFO] 15:33:15:909 Kernel/(8352:8352): Kernel listo para recibir a consola
-[INFO] 15:33:48:013 Kernel/(8395:8395): Kernel listo para recibir a consola
-[INFO] 15:35:49:092 Kernel/(8586:8586): Kernel listo para recibir a consola
-[INFO] 15:35:54:377 Kernel/(8352:8352): Se conecto la consola!
-[INFO] 15:35:54:377 Kernel/(8352:8352): Me llegaron las siguientes instrucciones:
-
-[INFO] 15:35:54:377 Kernel/(8352:8352): hola
-[ERROR] 15:35:55:097 Kernel/(8352:8352): La consola se desconecto. Finalizando Kernel
-[INFO] 15:40:47:991 Kernel/(8913:8913): Kernel listo para recibir a consola
-[INFO] 15:41:22:589 Kernel/(8975:8975): Kernel listo para recibir a consola
-[INFO] 12:54:10:528 Kernel/(4779:4779): Kernel listo para recibir a consola
-[INFO] 12:54:19:034 Kernel/(4779:4779): Se conecto la consola!
-[INFO] 12:54:19:034 Kernel/(4779:4779): Me llegaron las siguientes instrucciones:
-
-[INFO] 12:54:19:035 Kernel/(4779:4779): hola
-[ERROR] 12:54:19:863 Kernel/(4779:4779): La consola se desconecto. Finalizando Kernel
-[INFO] 12:29:35:214 Kernel/(17280:17280): Kernel listo para recibir a consola
-[INFO] 12:29:40:924 Kernel/(17280:17280): Se conecto la consola!
-[INFO] 12:29:40:925 Kernel/(17280:17280): Me llegaron las siguientes instrucciones: 
-
-[INFO] 12:29:40:925 Kernel/(17280:17280): NO_OP
-[INFO] 12:29:40:925 Kernel/(17280:17280): NO_OP
-[INFO] 12:29:40:926 Kernel/(17280:17280): EXIT
-[ERROR] 12:29:40:926 Kernel/(17280:17280): La consola se desconecto. Finalizando Kernel
+[INFO] 20:52:38:560 Kernel/(5035:5035): WRITE
+[INFO] 20:52:38:560 Kernel/(5035:5035): WRITE
+[INFO] 20:52:38:560 Kernel/(5035:5035): WRITE
+[INFO] 20:52:38:560 Kernel/(5035:5035): COPY
+[INFO] 20:52:38:560 Kernel/(5035:5035): WRITE
+[INFO] 20:52:38:560 Kernel/(5035:5035): WRITE
+[INFO] 20:52:38:560 Kernel/(5035:5035): I/O
+[INFO] 20:52:38:560 Kernel/(5035:5035): READ
+[INFO] 20:52:38:560 Kernel/(5035:5035): WRITE
+[INFO] 20:52:38:561 Kernel/(5035:5035): READ
+[INFO] 20:52:38:561 Kernel/(5035:5035): READ
+[INFO] 20:52:38:561 Kernel/(5035:5035): WRITE
+[INFO] 20:52:38:561 Kernel/(5035:5035): READ
+[INFO] 20:52:38:561 Kernel/(5035:5035): READ
+[INFO] 20:52:38:561 Kernel/(5035:5035): EXIT
+[ERROR] 20:52:38:561 Kernel/(5035:5035): La consola se desconecto. Finalizando Kernel
+[INFO] 21:48:20:023 Kernel/(13374:13374): Kernel listo para recibir a consola
+[INFO] 21:48:31:423 Kernel/(13461:13461): Kernel listo para recibir a consola
+[INFO] 21:48:51:929 KERNEL/(13582:13582): Hola memoria, soy Kernel
+[INFO] 21:48:51:932 KERNEL/(13582:13582): Le envio a memoria mi pid que es 0
+[INFO] 21:48:51:933 KERNEL/(13582:13582): Me llego la tabla de primero nivel nro: 0
