@@ -13,6 +13,11 @@
 #include<commons/string.h>
 #include<assert.h>
 #include<stdbool.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <errno.h>
+//#include <TIME.H>
+
 
 #define IP_MEMORIA "127.0.0.1"
 #define PUERTO_MEMORIA 8002
@@ -155,9 +160,10 @@ void escribirEnSwap(int,int,int);
 void leerDeSwap(int,int);
 
 void suspensionDeProceso(int);
-
+void finalizacionDeProceso(int);
 
 entradaTabla2doNivel* entradaCargadaConMarcoAsignado(int);
+int posicionDePunteroDelAlgoritmo(i);
 
 #endif /* FUNCIONES_MEMORIA_H_*/
 

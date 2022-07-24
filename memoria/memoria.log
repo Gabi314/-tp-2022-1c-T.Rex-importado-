@@ -2708,3 +2708,79 @@
 
 [ERROR] 19:43:43:492 MEMORIA/(7928:7928): Se desconecto el cliente. Terminando conexion
 [INFO] 19:43:43:493 MEMORIA/(7928:7928): Fin de memoria
+[INFO] 18:05:09:138 MEMORIA/(12760:12760): La posicion del puntero en la lista de marcos es: 0
+[INFO] 18:05:09:151 MEMORIA/(12760:12760): La posicion del puntero en la lista de marcos es: 1
+[INFO] 18:05:09:151 MEMORIA/(12760:12760): La posicion del puntero en la lista de marcos es: 2
+[INFO] 18:05:09:151 MEMORIA/(12760:12760): La posicion del puntero en la lista de marcos es: 0
+[INFO] 18:05:09:152 MEMORIA/(12760:12760): No hay ninguna pagina con bit de uso en 0
+[INFO] 18:05:09:152 MEMORIA/(12760:12760): Por algoritmo reemplazo todos los bit de uso a 0 y busco de nuevo
+[INFO] 18:05:09:152 MEMORIA/(12760:12760): La posicion del puntero en la lista de marcos es: 1
+[INFO] 18:05:09:152 MEMORIA/(12760:12760): PF, la posicion del puntero en la lista de marcos queda en: 2
+[INFO] 18:05:09:154 MEMORIA/(12760:12760): Marco a reemplazar: 1
+[INFO] 18:05:09:154 MEMORIA/(12760:12760): La posicion del puntero en la lista de marcos es: 2
+[INFO] 18:05:09:155 MEMORIA/(12760:12760): PF, la posicion del puntero en la lista de marcos queda en: 0
+[INFO] 18:05:09:155 MEMORIA/(12760:12760): Marco a reemplazar: 2
+[INFO] 18:05:09:155 MEMORIA/(12760:12760): Fin de memoria
+[INFO] 18:06:28:528 MEMORIA/(12795:12795): La posicion del puntero en la lista de marcos es: 0
+[INFO] 18:06:28:530 MEMORIA/(12795:12795): La posicion del puntero en la lista de marcos es: 1
+[INFO] 18:06:28:530 MEMORIA/(12795:12795): La posicion del puntero en la lista de marcos es: 2
+[INFO] 18:06:28:530 MEMORIA/(12795:12795): La posicion del puntero en la lista de marcos es: 0
+[INFO] 18:06:28:530 MEMORIA/(12795:12795): No hay ninguna pagina con bit de uso en 0
+[INFO] 18:06:28:530 MEMORIA/(12795:12795): Por algoritmo reemplazo todos los bit de uso a 0 y busco de nuevo
+[INFO] 18:06:28:530 MEMORIA/(12795:12795): La posicion del puntero en la lista de marcos es: 1
+[INFO] 18:06:28:530 MEMORIA/(12795:12795): PF, la posicion del puntero en la lista de marcos queda en: 2
+[INFO] 18:06:28:531 MEMORIA/(12795:12795): Marco a reemplazar: 1
+[INFO] 18:06:28:531 MEMORIA/(12795:12795): La posicion del puntero en la lista de marcos es: 2
+[INFO] 18:06:28:532 MEMORIA/(12795:12795): PF, la posicion del puntero en la lista de marcos queda en: 0
+[INFO] 18:06:28:532 MEMORIA/(12795:12795): Marco a reemplazar: 2
+[INFO] 18:06:28:532 MEMORIA/(12795:12795): Fin de memoria
+[INFO] 18:08:15:305 MEMORIA/(12829:12829): La posicion del puntero en la lista de marcos es: 0
+[INFO] 18:08:22:930 MEMORIA/(12829:12829): La posicion del puntero en la lista de marcos es: 1
+[INFO] 18:08:29:497 MEMORIA/(12829:12829): La posicion del puntero en la lista de marcos es: 2
+[INFO] 18:09:33:890 MEMORIA/(12931:12931): La posicion del puntero en la lista de marcos es: 0
+[INFO] 18:09:33:897 MEMORIA/(12931:12931): La posicion del puntero en la lista de marcos es: 1
+[INFO] 18:09:33:897 MEMORIA/(12931:12931): La posicion del puntero en la lista de marcos es: 2
+[INFO] 18:09:33:897 MEMORIA/(12931:12931): La posicion del puntero en la lista de marcos es: 0
+[INFO] 18:09:33:897 MEMORIA/(12931:12931): No hay ninguna pagina con bit de uso en 0
+[INFO] 18:09:33:897 MEMORIA/(12931:12931): Por algoritmo reemplazo todos los bit de uso a 0 y busco de nuevo
+[INFO] 18:09:33:897 MEMORIA/(12931:12931): La posicion del puntero en la lista de marcos es: 1
+[INFO] 18:09:33:898 MEMORIA/(12931:12931): PF, la posicion del puntero en la lista de marcos queda en: 2
+[INFO] 18:09:33:899 MEMORIA/(12931:12931): Marco a reemplazar: 1
+[INFO] 18:09:33:899 MEMORIA/(12931:12931): La posicion del puntero en la lista de marcos es: 2
+[INFO] 18:09:33:899 MEMORIA/(12931:12931): PF, la posicion del puntero en la lista de marcos queda en: 0
+[INFO] 18:09:33:899 MEMORIA/(12931:12931): Marco a reemplazar: 2
+[INFO] 18:09:33:899 MEMORIA/(12931:12931): Fin de memoria
+[INFO] 18:11:15:303 MEMORIA/(13001:13001): La posicion del puntero en la lista de marcos es: 0
+[INFO] 18:11:15:303 MEMORIA/(13001:13001): La posicion del puntero en la lista de marcos es: 1
+[INFO] 18:11:15:303 MEMORIA/(13001:13001): La posicion del puntero en la lista de marcos es: 2
+[INFO] 18:11:15:303 MEMORIA/(13001:13001): La posicion del puntero en la lista de marcos es: 0
+[INFO] 18:11:15:303 MEMORIA/(13001:13001): No hay ninguna pagina con bit de uso en 0
+[INFO] 18:11:15:303 MEMORIA/(13001:13001): Por algoritmo reemplazo todos los bit de uso a 0 y busco de nuevo
+[INFO] 18:11:15:303 MEMORIA/(13001:13001): La posicion del puntero en la lista de marcos es: 1
+[INFO] 18:11:15:303 MEMORIA/(13001:13001): PF, la posicion del puntero en la lista de marcos queda en: 2
+[INFO] 18:11:47:946 MEMORIA/(13065:13065): La posicion del puntero en la lista de marcos es: 0
+[INFO] 18:12:03:345 MEMORIA/(13065:13065): La posicion del puntero en la lista de marcos es: 1
+[INFO] 18:12:23:844 MEMORIA/(13065:13065): La posicion del puntero en la lista de marcos es: 2
+[INFO] 18:13:11:149 MEMORIA/(13065:13065): La posicion del puntero en la lista de marcos es: 0
+[INFO] 18:13:17:796 MEMORIA/(13065:13065): No hay ninguna pagina con bit de uso en 0
+[INFO] 18:13:17:796 MEMORIA/(13065:13065): Por algoritmo reemplazo todos los bit de uso a 0 y busco de nuevo
+[INFO] 18:13:17:796 MEMORIA/(13065:13065): La posicion del puntero en la lista de marcos es: 1
+[INFO] 18:13:17:796 MEMORIA/(13065:13065): PF, la posicion del puntero en la lista de marcos queda en: 2
+[INFO] 18:13:17:796 MEMORIA/(13065:13065): Marco a reemplazar: 1
+[INFO] 18:13:17:796 MEMORIA/(13065:13065): La posicion del puntero en la lista de marcos es: 2
+[INFO] 18:13:17:796 MEMORIA/(13065:13065): PF, la posicion del puntero en la lista de marcos queda en: 0
+[INFO] 18:13:17:796 MEMORIA/(13065:13065): Marco a reemplazar: 2
+[INFO] 18:13:17:796 MEMORIA/(13065:13065): Fin de memoria
+[INFO] 18:14:04:808 MEMORIA/(13196:13196): La posicion del puntero en la lista de marcos es: 0
+[INFO] 18:14:04:808 MEMORIA/(13196:13196): La posicion del puntero en la lista de marcos es: 1
+[INFO] 18:14:04:809 MEMORIA/(13196:13196): La posicion del puntero en la lista de marcos es: 2
+[INFO] 18:14:04:809 MEMORIA/(13196:13196): La posicion del puntero en la lista de marcos es: 3
+[INFO] 18:14:04:809 MEMORIA/(13196:13196): No hay ninguna pagina con bit de uso en 0
+[INFO] 18:14:04:809 MEMORIA/(13196:13196): Por algoritmo reemplazo todos los bit de uso a 0 y busco de nuevo
+[INFO] 18:14:04:809 MEMORIA/(13196:13196): La posicion del puntero en la lista de marcos es: 0
+[INFO] 18:14:04:809 MEMORIA/(13196:13196): PF, la posicion del puntero en la lista de marcos queda en: 1
+[INFO] 18:14:04:809 MEMORIA/(13196:13196): Marco a reemplazar: 0
+[INFO] 18:14:04:809 MEMORIA/(13196:13196): La posicion del puntero en la lista de marcos es: 1
+[INFO] 18:14:04:809 MEMORIA/(13196:13196): PF, la posicion del puntero en la lista de marcos queda en: 2
+[INFO] 18:14:04:809 MEMORIA/(13196:13196): Marco a reemplazar: 1
+[INFO] 18:14:04:809 MEMORIA/(13196:13196): Fin de memoria
