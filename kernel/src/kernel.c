@@ -27,11 +27,11 @@ int main(void) {
 
 
 	 	hiloAdminCreado[0] = pthread_create(&hiloAdmin[0],NULL,&asignar_memoria,NULL);
-	 	hiloAdminCreado[1] = pthread_create(&hiloAdmin[1],NULL,&finalizar_proceso_y_avisar_a_memoria,NULL);
-	 	hiloAdminCreado[2] = pthread_create(&hiloAdmin[2],NULL,&finalizar_proceso_y_avisar_a_consola,NULL);
+	 	hiloAdminCreado[1] = pthread_create(&hiloAdmin[1],NULL,&atenderIOyEXIT,NULL);
+	 //	hiloAdminCreado[2] = pthread_create(&hiloAdmin[2],NULL,&finalizar_proceso_y_avisar_a_consola,NULL);
 	 	hiloAdminCreado[3] = pthread_create(&hiloAdmin[3],NULL,&readyAExe,NULL);
-	 	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&suspender,NULL);
-		hiloAdminCreado[5] = pthread_create(&hiloAdmin[5],NULL,&desbloquear_suspendido,NULL);
+//	 	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&suspender,NULL);
+	//	hiloAdminCreado[5] = pthread_create(&hiloAdmin[5],NULL,&desbloquear_suspendido,NULL);
 
 
 // TRANSICIONES QUE FALTAN EN HILOS
@@ -41,7 +41,7 @@ int main(void) {
 
 	 	pthread_detach(hiloAdmin[0]);
 	 	pthread_detach(hiloAdmin[1]);
-	 	pthread_detach(hiloAdmin[2]);
+	// 	pthread_detach(hiloAdmin[2]);
 	 	pthread_detach(hiloAdmin[3]);
 		pthread_detach(hiloAdmin[4]);
 		pthread_detach(hiloAdmin[5]);
@@ -90,6 +90,7 @@ void inicializar_colas(){
 	colaBlocked = list_create();
 	colaSuspendedBlocked = list_create();
 	colaExit = list_create();
+	listaDeConsolas = list_create();
 }
 
 void generar_conexiones(){
@@ -106,10 +107,15 @@ void inicializar_semaforos(){
 	sem_init(&pcbEnReady,0,0);
 	sem_init(&cpuDisponible,0,1);
 	sem_init(&gradoDeMultiprogramacion,0,gradoMultiprogramacionTotal);
+	sem_init(&desalojarProceso,0,0);
+	sem_init(&procesoEjecutandose,0,0);
+	sem_init(&procesoDesalojado,0,1);
 	pthread_mutex_init(&asignarMemoria,NULL);
 	pthread_mutex_init(&colaReadyFIFO,NULL);
 	pthread_mutex_init(&colaReadySRT,NULL);
 	pthread_mutex_init(&ejecucion,NULL);
+	pthread_mutex_init(&procesoExit,NULL);
+	pthread_mutex_init(&consolasExit,NULL);
 
 
 }

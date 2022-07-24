@@ -102,7 +102,7 @@ t_list* recibir_paquete(int socket_cliente)
 		list_add(identificadores,instruccion->identificador);//Para que loguee los identificadores cuando les llegan de consola
 	}
 	free(buffer);
-	return identificadores;
+	return listaDeInstrucciones;
 }
 
 
@@ -141,8 +141,7 @@ t_pcb* tomar_pcb(int socket_cliente)
 		memcpy(&pcb->tabla_paginas, buffer + desplazamiento, sizeof(int));
 		desplazamiento+=sizeof(int);
 		memcpy(&pcb->estimacion_rafaga, buffer + desplazamiento, sizeof(float));
-		desplazamiento+=sizeof(float);
-		memcpy(&pcb->socket_cliente, buffer + desplazamiento, sizeof(int));
+
 	free(buffer);
 	return pcb;
 }
@@ -218,6 +217,15 @@ void crear_buffer(t_paquete* paquete)
 	paquete->buffer->stream = NULL;
 }
 
+void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio)
+{
+	paquete->buffer->stream = realloc(paquete->buffer->stream, paquete->buffer->size + tamanio + sizeof(int));
+
+	memcpy(paquete->buffer->stream + paquete->buffer->size, &tamanio, sizeof(int));
+	memcpy(paquete->buffer->stream + paquete->buffer->size + sizeof(int), valor, tamanio);
+
+	paquete->buffer->size += tamanio + sizeof(int);
+}
 
 void agregar_instrucciones_al_paquete(instrucciones* instruccion) {
 	void* id = instruccion->identificador;
@@ -239,17 +247,9 @@ t_paquete* crear_paquete(void)
 	crear_buffer(paquete);
 	return paquete;
 }
-/*
-void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio)
-{
-	paquete->buffer->stream = realloc(paquete->buffer->stream, paquete->buffer->size + tamanio + sizeof(int));
 
-	memcpy(paquete->buffer->stream + paquete->buffer->size, &tamanio, sizeof(int));
-	memcpy(paquete->buffer->stream + paquete->buffer->size + sizeof(int), valor, tamanio);
 
-	paquete->buffer->size += tamanio + sizeof(int);
-}
-*/
+
 
 void agregar_a_paquete_kernel_cpu(t_pcb* pcb)
 {
@@ -272,8 +272,7 @@ void agregar_a_paquete_kernel_cpu(t_pcb* pcb)
 	desplazamiento+=sizeof(int);
 	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->estimacion_rafaga), sizeof(float));
 	desplazamiento+=sizeof(float);
-	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->socket_cliente), sizeof(int));
-	desplazamiento+=sizeof(int);
+
 	paquete->buffer->size = desplazamiento;
 	free(pcb);
 }
@@ -318,7 +317,7 @@ void liberar_conexion(int socket_cliente)
 
 
 void destruirProceso(t_pcb* proceso){
-    close(proceso->socket_cliente);
+   // close(proceso->socket_cliente);
     free(proceso);
 }
 
@@ -351,84 +350,11 @@ t_algoritmo_planificacion obtener_algoritmo(){
 
 
 
-t_pcb* obtenerSiguienteDeReady(){
-
-	//sem_wait(&contadorReady);
-
-	t_pcb* procesoPlanificado = NULL;
-
-	// Aca dentro un SWITCH para los distintos algoritmos q llama a una funcion para cada uno
-	switch(algoritmoPlanificacionActual){
-
-		//CASO FIFO
-		case FIFO:
-			procesoPlanificado = obtenerSiguienteFIFO();
-		break;
-
-		//CASO SJF con desalojo
-		case SRT:
-			procesoPlanificado = obtenerSiguienteSRT();
-		break;
 
 
-	}
-
-	// Devuelve NULL si no hay nada en ready
-	// Caso contrario devuelve el que tiene mas prioridad segun el algoritmo que se este empleando
-	return procesoPlanificado;
-}
 
 
-t_pcb* obtenerSiguienteFIFO(){
-	pthread_mutex_lock(&colaReadyFIFO);
-	t_pcb* procesoPlanificado = list_get(colaReady,0);
-	pthread_mutex_unlock(&colaReadyFIFO);
-	return procesoPlanificado;
-}
 
-t_pcb* obtenerSiguienteSRT(){
-
-	t_pcb* procesoPlanificado = NULL;
-	t_pcb* procesoAux = NULL;
-	int i;
-	int indexARemover;
-	float shortestJob;
-
-	pthread_mutex_lock(&colaReadySRT); //----------------------------------
-
-	procesoAux = list_get(colaReady,0);
-
-
-	indexARemover = 0;
-	shortestJob = procesoAux->estimacion_rafaga;
-
-	//itero por la lista de Ready
-	//sem_wait(&contadorReady);
-	//pthread_mutex_lock(&mutexReady);
-
-	log_info(logger,"PROCESOS EN READY: %d \n", list_size(colaReady));
-
-
-	for(i=1;i<list_size(colaReady);i++){
-	   	procesoAux = list_get(colaReady,i);
-		if(shortestJob > procesoAux->estimacion_rafaga){
-			shortestJob = procesoAux->estimacion_rafaga;
-			indexARemover = i;
-		}
-	}
-	procesoPlanificado = list_remove(colaReady, indexARemover);
-
-	pthread_mutex_unlock(&colaReadySRT); //--------------------------------------
-
-
-	return procesoPlanificado;
-}
-
-void estimarRafaga(t_pcb* proceso){
-	proceso->estimacion_anterior=proceso->estimacion_rafaga;
-	proceso->estimacion_rafaga = alfa * proceso->rafagaMs + (1 - alfa) * proceso->estimacion_rafaga;
-
-}
 
 
 void enviarInterrupcionACpu(){
@@ -461,21 +387,7 @@ void enviarMensajeAConsola(char* mensaje){
 
   //--------------------TRANSICIONES---------------
 
-void agregarANew(t_pcb* proceso) {
 
-	//pthread_mutex_lock(&mutexNew);
-
-	queue_push(colaNew, proceso);
-	log_info(logger, "[NEW] Entra el proceso de PID: %d a la cola.", proceso->idProceso);
-
-	//pthread_mutex_unlock(&mutexNew);
-
-	//sem_post(&analizarSuspension); // Despierta al planificador de mediano plazo
-	//sem_wait(&suspensionFinalizada); // Espera a que ya se haya hecho, o no, la suspension
-
-	//sem_post(&contadorNew); // Despierta al planificador de largo plazo
-	//sem_post(&largoPlazo);
-}
 
 t_pcb* sacarDeNew(){
 
@@ -491,28 +403,6 @@ t_pcb* sacarDeNew(){
 }
 
 
-void agregarAReady(t_pcb* proceso){
-
-	//sem_wait(&multiprogramacion); Lo sacamos de aca para usarlo en el contexto en el que se llama a la funcion, porque no siempre que se agrega a ready, se toca la multiprogramacion
-	//pthread_mutex_lock(&mutexReady);
-
-	if (gradoMultiprogramacionActual <= gradoMultiprogramacionTotal){ // por las dudas queda aca, pero se supone que con semaforos no deberia haber problema
-		proceso->suspendido = false;
-		list_add(colaReady, proceso);
-		log_info(logger, "[READY] Entra el proceso de PID: %d a la cola.", proceso->idProceso);
-		gradoMultiprogramacionActual ++;
-		if(algoritmoPlanificacionActual == SRT){
-			//Mandar interrupcion a CPU
-		}
-		//Aca hay que mandar un mensaje a memoria para que inicialice sus estructuras
-	}
-	else{
-		log_info(logger, "No se pueden agregar más procesos a READY  se alcanzó el grado de multiprogramácion maximo");
-	}
-	//pthread_mutex_unlock(&mutexReady);
-	//sem_post(&contadorReady);
-	//sem_post(&contadorProcesosEnMemoria); Lo sacamos de aca para usarlo en el contexto en el que se llama a la funcion, porque no siempre que se agrega a ready, se toca la multiprogramacion
-}
 
 
 void agregarABlocked(t_pcb* proceso){		//ver semaforos
@@ -566,7 +456,7 @@ void sacarDeBlocked(t_pcb* proceso){
 
 
 void agregarASuspendedBlocked(t_pcb* proceso){
-
+/*
 	//pthread_mutex_lock(&mutexBlockSuspended);
 
 	proceso->suspendido = true;
@@ -577,7 +467,7 @@ void agregarASuspendedBlocked(t_pcb* proceso){
 
 	//pthread_mutex_unlock(&mutexBlockSuspended);
 
-	/*size_t size = sizeof(sem_code)+sizeof(uint32_t);
+	size_t size = sizeof(sem_code)+sizeof(uint32_t);
 
 	void* stream = malloc(size);
 
@@ -589,7 +479,7 @@ void agregarASuspendedBlocked(t_pcb* proceso){
 	send(proceso->socketMemoria, stream, size, 0);
 
 	free(stream);
-	*/  //Aca tenemos que mandar el proceso a disco
+	 //Aca tenemos que mandar el proceso a disco*/
 }
 
 void sacarDeSuspendedBlocked(t_pcb* proceso){
@@ -630,7 +520,7 @@ t_pcb* sacarDeSuspendedReady(){
 	//pthread_mutex_lock(&mutexReadySuspended);
 
 	t_pcb* proceso = queue_pop(colaSuspendedReady);
-	proceso->suspendido = false;
+//	proceso->suspendido = false;
 	log_info(logger, "[SUSPENDEDREADY] Sale el proceso de PID: %d de la cola.", proceso->idProceso);
 
 	//pthread_mutex_unlock(&mutexReadySuspended);
@@ -640,88 +530,17 @@ t_pcb* sacarDeSuspendedReady(){
 
 
 
-void ejecutar(t_pcb* proceso){
-
-
-	time_t a = time(NULL);
-	proceso->horaDeIngresoAExe = ((float) a)*1000;
-	proceso->estado = EXEC;
-	pthread_mutex_lock(&ejecucion);
-	procesoEnEjecucion = proceso;
-	pthread_mutex_unlock(&ejecucion);
-	send(socketCpuDispatch, proceso, proceso->tamanioProceso, 0);
-
-	//Aca mando el proceso a cpu y guardo el momento en el que arranca a ejecutar para el calculo de la estimacion
-}
-
-
-void atenderDesalojo(){
-	t_pcb* proceso;
-
-	while(recv(socketCpuInterrupt,&proceso,sizeof(t_pcb),0)){
-		time_t a = time(NULL);
-		float tiempoDeFin = ((float) a)*1000;
-		proceso->rafagaMs = proceso->horaDeIngresoAExe - tiempoDeFin;
-		estimarRafaga(proceso);
-
-		agregarAReady(proceso);
-
-
-	}
-}
 
 
 
 
-void atenderIOyEXIT(){
-	t_pcb* proceso;
-	while(recv(socketCpuDispatch, &proceso,sizeof(t_pcb),0)){
-		// cuando reciba del cpu una interrupcion
-		if (!proceso->aFinalizar) {
-			time_t a = time(NULL);									//de I/O se encarga de atenderla
-			float tiempoDeFin = ((float) a)*1000;
-			proceso->rafagaMs = proceso->horaDeIngresoAExe - tiempoDeFin;
-			estimarRafaga(proceso);
 
 
-			agregarABlocked(proceso);
-
-			if(!supera_tiempo_maximo_bloqueado(proceso)){
-
-				usleep(obtenerTiempoDeBloqueo(proceso)*1000);
-				sacarDeBlocked(proceso);
-
-				agregarAReady(proceso);
-
-			}else{
-
-				usleep(tiempoMaximoBloqueado*1000);
-
-				sacarDeBlocked(proceso);
-
-				agregarASuspendedBlocked(proceso);
-
-				//Avisar a memoria
-
-				usleep((obtenerTiempoDeBloqueo(proceso) - tiempoMaximoBloqueado)*1000);
-
-				agregarASuspendedReady(proceso);
-
-			}
 
 
-		}
-
-		else {
-			terminarEjecucion(proceso);
-
-		}
-
-	}
-}
 
 
-// Las funciones siguientes son hilos del planificador
+
 
 void newAReady(){
 
@@ -744,32 +563,6 @@ void newAReady(){
 			//sem_post(&contadorProcesosEnMemoria);
 		}
 	} //aca hay que replanificar en caso de SRT?
-}
-
-void readyAExe(){
-
-	while(1){
-		sem_wait(&pcbEnReady);
-		sem_wait(&cpuDisponible);
-		procesoAEjecutar = obtenerSiguienteDeReady();
-
-
-		if(procesoAEjecutar != NULL) { // por las dudas dejo este if, pero se supone que los semaforos garantizan que no sea NULL
-
-			ejecutar(procesoAEjecutar);
-
-
-			if(algoritmoPlanificacion == SRT){
-				log_info(logger, "[EXEC] Ingresa el proceso de PID: %d con una rafaga de ejecucion estimada de %f milisegundos.", procesoAEjecutar->idProceso, procesoAEjecutar->estimacion_rafaga);
-			}else{
-				log_info(logger, "[EXEC] Ingresa el proceso de PID: %d", procesoAEjecutar->idProceso);
-			}
-
-
-		}else{
-			log_info(logger, "[EXEC] No se logró encontrar un proceso para ejecutar");
-		}
-	}
 }
 
 
@@ -816,19 +609,6 @@ bool supera_tiempo_maximo_bloqueado(t_pcb* proceso){
 
 
 
-void terminarEjecucion(t_pcb* proceso){
-
-	//pthread_mutex_lock(&mutexExit);
-
-	list_add(colaExit, proceso);
-	log_info(logger, "[EXIT] Finaliza el proceso de PID: %d", proceso->idProceso);
-
-	//pthread_mutex_unlock(&mutexExit);
-
-
-	//Aca hay que mandar un mensaje a memoria para que libere sus estructuras
-	//Y tambien avisar a consola que termino su ejecucion
-}
 
 
 
@@ -857,23 +637,39 @@ void  recibir_consola(int servidor) {
 
 void atender_consola(int nuevo_cliente) {
 			t_pcb* PCB;
-			t_list* listaDeInstrucciones = recibir_paquete(nuevo_cliente);
-			// no las devuelve pero la idea es que lo haga o  en su defecto crear una funcion que lo haga
+			t_list* listaDeInstrucciones = recibir_paquete(nuevo_cliente); // supuestamente esto las devuelve
+
 			t_list* proximaInstruccion = listaDeInstrucciones;
 
 			PCB->idProceso = 1000; // esto después va a ser un numero random por cada consola conectada
-			PCB->tamanioProceso = 512; // idem
+			PCB->tamanioProceso = sizeof(PCB);
 			PCB->instrucciones = listaDeInstrucciones;
-			PCB->program_counter = proximaInstruccion;
-			PCB->estimacion_rafaga= estimacionInicial;
+			PCB->program_counter = 1; // o 0?
+			PCB->tabla_paginas = -1;
+			PCB->estimacion_rafaga = estimacionInicial;
+			PCB->estimacion_anterior = -1;
+			PCB->rafagaMs = 0;
+			PCB->horaDeIngresoAExe = 0;
 			PCB->estado = NEW;
-			PCB->socket_cliente = nuevo_cliente; // acá guardamos el socket
 
+
+			t_pidXsocket*  datosCliente = malloc(sizeof(t_pidXsocket));
+			datosCliente->pid = PCB->idProceso;
+			datosCliente->socket = nuevo_cliente;
+
+			list_add(listaDeConsolas,datosCliente); // acá guardamos el socket
 
 			agregarANew(PCB);
 
 			sem_post(&pcbEnNew);
 		}
+
+
+void agregarANew(t_pcb* proceso) {
+
+	queue_push(colaNew, proceso);
+	log_info(logger, "[NEW] Entra el proceso de PID: %d a la cola.", proceso->idProceso);
+}
 
 	/*
 	ASIGNAR_MEMORIA(): si el grado de multiprogramacion lo permite, pasa el primer proceso de colaNew a READY, envia
@@ -891,19 +687,259 @@ void asignar_memoria() {
 		sem_wait(&gradoDeMultiprogramacion);
 		agregarAReady(proceso);
 		pthread_mutex_unlock(&asignarMemoria);
-		//enviarMensajeAMemoria("Inicializar estructuras"); // falta desarrollar
-		//enviarProcesoAMemoria(proceso); // falta desarrollar // la seccion critica llegaria hasta aca pero en las pruebas no // solo se manda el PID
-		//int NroTP = obtenerValorDeTP();  // falta desarrollar
 
-		//if(algoritmoPlanificacion == SRT)
-			//enviarInterrupcionACpu(); // falta desarrollar
+		send(socketMemoria,PAQUETE,sizeof(int),MSG_WAITALL);
+		t_paquete* paquete = crear_paquete(PAQUETE);
+		agregar_a_paquete(paquete,proceso->idProceso,sizeof(int));
+		enviar_paquete(paquete,socketMemoria);
+		eliminar_paquete(paquete);
 
+		send(socketCpuDispatch,PAQUETE,sizeof(int),MSG_WAITALL); // aca le envio la operacion a cpu para "despertarlo"
+		 t_paquete* paquete = crear_paquete(PAQUETE);
+		agregar_a_paquete(paquete,proceso->idProceso,sizeof(int));
+		enviar_paquete(paquete,socketCpuDispatch);
+		eliminar_paquete(paquete);
+
+
+		int NroTP = recibir_paquete(socketCpuDispatch);  // falta desarrollar
+
+		if(algoritmoPlanificacion == SRT)
+			sem_post(&desalojarProceso);
 
 		sem_post(&pcbEnReady);
 		}
 
 
 	}
+
+void agregarAReady(t_pcb* proceso){
+		sem_wait(&pcbEnReady);
+		list_add(colaReady, proceso);
+		log_info(logger, "[READY] Entra el proceso de PID: %d a la cola.", proceso->idProceso);
+
+}
+
+
+void readyAExe(){
+
+	while(1){
+
+		sem_wait(&cpuDisponible);
+
+		if(algoritmoPlanificacionActual == SRT)
+		sem_wait(&procesoDesalojado);
+
+
+		procesoAEjecutar = malloc(sizeof(t_pcb*));
+		procesoAEjecutar = obtenerSiguienteDeReady();
+
+		if(procesoAEjecutar != NULL) { // por las dudas dejo este if, pero se supone que los semaforos garantizan que no sea NULL
+
+			ejecutar(procesoAEjecutar);
+
+
+			if(algoritmoPlanificacion == SRT){
+				log_info(logger, "[EXEC] Ingresa el proceso de PID: %d con una rafaga de ejecucion estimada de %f milisegundos.", procesoAEjecutar->idProceso, procesoAEjecutar->estimacion_rafaga);
+			}else{
+				log_info(logger, "[EXEC] Ingresa el proceso de PID: %d", procesoAEjecutar->idProceso);
+			}
+
+
+		}else{
+			log_info(logger, "[EXEC] No se logró encontrar un proceso para ejecutar");
+		}
+	}
+}
+
+t_pcb* obtenerSiguienteFIFO(){
+	pthread_mutex_lock(&colaReadyFIFO);
+	t_pcb* procesoPlanificado = list_get(colaReady,0);
+	pthread_mutex_unlock(&colaReadyFIFO);
+	return procesoPlanificado;
+}
+
+t_pcb* obtenerSiguienteSRT(){
+
+	t_pcb* procesoPlanificado = NULL;
+	t_pcb* procesoAux = NULL;
+	int i;
+	int indexARemover;
+	float shortestJob;
+
+	pthread_mutex_lock(&colaReadySRT); //----------------------------------
+
+	procesoAux = list_get(colaReady,0);
+
+
+	indexARemover = 0;
+	shortestJob = procesoAux->estimacion_rafaga;
+
+	//itero por la lista de Ready
+
+	log_info(logger,"PROCESOS EN READY: %d \n", list_size(colaReady));
+
+
+	for(i=1;i<list_size(colaReady);i++){
+	   	procesoAux = list_get(colaReady,i);
+		if(shortestJob > procesoAux->estimacion_rafaga){
+			shortestJob = procesoAux->estimacion_rafaga;
+			indexARemover = i;
+		}
+	}
+	procesoPlanificado = list_remove(colaReady, indexARemover);
+
+	pthread_mutex_unlock(&colaReadySRT); //--------------------------------------
+
+
+	return procesoPlanificado;
+}
+t_pcb* obtenerSiguienteDeReady(){
+
+
+	t_pcb * procesoPlanificado = malloc(sizeof(t_pcb*));
+
+	// Aca dentro un SWITCH para los distintos algoritmos q llama a una funcion para cada uno
+	switch(algoritmoPlanificacionActual){
+
+		//CASO FIFO
+		case FIFO:
+			procesoPlanificado = obtenerSiguienteFIFO();
+		break;
+
+		//CASO SJF con desalojo
+		case SRT:
+			procesoPlanificado = obtenerSiguienteSRT();
+		break;
+
+
+	}
+
+	// Devuelve NULL si no hay nada en ready
+	// Caso contrario devuelve el que tiene mas prioridad segun el algoritmo que se este empleando
+	return procesoPlanificado;
+}
+
+
+
+void ejecutar(t_pcb* proceso){
+
+
+	time_t a = time(NULL);
+	proceso->horaDeIngresoAExe = ((float) a)*1000;
+	proceso->estado = EXEC;
+	pthread_mutex_lock(&ejecucion);
+	procesoEnEjecucion = proceso;
+	pthread_mutex_unlock(&ejecucion);
+	sem_post(&procesoEjecutandose);
+	send(socketCpuDispatch,PAQUETE,sizeof(int),MSG_WAITALL);
+
+	t_paquete* paquete = crear_paquete(PAQUETE);
+
+	agregar_a_paquete(paquete,proceso->idProceso,sizeof(int));
+	enviar_paquete(paquete,socketCpuDispatch);
+	eliminar_paquete(paquete);
+
+	//Aca mando el proceso a cpu y guardo el momento en el que arranca a ejecutar para el calculo de la estimacion
+}
+
+
+void atenderDesalojo(){
+
+	sem_wait(&procesoEjecutandose);
+	sem_wait(&desalojarProceso);
+
+	send(socketCpuDispatch,MENSAJE,sizeof(char*),MSG_WAITALL);
+	enviar_mensaje("Desalojar proceso",socketCpuInterrupt); // falta ver todavia si es asi
+
+	t_pcb* proceso = procesoEnEjecucion;
+
+		time_t a = time(NULL);
+		float tiempoDeFin = ((float) a)*1000;
+		proceso->rafagaMs = tiempoDeFin - proceso->horaDeIngresoAExe;
+		estimarRafaga(proceso);
+		agregarAReady(proceso);
+
+		sem_post(&procesoDesalojado);
+
+}
+
+void estimarRafaga(t_pcb* proceso){
+	proceso->estimacion_anterior=proceso->estimacion_rafaga; // no estoy seguro de que la estimacion anterior sea necesaria
+	proceso->estimacion_rafaga = alfa * proceso->rafagaMs + (1 - alfa) * proceso->estimacion_rafaga;
+
+}
+
+void atenderIOyEXIT(){
+	t_pcb* proceso;
+	while(recv(socketCpuDispatch, &proceso,sizeof(t_pcb),0)){
+		// cuando reciba del cpu una interrupcion
+
+		sem_post(&cpuDisponible);
+
+		if (!proceso->aFinalizar) {
+			time_t a = time(NULL);									//de I/O se encarga de atenderla
+			float tiempoDeFin = ((float) a)*1000;
+			proceso->rafagaMs = tiempoDeFin - proceso->horaDeIngresoAExe;
+			estimarRafaga(proceso);
+
+
+			agregarABlocked(proceso);
+
+			if(!supera_tiempo_maximo_bloqueado(proceso)){
+
+				usleep(obtenerTiempoDeBloqueo(proceso)*1000);
+				sacarDeBlocked(proceso);
+
+				agregarAReady(proceso);
+
+			}else{
+
+				usleep(tiempoMaximoBloqueado*1000);
+
+				sacarDeBlocked(proceso);
+
+				agregarASuspendedBlocked(proceso);
+
+				//Avisar a memoria
+
+				usleep((obtenerTiempoDeBloqueo(proceso) - tiempoMaximoBloqueado)*1000);
+
+				agregarASuspendedReady(proceso);
+
+			}
+
+
+		}
+
+		else {
+			terminarEjecucion(proceso);
+
+		}
+
+	}
+}
+
+void terminarEjecucion(t_pcb* proceso){
+
+
+	t_pidXsocket * unaConsola = malloc(sizeof(t_pidXsocket));
+	pthread_mutex_lock(&procesoExit);
+	proceso->estado = EXIT;
+
+	pthread_mutex_unlock(&procesoExit);
+	send(socketMemoria,MENSAJE,sizeof(char*),MSG_WAITALL);
+	enviar_mensaje("Liberar estructuras",socketMemoria); // falta ver si es asi
+	log_info(logger, "[EXIT] Finaliza el proceso de PID: %d", proceso->idProceso);
+	pthread_mutex_lock(&consolasExit);
+
+	list_find(listaDeConsolas,unaConsola->pid == proceso->idProceso);
+	enviar_mensaje("Finalizo la ejecucion",unaConsola->socket);
+	pthread_mutex_unlock(&consolasExit);
+	close(unaConsola->socket);
+
+	sem_post(&gradoDeMultiprogramacion);
+}
+
 
 	/*
 	  * FINALIZAR_PROCESO_Y_AVISAR_A_MEMORIA(): Recibe un PCB con motivo de finalizar el mismo, pasa al
@@ -916,7 +952,7 @@ void finalizar_proceso_y_avisar_a_memoria() {
 		t_pcb * proceso = recibirProcesoAFinalizar(); //falta desarrollar
 		terminarEjecucion(proceso);
 
-	//	enviarMensajeAMemoria("Liberar estructuras"); // falta desarrollar
+
 		}
 	}
 
@@ -935,26 +971,26 @@ void finalizar_proceso_y_avisar_a_consola() {
 
 	//* PLANIFICAR(): Llama constantemente al planificador.
 
+/*
 void planificar() {
 
 		while(1) {
-			readyAExe(); //en principio llama a esta transicion ya que es la única que invoca a los planificadores y
-						//además se encuentra aislada del resto
-		}				// igual ojo porque parece que falta actualizarla
+			readyAExe();
+		}
 	}
-
+*/
 	/*
 	 * SUSPENDER(): si un proceso está bloqueado por un tiempo mayor al límite se llamará a una transición para
 		           suspenderlo y se enviará un mensaje a memoria con la informacion necesaria.
 	 */
-
+/*
 void suspender(){
 		while(1){
 		blockedASuspension(); // modificar: la idea sería que solo tome el primer elemento de la lista y
 								//lo pase a bloqueado y suspendido
 		}
 	}
-
+*/
 	/*
 	 * DESBLOQUEAR_SUSPENDIDO(): espera a que termine la entrada/salida de un proceso SUSPENDED-BLOCKED y llama
 		a las transiciones necesarias para que pase a ser SUSPENDED-READY
@@ -1173,7 +1209,7 @@ void atender_consola_prueba(int nuevo_cliente) {
 				PCB->rafagaMs = 0;
 				PCB->horaDeIngresoAExe = 0;
 				PCB->estado = NEW;
-				PCB->socket_cliente = nuevo_cliente;
+
 
 				log_info(logger,"inicializamos el pcb");
 

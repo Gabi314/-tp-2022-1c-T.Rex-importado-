@@ -52,7 +52,7 @@ typedef enum estado { NEW, READY, BLOCKED, EXEC, SUSP_READY, SUSP_BLOCKED, TERMI
 
 
 t_queue* colaNew;
-t_queue* colaReady;
+t_list* colaReady;
 t_queue* colaSuspendedReady;
 t_queue* colaBlocked;
 t_queue* colaSuspendedBlocked;
@@ -72,11 +72,17 @@ typedef struct
 	clock_t rafagaMs;
 	clock_t horaDeIngresoAExe;
 	t_estado estado;
-	bool suspendido; //parece que ya no hace falta
-	bool aFinalizar;
-	int socket_cliente;
+	//bool suspendido; //parece que ya no hace falta
+	//bool aFinalizar;
+
 
 } t_pcb;
+
+typedef struct
+{
+	int socket;
+	int pid;
+} t_pidXsocket;
 
 typedef enum
 {
@@ -98,6 +104,8 @@ typedef enum{
 	COPY ,
 	READ
 }nroDeInstruccion;
+
+
 //-------------- Funciones para Kernel como servidor de consola ---------
 typedef struct
 {
@@ -203,11 +211,15 @@ t_pcb* procesoAEjecutar;
 
 bool supera_tiempo_maximo_bloqueado(t_pcb* proceso);
 int obtenerTiempoDeBloqueo(t_pcb* proceso);
+t_pcb* obtenerSiguienteDeReady();
+
 //------------------HILOS--------------------
 //MULTIHILOS DE EJECUCION PARA ATENDER N CONSOLAS: esperan a recibir una consola y sus
  //          instrucciones para generar el pcb y asignar el proceso a NEW
 void recibir_consola(int servidor) ;
 void atender_consola(int cliente);
+
+t_list * listaDeConsolas;
 
 /*
 ASIGNAR_MEMORIA(): si el grado de multiprogramacion lo permite, pasa el primer proceso de colaNew a READY, envia
@@ -221,6 +233,8 @@ void asignar_memoria();
 	da aviso al módulo Memoria para que éste libere sus estructuras. La idea sería tener un semaforo o algo que
 	controle que la ejecucion del proceso sea la última
  */
+void atenderIOyEXIT();
+void readyAExe();
 
 void finalizar_proceso_y_avisar_a_memoria();
 
@@ -257,12 +271,16 @@ sem_t pcbEnNew;
 sem_t pcbEnReady;
 sem_t gradoDeMultiprogramacion;
 sem_t cpuDisponible;
+sem_t desalojarProceso;
+sem_t procesoEjecutandose;
+sem_t procesoDesalojado;
 
 pthread_mutex_t asignarMemoria;
 pthread_mutex_t colaReadyFIFO;
 pthread_mutex_t colaReadySRT;
 pthread_mutex_t ejecucion;
-
+pthread_mutex_t procesoExit;
+pthread_mutex_t consolasExit;
 
 //-------------VARIABLES Y FUNCIONES DE PRUEBA -------------------------
 
