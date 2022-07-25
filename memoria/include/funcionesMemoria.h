@@ -19,15 +19,19 @@
 
 typedef enum
 {
-	MENSAJE,
-	PAQUETE,
-	PAQUETE2,
-	PAQUETE3,
-	PAQUETE4,
-	PAQUETE5,
-	SUSPENSION,
-	DESUSPENSION
-}op_code;
+	MENSAJE_CPU_MEMORIA,
+	TAM_PAGINAS_Y_CANT_ENTRADAS,
+	PRIMER_ACCESO,
+	SEGUNDO_ACCESO,
+	READ,
+	WRITE,
+	COPY
+}op_code_cpu;
+
+typedef enum
+{	MENSAJE_A_KERNEL,
+	NRO_TP1
+}op_code_kernel;
 
 typedef struct
 {
@@ -37,7 +41,8 @@ typedef struct
 
 typedef struct
 {
-	op_code codigo_operacion;
+	op_code_cpu codigo_operacion_cpu;
+	op_code_kernel codigo_operacion_kernel;
 	t_buffer* buffer;
 } t_paquete;
 
@@ -160,3 +165,4 @@ void suspensionDeProceso(int);
 entradaTabla2doNivel* entradaCargadaConMarcoAsignado(int);
 
 #endif /* FUNCIONES_MEMORIA_H_*/
+

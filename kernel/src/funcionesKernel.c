@@ -177,10 +177,16 @@ t_pcb* tomar_pcb(int socket_cliente)
 
 void* serializar_paquete(t_paquete* paquete, int bytes)
 {
+
 	void * magic = malloc(bytes);
 	int desplazamiento = 0;
 
-	memcpy(magic + desplazamiento, &(paquete->codigo_operacion), sizeof(int));
+	if(socketMemoria){
+		memcpy(magic + desplazamiento, &(paquete->codigo_operacion_memoria), sizeof(int));
+	}else if(socketCpuDispatch){
+		memcpy(magic + desplazamiento, &(paquete->codigo_operacion_cpu), sizeof(int));
+	}
+
 	desplazamiento+= sizeof(int);
 	memcpy(magic + desplazamiento, &(paquete->buffer->size), sizeof(int));
 	desplazamiento+= sizeof(int);
@@ -219,7 +225,12 @@ void enviar_mensaje(char* mensaje, int socket_cliente)
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
 
-	paquete->codigo_operacion = MENSAJE;
+	if(socket_cliente == socketMemoria){
+		paquete->codigo_operacion_memoria = MENSAJE_A_MEMORIA;
+	}else if(socket_cliente == socketCpuDispatch){
+		paquete->codigo_operacion_cpu = MENSAJE_A_MEMORIA;
+	}
+
 	paquete->buffer = malloc(sizeof(t_buffer));
 	paquete->buffer->size = strlen(mensaje) + 1;
 	paquete->buffer->stream = malloc(paquete->buffer->size);
@@ -260,7 +271,11 @@ void agregar_instrucciones_al_paquete(instrucciones* instruccion) {
 t_paquete* crear_paquete(int cod_op)
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
-	paquete->codigo_operacion = cod_op;
+	if(socketMemoria){
+		paquete->codigo_operacion_memoria = cod_op;
+	}else if(socketCpuDispatch){
+		paquete->codigo_operacion_cpu = cod_op;
+	}
 	crear_buffer(paquete);
 	return paquete;
 }
@@ -338,4 +353,6 @@ void liberar_conexion(int socket_cliente)
 {
 	close(socket_cliente);
 }
+
+
 

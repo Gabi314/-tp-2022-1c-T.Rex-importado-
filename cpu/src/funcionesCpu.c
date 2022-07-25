@@ -99,7 +99,11 @@ void enviar_mensaje(char* mensaje, int socket_cliente,int cod_op)
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
 
-	paquete->codigo_operacion = cod_op;
+	if(socket_cliente == clienteKernel){
+		paquete->codigo_operacion_kernel = MENSAJE_A_KERNEL;
+	}else if(socket_cliente == conexionMemoria){
+		paquete->codigo_operacion_memoria = MENSAJE_CPU_MEMORIA;
+	}
 	paquete->buffer = malloc(sizeof(t_buffer));
 	paquete->buffer->size = strlen(mensaje) + 1;
 	paquete->buffer->stream = malloc(paquete->buffer->size);
@@ -120,7 +124,12 @@ void* serializar_paquete(t_paquete* paquete, int bytes)
 	void * magic = malloc(bytes);
 	int desplazamiento = 0;
 
-	memcpy(magic + desplazamiento, &(paquete->codigo_operacion), sizeof(int));
+	if(clienteKernel){
+		memcpy(magic + desplazamiento, &(paquete->codigo_operacion_kernel), sizeof(int));
+	}else if(conexionMemoria){
+		memcpy(magic + desplazamiento, &(paquete->codigo_operacion_memoria), sizeof(int));
+	}
+
 	desplazamiento+= sizeof(int);
 	memcpy(magic + desplazamiento, &(paquete->buffer->size), sizeof(int));
 	desplazamiento+= sizeof(int);
@@ -167,7 +176,13 @@ void crear_buffer(t_paquete* paquete)
 t_paquete* crear_paquete(int cod_op) //entrada1erNivel paquete1 entrada2doNivel paquete2 dirFisicaYValor paquete3
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
-	paquete->codigo_operacion = cod_op;
+
+	if(clienteKernel){
+		paquete->codigo_operacion_kernel = cod_op;
+	}else if(conexionMemoria){
+		paquete->codigo_operacion_memoria = cod_op;
+	}
+
 	crear_buffer(paquete);
 	return paquete;
 }
@@ -254,3 +269,4 @@ void liberar_conexion(int socket_cliente)
 void iterator(int value) {
 	log_info(logger,"%d", value);
 }
+

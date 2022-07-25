@@ -175,3 +175,50 @@
 
 [ERROR] 21:49:10:318 MEMORIA/(13328:13328): Se desconecto el cliente. Terminando conexion
 [INFO] 21:49:10:318 MEMORIA/(13328:13328): Fin de memoria
+[INFO] 13:15:22:019 MEMORIA/(16202:16202): Ya existe la direccion de swap
+[INFO] 13:15:22:020 MEMORIA/(16202:16202): Memoria lista para recibir a Kernel
+[INFO] 13:15:32:433 MEMORIA/(16202:16202): Se conecto un cliente!
+[INFO] 13:15:32:436 MEMORIA/(16202:16202): Envio el numero de tabla de 1er nivel a Kernel que es 0
+[ERROR] 13:15:32:438 MEMORIA/(16202:16202): Se desconecto el cliente. Terminando conexion
+[INFO] 13:15:32:438 MEMORIA/(16202:16202): Memoria lista para recibir a Cpu
+[INFO] 13:15:43:157 MEMORIA/(16202:16202): Se conecto un cliente!
+[INFO] 13:15:43:159 MEMORIA/(16202:16202): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 13:15:43:159 MEMORIA/(16202:16202): Envio el tamanio de pag y cant entradas
+[INFO] 13:15:43:161 MEMORIA/(16202:16202): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 13:15:43:161 MEMORIA/(16202:16202): Envio el numero de tabla de 2do nivel 0
+[INFO] 13:15:43:161 MEMORIA/(16202:16202): Me llego  la entrada de segundo nivel 0
+[INFO] 13:15:43:161 MEMORIA/(16202:16202): Envio el marco correspondiente el cual es 0
+[INFO] 13:15:44:162 MEMORIA/(16202:16202): Me llego el marco 0 con desplazamiento 0
+[INFO] 13:15:44:199 MEMORIA/(16202:16202): -------------------WRITE-------------------
+[INFO] 13:15:44:199 MEMORIA/(16202:16202): Me llego el valor a escribir: 1000
+[INFO] 13:15:44:199 MEMORIA/(16202:16202): -------------------WRITE-------------------
+
+[INFO] 13:15:44:200 MEMORIA/(16202:16202): Me llego el marco 0 con desplazamiento 4
+[INFO] 13:15:44:239 MEMORIA/(16202:16202): -------------------WRITE-------------------
+[INFO] 13:15:44:239 MEMORIA/(16202:16202): Me llego el valor a escribir: 1001
+[INFO] 13:15:44:239 MEMORIA/(16202:16202): -------------------WRITE-------------------
+
+[INFO] 13:15:44:240 MEMORIA/(16202:16202): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 13:15:44:240 MEMORIA/(16202:16202): Envio el numero de tabla de 2do nivel 0
+[INFO] 13:15:44:242 MEMORIA/(16202:16202): Me llego  la entrada de segundo nivel 1
+[INFO] 13:15:44:242 MEMORIA/(16202:16202): Envio el marco correspondiente el cual es 1
+[INFO] 13:15:44:242 MEMORIA/(16202:16202): Me llego el marco 1 con desplazamiento 4
+[INFO] 13:15:44:279 MEMORIA/(16202:16202): -------------------WRITE-------------------
+[INFO] 13:15:44:279 MEMORIA/(16202:16202): Me llego el valor a escribir: 2000
+[INFO] 13:15:44:280 MEMORIA/(16202:16202): -------------------WRITE-------------------
+
+[INFO] 13:15:44:280 MEMORIA/(16202:16202): -------------------COPIAR-------------------
+[INFO] 13:15:44:280 MEMORIA/(16202:16202): Se copio el valor 2000 en la dir fisica:(marco 1 offset 0)
+[INFO] 13:15:44:280 MEMORIA/(16202:16202): -------------------COPIAR-------------------
+
+[INFO] 13:15:44:319 MEMORIA/(16202:16202): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 13:15:44:320 MEMORIA/(16202:16202): Envio el numero de tabla de 2do nivel 0
+[INFO] 13:15:44:320 MEMORIA/(16202:16202): Me llego  la entrada de segundo nivel 2
+[INFO] 13:15:44:320 MEMORIA/(16202:16202): Envio el marco correspondiente el cual es 2
+[INFO] 13:15:44:320 MEMORIA/(16202:16202): Me llego el marco 2 con desplazamiento 0
+[INFO] 13:15:44:359 MEMORIA/(16202:16202): -------------------WRITE-------------------
+[INFO] 13:15:44:360 MEMORIA/(16202:16202): Me llego el valor a escribir: 3000
+[INFO] 13:15:44:360 MEMORIA/(16202:16202): -------------------WRITE-------------------
+
+[ERROR] 13:15:44:363 MEMORIA/(16202:16202): Se desconecto el cliente. Terminando conexion
+[INFO] 13:15:44:363 MEMORIA/(16202:16202): Fin de memoria

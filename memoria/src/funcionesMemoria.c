@@ -102,10 +102,16 @@ t_list* recibir_paquete_int(int socket_cliente)
 //------------------------------------------------------------------------------------
 void* serializar_paquete(t_paquete* paquete, int bytes)
 {
+
 	void * magic = malloc(bytes);
 	int desplazamiento = 0;
 
-	memcpy(magic + desplazamiento, &(paquete->codigo_operacion), sizeof(int));
+	if(clienteKernel){//HACER ESTO CON TODOSSS
+		memcpy(magic + desplazamiento, &(paquete->codigo_operacion_kernel), sizeof(int));
+	}else if(clienteCpu){
+		memcpy(magic + desplazamiento, &(paquete->codigo_operacion_cpu), sizeof(int));
+	}
+
 	desplazamiento+= sizeof(int);
 	memcpy(magic + desplazamiento, &(paquete->buffer->size), sizeof(int));
 	desplazamiento+= sizeof(int);
@@ -115,6 +121,7 @@ void* serializar_paquete(t_paquete* paquete, int bytes)
 	return magic;
 }
 
+
 void crear_buffer(t_paquete* paquete)
 {
 	paquete->buffer = malloc(sizeof(t_buffer));
@@ -123,17 +130,21 @@ void crear_buffer(t_paquete* paquete)
 }
 
 
-t_paquete* crear_paquete(int cod_op) //paquete: paginas y entradas, paquete2 nroTabla2doNivel, paquete3 marco
+t_paquete* crear_paquete(int cod_op)
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
-	paquete->codigo_operacion = cod_op;
+	if(clienteKernel){
+		paquete->codigo_operacion_kernel = cod_op;
+	}else if(clienteCpu){
+		paquete->codigo_operacion_cpu = cod_op;
+	}
 	crear_buffer(paquete);
 	return paquete;
 }
 
 
 void enviarTamanioDePaginaYCantidadDeEntradas(int socket_cliente){
-	t_paquete* paquete = crear_paquete(PAQUETE);
+	t_paquete* paquete = crear_paquete(TAM_PAGINAS_Y_CANT_ENTRADAS);
 	log_info(logger,"Envio el tamanio de pag y cant entradas");
 
 	agregar_a_paquete(paquete,&tamanioDePagina,sizeof(tamanioDePagina));
@@ -145,7 +156,7 @@ void enviarTamanioDePaginaYCantidadDeEntradas(int socket_cliente){
 }
 
 void enviarNroTabla2doNivel(int socket_cliente,int nroTabla2doNivel){
-	t_paquete* paquete = crear_paquete(PAQUETE2);
+	t_paquete* paquete = crear_paquete(PRIMER_ACCESO);
 	log_info(logger,"Envio el numero de tabla de 2do nivel %d",nroTabla2doNivel);
 
 	agregar_a_paquete(paquete,&nroTabla2doNivel,sizeof(nroTabla2doNivel));
@@ -156,7 +167,7 @@ void enviarNroTabla2doNivel(int socket_cliente,int nroTabla2doNivel){
 }
 
 void enviarNroTabla1erNivel(int socket_cliente,int nroTabla1erNivel){
-	t_paquete* paquete = crear_paquete(PAQUETE);
+	t_paquete* paquete = crear_paquete(NRO_TP1);
 	log_info(logger,"Envio el numero de tabla de 1er nivel a Kernel que es %d",nroTabla1erNivel);
 
 	agregar_a_paquete(paquete,&nroTabla1erNivel,sizeof(nroTabla1erNivel));
@@ -167,7 +178,7 @@ void enviarNroTabla1erNivel(int socket_cliente,int nroTabla1erNivel){
 }
 
 void enviarMarco(int socket_cliente, int marco){
-	t_paquete* paquete = crear_paquete(PAQUETE3);
+	t_paquete* paquete = crear_paquete(SEGUNDO_ACCESO);
 	log_info(logger,"Envio el marco correspondiente el cual es %d",marco);
 
 	agregar_a_paquete(paquete,&marco,sizeof(marco));
@@ -180,7 +191,12 @@ void enviar_mensaje(char* mensaje, int socket_cliente)
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
 
-	paquete->codigo_operacion = MENSAJE;
+	if(socket_cliente == clienteKernel){
+		paquete->codigo_operacion_kernel = MENSAJE_A_KERNEL;
+	}else if(socket_cliente == clienteCpu){
+		paquete->codigo_operacion_cpu = MENSAJE_CPU_MEMORIA;
+	}
+
 	paquete->buffer = malloc(sizeof(t_buffer));
 	paquete->buffer->size = strlen(mensaje) + 1;
 	paquete->buffer->stream = malloc(paquete->buffer->size);
@@ -196,7 +212,6 @@ void enviar_mensaje(char* mensaje, int socket_cliente)
 	eliminar_paquete(paquete);
 }
 
-
 void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio)
 {
 	paquete->buffer->stream = realloc(paquete->buffer->stream, paquete->buffer->size + tamanio + sizeof(int));
@@ -210,7 +225,7 @@ void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio)
 void enviar_paquete(t_paquete* paquete, int socket_cliente)
 {
 	int bytes = paquete->buffer->size + 2*sizeof(int);
-	void* a_enviar = serializar_paquete(paquete, bytes);// void* se utiliza para mandar espacion de usuario a memoria a escribir
+	void* a_enviar = serializar_paquete(paquete, bytes);
 
 	send(socket_cliente, a_enviar, bytes, 0);
 

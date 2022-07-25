@@ -21,15 +21,20 @@
 
 typedef enum
 {
-	MENSAJE,
-	PAQUETE,
-	PAQUETE2,
-	PAQUETE3,
-	PAQUETE4,
-	PAQUETE5,
-	SUSPENSION,
-	DESUSPENSION
-}op_code;
+	MENSAJE_CPU_MEMORIA,
+	TAM_PAGINAS_Y_CANT_ENTRADAS,
+	PRIMER_ACCESO,
+	SEGUNDO_ACCESO,
+	READ,
+	WRITE,
+	COPY
+}op_code_memoria;
+
+typedef enum
+{
+	MENSAJE_A_KERNEL,
+	PAQUETE          //poner otro nombre
+}op_code_kernel;
 
 typedef struct
 {
@@ -39,7 +44,8 @@ typedef struct
 
 typedef struct
 {
-	op_code codigo_operacion;
+	op_code_memoria codigo_operacion_memoria;
+	op_code_kernel codigo_operacion_kernel;
 	t_buffer* buffer;
 } t_paquete;
 
@@ -164,5 +170,6 @@ int accederAMemoria(int);
 instruccion* buscarInstruccionAEjecutar(t_pcb*);
 void decode(instruccion*);
 void ejecutar(instruccion*);
+
 
 #endif /*FUNCIONES_CPU_H_*/

@@ -69,9 +69,9 @@ typedef enum
 
 typedef enum
 {
-	MENSAJE,
-	PAQUETE,
-}op_code;
+	MENSAJE_A_MEMORIA,
+	NRO_TP1
+}op_code_memoria;
 
 //Funciones como cliente de Memoria
 int conexionConMemoria();
@@ -108,7 +108,8 @@ typedef struct
 
 typedef struct
 {
-	op_code codigo_operacion;
+	op_code_memoria codigo_operacion_memoria;
+	op_code_cpu codigo_operacion_cpu;
 	t_buffer* buffer;
 } t_paquete;
 

@@ -8,7 +8,7 @@ int main(void) {
     //generar_conexiones();
 
 	//conexionConConsola();
-	//conexionConCpu(); ver que hacer aca
+	//conexionConCpu();
 	conexionConMemoria();
 }
 
@@ -54,7 +54,7 @@ void crear_colas(){
 void generar_conexiones(){
      //socketServidor = iniciar_servidor();
      //log_info(logger, "Servidor listo para recibir al cliente");
-    // socketMemoria = crear_conexion(ipMemoria, puertoMemoria);//estan pasando un string en los puertos
+     socketMemoria = crear_conexion(ipMemoria, puertoMemoria);//estan pasando un string en los puertos
      //socketCpuDispatch = crear_conexion(ipCpu, puertoCpuDispatch);
 	 //falta también las conexiones con cpu para interrupciones
 }
@@ -72,7 +72,7 @@ int conexionConMemoria(void){
 
 	int cod_op = recibir_operacion(socketMemoria);
 
-	if(cod_op == PAQUETE){
+	if(cod_op == NRO_TP1){
 		listaQueContieneNroTabla1erNivel = recibir_paquete_int(socketMemoria);
 	}
 
@@ -85,7 +85,7 @@ int conexionConMemoria(void){
 }
 
 void enviarPID(){//pasar entrada y nroTabla1ernivel
-	t_paquete* paquete = crear_paquete(PAQUETE);
+	t_paquete* paquete = crear_paquete(NRO_TP1);
 	// Leemos y esta vez agregamos las lineas al paquete
 	agregar_a_paquete(paquete,&pidKernel,sizeof(pidKernel));
 
@@ -101,7 +101,7 @@ void enviarPID(){//pasar entrada y nroTabla1ernivel
 //---------------------------------------------------------------------------------------------
 
 //preguntar por el switch
-int conexionConConsola(void){
+/*int conexionConConsola(void){
 	logger = log_create("./kernel.log", "Kernel", 1, LOG_LEVEL_DEBUG);
 
 	int server_fd = iniciar_servidor();
@@ -132,7 +132,7 @@ int conexionConConsola(void){
 			}
 	  return EXIT_SUCCESS;
 }
-
+*/
 // -----------------------------------------------------------------------------------------------------
 
 

@@ -78,11 +78,11 @@ int conexionConCpu(void){
 
 		int nroTabla2doNivel;
 		switch (cod_op) {
-			case MENSAJE:
+			case MENSAJE_CPU_MEMORIA://mensaje de pedido tam pag y cant entradas
 				recibir_mensaje(clienteCpu);//recibe el pedido de tam_pag y cant_entradas
 				enviarTamanioDePaginaYCantidadDeEntradas(clienteCpu);
 				break;
-			case PAQUETE://envio de nro tabla 2do nivel
+			case PRIMER_ACCESO://envio de nro tabla 2do nivel
 				listaQueContieneNroTabla1erNivelYentrada = recibir_paquete_int(clienteCpu); // lista con valores de nro y entrada de tabla
 
 				nroTabla2doNivel = leerYRetornarNroTabla2doNivel(listaQueContieneNroTabla1erNivelYentrada);
@@ -90,7 +90,7 @@ int conexionConCpu(void){
 				enviarNroTabla2doNivel(clienteCpu,nroTabla2doNivel);
 				break;
 
-			case PAQUETE2://poner cases mas expresivos envio de marco
+			case SEGUNDO_ACCESO://poner cases mas expresivos envio de marco
 				listaQueContieneEntradaDeTabla2doNivel = recibir_paquete_int(clienteCpu);
 				int entradaTabla2doNivel = (int) list_get(listaQueContieneEntradaDeTabla2doNivel,0);
 				log_info(logger,"Me llego  la entrada de segundo nivel %d",entradaTabla2doNivel);
@@ -100,7 +100,7 @@ int conexionConCpu(void){
 				enviarMarco(clienteCpu,marco);
 
 				break;
-			case PAQUETE3://caso: me envia dir fisica y leo el valor de esa direccion
+			case READ://caso: me envia dir fisica y leo el valor de esa direccion
 				listaQueContieneDireccionFisca = recibir_paquete_int(clienteCpu);
 
 				marco = (int) list_get(listaQueContieneDireccionFisca,0); // por ahora piso la variable de arriba despues ver como manejar el tema de marco que envio y marco que recibo
@@ -119,7 +119,7 @@ int conexionConCpu(void){
 				}
 
 				break;
-			case PAQUETE4://caso: me envia dir fisica y escribo el valor en esa direccion
+			case WRITE://caso: me envia dir fisica y escribo el valor en esa direccion
 				listaQueContieneValorAEscribir = recibir_paquete_int(clienteCpu);
 				uint32_t valorAEscribir = (uint32_t) list_get(listaQueContieneValorAEscribir,0);
 
@@ -130,7 +130,7 @@ int conexionConCpu(void){
 
 				log_info(logger,"-------------------WRITE-------------------\n");
 				break;
-			case PAQUETE5://caso copiar
+			case COPY://caso copiar
 				listaQueContieneDirFisica1YDirFisica2 = recibir_paquete_int(clienteCpu);
 
 				int marcoDeDestino = (int) list_get(listaQueContieneDirFisica1YDirFisica2,0);
@@ -714,7 +714,7 @@ int conexionConKernel(void){
 
 		switch (cod_op) {
 
-			case PAQUETE:
+			case NRO_TP1:
 				listaQueContienePID = recibir_paquete_int(clienteKernel);
 				pidActual = (int) list_get(listaQueContienePID,0);
 
@@ -745,3 +745,5 @@ void iterator(char* value) {
 }
 
 // falta terminar programa
+
+

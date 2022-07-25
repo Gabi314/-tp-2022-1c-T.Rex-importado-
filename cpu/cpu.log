@@ -232,3 +232,55 @@
 
 [INFO] 21:49:10:316 CPU/(13624:13624): Finalizo el proceso 
 [INFO] 21:49:10:316 CPU/(13624:13624): Termino cpu
+[INFO] 13:15:43:158 CPU/(16274:16274): Hola memoria, soy cpu
+[INFO] 13:15:43:159 CPU/(16274:16274): Me llegaron los siguientes valores:
+[INFO] 13:15:43:159 CPU/(16274:16274): tamanio de pagina: 256 
+[INFO] 13:15:43:159 CPU/(16274:16274): entradas por tabla: 4 
+
+[INFO] 13:15:43:159 CPU/(16274:16274): ----------------EXECUTE WRITE----------------
+[INFO] 13:15:43:160 CPU/(16274:16274): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 13:15:43:160 CPU/(16274:16274): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 13:15:43:161 CPU/(16274:16274): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 13:15:43:161 CPU/(16274:16274): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 13:15:43:161 CPU/(16274:16274): Me llego el marco que es 0
+[INFO] 13:15:44:162 CPU/(16274:16274): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 13:15:44:162 CPU/(16274:16274): Le envio a memoria el valor a escribir 1000
+[INFO] 13:15:44:200 CPU/(16274:16274): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 13:15:44:200 CPU/(16274:16274): ----------------FINALIZA WRITE----------------
+
+[INFO] 13:15:44:200 CPU/(16274:16274): ----------------EXECUTE WRITE----------------
+[INFO] 13:15:44:200 CPU/(16274:16274): Le envio a memoria direccion fisica: Marco:0 y Offset: 4
+[INFO] 13:15:44:200 CPU/(16274:16274): Le envio a memoria el valor a escribir 1001
+[INFO] 13:15:44:239 CPU/(16274:16274): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 13:15:44:240 CPU/(16274:16274): ----------------FINALIZA WRITE----------------
+
+[INFO] 13:15:44:240 CPU/(16274:16274): ----------------EXECUTE WRITE----------------
+[INFO] 13:15:44:240 CPU/(16274:16274): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 13:15:44:240 CPU/(16274:16274): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 13:15:44:240 CPU/(16274:16274): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 13:15:44:241 CPU/(16274:16274): Le envio a memoria entrada de tabla de 2do nivel que es 1
+[INFO] 13:15:44:242 CPU/(16274:16274): Me llego el marco que es 1
+[INFO] 13:15:44:242 CPU/(16274:16274): TLB: Reemplazo la pagina 1 en el marco 1 cuya entrada es 0
+[INFO] 13:15:44:242 CPU/(16274:16274): Le envio a memoria direccion fisica: Marco:1 y Offset: 4
+[INFO] 13:15:44:242 CPU/(16274:16274): Le envio a memoria el valor a escribir 2000
+[INFO] 13:15:44:280 CPU/(16274:16274): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 13:15:44:280 CPU/(16274:16274): ----------------FINALIZA WRITE----------------
+
+[INFO] 13:15:44:280 CPU/(16274:16274): ----------------EXECUTE COPY----------------
+[INFO] 13:15:44:280 CPU/(16274:16274): Le envio a memoria para que copie de dir fisica1: (marco: 1 offset: 4) a dir fisica2: (marco: 1 offset: 0)
+[INFO] 13:15:44:280 CPU/(16274:16274): ----------------FINALIZA COPY----------------
+
+[INFO] 13:15:44:280 CPU/(16274:16274): ----------------EXECUTE WRITE----------------
+[INFO] 13:15:44:280 CPU/(16274:16274): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 13:15:44:281 CPU/(16274:16274): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 13:15:44:320 CPU/(16274:16274): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 13:15:44:320 CPU/(16274:16274): Le envio a memoria entrada de tabla de 2do nivel que es 2
+[INFO] 13:15:44:320 CPU/(16274:16274): Me llego el marco que es 2
+[INFO] 13:15:44:320 CPU/(16274:16274): TLB: Reemplazo la pagina 2 en el marco 2 cuya entrada es 0
+[INFO] 13:15:44:320 CPU/(16274:16274): Le envio a memoria direccion fisica: Marco:2 y Offset: 0
+[INFO] 13:15:44:320 CPU/(16274:16274): Le envio a memoria el valor a escribir 3000
+[INFO] 13:15:44:360 CPU/(16274:16274): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 13:15:44:360 CPU/(16274:16274): ----------------FINALIZA WRITE----------------
+
+[INFO] 13:15:44:360 CPU/(16274:16274): Finalizo el proceso 
+[INFO] 13:15:44:360 CPU/(16274:16274): Termino cpu
