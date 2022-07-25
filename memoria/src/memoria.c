@@ -16,6 +16,8 @@ int contadorDeEntradasPorProceso = 0;
 
 char* pathDeArchivos;
 
+pthread_mutex_t mutexMemoriaData;
+
 t_list* listaT1nivel;
 t_list* listaDeMarcos;
 t_list* listaT2Nivel;
@@ -34,10 +36,10 @@ int main(void) {
 	listaDeMarcos = list_create();
 	listaT2Nivel = list_create();
 	listaDePaginasEnMemoria = list_create();
-	//inicializarMarcos();
-	//inicializarEstructuras(pidActual);//esto tiene que estar despues de recibir el pid de kernel
-	conexionConKernel();
-	liberar_conexion(clienteKernel);
+	inicializarMarcos();
+	inicializarEstructuras(pidActual);//esto tiene que estar despues de recibir el pid de kernel
+	//conexionConKernel();
+	//liberar_conexion(clienteKernel);
 	conexionConCpu();
 
 	log_info(logger,"Fin de memoria");
@@ -62,7 +64,7 @@ void crearDirectorio(){
 
 int conexionConCpu(void){
 
-	//int server_fd = iniciar_servidor(); // tendria que estar comentado porque viene despues de coenxion con kernel
+	int server_fd = iniciar_servidor(); // tendria que estar comentado porque viene despues de coenxion con kernel
 	log_info(logger, "Memoria lista para recibir a Cpu");
 	clienteCpu = esperar_cliente(server_fd);
 
@@ -75,7 +77,10 @@ int conexionConCpu(void){
 	//int a = 1;
 	while(1) {
 		int cod_op = recibir_operacion(clienteCpu);
-
+		pthread_mutex_lock(&mutexMemoriaData);
+		
+		sleep(retardoMemoria/1000); //lo que se tarda en acceder a memoria
+		
 		int nroTabla2doNivel;
 		switch (cod_op) {
 			case MENSAJE_CPU_MEMORIA://mensaje de pedido tam pag y cant entradas
@@ -163,6 +168,8 @@ int conexionConCpu(void){
 				log_warning(logger,"Operacion desconocida. No quieras meter la pata");
 				break;
 		}
+
+		 pthread_mutex_unlock(&mutexMemoriaData);
 	}
 	return EXIT_SUCCESS;
 }

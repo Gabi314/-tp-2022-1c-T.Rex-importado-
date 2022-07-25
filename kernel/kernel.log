@@ -77,3 +77,39 @@
 [INFO] 13:15:32:435 KERNEL/(16243:16243): Hola memoria, soy Kernel
 [INFO] 13:15:32:436 KERNEL/(16243:16243): Le envio a memoria mi pid que es 0
 [INFO] 13:15:32:436 KERNEL/(16243:16243): Me llego la tabla de primero nivel nro: 0
+[INFO] 15:26:40:378 KERNEL/(3907:3907): Hola memoria, soy Kernel
+[INFO] 15:26:40:378 KERNEL/(3907:3907): Le envio a memoria mi pid que es 0
+[INFO] 15:26:40:464 KERNEL/(3907:3907): Me llego la tabla de primero nivel nro: 0
+[INFO] 15:43:17:622 KERNEL/(5740:5740): Hola memoria, soy Kernel
+[INFO] 15:43:17:623 KERNEL/(5740:5740): Le envio a memoria mi pid que es 0
+[INFO] 15:56:41:036 KERNEL/(7500:7500): Hola memoria, soy Kernel
+[INFO] 15:56:41:036 KERNEL/(7500:7500): Le envio a memoria mi pid que es 0
+[INFO] 15:56:41:128 KERNEL/(7500:7500): Me llego la tabla de primero nivel nro: 0
+[INFO] 16:00:33:503 KERNEL/(7878:7878): Hola memoria, soy Kernel
+[INFO] 16:00:33:504 KERNEL/(7878:7878): Le envio a memoria mi pid que es 0
+[INFO] 16:03:23:143 KERNEL/(8297:8297): Hola memoria, soy Kernel
+[INFO] 16:03:23:144 KERNEL/(8297:8297): Le envio a memoria mi pid que es 0
+[INFO] 16:04:49:804 KERNEL/(8440:8440): Hola memoria, soy Kernel
+[INFO] 16:04:49:805 KERNEL/(8440:8440): Le envio a memoria mi pid que es 0
+[INFO] 16:11:51:405 KERNEL/(9143:9143): Hola memoria, soy Kernel
+[INFO] 16:11:51:407 KERNEL/(9143:9143): Le envio a memoria mi pid que es 0
+[INFO] 16:11:51:788 KERNEL/(9143:9143): Me llego la tabla de primero nivel nro: 0
+[INFO] 16:20:12:751 KERNEL/(10204:10204): Hola memoria, soy Kernel
+[INFO] 16:20:12:752 KERNEL/(10204:10204): Le envio a memoria mi pid que es 0
+[INFO] 16:20:13:111 KERNEL/(10204:10204): Me llego la tabla de primero nivel nro: 0
+[INFO] 16:26:29:458 KERNEL/(11305:11305): Hola memoria, soy Kernel
+[INFO] 16:26:29:460 KERNEL/(11305:11305): Le envio a memoria mi pid que es 0
+[INFO] 16:26:29:462 KERNEL/(11305:11305): Me llego la tabla de primero nivel nro: 0
+[INFO] 16:27:59:330 KERNEL/(11508:11508): Hola memoria, soy Kernel
+[INFO] 16:27:59:330 KERNEL/(11508:11508): Le envio a memoria mi pid que es 0
+[INFO] 16:27:59:420 KERNEL/(11508:11508): Me llego la tabla de primero nivel nro: 0
+[INFO] 16:32:37:801 KERNEL/(12138:12138): Hola memoria, soy Kernel
+[INFO] 16:32:37:801 KERNEL/(12138:12138): Le envio a memoria mi pid que es 0
+[INFO] 16:33:23:223 KERNEL/(12239:12239): Hola memoria, soy Kernel
+[INFO] 16:33:23:224 KERNEL/(12239:12239): Le envio a memoria mi pid que es 0
+[INFO] 16:34:20:865 KERNEL/(12372:12372): Hola memoria, soy Kernel
+[INFO] 16:34:20:866 KERNEL/(12372:12372): Le envio a memoria mi pid que es 0
+[INFO] 16:34:21:236 KERNEL/(12372:12372): Me llego la tabla de primero nivel nro: 0
+[INFO] 16:39:51:267 KERNEL/(12868:12868): Hola memoria, soy Kernel
+[INFO] 16:39:51:267 KERNEL/(12868:12868): Le envio a memoria mi pid que es 0
+[INFO] 16:39:51:643 KERNEL/(12868:12868): Me llego la tabla de primero nivel nro: 0

@@ -14,6 +14,8 @@
 #include<assert.h>
 #include<stdbool.h>
 
+#include<pthread.h>
+
 #define IP_MEMORIA "127.0.0.1"
 #define PUERTO_MEMORIA 8002
 
