@@ -73,6 +73,28 @@ void recibir_mensaje(int socket_cliente) //No creo que haga falta (estoy de acue
 	free(buffer);
 }
 
+t_list* recibir_paquete_int(int socket_cliente){
+	int size;
+	int desplazamiento = 0;
+	void * buffer;
+	t_list* valores = list_create();
+	int tamanio;
+
+	buffer = recibir_buffer(&size, socket_cliente);
+
+	while(desplazamiento < size){
+		memcpy(&tamanio, buffer + desplazamiento, sizeof(int));
+		desplazamiento+=sizeof(int);
+		int valor = 0;
+		memcpy(&valor, buffer+desplazamiento, sizeof(int));
+		desplazamiento+=sizeof(int);
+		list_add(valores, (void *)valor);
+	}
+
+	free(buffer);
+	return valores;
+}
+
 t_list* recibir_paquete(int socket_cliente)
 {
 	int size;
@@ -105,6 +127,16 @@ t_list* recibir_paquete(int socket_cliente)
 	return listaDeInstrucciones;
 }
 
+void enviarPID(int pid){//pasar entrada y nroTabla1ernivel
+	t_paquete* paquete = crear_paquete(PAQUETE);
+	// Leemos y esta vez agregamos las lineas al paquete
+	agregar_a_paquete(paquete,&pid,sizeof(pid));
+
+
+	log_info(logger,"Le envio a memoria mi pid que es %d",pid);
+	enviar_paquete(paquete,socketMemoria);
+	eliminar_paquete(paquete);
+}
 
 t_pcb* tomar_pcb(int socket_cliente)
 {
@@ -189,11 +221,11 @@ int crear_conexion(char *ip, int unPuerto)
 	return socket_cliente;
 }
 
-void enviar_mensaje(char* mensaje, int socket_cliente)
+void enviar_mensaje(char* mensaje, int socket_cliente, int cod_op)
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
 
-	paquete->codigo_operacion = MENSAJE;
+	paquete->codigo_operacion = cod_op;
 	paquete->buffer = malloc(sizeof(t_buffer));
 	paquete->buffer->size = strlen(mensaje) + 1;
 	paquete->buffer->stream = malloc(paquete->buffer->size);
@@ -240,23 +272,21 @@ void agregar_instrucciones_al_paquete(instrucciones* instruccion) {
 	free(instruccion);
 }
 
-t_paquete* crear_paquete(void)
+t_paquete* crear_paquete(int cod_op)
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
-	paquete->codigo_operacion = PAQUETE;
+	paquete->codigo_operacion = cod_op;
 	crear_buffer(paquete);
 	return paquete;
 }
 
 
-
-
-void agregar_a_paquete_kernel_cpu(t_pcb* pcb)
+void agregar_a_paquete_kernel_cpu(t_pcb* pcb, int op_code)
 {
 	tamanioTotalIdentificadores = 0;
 	contadorInstrucciones = 0;
 	desplazamiento = 0;
-	paquete = crear_paquete();
+	paquete = crear_paquete(op_code);
 	list_iterate(pcb->instrucciones, (void*) obtenerTamanioIdentificadores);
 	paquete->buffer->stream = realloc(paquete->buffer->stream, paquete->buffer->size + tamanioTotalIdentificadores + contadorInstrucciones*sizeof(int[2]) + contadorInstrucciones*sizeof(int) + 6*sizeof(int) + sizeof(float));
 	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->idProceso), sizeof(int));
@@ -626,7 +656,7 @@ void  recibir_consola(int servidor) {
 		int nuevo_cliente = esperar_cliente(servidor); // hay que averiguar si esperar_cliente controla que cada vez que acepta uno ese cliente es nuevo y no se repite.
 		int hiloCreado = pthread_create(&hilo1, NULL,&atender_consola,nuevo_cliente);
 
-		pthread_join(hilo1,NULL);
+		pthread_detach(hilo1,NULL);
 
 		}
 
@@ -688,20 +718,19 @@ void asignar_memoria() {
 		agregarAReady(proceso);
 		pthread_mutex_unlock(&asignarMemoria);
 
-		send(socketMemoria,PAQUETE,sizeof(int),MSG_WAITALL);
-		t_paquete* paquete = crear_paquete(PAQUETE);
-		agregar_a_paquete(paquete,proceso->idProceso,sizeof(int));
-		enviar_paquete(paquete,socketMemoria);
-		eliminar_paquete(paquete);
+	// para inicializar estructuras
 
-		send(socketCpuDispatch,PAQUETE,sizeof(int),MSG_WAITALL); // aca le envio la operacion a cpu para "despertarlo"
-		 t_paquete* paquete = crear_paquete(PAQUETE);
-		agregar_a_paquete(paquete,proceso->idProceso,sizeof(int));
-		enviar_paquete(paquete,socketCpuDispatch);
-		eliminar_paquete(paquete);
+		enviarPID(proceso->idProceso);
+		int cod_op = recibir_operacion();
 
+		t_list * paqueteNroTp = list_create;
 
-		int NroTP = recibir_paquete(socketCpuDispatch);  // falta desarrollar
+		// cambiar nombre
+		if(cod_op == PAQUETE) {
+		paqueteNroTp= recibir_paquete_int(socketCpuDispatch);
+		proceso->idProceso = list_get(paqueteNroTp,0);
+		}
+
 
 		if(algoritmoPlanificacion == SRT)
 			sem_post(&desalojarProceso);
@@ -828,14 +857,12 @@ void ejecutar(t_pcb* proceso){
 	proceso->horaDeIngresoAExe = ((float) a)*1000;
 	proceso->estado = EXEC;
 	pthread_mutex_lock(&ejecucion);
-	procesoEnEjecucion = proceso;
+	procesoEnEjecucion = proceso; // esto lo hace la cpu, aca no se deberia actualizar
 	pthread_mutex_unlock(&ejecucion);
 	sem_post(&procesoEjecutandose);
-	send(socketCpuDispatch,PAQUETE,sizeof(int),MSG_WAITALL);
 
-	t_paquete* paquete = crear_paquete(PAQUETE);
 
-	agregar_a_paquete(paquete,proceso->idProceso,sizeof(int));
+	agregar_a_paquete_kernel_cpu(proceso,PAQUETE); // PCBAEJECUTAR --> nuevo nombre
 	enviar_paquete(paquete,socketCpuDispatch);
 	eliminar_paquete(paquete);
 
@@ -848,10 +875,16 @@ void atenderDesalojo(){
 	sem_wait(&procesoEjecutandose);
 	sem_wait(&desalojarProceso);
 
-	send(socketCpuDispatch,MENSAJE,sizeof(char*),MSG_WAITALL);
-	enviar_mensaje("Desalojar proceso",socketCpuInterrupt); // falta ver todavia si es asi
 
-	t_pcb* proceso = procesoEnEjecucion;
+	enviar_mensaje("Desalojar proceso",socketCpuInterrupt,MENSAJE_INTERRUPT);
+
+
+	// recibir pcb
+
+	//if(cod_op == RECIBIRPCB)
+	t_pcb * proceso = tomar_pcb(socketCpuDispatch);
+
+
 
 		time_t a = time(NULL);
 		float tiempoDeFin = ((float) a)*1000;
@@ -874,9 +907,14 @@ void atenderIOyEXIT(){
 	while(recv(socketCpuDispatch, &proceso,sizeof(t_pcb),0)){
 		// cuando reciba del cpu una interrupcion
 
+		// if
+
+		// obtener tiempo a partir de tomar el program_counter como indice
+
+
 		sem_post(&cpuDisponible);
 
-		if (!proceso->aFinalizar) {
+		if (true) {
 			time_t a = time(NULL);									//de I/O se encarga de atenderla
 			float tiempoDeFin = ((float) a)*1000;
 			proceso->rafagaMs = tiempoDeFin - proceso->horaDeIngresoAExe;
@@ -927,13 +965,17 @@ void terminarEjecucion(t_pcb* proceso){
 	proceso->estado = EXIT;
 
 	pthread_mutex_unlock(&procesoExit);
-	send(socketMemoria,MENSAJE,sizeof(char*),MSG_WAITALL);
-	enviar_mensaje("Liberar estructuras",socketMemoria); // falta ver si es asi
+
+
+	enviar_mensaje("Liberar estructuras",socketMemoria,MENSAJE_LIBRERAR_ESTRUCTURAS);
+
 	log_info(logger, "[EXIT] Finaliza el proceso de PID: %d", proceso->idProceso);
 	pthread_mutex_lock(&consolasExit);
 
 	list_find(listaDeConsolas,unaConsola->pid == proceso->idProceso);
-	enviar_mensaje("Finalizo la ejecucion",unaConsola->socket);
+
+	enviar_mensaje("Finalizo la ejecucion",unaConsola->socket,MENSAJE_FINALIZAR_EXE); //TODAVIA FALTA HACER QUE CONSOLA PUEDA RECIBIR MENSAJES
+
 	pthread_mutex_unlock(&consolasExit);
 	close(unaConsola->socket);
 

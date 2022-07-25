@@ -137,27 +137,28 @@ void iterator(char* value) {
 	log_info(logger,"%s", value);
 }
 
-//---------------------------------------------------------------------------------------------
 
-/*void conexionConMemoria(void){
-	int conexion;
-	char* ip;
-	int puerto;
+int conexionConMemoria(void){
+	socketMemoria = crear_conexion(ipMemoria, puertoMemoria);
+	log_info(logger,"Hola memoria, soy Kernel");
+	//enviar_mensaje("hola kernel",socketMemoria,MENSAJE);
+	enviarPID();
 
-	t_log* logger = iniciar_logger();
-	t_config* config = iniciar_config();
+	t_list* listaQueContieneNroTabla1erNivel = list_create();
 
-	ip = config_get_string_value(config,"IP_MEMORIA");
-	puerto =  config_get_int_value(config,"PUERTO_MEMORIA");
+	int cod_op = recibir_operacion(socketMemoria);
 
-	// Creamos una conexión hacia el servidor
-	conexion = crear_conexion(ip, puerto);
+	if(cod_op == PAQUETE){
+		listaQueContieneNroTabla1erNivel = recibir_paquete_int(socketMemoria);
+	}
 
-    // Armamos y enviamos el paquete
-	paquete(conexion, "pido archivo configuracion de memoria");
+	//poner en pcb:
+	int nroTabla1erNivel = (int) list_get(listaQueContieneNroTabla1erNivel,0);
 
-	terminar_programa(conexion, logger, config);
-}*/
+	log_info(logger,"Me llego la tabla de primero nivel nro: %d",nroTabla1erNivel);
+
+	return EXIT_SUCCESS;
+}
 
 
 

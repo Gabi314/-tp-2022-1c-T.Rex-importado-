@@ -88,14 +88,22 @@ typedef enum
 {
 	I_O,
 	EXIT,
-	INTERRUPT
+	INTERRUPT,
+	MENSAJE_INTERRUPT,
+	MENSAJE_LIBRERAR_ESTRUCTURAS,
+	MENSAJE_FINALIZAR_EXE
 }op_code_cpu;
+// juntar paquetes y operaciones
 
 typedef enum
 {
 	MENSAJE,
-	PAQUETE
+	PAQUETE,
+	PAQUETE_INICIALIZAR_ESTRUCTURAS
 }op_code;
+// op_code_memoria
+// hay que probar tener diferentes estructuras.
+// op_code_cpu
 
 typedef enum{
 	NO_OP,
