@@ -221,11 +221,11 @@ int crear_conexion(char *ip, int unPuerto)
 	return socket_cliente;
 }
 
-void enviar_mensaje(char* mensaje, int socket_cliente, int cod_op)
+void enviar_mensaje(char* mensaje, int socket_cliente, int op_code)
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
 
-	paquete->codigo_operacion = cod_op;
+	paquete->codigo_operacion = op_code;
 	paquete->buffer = malloc(sizeof(t_buffer));
 	paquete->buffer->size = strlen(mensaje) + 1;
 	paquete->buffer->stream = malloc(paquete->buffer->size);
@@ -272,10 +272,10 @@ void agregar_instrucciones_al_paquete(instrucciones* instruccion) {
 	free(instruccion);
 }
 
-t_paquete* crear_paquete(int cod_op)
+t_paquete* crear_paquete(int op_code)
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
-	paquete->codigo_operacion = cod_op;
+	paquete->codigo_operacion = op_code;
 	crear_buffer(paquete);
 	return paquete;
 }
@@ -656,7 +656,7 @@ void  recibir_consola(int servidor) {
 		int nuevo_cliente = esperar_cliente(servidor); // hay que averiguar si esperar_cliente controla que cada vez que acepta uno ese cliente es nuevo y no se repite.
 		int hiloCreado = pthread_create(&hilo1, NULL,&atender_consola,nuevo_cliente);
 
-		pthread_detach(hilo1,NULL);
+		pthread_detach(hilo1);
 
 		}
 
@@ -721,7 +721,7 @@ void asignar_memoria() {
 	// para inicializar estructuras
 
 		enviarPID(proceso->idProceso);
-		int cod_op = recibir_operacion();
+		int cod_op = recibir_operacion(socketCpuDispatch); //Aca no va dispatch
 
 		t_list * paqueteNroTp = list_create;
 
@@ -903,56 +903,60 @@ void estimarRafaga(t_pcb* proceso){
 }
 
 void atenderIOyEXIT(){
-	t_pcb* proceso;
-	while(recv(socketCpuDispatch, &proceso,sizeof(t_pcb),0)){
+	while(1){
+
 		// cuando reciba del cpu una interrupcion
 
 		// if
 
 		// obtener tiempo a partir de tomar el program_counter como indice
 
+		int op_code = recibir_operacion(socketCpuDispatch);
+		t_pcb * proceso = tomar_pcb(socketCpuDispatch);
+		switch(op_code){
+
+			case I_O:
+				tiempo = time(NULL);                 //tuve que cambiar algunas cosas porque me tiraba errores de compilacion
+				tiempoDeFin = ((float) tiempo)*1000; //creo que es clock_t
+				proceso->rafagaMs = tiempoDeFin - proceso->horaDeIngresoAExe;
+				estimarRafaga(proceso);
+
+				agregarABlocked(proceso);
+
+				if(!supera_tiempo_maximo_bloqueado(proceso)){
+
+					usleep(obtenerTiempoDeBloqueo(proceso)*1000);
+					sacarDeBlocked(proceso);
+
+					agregarAReady(proceso);
+
+				}else{
+
+					usleep(tiempoMaximoBloqueado*1000);
+
+					sacarDeBlocked(proceso);
+
+					agregarASuspendedBlocked(proceso);
+
+					//Avisar a memoria
+
+					usleep((obtenerTiempoDeBloqueo(proceso) - tiempoMaximoBloqueado)*1000);
+
+					agregarASuspendedReady(proceso);
+
+				}
+
+				break;
+			case EXIT:
+				terminarEjecucion(proceso);
+				break;
+			default:
+				log_info(logger, "Operacion desconocida.");
+				break;
+
+		}
 
 		sem_post(&cpuDisponible);
-
-		if (true) {
-			time_t a = time(NULL);									//de I/O se encarga de atenderla
-			float tiempoDeFin = ((float) a)*1000;
-			proceso->rafagaMs = tiempoDeFin - proceso->horaDeIngresoAExe;
-			estimarRafaga(proceso);
-
-
-			agregarABlocked(proceso);
-
-			if(!supera_tiempo_maximo_bloqueado(proceso)){
-
-				usleep(obtenerTiempoDeBloqueo(proceso)*1000);
-				sacarDeBlocked(proceso);
-
-				agregarAReady(proceso);
-
-			}else{
-
-				usleep(tiempoMaximoBloqueado*1000);
-
-				sacarDeBlocked(proceso);
-
-				agregarASuspendedBlocked(proceso);
-
-				//Avisar a memoria
-
-				usleep((obtenerTiempoDeBloqueo(proceso) - tiempoMaximoBloqueado)*1000);
-
-				agregarASuspendedReady(proceso);
-
-			}
-
-
-		}
-
-		else {
-			terminarEjecucion(proceso);
-
-		}
 
 	}
 }
@@ -962,8 +966,7 @@ void terminarEjecucion(t_pcb* proceso){
 
 	t_pidXsocket * unaConsola = malloc(sizeof(t_pidXsocket));
 	pthread_mutex_lock(&procesoExit);
-	proceso->estado = EXIT;
-
+	proceso->estado = EXIT;								//tambien habría que camciarlo de cola?
 	pthread_mutex_unlock(&procesoExit);
 
 

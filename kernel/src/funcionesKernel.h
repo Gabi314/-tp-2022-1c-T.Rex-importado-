@@ -46,7 +46,8 @@ int tamanioTotalIdentificadores;
 int contadorInstrucciones;
 int desplazamiento;
 char* tamanioDelProceso;
-
+float tiempoDeFin;
+time_t tiempo;
 
 typedef enum estado { NEW, READY, BLOCKED, EXEC, SUSP_READY, SUSP_BLOCKED, TERMINATED } t_estado;
 
@@ -91,7 +92,8 @@ typedef enum
 	INTERRUPT,
 	MENSAJE_INTERRUPT,
 	MENSAJE_LIBRERAR_ESTRUCTURAS,
-	MENSAJE_FINALIZAR_EXE
+	MENSAJE_FINALIZAR_EXE,
+
 }op_code_cpu;
 // juntar paquetes y operaciones
 
@@ -151,11 +153,11 @@ typedef struct
 t_paquete* paquete;
 
 int crear_conexion(char* ip, int puertoCpuDispatch);
-void enviar_mensaje(char* mensaje, int socket_cliente);
+void enviar_mensaje(char* mensaje, int socket_cliente,int op_code);
 void crear_buffer(t_paquete* paquete);
-t_paquete* crear_paquete(void);
+t_paquete* crear_paquete(int op_code);
 t_paquete* crear_super_paquete(void);
-//void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio);
+void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio); //estaba comentada
 void eliminar_paquete_mensaje(t_paquete* paqueteMensaje);
 void obtenerTamanioIdentificadores(instrucciones* instruccion);
 void agregar_instrucciones_a_paquete(instrucciones* instruccion);
@@ -220,6 +222,8 @@ t_pcb* procesoAEjecutar;
 bool supera_tiempo_maximo_bloqueado(t_pcb* proceso);
 int obtenerTiempoDeBloqueo(t_pcb* proceso);
 t_pcb* obtenerSiguienteDeReady();
+
+void terminarEjecucion(t_pcb* proceso);
 
 //------------------HILOS--------------------
 //MULTIHILOS DE EJECUCION PARA ATENDER N CONSOLAS: esperan a recibir una consola y sus
