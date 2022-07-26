@@ -12,26 +12,27 @@ int main(void) {
 
 	 pthread_t hilo0, hiloAdmin[6];
 	 int hiloAdminCreado[6];
+	 ejecucionActiva = false;
 
 
-	 	/*
 
 	 	int hiloCreado = pthread_create(&hilo0, NULL,&recibir_consola,socketServidor);
 	 	pthread_detach(hiloCreado);
-		*/
 
+/*
 	 	 servidorPrueba = 1;
 
 	 	int hiloCreado = pthread_create(&hilo0, NULL,&recibir_consola_prueba,servidorPrueba);
 	 	pthread_detach(hiloCreado);
-
+*/
 
 	 	hiloAdminCreado[0] = pthread_create(&hiloAdmin[0],NULL,&asignar_memoria,NULL);
-	 	hiloAdminCreado[1] = pthread_create(&hiloAdmin[1],NULL,&finalizar_proceso_y_avisar_a_memoria,NULL);
-	 	hiloAdminCreado[2] = pthread_create(&hiloAdmin[2],NULL,&finalizar_proceso_y_avisar_a_consola,NULL);
+	 	hiloAdminCreado[1] = pthread_create(&hiloAdmin[1],NULL,&atender_interrupcion_de_ejecucion,NULL);
+	 	hiloAdminCreado[2] = pthread_create(&hiloAdmin[2],NULL,&atenderDesalojo,NULL);
 	 	hiloAdminCreado[3] = pthread_create(&hiloAdmin[3],NULL,&readyAExe,NULL);
-	 	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&suspender,NULL);
-		hiloAdminCreado[5] = pthread_create(&hiloAdmin[5],NULL,&desbloquear_suspendido,NULL);
+	 	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&terminarEjecucion,NULL);
+	// 	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&suspender,NULL);
+	//	hiloAdminCreado[5] = pthread_create(&hiloAdmin[5],NULL,&desbloquear_suspendido,NULL);
 
 
 // TRANSICIONES QUE FALTAN EN HILOS
@@ -44,7 +45,7 @@ int main(void) {
 	 	pthread_detach(hiloAdmin[2]);
 	 	pthread_detach(hiloAdmin[3]);
 		pthread_detach(hiloAdmin[4]);
-		pthread_detach(hiloAdmin[5]);
+	//	pthread_detach(hiloAdmin[5]);
 
 	 	while(1);
 		//conexionConConsola();
@@ -90,6 +91,7 @@ void inicializar_colas(){
 	colaBlocked = list_create();
 	colaSuspendedBlocked = list_create();
 	colaExit = list_create();
+	listaDeConsolas = list_create();
 }
 
 void generar_conexiones(){
@@ -98,7 +100,7 @@ void generar_conexiones(){
      socketMemoria = crear_conexion(ipMemoria, puertoMemoria);
 	 socketCpuDispatch = crear_conexion(ipCpu, puertoCpuDispatch);
 	 socketCpuInterrupt = crear_conexion(ipCpu, puertoCpuInterrupt);
-	 //falta también las conexiones con cpu para interrupciones
+
 }
 
 void inicializar_semaforos(){
@@ -106,11 +108,23 @@ void inicializar_semaforos(){
 	sem_init(&pcbEnReady,0,0);
 	sem_init(&cpuDisponible,0,1);
 	sem_init(&gradoDeMultiprogramacion,0,gradoMultiprogramacionTotal);
-	pthread_mutex_init(&asignarMemoria,NULL);
-	pthread_mutex_init(&colaReadyFIFO,NULL);
-	pthread_mutex_init(&colaReadySRT,NULL);
-	pthread_mutex_init(&ejecucion,NULL);
+	sem_init(&desalojarProceso,0,0);
+	sem_init(&procesoEjecutandose,0,0);
+	sem_init(&procesoDesalojado,0,1);
+	sem_init(&pcbInterrupt,0,0);
+	sem_init(&pcbBlocked,0,0);
+	sem_init(&pcbExit,0,0);
 
+	pthread_mutex_init(&asignarMemoria,NULL);
+	pthread_mutex_init(&obtenerProceso,NULL);
+	pthread_mutex_init(&ejecucion,NULL);
+	pthread_mutex_init(&procesoExit,NULL);
+	pthread_mutex_init(&consolasExit,NULL);
+	pthread_mutex_init(&desalojandoProceso,NULL);
+	pthread_mutex_init(&consolaNueva,NULL);
+	pthread_mutex_init(&encolandoPcb,NULL);
+	pthread_mutex_init(&mutexExit,NULL);
+	pthread_mutex_init(& mutexInterrupt,NULL);
 
 }
 
@@ -131,27 +145,28 @@ void iterator(char* value) {
 	log_info(logger,"%s", value);
 }
 
-//---------------------------------------------------------------------------------------------
 
-/*void conexionConMemoria(void){
-	int conexion;
-	char* ip;
-	int puerto;
+int conexionConMemoria(void){
+	socketMemoria = crear_conexion(ipMemoria, puertoMemoria);
+	log_info(logger,"Hola memoria, soy Kernel");
+	//enviar_mensaje("hola kernel",socketMemoria,MENSAJE);
+	enviarPID();
 
-	t_log* logger = iniciar_logger();
-	t_config* config = iniciar_config();
+	t_list* listaQueContieneNroTabla1erNivel = list_create();
 
-	ip = config_get_string_value(config,"IP_MEMORIA");
-	puerto =  config_get_int_value(config,"PUERTO_MEMORIA");
+	int cod_op = recibir_operacion(socketMemoria);
 
-	// Creamos una conexión hacia el servidor
-	conexion = crear_conexion(ip, puerto);
+	if(cod_op == PAQUETE){
+		listaQueContieneNroTabla1erNivel = recibir_paquete_int(socketMemoria);
+	}
 
-    // Armamos y enviamos el paquete
-	paquete(conexion, "pido archivo configuracion de memoria");
+	//poner en pcb:
+	int nroTabla1erNivel = (int) list_get(listaQueContieneNroTabla1erNivel,0);
 
-	terminar_programa(conexion, logger, config);
-}*/
+	log_info(logger,"Me llego la tabla de primero nivel nro: %d",nroTabla1erNivel);
+
+	return EXIT_SUCCESS;
+}
 
 
 
