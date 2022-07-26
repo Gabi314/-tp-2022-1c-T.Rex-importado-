@@ -156,13 +156,13 @@ int marcoSegunIndice(int,int);
 int algoritmoClock(t_list*);
 int algoritmoClockM(t_list*);
 int indiceDeEntradaAReemplazar(int);
+int posicionDePunteroDelAlgoritmo(int);
 
 char* nombreArchivoProceso(int);
 void escribirEnSwap(int,int,int);
 void leerDeSwap(int,int);
 
 void suspensionDeProceso(int);
-
 
 entradaTabla2doNivel* entradaCargadaConMarcoAsignado(int);
 

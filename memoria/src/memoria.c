@@ -12,6 +12,8 @@ int contTablas2doNivel = 0;
 int flagDeEntradasPorTabla = 0;
 int contadorDeMarcosPorProceso = 0;
 
+int posicionDelPuntero;
+
 int contadorDeEntradasPorProceso = 0;
 
 char* pathDeArchivos;
@@ -80,6 +82,7 @@ int conexionConCpu(void){
 		pthread_mutex_lock(&mutexMemoriaData);
 		
 		sleep(retardoMemoria/1000); //lo que se tarda en acceder a memoria
+		//log_info(logger,"Accediendo a memoria espere %d segundos\n",retardoMemoria/1000);
 		
 		int nroTabla2doNivel;
 		switch (cod_op) {
@@ -466,31 +469,61 @@ void reemplazarTodosLosUsoACero(t_list* listaDeEntradasDe2doNivel){
 			}
 }
 
+int posicionDePunteroDelAlgoritmo(int i){
+	posicionDelPuntero += i;
+
+	if(posicionDelPuntero<marcosPorProceso){
+		return posicionDelPuntero;
+	}else{
+		posicionDelPuntero = 0;
+		return	posicionDelPuntero;
+	}
+}
 
 int algoritmoClock(t_list* listaDeEntradasDe2doNivel){
 	entradaTabla2doNivel* unaEntrada = malloc(sizeof(entradaTabla2doNivel));
 
 	for(int i = 0; i<list_size(listaDeEntradasDe2doNivel);i++){
-		unaEntrada = list_get(listaDeEntradasDe2doNivel,i);
+		if(i==0){
+			posicionDelPuntero = posicionDePunteroDelAlgoritmo(0);
+			log_info(logger,"La posicion del puntero en la lista de marcos es: %d", posicionDelPuntero);
+		}else{
+			posicionDelPuntero = posicionDePunteroDelAlgoritmo(1);
+			log_info(logger,"La posicion del puntero en la lista de marcos es: %d", posicionDelPuntero);
+		}
+
+		unaEntrada = list_get(listaDeEntradasDe2doNivel,posicionDelPuntero);
 
 		if(unaEntrada->uso == 0){
-				int numeroDeMarcoAReemplazar = unaEntrada->numeroMarco;
-				sacarMarcoAPagina(unaEntrada);
-				return numeroDeMarcoAReemplazar;
+			int numeroDeMarcoAReemplazar = unaEntrada->numeroMarco;
+			sacarMarcoAPagina(unaEntrada);
+			posicionDelPuntero = posicionDePunteroDelAlgoritmo(1);//Si reemplaza se mueve al siguiente
+			log_info(logger,"PF, la posicion del puntero en la lista de marcos queda en: %d", posicionDelPuntero);
+			return numeroDeMarcoAReemplazar;
 		}
 	}
-
 	log_info(logger,"No hay ninguna pagina con bit de uso en 0");
 	log_info(logger,"Por algoritmo reemplazo todos los bit de uso a 0 y busco de nuevo");
+	posicionDelPuntero = posicionDePunteroDelAlgoritmo(1);
 	reemplazarTodosLosUsoACero(listaDeEntradasDe2doNivel);
 
 	for(int i = 0; i<list_size(listaDeEntradasDe2doNivel);i++){
-		unaEntrada = list_get(listaDeEntradasDe2doNivel,i);
+		if(i==0){
+			posicionDelPuntero = posicionDePunteroDelAlgoritmo(0);
+			log_info(logger,"La posicion del puntero en la lista de marcos es: %d", posicionDelPuntero);
+		}else{
+			posicionDelPuntero = posicionDePunteroDelAlgoritmo(1);
+			log_info(logger,"La posicion del puntero en la lista de marcos es: %d", posicionDelPuntero);
+		}
+
+		unaEntrada = list_get(listaDeEntradasDe2doNivel,posicionDelPuntero);
 
 		if(unaEntrada->uso == 0){
-				int numeroDeMarcoAReemplazar = unaEntrada->numeroMarco;
-				sacarMarcoAPagina(unaEntrada);
-				return numeroDeMarcoAReemplazar;
+			int numeroDeMarcoAReemplazar = unaEntrada->numeroMarco;
+			sacarMarcoAPagina(unaEntrada);
+			posicionDelPuntero = posicionDePunteroDelAlgoritmo(1);//Si reemplaza se mueve al siguiente
+			log_info(logger,"PF, la posicion del puntero en la lista de marcos queda en: %d", posicionDelPuntero);
+			return numeroDeMarcoAReemplazar;
 		}
 	}
 
@@ -501,14 +534,22 @@ int algoritmoClockM (t_list* listaDeEntradasDe2doNivel){
 	entradaTabla2doNivel* unaEntrada = malloc(sizeof(entradaTabla2doNivel));
 
 	for(int i = 0; i<list_size(listaDeEntradasDe2doNivel);i++){
-		unaEntrada = list_get(listaDeEntradasDe2doNivel,i);
+		if(i==0){
+			posicionDelPuntero = posicionDePunteroDelAlgoritmo(0);
+			log_info(logger,"La posicion del puntero en la lista de marcos es: %d", posicionDelPuntero);
+		}else{
+			posicionDelPuntero = posicionDePunteroDelAlgoritmo(1);
+			log_info(logger,"La posicion del puntero en la lista de marcos es: %d", posicionDelPuntero);
+		}
+
+		unaEntrada = list_get(listaDeEntradasDe2doNivel,posicionDelPuntero);
 
 		if(unaEntrada->uso == 0 && unaEntrada->modificado == 0){
-
 			int numeroDeMarcoAReemplazar = unaEntrada->numeroMarco;
 			sacarMarcoAPagina(unaEntrada);
+			posicionDelPuntero = posicionDePunteroDelAlgoritmo(1);//Si reemplaza se mueve al siguiente
+			log_info(logger,"PF, la posicion del puntero en la lista de marcos queda en: %d", posicionDelPuntero);
 			return numeroDeMarcoAReemplazar;
-
 		}
 	}
 
@@ -516,12 +557,21 @@ int algoritmoClockM (t_list* listaDeEntradasDe2doNivel){
 	log_info(logger,"Busco con bit de uso en 0 y modificado en 1");
 
 	for(int i = 0; i<list_size(listaDeEntradasDe2doNivel);i++){
-		unaEntrada = list_get(listaDeEntradasDe2doNivel,i);
+		if(i==0){
+			posicionDelPuntero = posicionDePunteroDelAlgoritmo(0);
+			log_info(logger,"La posicion del puntero en la lista de marcos es: %d", posicionDelPuntero);
+		}else{
+			posicionDelPuntero = posicionDePunteroDelAlgoritmo(1);
+			log_info(logger,"La posicion del puntero en la lista de marcos es: %d", posicionDelPuntero);
+		}
+
+		unaEntrada = list_get(listaDeEntradasDe2doNivel,posicionDelPuntero);
 
 		if(unaEntrada->uso == 0 && unaEntrada->modificado == 1){
-
 			int numeroDeMarcoAReemplazar = unaEntrada->numeroMarco;
 			sacarMarcoAPagina(unaEntrada);
+			posicionDelPuntero = posicionDePunteroDelAlgoritmo(1);//Si reemplaza se mueve al siguiente
+			log_info(logger,"PF, la posicion del puntero en la lista de marcos queda en: %d", posicionDelPuntero);
 			return numeroDeMarcoAReemplazar;
 		}
 	}
@@ -532,12 +582,21 @@ int algoritmoClockM (t_list* listaDeEntradasDe2doNivel){
 	log_info(logger,"Busco con bit de uso en 0 y modificado en 0 ");
 
 	for(int i = 0; i<list_size(listaDeEntradasDe2doNivel);i++){
-		unaEntrada = list_get(listaDeEntradasDe2doNivel,i);
+		if(i==0){
+			posicionDelPuntero = posicionDePunteroDelAlgoritmo(0);
+			log_info(logger,"La posicion del puntero en la lista de marcos es: %d", posicionDelPuntero);
+		}else{
+			posicionDelPuntero = posicionDePunteroDelAlgoritmo(1);
+			log_info(logger,"La posicion del puntero en la lista de marcos es: %d", posicionDelPuntero);
+		}
+
+		unaEntrada = list_get(listaDeEntradasDe2doNivel,posicionDelPuntero);
 
 		if(unaEntrada->uso == 0 && unaEntrada->modificado == 0){
-
 			int numeroDeMarcoAReemplazar = unaEntrada->numeroMarco;
 			sacarMarcoAPagina(unaEntrada);
+			posicionDelPuntero = posicionDePunteroDelAlgoritmo(1);//Si reemplaza se mueve al siguiente
+			log_info(logger,"PF, la posicion del puntero en la lista de marcos queda en: %d", posicionDelPuntero);
 			return numeroDeMarcoAReemplazar;
 		}
 	}
@@ -545,15 +604,24 @@ int algoritmoClockM (t_list* listaDeEntradasDe2doNivel){
 	log_info(logger,"Busco con bit de uso en 0 y modificado en 1");
 
 	for(int i = 0; i<list_size(listaDeEntradasDe2doNivel);i++){
-		unaEntrada = list_get(listaDeEntradasDe2doNivel,i);
+		if(i==0){
+			posicionDelPuntero = posicionDePunteroDelAlgoritmo(0);
+			log_info(logger,"La posicion del puntero en la lista de marcos es: %d", posicionDelPuntero);
+		}else{
+			posicionDelPuntero = posicionDePunteroDelAlgoritmo(1);
+			log_info(logger,"La posicion del puntero en la lista de marcos es: %d", posicionDelPuntero);
+		}
+
+		unaEntrada = list_get(listaDeEntradasDe2doNivel,posicionDelPuntero);
 
 		if(unaEntrada->uso == 0 && unaEntrada->modificado == 1){
-
 			int numeroDeMarcoAReemplazar = unaEntrada->numeroMarco;
 			sacarMarcoAPagina(unaEntrada);
+			posicionDelPuntero = posicionDePunteroDelAlgoritmo(1);//Si reemplaza se mueve al siguiente
+			log_info(logger,"PF, la posicion del puntero en la lista de marcos queda en: %d", posicionDelPuntero);
 			return numeroDeMarcoAReemplazar;
-			}
 		}
+	}
 }
 
 marco* buscarMarco(int nroDeMarco){
