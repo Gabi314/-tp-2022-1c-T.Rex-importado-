@@ -7,7 +7,7 @@ int main(void) {
 	inicializar_configuracion();
 	inicializar_colas();
 	inicializar_semaforos();
-	generar_conexiones();
+//	generar_conexiones();
 
 
 	 pthread_t hilo0, hiloAdmin[6];
@@ -15,19 +15,19 @@ int main(void) {
 	 ejecucionActiva = false;
 
 
-
+/*
 	 	int hiloCreado = pthread_create(&hilo0, NULL,&recibir_consola,socketServidor);
 	 	pthread_detach(hiloCreado);
 
-/*
+*/
 	 	 servidorPrueba = 1;
 
 	 	int hiloCreado = pthread_create(&hilo0, NULL,&recibir_consola_prueba,servidorPrueba);
 	 	pthread_detach(hiloCreado);
-*/
+
 
 	 	hiloAdminCreado[0] = pthread_create(&hiloAdmin[0],NULL,&asignar_memoria,NULL);
-	 	hiloAdminCreado[1] = pthread_create(&hiloAdmin[1],NULL,&atender_interrupcion_de_ejecucion,NULL);
+//	 	hiloAdminCreado[1] = pthread_create(&hiloAdmin[1],NULL,&atender_interrupcion_de_ejecucion,NULL);
 	 	hiloAdminCreado[2] = pthread_create(&hiloAdmin[2],NULL,&atenderDesalojo,NULL);
 	 	hiloAdminCreado[3] = pthread_create(&hiloAdmin[3],NULL,&readyAExe,NULL);
 	 	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&terminarEjecucion,NULL);
@@ -41,7 +41,7 @@ int main(void) {
 // readySuspended a ready
 
 	 	pthread_detach(hiloAdmin[0]);
-	 	pthread_detach(hiloAdmin[1]);
+//	 	pthread_detach(hiloAdmin[1]);
 	 	pthread_detach(hiloAdmin[2]);
 	 	pthread_detach(hiloAdmin[3]);
 		pthread_detach(hiloAdmin[4]);

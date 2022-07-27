@@ -89,20 +89,24 @@ typedef enum
 	I_O,
 	EXIT,
 	INTERRUPT,
-	MENSAJE_INTERRUPT,
-	MENSAJE_LIBRERAR_ESTRUCTURAS,
-	MENSAJE_FINALIZAR_EXE,
-	PAQUETE_TP,
+	MENSAJE_INTERRUPT, // lo mandamos para que cpu desaloje
 	PCB_A_EJECUTAR
-}op_code_cpu_memoria;
+}op_code_cpu;
+
+typedef enum
+{
+	MENSAJE_LIBRERAR_ESTRUCTURAS, // a memoria para liberar estructuras en estado EXIT
+	PAQUETE_TP, // lo recibimos de memoria en asignar memoria
+	PAQUETE
+}op_code_memoria;
+
 
 
 typedef enum
 {
-	MENSAJE,
-	PAQUETE,
+	MENSAJE_FINALIZAR_EXE //  lo mandamos a consola para finalizar
 
-}op_code;
+}op_code_consola;
 
 
 typedef enum{
@@ -143,7 +147,8 @@ typedef struct
 
 typedef struct
 {
-	op_code codigo_operacion;
+	op_code_memoria codigo_operacion_memoria;
+	op_code_cpu codigo_operacion_cpu;
 	t_buffer* buffer;
 } t_paquete;
 
@@ -163,7 +168,7 @@ void enviar_paquete(t_paquete* paquete, int socket_cliente);
 void liberar_conexion(int socket_cliente);
 void eliminar_paquete(t_paquete* paquete);
 void eliminar_paquete_mensaje(t_paquete* paqueteMensaje);
-
+t_list* recibir_paquete_int(int socket_cliente);
 
 //Funciones propias del Kernel como cliente
 t_log* iniciar_logger(void);
@@ -187,7 +192,7 @@ void enviarInterrupcionACpu(); // falta desarrollar
 t_pcb * recibirProcesoAFinalizar(); // falta desarrollar
 void enviarMensajeAConsola(char* mensaje); // falta desarrollar
 
-
+void simulador_de_cpu(int operacion, t_pcb * proceso);
 
 //-------------PLANIFICADOR---------------
 
@@ -311,6 +316,9 @@ pthread_mutex_t mutexInterrupt;
 
 // int clientesDePrueba[4]={4,50,60,270};
 int servidorPrueba;
+int recibir_operacion_prueba();
+t_list * recibir_paquete_int_prueba();
+
 t_list * lista3;
 t_list * lista50;
 t_list * lista60;
