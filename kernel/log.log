@@ -1,5 +1,36 @@
-[INFO] 14:06:08:958 Servidor/(8270:8270): Servidor listo para recibir al cliente
-[INFO] 16:52:52:852 Servidor/(9706:9706): Servidor listo para recibir al cliente
-[INFO] 11:07:25:092 Servidor/(4344:4344): Servidor listo para recibir al cliente
-[INFO] 11:07:25:099 Servidor/(4344:4347): [EXIT] Finaliza el proceso de PID: 106136
-[INFO] 11:07:25:103 Servidor/(4344:4349): [EXEC] No se logró encontrar un proceso para ejecutar
+[INFO] 13:43:16:023 Servidor/(4743:4749): [recibir_consola_prueba]: esperamos una nueva consola
+[INFO] 13:43:16:025 Servidor/(4743:4749): [esperar_cliente_prueba]: Se conecto la consola 3!
+[INFO] 13:43:16:027 Servidor/(4743:4755): [atender_consola_prueba]: Tenemos lista de instrucciones!
+[INFO] 13:43:16:027 Servidor/(4743:4755): [atender_consola_prueba]: inicializamos el pcb
+[INFO] 13:43:16:027 Servidor/(4743:4755): [atender_consola_prueba]: creamos la estructura datosCiente con id 874 y socket 3
+[INFO] 13:43:16:027 Servidor/(4743:4755): [atender_consola_prueba]: agregamos el pcb y el socket a la lista de consolas 
+[INFO] 13:43:16:027 Servidor/(4743:4755): [NEW] Entra el proceso de PID: 874 a la cola.
+[INFO] 13:43:16:027 Servidor/(4743:4755): [atender_consola_prueba]: agregamos el pcb a new
+[INFO] 13:43:16:027 Servidor/(4743:4750): [NEW] Se saca el proceso de PID: 874 de la cola
+[INFO] 13:43:16:027 Servidor/(4743:4750): [READY] Entra el proceso de PID: 874 a la cola.
+[INFO] 13:43:16:027 Servidor/(4743:4750): [asignar_memoria]: enviamos el pid 874
+[INFO] 13:43:16:027 Servidor/(4743:4749): [recibir_consola_prueba]: esperamos una nueva consola
+[INFO] 13:43:16:027 Servidor/(4743:4749): [esperar_cliente_prueba]: No hay mas consolas
+[INFO] 13:43:16:027 Servidor/(4743:4749): [recibir_consola_prueba]: fin de la espera
+[INFO] 13:43:16:028 Servidor/(4743:4750): [asignar_memoria]: recibimos el codigo de operacion de numero 1 (deberia ser 1)
+[INFO] 13:43:16:028 Servidor/(4743:4750): [asignar_memoria]: recibimos el numero de tabla de paginas 10
+[INFO] 13:43:16:028 Servidor/(4743:4750): [asignar_memoria]: desde asignar_memoria despertamos a readyAExe
+[INFO] 13:43:16:028 Servidor/(4743:4752): [readyAExe]: .........se despierta readyAExe 
+[INFO] 13:43:16:028 Servidor/(4743:4752): [readyAExe]: Desde readyAExe obtuvimos el proceso de pid: 874
+[INFO] 13:43:16:028 Servidor/(4743:4752): [readyAExe]: Desde readyAExe mandamos al proceso de pid 874 a ejecutar  
+[INFO] 13:43:16:028 Servidor/(4743:4752): [ejecutar]: Se duerme ejecutar()
+[INFO] 13:43:16:028 Servidor/(4743:4752): [EXEC] Ingresa el proceso de PID: 874
+[INFO] 13:43:16:028 Servidor/(4743:4752): [ejecutar]: ejecucion activa es true!!
+[INFO] 13:43:16:028 Servidor/(4743:4752): [ejecutar]: enviamos el proceso a cpu
+[INFO] 13:43:16:028 Servidor/(4743:4752): cpu simulando la ejecucion de NO_OP por 1000 ms............ 
+[INFO] 13:43:16:030 Servidor/(4743:4752): Fin de la simulacion!
+[INFO] 13:43:16:030 Servidor/(4743:4752): Desde cpu nos llega el proceso a finalizar de pid 874 
+[INFO] 13:43:16:030 Servidor/(4743:4752): Desde el simulador despertamos terminarEjecucion
+[INFO] 13:43:16:030 Servidor/(4743:4753): [terminarEjecucion]: Se desperto terminarEjecucion...
+[INFO] 13:43:16:031 Servidor/(4743:4752): ejecucionActiva ahora es false....
+[INFO] 13:43:16:031 Servidor/(4743:4752): LA CPU VUELVE A ESTAR DISPONIBLE!
+[INFO] 13:43:16:031 Servidor/(4743:4752): [readyAExe]: Desde readyAExe recibimos el proceso de pid: 874 despues de ejecutar
+[INFO] 13:43:16:031 Servidor/(4743:4753): [terminarEjecucion]: Se cambia el estado del proceso 874 a TERMINATED
+[INFO] 13:43:16:031 Servidor/(4743:4753): [terminarEjecucion]: Se envia un mensaje a memoria para que libere estructuras
+[INFO] 13:43:16:031 Servidor/(4743:4753): [terminarEjecucion]: Encontramos el socket del proceso 874, resulta que es 3
+[INFO] 13:43:16:031 Servidor/(4743:4753): [terminarEjecucion]: Aumenta grado de multiprogramacion actual y termina terminarEjecucion!!
