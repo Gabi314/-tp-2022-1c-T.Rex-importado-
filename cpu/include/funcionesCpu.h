@@ -33,7 +33,7 @@ typedef enum
 typedef enum
 {
 	MENSAJE_A_KERNEL,
-	PAQUETE          //poner otro nombre
+	RECIBIR_PCB          
 }op_code_kernel;
 
 typedef struct
@@ -89,9 +89,10 @@ void recibir_mensaje(int);
 int recibir_operacion(int);
 
 //Funcion propia de cpu como servidor
-void iterator(int value);
+void iterator(instruccion*);
 int conexionConKernel(void);
 void obtenerTamanioIdentificadores(instruccion*);
+t_pcb* recibir_pcb();
 void agregarInstruccionesAlPaquete(instruccion*);
 t_paquete* agregar_a_paquete_kernel_cpu(t_pcb*);
 //Funcion propia de cpu como servidor

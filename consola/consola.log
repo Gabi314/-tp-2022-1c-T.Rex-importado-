@@ -137,3 +137,419 @@
 
 [INFO] 20:52:38:559 CONSOLA/(5152:5152): instruccion: EXIT
 
+[ERROR] 22:20:50:625 CONSOLA/(376:376): Falta un parametro
+[INFO] 22:21:19:855 CONSOLA/(411:411): Se leyo el archivo correctamente
+[INFO] 22:21:19:857 CONSOLA/(411:411): instruccion: WRITE
+
+[INFO] 22:21:19:857 CONSOLA/(411:411): instruccion: WRITE
+
+[INFO] 22:21:19:857 CONSOLA/(411:411): instruccion: WRITE
+
+[INFO] 22:21:19:857 CONSOLA/(411:411): instruccion: COPY
+
+[INFO] 22:21:19:857 CONSOLA/(411:411): instruccion: WRITE
+
+[INFO] 22:21:19:857 CONSOLA/(411:411): instruccion: WRITE
+
+[INFO] 22:21:19:857 CONSOLA/(411:411): instruccion: I/O
+
+[INFO] 22:21:19:858 CONSOLA/(411:411): instruccion: READ
+
+[INFO] 22:21:19:858 CONSOLA/(411:411): instruccion: WRITE
+
+[INFO] 22:21:19:858 CONSOLA/(411:411): instruccion: READ
+
+[INFO] 22:21:19:858 CONSOLA/(411:411): instruccion: READ
+
+[INFO] 22:21:19:858 CONSOLA/(411:411): instruccion: WRITE
+
+[INFO] 22:21:19:858 CONSOLA/(411:411): instruccion: READ
+
+[INFO] 22:21:19:858 CONSOLA/(411:411): instruccion: READ
+
+[INFO] 22:21:19:858 CONSOLA/(411:411): instruccion: EXIT
+
+[INFO] 22:22:54:744 CONSOLA/(558:558): Se leyo el archivo correctamente
+[INFO] 22:22:54:746 CONSOLA/(558:558): instruccion: WRITE
+
+[INFO] 22:22:54:748 CONSOLA/(558:558): instruccion: WRITE
+
+[INFO] 22:22:54:748 CONSOLA/(558:558): instruccion: WRITE
+
+[INFO] 22:22:54:749 CONSOLA/(558:558): instruccion: COPY
+
+[INFO] 22:22:54:749 CONSOLA/(558:558): instruccion: WRITE
+
+[INFO] 22:22:54:749 CONSOLA/(558:558): instruccion: WRITE
+
+[INFO] 22:22:54:750 CONSOLA/(558:558): instruccion: I/O
+
+[INFO] 22:22:54:750 CONSOLA/(558:558): instruccion: READ
+
+[INFO] 22:22:54:756 CONSOLA/(558:558): instruccion: WRITE
+
+[INFO] 22:22:54:756 CONSOLA/(558:558): instruccion: READ
+
+[INFO] 22:22:54:756 CONSOLA/(558:558): instruccion: READ
+
+[INFO] 22:22:54:756 CONSOLA/(558:558): instruccion: WRITE
+
+[INFO] 22:22:54:756 CONSOLA/(558:558): instruccion: READ
+
+[INFO] 22:22:54:756 CONSOLA/(558:558): instruccion: READ
+
+[INFO] 22:22:54:756 CONSOLA/(558:558): instruccion: EXIT
+
+[INFO] 22:24:08:854 CONSOLA/(737:737): Se leyo el archivo correctamente
+[INFO] 22:24:08:856 CONSOLA/(737:737): instruccion: WRITE
+
+[INFO] 22:24:08:857 CONSOLA/(737:737): instruccion: WRITE
+
+[INFO] 22:24:08:857 CONSOLA/(737:737): instruccion: WRITE
+
+[INFO] 22:24:08:858 CONSOLA/(737:737): instruccion: COPY
+
+[INFO] 22:24:08:858 CONSOLA/(737:737): instruccion: WRITE
+
+[INFO] 22:24:08:858 CONSOLA/(737:737): instruccion: WRITE
+
+[INFO] 22:24:08:860 CONSOLA/(737:737): instruccion: I/O
+
+[INFO] 22:24:08:860 CONSOLA/(737:737): instruccion: READ
+
+[INFO] 22:24:08:861 CONSOLA/(737:737): instruccion: WRITE
+
+[INFO] 22:24:08:861 CONSOLA/(737:737): instruccion: READ
+
+[INFO] 22:24:08:861 CONSOLA/(737:737): instruccion: READ
+
+[INFO] 22:24:08:862 CONSOLA/(737:737): instruccion: WRITE
+
+[INFO] 22:24:08:862 CONSOLA/(737:737): instruccion: READ
+
+[INFO] 22:24:08:863 CONSOLA/(737:737): instruccion: READ
+
+[INFO] 22:24:08:863 CONSOLA/(737:737): instruccion: EXIT
+
+[INFO] 22:25:46:003 CONSOLA/(903:903): Se leyo el archivo correctamente
+[INFO] 22:25:46:005 CONSOLA/(903:903): instruccion: WRITE
+
+[INFO] 22:25:46:006 CONSOLA/(903:903): instruccion: WRITE
+
+[INFO] 22:25:46:007 CONSOLA/(903:903): instruccion: WRITE
+
+[INFO] 22:25:46:007 CONSOLA/(903:903): instruccion: COPY
+
+[INFO] 22:25:46:008 CONSOLA/(903:903): instruccion: WRITE
+
+[INFO] 22:25:46:012 CONSOLA/(903:903): instruccion: WRITE
+
+[INFO] 22:25:46:012 CONSOLA/(903:903): instruccion: I/O
+
+[INFO] 22:25:46:013 CONSOLA/(903:903): instruccion: READ
+
+[INFO] 22:25:46:013 CONSOLA/(903:903): instruccion: WRITE
+
+[INFO] 22:25:46:013 CONSOLA/(903:903): instruccion: READ
+
+[INFO] 22:25:46:015 CONSOLA/(903:903): instruccion: READ
+
+[INFO] 22:25:46:016 CONSOLA/(903:903): instruccion: WRITE
+
+[INFO] 22:25:46:016 CONSOLA/(903:903): instruccion: READ
+
+[INFO] 22:25:46:016 CONSOLA/(903:903): instruccion: READ
+
+[INFO] 22:25:46:017 CONSOLA/(903:903): instruccion: EXIT
+
+[INFO] 22:27:57:290 CONSOLA/(1200:1200): Se leyo el archivo correctamente
+[INFO] 22:27:57:292 CONSOLA/(1200:1200): instruccion: WRITE
+
+[INFO] 22:27:57:293 CONSOLA/(1200:1200): instruccion: WRITE
+
+[INFO] 22:27:57:293 CONSOLA/(1200:1200): instruccion: WRITE
+
+[INFO] 22:27:57:294 CONSOLA/(1200:1200): instruccion: COPY
+
+[INFO] 22:27:57:294 CONSOLA/(1200:1200): instruccion: WRITE
+
+[INFO] 22:27:57:295 CONSOLA/(1200:1200): instruccion: WRITE
+
+[INFO] 22:27:57:295 CONSOLA/(1200:1200): instruccion: I/O
+
+[INFO] 22:27:57:296 CONSOLA/(1200:1200): instruccion: READ
+
+[INFO] 22:27:57:297 CONSOLA/(1200:1200): instruccion: WRITE
+
+[INFO] 22:27:57:297 CONSOLA/(1200:1200): instruccion: READ
+
+[INFO] 22:27:57:297 CONSOLA/(1200:1200): instruccion: READ
+
+[INFO] 22:27:57:298 CONSOLA/(1200:1200): instruccion: WRITE
+
+[INFO] 22:27:57:298 CONSOLA/(1200:1200): instruccion: READ
+
+[INFO] 22:27:57:298 CONSOLA/(1200:1200): instruccion: READ
+
+[INFO] 22:27:57:299 CONSOLA/(1200:1200): instruccion: EXIT
+
+[INFO] 15:05:46:603 CONSOLA/(17989:17989): Se leyo el archivo correctamente
+[INFO] 15:05:46:604 CONSOLA/(17989:17989): instruccion: WRITE
+
+[INFO] 15:05:46:605 CONSOLA/(17989:17989): instruccion: WRITE
+
+[INFO] 15:05:46:605 CONSOLA/(17989:17989): instruccion: WRITE
+
+[INFO] 15:05:46:605 CONSOLA/(17989:17989): instruccion: COPY
+
+[INFO] 15:05:46:605 CONSOLA/(17989:17989): instruccion: WRITE
+
+[INFO] 15:05:46:605 CONSOLA/(17989:17989): instruccion: WRITE
+
+[INFO] 15:05:46:605 CONSOLA/(17989:17989): instruccion: I/O
+
+[INFO] 15:05:46:606 CONSOLA/(17989:17989): instruccion: READ
+
+[INFO] 15:05:46:606 CONSOLA/(17989:17989): instruccion: WRITE
+
+[INFO] 15:05:46:606 CONSOLA/(17989:17989): instruccion: READ
+
+[INFO] 15:05:46:606 CONSOLA/(17989:17989): instruccion: READ
+
+[INFO] 15:05:46:607 CONSOLA/(17989:17989): instruccion: WRITE
+
+[INFO] 15:05:46:607 CONSOLA/(17989:17989): instruccion: READ
+
+[INFO] 15:05:46:608 CONSOLA/(17989:17989): instruccion: READ
+
+[INFO] 15:05:46:608 CONSOLA/(17989:17989): instruccion: EXIT
+
+[ERROR] 15:12:38:605 CONSOLA/(18796:18796): Falta un parametro
+[INFO] 15:13:13:717 CONSOLA/(18882:18882): Se leyo el archivo correctamente
+[INFO] 15:13:13:719 CONSOLA/(18882:18882): instruccion: WRITE
+
+[INFO] 15:13:13:719 CONSOLA/(18882:18882): instruccion: WRITE
+
+[INFO] 15:13:13:719 CONSOLA/(18882:18882): instruccion: WRITE
+
+[INFO] 15:13:13:720 CONSOLA/(18882:18882): instruccion: COPY
+
+[INFO] 15:13:13:720 CONSOLA/(18882:18882): instruccion: WRITE
+
+[INFO] 15:13:13:720 CONSOLA/(18882:18882): instruccion: WRITE
+
+[INFO] 15:13:13:720 CONSOLA/(18882:18882): instruccion: I/O
+
+[INFO] 15:13:13:720 CONSOLA/(18882:18882): instruccion: READ
+
+[INFO] 15:13:13:720 CONSOLA/(18882:18882): instruccion: WRITE
+
+[INFO] 15:13:13:720 CONSOLA/(18882:18882): instruccion: READ
+
+[INFO] 15:13:13:720 CONSOLA/(18882:18882): instruccion: READ
+
+[INFO] 15:13:13:720 CONSOLA/(18882:18882): instruccion: WRITE
+
+[INFO] 15:13:13:720 CONSOLA/(18882:18882): instruccion: READ
+
+[INFO] 15:13:13:720 CONSOLA/(18882:18882): instruccion: READ
+
+[INFO] 15:13:13:721 CONSOLA/(18882:18882): instruccion: EXIT
+
+[INFO] 15:15:18:747 CONSOLA/(19237:19237): Se leyo el archivo correctamente
+[INFO] 15:15:18:748 CONSOLA/(19237:19237): instruccion: WRITE
+
+[INFO] 15:15:18:748 CONSOLA/(19237:19237): instruccion: WRITE
+
+[INFO] 15:15:18:748 CONSOLA/(19237:19237): instruccion: WRITE
+
+[INFO] 15:15:18:749 CONSOLA/(19237:19237): instruccion: COPY
+
+[INFO] 15:15:18:749 CONSOLA/(19237:19237): instruccion: WRITE
+
+[INFO] 15:15:18:752 CONSOLA/(19237:19237): instruccion: WRITE
+
+[INFO] 15:15:18:752 CONSOLA/(19237:19237): instruccion: I/O
+
+[INFO] 15:15:18:753 CONSOLA/(19237:19237): instruccion: READ
+
+[INFO] 15:15:18:753 CONSOLA/(19237:19237): instruccion: WRITE
+
+[INFO] 15:15:18:753 CONSOLA/(19237:19237): instruccion: READ
+
+[INFO] 15:15:18:753 CONSOLA/(19237:19237): instruccion: READ
+
+[INFO] 15:15:18:753 CONSOLA/(19237:19237): instruccion: WRITE
+
+[INFO] 15:15:18:754 CONSOLA/(19237:19237): instruccion: READ
+
+[INFO] 15:15:18:754 CONSOLA/(19237:19237): instruccion: READ
+
+[INFO] 15:15:18:754 CONSOLA/(19237:19237): instruccion: EXIT
+
+[INFO] 15:20:10:240 CONSOLA/(19775:19775): Se leyo el archivo correctamente
+[INFO] 15:20:10:240 CONSOLA/(19775:19775): instruccion: WRITE
+
+[INFO] 15:20:10:241 CONSOLA/(19775:19775): instruccion: WRITE
+
+[INFO] 15:20:10:241 CONSOLA/(19775:19775): instruccion: WRITE
+
+[INFO] 15:20:10:241 CONSOLA/(19775:19775): instruccion: COPY
+
+[INFO] 15:20:10:241 CONSOLA/(19775:19775): instruccion: WRITE
+
+[INFO] 15:20:10:241 CONSOLA/(19775:19775): instruccion: WRITE
+
+[INFO] 15:20:10:241 CONSOLA/(19775:19775): instruccion: I/O
+
+[INFO] 15:20:10:242 CONSOLA/(19775:19775): instruccion: READ
+
+[INFO] 15:20:10:242 CONSOLA/(19775:19775): instruccion: WRITE
+
+[INFO] 15:20:10:242 CONSOLA/(19775:19775): instruccion: READ
+
+[INFO] 15:20:10:242 CONSOLA/(19775:19775): instruccion: READ
+
+[INFO] 15:20:10:243 CONSOLA/(19775:19775): instruccion: WRITE
+
+[INFO] 15:20:10:243 CONSOLA/(19775:19775): instruccion: READ
+
+[INFO] 15:20:10:243 CONSOLA/(19775:19775): instruccion: READ
+
+[INFO] 15:20:10:243 CONSOLA/(19775:19775): instruccion: EXIT
+
+[INFO] 15:21:32:141 CONSOLA/(20059:20059): Se leyo el archivo correctamente
+[INFO] 15:21:32:141 CONSOLA/(20059:20059): instruccion: WRITE
+
+[INFO] 15:21:32:141 CONSOLA/(20059:20059): instruccion: WRITE
+
+[INFO] 15:21:32:142 CONSOLA/(20059:20059): instruccion: WRITE
+
+[INFO] 15:21:32:142 CONSOLA/(20059:20059): instruccion: COPY
+
+[INFO] 15:21:32:142 CONSOLA/(20059:20059): instruccion: WRITE
+
+[INFO] 15:21:32:142 CONSOLA/(20059:20059): instruccion: WRITE
+
+[INFO] 15:21:32:142 CONSOLA/(20059:20059): instruccion: I/O
+
+[INFO] 15:21:32:142 CONSOLA/(20059:20059): instruccion: READ
+
+[INFO] 15:21:32:143 CONSOLA/(20059:20059): instruccion: WRITE
+
+[INFO] 15:21:32:143 CONSOLA/(20059:20059): instruccion: READ
+
+[INFO] 15:21:32:143 CONSOLA/(20059:20059): instruccion: READ
+
+[INFO] 15:21:32:143 CONSOLA/(20059:20059): instruccion: WRITE
+
+[INFO] 15:21:32:143 CONSOLA/(20059:20059): instruccion: READ
+
+[INFO] 15:21:32:143 CONSOLA/(20059:20059): instruccion: READ
+
+[INFO] 15:21:32:144 CONSOLA/(20059:20059): instruccion: EXIT
+
+[INFO] 15:25:55:330 CONSOLA/(20592:20592): Se leyo el archivo correctamente
+[INFO] 15:25:55:330 CONSOLA/(20592:20592): instruccion: WRITE
+
+[INFO] 15:25:55:334 CONSOLA/(20592:20592): instruccion: WRITE
+
+[INFO] 15:25:55:335 CONSOLA/(20592:20592): instruccion: WRITE
+
+[INFO] 15:25:55:335 CONSOLA/(20592:20592): instruccion: COPY
+
+[INFO] 15:25:55:335 CONSOLA/(20592:20592): instruccion: WRITE
+
+[INFO] 15:25:55:335 CONSOLA/(20592:20592): instruccion: WRITE
+
+[INFO] 15:25:55:335 CONSOLA/(20592:20592): instruccion: I/O
+
+[INFO] 15:25:55:335 CONSOLA/(20592:20592): instruccion: READ
+
+[INFO] 15:25:55:335 CONSOLA/(20592:20592): instruccion: WRITE
+
+[INFO] 15:25:55:336 CONSOLA/(20592:20592): instruccion: READ
+
+[INFO] 15:25:55:336 CONSOLA/(20592:20592): instruccion: READ
+
+[INFO] 15:25:55:336 CONSOLA/(20592:20592): instruccion: WRITE
+
+[INFO] 15:25:55:336 CONSOLA/(20592:20592): instruccion: READ
+
+[INFO] 15:25:55:337 CONSOLA/(20592:20592): instruccion: READ
+
+[INFO] 15:25:55:337 CONSOLA/(20592:20592): instruccion: EXIT
+
+[INFO] 15:27:48:149 CONSOLA/(20889:20889): Se leyo el archivo correctamente
+[INFO] 15:27:48:150 CONSOLA/(20889:20889): instruccion: WRITE
+
+[INFO] 15:27:48:150 CONSOLA/(20889:20889): instruccion: WRITE
+
+[INFO] 15:27:48:150 CONSOLA/(20889:20889): instruccion: WRITE
+
+[INFO] 15:27:48:150 CONSOLA/(20889:20889): instruccion: COPY
+
+[INFO] 15:27:48:150 CONSOLA/(20889:20889): instruccion: WRITE
+
+[INFO] 15:27:48:151 CONSOLA/(20889:20889): instruccion: WRITE
+
+[INFO] 15:27:48:153 CONSOLA/(20889:20889): instruccion: I/O
+
+[INFO] 15:27:48:153 CONSOLA/(20889:20889): instruccion: READ
+
+[INFO] 15:27:48:153 CONSOLA/(20889:20889): instruccion: WRITE
+
+[INFO] 15:27:48:153 CONSOLA/(20889:20889): instruccion: READ
+
+[INFO] 15:27:48:153 CONSOLA/(20889:20889): instruccion: READ
+
+[INFO] 15:27:48:154 CONSOLA/(20889:20889): instruccion: WRITE
+
+[INFO] 15:27:48:154 CONSOLA/(20889:20889): instruccion: READ
+
+[INFO] 15:27:48:154 CONSOLA/(20889:20889): instruccion: READ
+
+[INFO] 15:27:48:155 CONSOLA/(20889:20889): instruccion: EXIT
+
+[INFO] 15:31:17:036 CONSOLA/(21406:21406): Se leyo el archivo correctamente
+[INFO] 15:37:20:769 CONSOLA/(22095:22095): Se leyo el archivo correctamente
+[INFO] 15:41:14:793 CONSOLA/(22604:22604): Se leyo el archivo correctamente
+[INFO] 15:43:58:458 CONSOLA/(22969:22969): Se leyo el archivo correctamente
+[INFO] 15:48:14:853 CONSOLA/(23480:23480): Se leyo el archivo correctamente
+[INFO] 15:49:13:339 CONSOLA/(23715:23715): Se leyo el archivo correctamente
+[INFO] 15:51:24:831 CONSOLA/(24072:24072): Se leyo el archivo correctamente
+[INFO] 15:54:38:335 CONSOLA/(24506:24506): Se leyo el archivo correctamente
+[INFO] 15:57:08:841 CONSOLA/(24867:24867): Se leyo el archivo correctamente
+[INFO] 15:57:53:695 CONSOLA/(25073:25073): Se leyo el archivo correctamente
+[INFO] 16:01:16:606 CONSOLA/(25521:25521): Se leyo el archivo correctamente
+[INFO] 16:07:43:775 CONSOLA/(26289:26289): Se leyo el archivo correctamente
+[INFO] 16:14:16:066 CONSOLA/(27107:27107): Se leyo el archivo correctamente
+[INFO] 16:24:39:508 CONSOLA/(28122:28122): Se leyo el archivo correctamente
+[INFO] 16:26:18:767 CONSOLA/(28425:28425): Se leyo el archivo correctamente
+[INFO] 16:29:17:658 CONSOLA/(28882:28882): Se leyo el archivo correctamente
+[INFO] 16:33:32:888 CONSOLA/(29420:29420): Se leyo el archivo correctamente
+[INFO] 16:38:48:506 CONSOLA/(29999:29999): Se leyo el archivo correctamente
+[INFO] 16:41:31:990 CONSOLA/(30546:30546): Se leyo el archivo correctamente
+[INFO] 16:46:39:269 CONSOLA/(31104:31104): Se leyo el archivo correctamente
+[INFO] 16:47:19:729 CONSOLA/(31295:31295): Se leyo el archivo correctamente
+[INFO] 16:51:53:755 CONSOLA/(31837:31837): Se leyo el archivo correctamente
+[INFO] 16:55:04:709 CONSOLA/(32274:32274): Se leyo el archivo correctamente
+[INFO] 16:55:54:361 CONSOLA/(32487:32487): Se leyo el archivo correctamente
+[INFO] 17:01:41:226 CONSOLA/(665:665): Se leyo el archivo correctamente
+[INFO] 17:10:59:521 CONSOLA/(1552:1552): Se leyo el archivo correctamente
+[INFO] 17:14:31:405 CONSOLA/(2003:2003): Se leyo el archivo correctamente
+[INFO] 17:16:12:522 CONSOLA/(2252:2252): Se leyo el archivo correctamente
+[INFO] 17:16:51:084 CONSOLA/(2401:2401): Se leyo el archivo correctamente
+[INFO] 17:18:02:592 CONSOLA/(2605:2605): Se leyo el archivo correctamente
+[INFO] 17:19:19:813 CONSOLA/(2836:2836): Se leyo el archivo correctamente
+[INFO] 17:21:22:364 CONSOLA/(3141:3141): Se leyo el archivo correctamente
+[INFO] 17:24:26:423 CONSOLA/(3627:3627): Se leyo el archivo correctamente
+[INFO] 17:26:44:841 CONSOLA/(3908:3908): Se leyo el archivo correctamente
+[INFO] 17:31:25:564 CONSOLA/(4417:4417): Se leyo el archivo correctamente
+[INFO] 17:36:07:760 CONSOLA/(4992:4992): Se leyo el archivo correctamente
+[INFO] 18:48:34:928 CONSOLA/(10579:10579): Se leyo el archivo correctamente
+[INFO] 18:58:54:154 CONSOLA/(11235:11235): Se leyo el archivo correctamente
+[INFO] 19:03:46:073 CONSOLA/(11661:11661): Se leyo el archivo correctamente
+[INFO] 19:09:54:678 CONSOLA/(12118:12118): Se leyo el archivo correctamente
+[INFO] 19:17:04:600 CONSOLA/(12663:12663): Se leyo el archivo correctamente
+[INFO] 19:21:32:981 CONSOLA/(13076:13076): Se leyo el archivo correctamente

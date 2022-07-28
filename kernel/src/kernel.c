@@ -1,23 +1,31 @@
 #include "funcionesKernel.h"
 
+t_list* listaInstrucciones;
+
 int main(void) {
 	logger = log_create("kernel.log", "KERNEL", 1, LOG_LEVEL_INFO);
-	cargar_pcb();
 	inicializarConfiguraciones();
 	//crear_colas();
     //generar_conexiones();
 
-	//conexionConConsola();
-	//conexionConCpu();
-	conexionConMemoria();
+	conexionConConsola();
+	cargar_pcb();
+	conexionConCpu();
+	//conexionConMemoria();
 }
 
 
 void cargar_pcb(){
+	pcb = malloc(sizeof(t_pcb));
+	pcb -> instrucciones = list_create();
 
+	pcb->instrucciones = listaInstrucciones;
+	pcb->idProceso = 0; //esto es por la idea de tomas de hacerlo secuencial, proceso 1 id 0, proceso 2 id 1, etc...
+	pcb->program_counter = 0;
+	pcb->tamanioProceso = 1024; // viene por consola en realidad
+	pcb->tabla_paginas = 0;//viene de memoria
+	pcb->estimacion_rafaga = estimacionInicial; // no se si varia
 
-	//ipKernel = config_get_string_value(config, "IP");
-	pidKernel = 0; // ID del kernel
 
 	gradoMultiprogramacionActual = 0; //Arranca en 0 porque no hay procesos en memoria
 }
@@ -35,7 +43,7 @@ void inicializarConfiguraciones(){
 	puertoCpuInterrupt = config_get_string_value(config, "PUERTO_CPU_INTERRUPT");
 	puertoKernel = config_get_string_value(config, "PUERTO_ESCUCHA");
 	algoritmoPlanificacion = config_get_string_value(config, "ALGORITMO_PLANIFICACION");
-	estimacionInicial = config_get_string_value(config, "ESTIMACION_INICIAL");
+	estimacionInicial = atoi(config_get_string_value(config, "ESTIMACION_INICIAL"));
 	alfa = atoi(config_get_string_value(config, "ALFA"));
 	gradoDeMultiprogramacion = atoi(config_get_string_value(config, "GRADO_MULTIPROGRAMACION"));
 	tiempoMaximoBloqueado = config_get_string_value(config, "TIEMPO_MAXIMO_BLOQUEADO");
@@ -101,14 +109,12 @@ void enviarPID(){//pasar entrada y nroTabla1ernivel
 //---------------------------------------------------------------------------------------------
 
 //preguntar por el switch
-/*int conexionConConsola(void){
+int conexionConConsola(void){
 	logger = log_create("./kernel.log", "Kernel", 1, LOG_LEVEL_DEBUG);
 
 	int server_fd = iniciar_servidor();
 	log_info(logger, "Kernel listo para recibir a consola");
 	int cliente_fd = esperar_cliente(server_fd);
-
-	t_list* instrucciones;
 
 	while (1) {
 		int cod_op = recibir_operacion(cliente_fd);
@@ -116,11 +122,11 @@ void enviarPID(){//pasar entrada y nroTabla1ernivel
 			case MENSAJE:
 				recibir_mensaje(cliente_fd);
 			break;
-			case PAQUETE:
-				instrucciones = recibir_paquete(cliente_fd);
-
-				log_info(logger, "Me llegaron las siguientes instrucciones: \n");
-				list_iterate(instrucciones, (void*) iterator);
+			case RECIBIR_INSTRUCCIONES:
+				listaInstrucciones = list_create();
+				listaInstrucciones = recibir_paquete(cliente_fd);
+				
+				//list_iterate(instrucciones, (void*) iterator);
 			break;
 			case -1:
 				log_error(logger, "La consola se desconecto. Finalizando Kernel");
@@ -132,53 +138,24 @@ void enviarPID(){//pasar entrada y nroTabla1ernivel
 			}
 	  return EXIT_SUCCESS;
 }
-*/
+
 // -----------------------------------------------------------------------------------------------------
 
 
-/*void conexionConCpu(void){
+int conexionConCpu(void){
 
-	int conexion;
-	char* ip;
-	int puerto;
-	char* pcb; //deberia ser una estructura
+    socketCpuDispatch = crear_conexion(ipCpu, puertoCpuDispatch);
+	
+	log_info(logger,"Hola cpu, soy Kernel");
 
-	t_log* logger = iniciar_logger();
-	t_config* config = iniciar_config();
+	agregar_a_paquete_kernel_cpu(pcb); // aca ya se envia
 
-	ip = config_get_string_value(config,"IP_CPU");
-	puerto =  config_get_int_value(config,"PUERTO_CPU_DISPATCH");
-	pcb = "Aca le mandaria el pcb";
-
-	// Creamos una conexión hacia el servidor
-    conexion = crear_conexion(ip, puerto);
-
-	// Armamos y enviamos el paquete
-	paquete(conexion,pcb);
-
-	terminar_programa(conexion, logger, config);
-}*/
-
-t_log* iniciar_logger(void){
-	return log_create("./kernel.log","KERNEL",true,LOG_LEVEL_INFO);
+	
+	
+	return EXIT_SUCCESS;
 }
 
-/*t_config* iniciar_config(void){
-	return config_create("kernel.config");
-}*/
 
-/*void paquete(int conexion, char* mensaje){
-
-	t_paquete* paquete = crear_paquete();
-
-	// Leemos y esta vez agregamos las lineas al paquete
-    agregar_a_paquete(paquete,mensaje,strlen(mensaje) + 1);
-    //free(pcb); tira terrible error
-
-    enviar_paquete(paquete,conexion);
-    eliminar_paquete(paquete);
-}*/
-//Revisar ubicacion
 
 void terminar_programa(int conexion, t_log* logger, t_config* config){
 	/* Y por ultimo, hay que liberar lo que utilizamos (conexion, log y config)
@@ -189,6 +166,8 @@ void terminar_programa(int conexion, t_log* logger, t_config* config){
 	liberar_conexion(conexion);
 }
 
-void iterator(char* value) {
-	log_info(logger,"%s", value);
+void iterator(int value) {
+	log_info(logger,"%d",value);
 }
+
+

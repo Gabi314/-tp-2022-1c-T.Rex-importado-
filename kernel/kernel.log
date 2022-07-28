@@ -113,3 +113,886 @@
 [INFO] 16:39:51:267 KERNEL/(12868:12868): Hola memoria, soy Kernel
 [INFO] 16:39:51:267 KERNEL/(12868:12868): Le envio a memoria mi pid que es 0
 [INFO] 16:39:51:643 KERNEL/(12868:12868): Me llego la tabla de primero nivel nro: 0
+[INFO] 22:20:41:806 Kernel/(362:362): Kernel listo para recibir a consola
+[INFO] 22:21:19:855 Kernel/(362:362): Se conecto la consola!
+[INFO] 22:21:19:860 Kernel/(362:362): Me llegaron las siguientes instrucciones: 
+
+[ERROR] 22:21:19:860 Kernel/(362:362): La consola se desconecto. Finalizando Kernel
+[INFO] 22:22:51:515 Kernel/(554:554): Kernel listo para recibir a consola
+[INFO] 22:22:54:739 Kernel/(554:554): Se conecto la consola!
+[INFO] 22:22:54:756 Kernel/(554:554): Me llegaron las siguientes instrucciones: 
+
+[INFO] 22:24:05:444 Kernel/(729:729): Kernel listo para recibir a consola
+[INFO] 22:24:08:852 Kernel/(729:729): Se conecto la consola!
+[INFO] 22:24:08:864 Kernel/(729:729): Me llegaron las siguientes instrucciones: 
+
+[INFO] 22:25:42:017 Kernel/(892:892): Kernel listo para recibir a consola
+[INFO] 22:25:45:998 Kernel/(892:892): Se conecto la consola!
+[INFO] 22:25:46:017 Kernel/(892:892): Me llegaron las siguientes instrucciones: 
+
+[INFO] 22:25:46:017 Kernel/(892:892): WRITE
+[INFO] 22:25:46:017 Kernel/(892:892): WRITE
+[INFO] 22:25:46:017 Kernel/(892:892): WRITE
+[INFO] 22:25:46:017 Kernel/(892:892): COPY
+[INFO] 22:25:46:017 Kernel/(892:892): WRITE
+[INFO] 22:25:46:017 Kernel/(892:892): WRITE
+[INFO] 22:25:46:018 Kernel/(892:892): I/O
+[INFO] 22:25:46:018 Kernel/(892:892): READ
+[INFO] 22:25:46:018 Kernel/(892:892): WRITE
+[INFO] 22:25:46:018 Kernel/(892:892): READ
+[INFO] 22:25:46:018 Kernel/(892:892): READ
+[INFO] 22:25:46:018 Kernel/(892:892): WRITE
+[INFO] 22:25:46:018 Kernel/(892:892): READ
+[INFO] 22:25:46:018 Kernel/(892:892): READ
+[INFO] 22:25:46:018 Kernel/(892:892): EXIT
+[ERROR] 22:25:46:019 Kernel/(892:892): La consola se desconecto. Finalizando Kernel
+[INFO] 22:25:46:019 Kernel/(892:892): WRITE
+[INFO] 22:25:46:019 Kernel/(892:892): WRITE
+[INFO] 22:25:46:019 Kernel/(892:892): WRITE
+[INFO] 22:25:46:019 Kernel/(892:892): COPY
+[INFO] 22:25:46:019 Kernel/(892:892): WRITE
+[INFO] 22:25:46:019 Kernel/(892:892): WRITE
+[INFO] 22:25:46:019 Kernel/(892:892): I/O
+[INFO] 22:25:46:019 Kernel/(892:892): READ
+[INFO] 22:25:46:019 Kernel/(892:892): WRITE
+[INFO] 22:25:46:019 Kernel/(892:892): READ
+[INFO] 22:25:46:019 Kernel/(892:892): READ
+[INFO] 22:25:46:019 Kernel/(892:892): WRITE
+[INFO] 22:25:46:019 Kernel/(892:892): READ
+[INFO] 22:25:46:020 Kernel/(892:892): READ
+[INFO] 22:25:46:020 Kernel/(892:892): EXIT
+[INFO] 22:27:54:573 Kernel/(1196:1196): Kernel listo para recibir a consola
+[INFO] 22:27:57:286 Kernel/(1196:1196): Se conecto la consola!
+[ERROR] 22:27:57:300 Kernel/(1196:1196): La consola se desconecto. Finalizando Kernel
+[INFO] 22:27:57:301 Kernel/(1196:1196): Instrucciones: 
+
+[INFO] 22:27:57:301 Kernel/(1196:1196): WRITE
+[INFO] 22:27:57:301 Kernel/(1196:1196): WRITE
+[INFO] 22:27:57:301 Kernel/(1196:1196): WRITE
+[INFO] 22:27:57:301 Kernel/(1196:1196): COPY
+[INFO] 22:27:57:301 Kernel/(1196:1196): WRITE
+[INFO] 22:27:57:301 Kernel/(1196:1196): WRITE
+[INFO] 22:27:57:301 Kernel/(1196:1196): I/O
+[INFO] 22:27:57:301 Kernel/(1196:1196): READ
+[INFO] 22:27:57:301 Kernel/(1196:1196): WRITE
+[INFO] 22:27:57:301 Kernel/(1196:1196): READ
+[INFO] 22:27:57:301 Kernel/(1196:1196): READ
+[INFO] 22:27:57:301 Kernel/(1196:1196): WRITE
+[INFO] 22:27:57:301 Kernel/(1196:1196): READ
+[INFO] 22:27:57:302 Kernel/(1196:1196): READ
+[INFO] 22:27:57:302 Kernel/(1196:1196): EXIT
+[INFO] 15:05:37:402 Kernel/(17972:17972): Kernel listo para recibir a consola
+[INFO] 15:05:46:602 Kernel/(17972:17972): Se conecto la consola!
+[ERROR] 15:05:46:608 Kernel/(17972:17972): La consola se desconecto. Finalizando Kernel
+[INFO] 15:05:46:608 Kernel/(17972:17972): Instrucciones: 
+
+[INFO] 15:05:46:608 Kernel/(17972:17972): WRITE
+[INFO] 15:05:46:608 Kernel/(17972:17972): WRITE
+[INFO] 15:05:46:608 Kernel/(17972:17972): WRITE
+[INFO] 15:05:46:608 Kernel/(17972:17972): COPY
+[INFO] 15:05:46:609 Kernel/(17972:17972): WRITE
+[INFO] 15:05:46:609 Kernel/(17972:17972): WRITE
+[INFO] 15:05:46:609 Kernel/(17972:17972): I/O
+[INFO] 15:05:46:609 Kernel/(17972:17972): READ
+[INFO] 15:05:46:609 Kernel/(17972:17972): WRITE
+[INFO] 15:05:46:609 Kernel/(17972:17972): READ
+[INFO] 15:05:46:609 Kernel/(17972:17972): READ
+[INFO] 15:05:46:609 Kernel/(17972:17972): WRITE
+[INFO] 15:05:46:609 Kernel/(17972:17972): READ
+[INFO] 15:05:46:609 Kernel/(17972:17972): READ
+[INFO] 15:05:46:609 Kernel/(17972:17972): EXIT
+[INFO] 15:05:46:610 Kernel/(17972:17972): Hola cpu, soy Kernel
+[INFO] 15:12:26:706 Kernel/(18731:18731): Kernel listo para recibir a consola
+[INFO] 15:13:13:704 Kernel/(18731:18731): Se conecto la consola!
+[ERROR] 15:13:13:721 Kernel/(18731:18731): La consola se desconecto. Finalizando Kernel
+[INFO] 15:13:13:721 Kernel/(18731:18731): Instrucciones: 
+
+[INFO] 15:13:13:721 Kernel/(18731:18731): WRITE
+[INFO] 15:13:13:721 Kernel/(18731:18731): WRITE
+[INFO] 15:13:13:721 Kernel/(18731:18731): WRITE
+[INFO] 15:13:13:721 Kernel/(18731:18731): COPY
+[INFO] 15:13:13:721 Kernel/(18731:18731): WRITE
+[INFO] 15:13:13:721 Kernel/(18731:18731): WRITE
+[INFO] 15:13:13:721 Kernel/(18731:18731): I/O
+[INFO] 15:13:13:721 Kernel/(18731:18731): READ
+[INFO] 15:13:13:721 Kernel/(18731:18731): WRITE
+[INFO] 15:13:13:721 Kernel/(18731:18731): READ
+[INFO] 15:13:13:721 Kernel/(18731:18731): READ
+[INFO] 15:13:13:721 Kernel/(18731:18731): WRITE
+[INFO] 15:13:13:721 Kernel/(18731:18731): READ
+[INFO] 15:13:13:721 Kernel/(18731:18731): READ
+[INFO] 15:13:13:721 Kernel/(18731:18731): EXIT
+[INFO] 15:15:14:020 Kernel/(19189:19189): Kernel listo para recibir a consola
+[INFO] 15:15:18:746 Kernel/(19189:19189): Se conecto la consola!
+[ERROR] 15:15:18:754 Kernel/(19189:19189): La consola se desconecto. Finalizando Kernel
+[INFO] 15:15:18:754 Kernel/(19189:19189): Instrucciones: 
+
+[INFO] 15:15:18:754 Kernel/(19189:19189): WRITE
+[INFO] 15:15:18:754 Kernel/(19189:19189): WRITE
+[INFO] 15:15:18:754 Kernel/(19189:19189): WRITE
+[INFO] 15:15:18:754 Kernel/(19189:19189): COPY
+[INFO] 15:15:18:754 Kernel/(19189:19189): WRITE
+[INFO] 15:15:18:754 Kernel/(19189:19189): WRITE
+[INFO] 15:15:18:755 Kernel/(19189:19189): I/O
+[INFO] 15:15:18:755 Kernel/(19189:19189): READ
+[INFO] 15:15:18:755 Kernel/(19189:19189): WRITE
+[INFO] 15:15:18:755 Kernel/(19189:19189): READ
+[INFO] 15:15:18:755 Kernel/(19189:19189): READ
+[INFO] 15:15:18:755 Kernel/(19189:19189): WRITE
+[INFO] 15:15:18:755 Kernel/(19189:19189): READ
+[INFO] 15:15:18:755 Kernel/(19189:19189): READ
+[INFO] 15:15:18:755 Kernel/(19189:19189): EXIT
+[INFO] 15:15:18:755 Kernel/(19189:19189): Hola cpu, soy Kernel
+[INFO] 15:20:05:655 Kernel/(19680:19680): Kernel listo para recibir a consola
+[INFO] 15:20:16:114 Kernel/(19680:19680): Se conecto la consola!
+[ERROR] 15:20:28:127 Kernel/(19680:19680): La consola se desconecto. Finalizando Kernel
+[INFO] 15:20:55:614 Kernel/(19894:19894): Kernel listo para recibir a consola
+[INFO] 15:21:20:600 Kernel/(19982:19982): Kernel listo para recibir a consola
+[INFO] 15:21:35:591 Kernel/(19982:19982): Se conecto la consola!
+[ERROR] 15:21:47:101 Kernel/(19982:19982): La consola se desconecto. Finalizando Kernel
+[INFO] 15:21:58:197 Kernel/(19982:19982): Instrucciones: 
+
+[INFO] 15:21:59:197 Kernel/(19982:19982): WRITE
+[INFO] 15:21:59:197 Kernel/(19982:19982): WRITE
+[INFO] 15:21:59:197 Kernel/(19982:19982): WRITE
+[INFO] 15:21:59:197 Kernel/(19982:19982): COPY
+[INFO] 15:21:59:197 Kernel/(19982:19982): WRITE
+[INFO] 15:21:59:197 Kernel/(19982:19982): WRITE
+[INFO] 15:21:59:197 Kernel/(19982:19982): I/O
+[INFO] 15:21:59:197 Kernel/(19982:19982): READ
+[INFO] 15:21:59:197 Kernel/(19982:19982): WRITE
+[INFO] 15:21:59:198 Kernel/(19982:19982): READ
+[INFO] 15:21:59:198 Kernel/(19982:19982): READ
+[INFO] 15:21:59:198 Kernel/(19982:19982): WRITE
+[INFO] 15:21:59:198 Kernel/(19982:19982): READ
+[INFO] 15:21:59:198 Kernel/(19982:19982): READ
+[INFO] 15:21:59:198 Kernel/(19982:19982): EXIT
+[INFO] 15:22:19:292 Kernel/(19982:19982): Hola cpu, soy Kernel
+[INFO] 15:25:49:782 Kernel/(20541:20541): Kernel listo para recibir a consola
+[INFO] 15:25:55:330 Kernel/(20541:20541): Se conecto la consola!
+[ERROR] 15:25:55:337 Kernel/(20541:20541): La consola se desconecto. Finalizando Kernel
+[INFO] 15:25:55:338 Kernel/(20541:20541): Instrucciones: 
+
+[INFO] 15:25:55:338 Kernel/(20541:20541): WRITE
+[INFO] 15:25:55:338 Kernel/(20541:20541): WRITE
+[INFO] 15:25:55:338 Kernel/(20541:20541): WRITE
+[INFO] 15:25:55:338 Kernel/(20541:20541): COPY
+[INFO] 15:25:55:338 Kernel/(20541:20541): WRITE
+[INFO] 15:25:55:338 Kernel/(20541:20541): WRITE
+[INFO] 15:25:55:338 Kernel/(20541:20541): I/O
+[INFO] 15:25:55:338 Kernel/(20541:20541): READ
+[INFO] 15:25:55:338 Kernel/(20541:20541): WRITE
+[INFO] 15:25:55:338 Kernel/(20541:20541): READ
+[INFO] 15:25:55:338 Kernel/(20541:20541): READ
+[INFO] 15:25:55:338 Kernel/(20541:20541): WRITE
+[INFO] 15:25:55:339 Kernel/(20541:20541): READ
+[INFO] 15:25:55:339 Kernel/(20541:20541): READ
+[INFO] 15:25:55:339 Kernel/(20541:20541): EXIT
+[INFO] 15:25:55:339 Kernel/(20541:20541): Hola cpu, soy Kernel
+[INFO] 15:27:42:842 Kernel/(20813:20813): Kernel listo para recibir a consola
+[INFO] 15:27:51:314 Kernel/(20813:20813): Se conecto la consola!
+[ERROR] 15:27:57:397 Kernel/(20813:20813): La consola se desconecto. Finalizando Kernel
+[INFO] 15:28:01:134 Kernel/(20813:20813): Instrucciones: 
+
+[INFO] 15:28:01:134 Kernel/(20813:20813): WRITE
+[INFO] 15:28:01:134 Kernel/(20813:20813): WRITE
+[INFO] 15:28:01:134 Kernel/(20813:20813): WRITE
+[INFO] 15:28:01:134 Kernel/(20813:20813): COPY
+[INFO] 15:28:01:134 Kernel/(20813:20813): WRITE
+[INFO] 15:28:01:134 Kernel/(20813:20813): WRITE
+[INFO] 15:28:01:134 Kernel/(20813:20813): I/O
+[INFO] 15:28:01:134 Kernel/(20813:20813): READ
+[INFO] 15:28:01:134 Kernel/(20813:20813): WRITE
+[INFO] 15:28:01:134 Kernel/(20813:20813): READ
+[INFO] 15:28:01:134 Kernel/(20813:20813): READ
+[INFO] 15:28:01:134 Kernel/(20813:20813): WRITE
+[INFO] 15:28:01:134 Kernel/(20813:20813): READ
+[INFO] 15:28:01:134 Kernel/(20813:20813): READ
+[INFO] 15:28:01:134 Kernel/(20813:20813): EXIT
+[INFO] 15:28:10:823 Kernel/(20813:20813): Hola cpu, soy Kernel
+[INFO] 15:30:51:976 Kernel/(21257:21257): Kernel listo para recibir a consola
+[INFO] 15:31:11:762 Kernel/(21326:21326): Kernel listo para recibir a consola
+[INFO] 15:31:20:735 Kernel/(21326:21326): Se conecto la consola!
+[ERROR] 15:31:26:917 Kernel/(21326:21326): La consola se desconecto. Finalizando Kernel
+[INFO] 15:31:29:706 Kernel/(21326:21326): Instrucciones: 
+
+[INFO] 15:31:29:706 Kernel/(21326:21326): WRITE
+[INFO] 15:31:29:706 Kernel/(21326:21326): WRITE
+[INFO] 15:31:29:706 Kernel/(21326:21326): WRITE
+[INFO] 15:31:29:706 Kernel/(21326:21326): COPY
+[INFO] 15:31:29:706 Kernel/(21326:21326): WRITE
+[INFO] 15:31:29:706 Kernel/(21326:21326): WRITE
+[INFO] 15:31:29:706 Kernel/(21326:21326): I/O
+[INFO] 15:31:29:707 Kernel/(21326:21326): READ
+[INFO] 15:31:29:707 Kernel/(21326:21326): WRITE
+[INFO] 15:31:29:707 Kernel/(21326:21326): READ
+[INFO] 15:31:29:707 Kernel/(21326:21326): READ
+[INFO] 15:31:29:707 Kernel/(21326:21326): WRITE
+[INFO] 15:31:29:707 Kernel/(21326:21326): READ
+[INFO] 15:31:29:707 Kernel/(21326:21326): READ
+[INFO] 15:31:29:707 Kernel/(21326:21326): EXIT
+[INFO] 15:31:34:601 Kernel/(21326:21326): Hola cpu, soy Kernel
+[INFO] 15:37:15:263 Kernel/(22047:22047): Kernel listo para recibir a consola
+[INFO] 15:37:20:767 Kernel/(22047:22047): Se conecto la consola!
+[ERROR] 15:37:20:770 Kernel/(22047:22047): La consola se desconecto. Finalizando Kernel
+[INFO] 15:37:20:770 Kernel/(22047:22047): Instrucciones: 
+
+[INFO] 15:37:20:770 Kernel/(22047:22047): WRITE
+[INFO] 15:37:20:770 Kernel/(22047:22047): WRITE
+[INFO] 15:37:20:770 Kernel/(22047:22047): WRITE
+[INFO] 15:37:20:770 Kernel/(22047:22047): COPY
+[INFO] 15:37:20:773 Kernel/(22047:22047): WRITE
+[INFO] 15:37:20:773 Kernel/(22047:22047): WRITE
+[INFO] 15:37:20:773 Kernel/(22047:22047): I/O
+[INFO] 15:37:20:773 Kernel/(22047:22047): READ
+[INFO] 15:37:20:773 Kernel/(22047:22047): WRITE
+[INFO] 15:37:20:773 Kernel/(22047:22047): READ
+[INFO] 15:37:20:774 Kernel/(22047:22047): READ
+[INFO] 15:37:20:774 Kernel/(22047:22047): WRITE
+[INFO] 15:37:20:774 Kernel/(22047:22047): READ
+[INFO] 15:37:20:774 Kernel/(22047:22047): READ
+[INFO] 15:37:20:774 Kernel/(22047:22047): EXIT
+[INFO] 15:37:20:774 Kernel/(22047:22047): Hola cpu, soy Kernel
+[INFO] 15:41:04:572 Kernel/(22548:22548): Kernel listo para recibir a consola
+[INFO] 15:41:14:789 Kernel/(22548:22548): Se conecto la consola!
+[ERROR] 15:41:14:794 Kernel/(22548:22548): La consola se desconecto. Finalizando Kernel
+[INFO] 15:41:14:794 Kernel/(22548:22548): Instrucciones: 
+
+[INFO] 15:41:14:794 Kernel/(22548:22548): WRITE
+[INFO] 15:41:14:794 Kernel/(22548:22548): WRITE
+[INFO] 15:41:14:794 Kernel/(22548:22548): WRITE
+[INFO] 15:41:14:794 Kernel/(22548:22548): COPY
+[INFO] 15:41:14:794 Kernel/(22548:22548): WRITE
+[INFO] 15:41:14:795 Kernel/(22548:22548): WRITE
+[INFO] 15:41:14:795 Kernel/(22548:22548): I/O
+[INFO] 15:41:14:795 Kernel/(22548:22548): READ
+[INFO] 15:41:14:795 Kernel/(22548:22548): WRITE
+[INFO] 15:41:14:795 Kernel/(22548:22548): READ
+[INFO] 15:41:14:795 Kernel/(22548:22548): READ
+[INFO] 15:41:14:795 Kernel/(22548:22548): WRITE
+[INFO] 15:41:14:795 Kernel/(22548:22548): READ
+[INFO] 15:41:14:795 Kernel/(22548:22548): READ
+[INFO] 15:41:14:795 Kernel/(22548:22548): EXIT
+[INFO] 15:41:14:795 Kernel/(22548:22548): Hola cpu, soy Kernel
+[INFO] 15:43:37:401 Kernel/(22855:22855): Kernel listo para recibir a consola
+[INFO] 15:43:58:458 Kernel/(22855:22855): Se conecto la consola!
+[ERROR] 15:43:58:459 Kernel/(22855:22855): La consola se desconecto. Finalizando Kernel
+[INFO] 15:43:58:459 Kernel/(22855:22855): Instrucciones: 
+
+[INFO] 15:43:58:459 Kernel/(22855:22855): WRITE
+[INFO] 15:43:58:459 Kernel/(22855:22855): WRITE
+[INFO] 15:43:58:459 Kernel/(22855:22855): WRITE
+[INFO] 15:43:58:459 Kernel/(22855:22855): COPY
+[INFO] 15:43:58:459 Kernel/(22855:22855): WRITE
+[INFO] 15:43:58:459 Kernel/(22855:22855): WRITE
+[INFO] 15:43:58:459 Kernel/(22855:22855): I/O
+[INFO] 15:43:58:459 Kernel/(22855:22855): READ
+[INFO] 15:43:58:459 Kernel/(22855:22855): WRITE
+[INFO] 15:43:58:459 Kernel/(22855:22855): READ
+[INFO] 15:43:58:460 Kernel/(22855:22855): READ
+[INFO] 15:43:58:460 Kernel/(22855:22855): WRITE
+[INFO] 15:43:58:460 Kernel/(22855:22855): READ
+[INFO] 15:43:58:460 Kernel/(22855:22855): READ
+[INFO] 15:43:58:460 Kernel/(22855:22855): EXIT
+[INFO] 15:43:58:460 Kernel/(22855:22855): Hola cpu, soy Kernel
+[INFO] 15:48:06:381 Kernel/(23380:23380): Kernel listo para recibir a consola
+[INFO] 15:48:14:844 Kernel/(23380:23380): Se conecto la consola!
+[ERROR] 15:48:14:854 Kernel/(23380:23380): La consola se desconecto. Finalizando Kernel
+[INFO] 15:48:14:854 Kernel/(23380:23380): Instrucciones: 
+
+[INFO] 15:48:14:856 Kernel/(23380:23380): WRITE
+[INFO] 15:48:14:856 Kernel/(23380:23380): WRITE
+[INFO] 15:48:14:856 Kernel/(23380:23380): WRITE
+[INFO] 15:48:14:856 Kernel/(23380:23380): COPY
+[INFO] 15:48:14:856 Kernel/(23380:23380): WRITE
+[INFO] 15:48:14:856 Kernel/(23380:23380): WRITE
+[INFO] 15:48:14:856 Kernel/(23380:23380): I/O
+[INFO] 15:48:14:856 Kernel/(23380:23380): READ
+[INFO] 15:48:14:856 Kernel/(23380:23380): WRITE
+[INFO] 15:48:14:857 Kernel/(23380:23380): READ
+[INFO] 15:48:14:857 Kernel/(23380:23380): READ
+[INFO] 15:48:14:857 Kernel/(23380:23380): WRITE
+[INFO] 15:48:14:857 Kernel/(23380:23380): READ
+[INFO] 15:48:14:857 Kernel/(23380:23380): READ
+[INFO] 15:48:14:857 Kernel/(23380:23380): EXIT
+[INFO] 15:48:14:857 Kernel/(23380:23380): Hola cpu, soy Kernel
+[INFO] 15:49:07:264 Kernel/(23636:23636): Kernel listo para recibir a consola
+[INFO] 15:49:15:109 Kernel/(23636:23636): Se conecto la consola!
+[ERROR] 15:49:20:914 Kernel/(23636:23636): La consola se desconecto. Finalizando Kernel
+[INFO] 15:49:24:153 Kernel/(23636:23636): Instrucciones: 
+
+[INFO] 15:49:24:153 Kernel/(23636:23636): WRITE
+[INFO] 15:49:24:153 Kernel/(23636:23636): WRITE
+[INFO] 15:49:24:153 Kernel/(23636:23636): WRITE
+[INFO] 15:49:24:154 Kernel/(23636:23636): COPY
+[INFO] 15:49:24:154 Kernel/(23636:23636): WRITE
+[INFO] 15:49:24:154 Kernel/(23636:23636): WRITE
+[INFO] 15:49:24:154 Kernel/(23636:23636): I/O
+[INFO] 15:49:24:154 Kernel/(23636:23636): READ
+[INFO] 15:49:24:154 Kernel/(23636:23636): WRITE
+[INFO] 15:49:24:154 Kernel/(23636:23636): READ
+[INFO] 15:49:24:154 Kernel/(23636:23636): READ
+[INFO] 15:49:24:154 Kernel/(23636:23636): WRITE
+[INFO] 15:49:24:154 Kernel/(23636:23636): READ
+[INFO] 15:49:24:154 Kernel/(23636:23636): READ
+[INFO] 15:49:24:154 Kernel/(23636:23636): EXIT
+[INFO] 15:49:31:687 Kernel/(23636:23636): Hola cpu, soy Kernel
+[INFO] 15:51:19:190 Kernel/(24002:24002): Kernel listo para recibir a consola
+[INFO] 15:51:26:019 Kernel/(24002:24002): Se conecto la consola!
+[ERROR] 15:51:31:014 Kernel/(24002:24002): La consola se desconecto. Finalizando Kernel
+[INFO] 15:51:32:865 Kernel/(24002:24002): Instrucciones: 
+
+[INFO] 15:51:32:865 Kernel/(24002:24002): WRITE
+[INFO] 15:51:32:865 Kernel/(24002:24002): WRITE
+[INFO] 15:51:32:865 Kernel/(24002:24002): WRITE
+[INFO] 15:51:32:865 Kernel/(24002:24002): COPY
+[INFO] 15:51:32:865 Kernel/(24002:24002): WRITE
+[INFO] 15:51:32:865 Kernel/(24002:24002): WRITE
+[INFO] 15:51:32:865 Kernel/(24002:24002): I/O
+[INFO] 15:51:32:865 Kernel/(24002:24002): READ
+[INFO] 15:51:32:865 Kernel/(24002:24002): WRITE
+[INFO] 15:51:32:865 Kernel/(24002:24002): READ
+[INFO] 15:51:32:865 Kernel/(24002:24002): READ
+[INFO] 15:51:32:865 Kernel/(24002:24002): WRITE
+[INFO] 15:51:32:865 Kernel/(24002:24002): READ
+[INFO] 15:51:32:865 Kernel/(24002:24002): READ
+[INFO] 15:51:32:865 Kernel/(24002:24002): EXIT
+[INFO] 15:51:36:322 Kernel/(24002:24002): Hola cpu, soy Kernel
+[INFO] 15:54:34:399 Kernel/(24458:24458): Kernel listo para recibir a consola
+[INFO] 15:54:38:334 Kernel/(24458:24458): Se conecto la consola!
+[ERROR] 15:54:38:335 Kernel/(24458:24458): La consola se desconecto. Finalizando Kernel
+[INFO] 15:54:38:335 Kernel/(24458:24458): Instrucciones: 
+
+[INFO] 15:54:38:335 Kernel/(24458:24458): WRITE
+[INFO] 15:54:38:335 Kernel/(24458:24458): WRITE
+[INFO] 15:54:38:335 Kernel/(24458:24458): WRITE
+[INFO] 15:54:38:335 Kernel/(24458:24458): COPY
+[INFO] 15:54:38:335 Kernel/(24458:24458): WRITE
+[INFO] 15:54:38:336 Kernel/(24458:24458): WRITE
+[INFO] 15:54:38:336 Kernel/(24458:24458): I/O
+[INFO] 15:54:38:336 Kernel/(24458:24458): READ
+[INFO] 15:54:38:336 Kernel/(24458:24458): WRITE
+[INFO] 15:54:38:336 Kernel/(24458:24458): READ
+[INFO] 15:54:38:336 Kernel/(24458:24458): READ
+[INFO] 15:54:38:336 Kernel/(24458:24458): WRITE
+[INFO] 15:54:38:336 Kernel/(24458:24458): READ
+[INFO] 15:54:38:336 Kernel/(24458:24458): READ
+[INFO] 15:54:38:336 Kernel/(24458:24458): EXIT
+[INFO] 15:54:38:337 Kernel/(24458:24458): Hola cpu, soy Kernel
+[INFO] 15:57:05:564 Kernel/(24822:24822): Kernel listo para recibir a consola
+[INFO] 15:57:08:841 Kernel/(24822:24822): Se conecto la consola!
+[ERROR] 15:57:08:842 Kernel/(24822:24822): La consola se desconecto. Finalizando Kernel
+[INFO] 15:57:08:842 Kernel/(24822:24822): Instrucciones: 
+
+[INFO] 15:57:08:842 Kernel/(24822:24822): WRITE
+[INFO] 15:57:08:842 Kernel/(24822:24822): WRITE
+[INFO] 15:57:08:842 Kernel/(24822:24822): WRITE
+[INFO] 15:57:08:842 Kernel/(24822:24822): COPY
+[INFO] 15:57:08:844 Kernel/(24822:24822): WRITE
+[INFO] 15:57:08:844 Kernel/(24822:24822): WRITE
+[INFO] 15:57:08:844 Kernel/(24822:24822): I/O
+[INFO] 15:57:08:844 Kernel/(24822:24822): READ
+[INFO] 15:57:08:844 Kernel/(24822:24822): WRITE
+[INFO] 15:57:08:844 Kernel/(24822:24822): READ
+[INFO] 15:57:08:844 Kernel/(24822:24822): READ
+[INFO] 15:57:08:844 Kernel/(24822:24822): WRITE
+[INFO] 15:57:08:845 Kernel/(24822:24822): READ
+[INFO] 15:57:08:845 Kernel/(24822:24822): READ
+[INFO] 15:57:08:845 Kernel/(24822:24822): EXIT
+[INFO] 15:57:08:845 Kernel/(24822:24822): Hola cpu, soy Kernel
+[INFO] 15:57:49:633 Kernel/(25003:25003): Kernel listo para recibir a consola
+[INFO] 15:57:54:455 Kernel/(25003:25003): Se conecto la consola!
+[ERROR] 15:57:58:761 Kernel/(25003:25003): La consola se desconecto. Finalizando Kernel
+[INFO] 15:58:02:070 Kernel/(25003:25003): Instrucciones: 
+
+[INFO] 15:58:02:070 Kernel/(25003:25003): WRITE
+[INFO] 15:58:02:070 Kernel/(25003:25003): WRITE
+[INFO] 15:58:02:070 Kernel/(25003:25003): WRITE
+[INFO] 15:58:02:070 Kernel/(25003:25003): COPY
+[INFO] 15:58:02:070 Kernel/(25003:25003): WRITE
+[INFO] 15:58:02:070 Kernel/(25003:25003): WRITE
+[INFO] 15:58:02:070 Kernel/(25003:25003): I/O
+[INFO] 15:58:02:070 Kernel/(25003:25003): READ
+[INFO] 15:58:02:070 Kernel/(25003:25003): WRITE
+[INFO] 15:58:02:070 Kernel/(25003:25003): READ
+[INFO] 15:58:02:070 Kernel/(25003:25003): READ
+[INFO] 15:58:02:070 Kernel/(25003:25003): WRITE
+[INFO] 15:58:02:070 Kernel/(25003:25003): READ
+[INFO] 15:58:02:070 Kernel/(25003:25003): READ
+[INFO] 15:58:02:070 Kernel/(25003:25003): EXIT
+[INFO] 15:58:05:347 Kernel/(25003:25003): Hola cpu, soy Kernel
+[INFO] 16:01:13:135 Kernel/(25472:25472): Kernel listo para recibir a consola
+[INFO] 16:01:16:606 Kernel/(25472:25472): Se conecto la consola!
+[ERROR] 16:01:16:606 Kernel/(25472:25472): La consola se desconecto. Finalizando Kernel
+[INFO] 16:01:16:607 Kernel/(25472:25472): Instrucciones: 
+
+[INFO] 16:01:16:607 Kernel/(25472:25472): WRITE
+[INFO] 16:01:16:607 Kernel/(25472:25472): WRITE
+[INFO] 16:01:16:607 Kernel/(25472:25472): WRITE
+[INFO] 16:01:16:607 Kernel/(25472:25472): COPY
+[INFO] 16:01:16:607 Kernel/(25472:25472): WRITE
+[INFO] 16:01:16:607 Kernel/(25472:25472): WRITE
+[INFO] 16:01:16:607 Kernel/(25472:25472): I/O
+[INFO] 16:01:16:607 Kernel/(25472:25472): READ
+[INFO] 16:01:16:607 Kernel/(25472:25472): WRITE
+[INFO] 16:01:16:607 Kernel/(25472:25472): READ
+[INFO] 16:01:16:607 Kernel/(25472:25472): READ
+[INFO] 16:01:16:607 Kernel/(25472:25472): WRITE
+[INFO] 16:01:16:607 Kernel/(25472:25472): READ
+[INFO] 16:01:16:607 Kernel/(25472:25472): READ
+[INFO] 16:01:16:607 Kernel/(25472:25472): EXIT
+[INFO] 16:01:16:607 Kernel/(25472:25472): Hola cpu, soy Kernel
+[INFO] 16:07:38:813 Kernel/(26240:26240): Kernel listo para recibir a consola
+[INFO] 16:07:43:774 Kernel/(26240:26240): Se conecto la consola!
+[ERROR] 16:07:43:775 Kernel/(26240:26240): La consola se desconecto. Finalizando Kernel
+[INFO] 16:07:43:775 Kernel/(26240:26240): Instrucciones: 
+
+[INFO] 16:07:43:775 Kernel/(26240:26240): WRITE
+[INFO] 16:07:43:775 Kernel/(26240:26240): WRITE
+[INFO] 16:07:43:775 Kernel/(26240:26240): WRITE
+[INFO] 16:07:43:775 Kernel/(26240:26240): COPY
+[INFO] 16:07:43:776 Kernel/(26240:26240): WRITE
+[INFO] 16:07:43:776 Kernel/(26240:26240): WRITE
+[INFO] 16:07:43:776 Kernel/(26240:26240): I/O
+[INFO] 16:07:43:776 Kernel/(26240:26240): READ
+[INFO] 16:07:43:776 Kernel/(26240:26240): WRITE
+[INFO] 16:07:43:776 Kernel/(26240:26240): READ
+[INFO] 16:07:43:776 Kernel/(26240:26240): READ
+[INFO] 16:07:43:776 Kernel/(26240:26240): WRITE
+[INFO] 16:07:43:776 Kernel/(26240:26240): READ
+[INFO] 16:07:43:776 Kernel/(26240:26240): READ
+[INFO] 16:07:43:776 Kernel/(26240:26240): EXIT
+[INFO] 16:07:43:777 Kernel/(26240:26240): Hola cpu, soy Kernel
+[INFO] 16:14:10:313 Kernel/(27056:27056): Kernel listo para recibir a consola
+[INFO] 16:14:16:066 Kernel/(27056:27056): Se conecto la consola!
+[ERROR] 16:14:16:067 Kernel/(27056:27056): La consola se desconecto. Finalizando Kernel
+[INFO] 16:14:16:067 Kernel/(27056:27056): Instrucciones: 
+
+[INFO] 16:14:16:067 Kernel/(27056:27056): WRITE
+[INFO] 16:14:16:068 Kernel/(27056:27056): WRITE
+[INFO] 16:14:16:068 Kernel/(27056:27056): WRITE
+[INFO] 16:14:16:068 Kernel/(27056:27056): COPY
+[INFO] 16:14:16:068 Kernel/(27056:27056): WRITE
+[INFO] 16:14:16:068 Kernel/(27056:27056): WRITE
+[INFO] 16:14:16:068 Kernel/(27056:27056): I/O
+[INFO] 16:14:16:068 Kernel/(27056:27056): READ
+[INFO] 16:14:16:068 Kernel/(27056:27056): WRITE
+[INFO] 16:14:16:068 Kernel/(27056:27056): READ
+[INFO] 16:14:16:068 Kernel/(27056:27056): READ
+[INFO] 16:14:16:068 Kernel/(27056:27056): WRITE
+[INFO] 16:14:16:068 Kernel/(27056:27056): READ
+[INFO] 16:14:16:068 Kernel/(27056:27056): READ
+[INFO] 16:14:16:068 Kernel/(27056:27056): EXIT
+[INFO] 16:14:16:069 Kernel/(27056:27056): Hola cpu, soy Kernel
+[INFO] 16:24:12:993 Kernel/(27963:27963): Kernel listo para recibir a consola
+[INFO] 16:24:36:096 Kernel/(28057:28057): Kernel listo para recibir a consola
+[INFO] 16:24:41:924 Kernel/(28057:28057): Se conecto la consola!
+[ERROR] 16:24:46:343 Kernel/(28057:28057): La consola se desconecto. Finalizando Kernel
+[INFO] 16:24:48:429 Kernel/(28057:28057): Instrucciones: 
+
+[INFO] 16:24:48:430 Kernel/(28057:28057): WRITE
+[INFO] 16:24:48:430 Kernel/(28057:28057): WRITE
+[INFO] 16:24:48:430 Kernel/(28057:28057): WRITE
+[INFO] 16:24:48:430 Kernel/(28057:28057): COPY
+[INFO] 16:24:48:430 Kernel/(28057:28057): WRITE
+[INFO] 16:24:48:430 Kernel/(28057:28057): WRITE
+[INFO] 16:24:48:430 Kernel/(28057:28057): I/O
+[INFO] 16:24:48:430 Kernel/(28057:28057): READ
+[INFO] 16:24:48:430 Kernel/(28057:28057): WRITE
+[INFO] 16:24:48:430 Kernel/(28057:28057): READ
+[INFO] 16:24:48:430 Kernel/(28057:28057): READ
+[INFO] 16:24:48:430 Kernel/(28057:28057): WRITE
+[INFO] 16:24:48:430 Kernel/(28057:28057): READ
+[INFO] 16:24:48:430 Kernel/(28057:28057): READ
+[INFO] 16:24:48:430 Kernel/(28057:28057): EXIT
+[INFO] 16:24:52:710 Kernel/(28057:28057): Hola cpu, soy Kernel
+[INFO] 16:26:13:493 Kernel/(28350:28350): Kernel listo para recibir a consola
+[INFO] 16:26:21:255 Kernel/(28350:28350): Se conecto la consola!
+[ERROR] 16:26:25:581 Kernel/(28350:28350): La consola se desconecto. Finalizando Kernel
+[INFO] 16:26:27:572 Kernel/(28350:28350): Instrucciones: 
+
+[INFO] 16:26:27:572 Kernel/(28350:28350): WRITE
+[INFO] 16:26:27:573 Kernel/(28350:28350): WRITE
+[INFO] 16:26:27:573 Kernel/(28350:28350): WRITE
+[INFO] 16:26:27:573 Kernel/(28350:28350): COPY
+[INFO] 16:26:27:573 Kernel/(28350:28350): WRITE
+[INFO] 16:26:27:573 Kernel/(28350:28350): WRITE
+[INFO] 16:26:27:573 Kernel/(28350:28350): I/O
+[INFO] 16:26:27:573 Kernel/(28350:28350): READ
+[INFO] 16:26:27:573 Kernel/(28350:28350): WRITE
+[INFO] 16:26:27:573 Kernel/(28350:28350): READ
+[INFO] 16:26:27:573 Kernel/(28350:28350): READ
+[INFO] 16:26:27:573 Kernel/(28350:28350): WRITE
+[INFO] 16:26:27:573 Kernel/(28350:28350): READ
+[INFO] 16:26:27:573 Kernel/(28350:28350): READ
+[INFO] 16:26:27:573 Kernel/(28350:28350): EXIT
+[INFO] 16:26:30:175 Kernel/(28350:28350): Hola cpu, soy Kernel
+[INFO] 16:29:12:711 Kernel/(28812:28812): Kernel listo para recibir a consola
+[INFO] 16:29:21:785 Kernel/(28812:28812): Se conecto la consola!
+[ERROR] 16:29:27:185 Kernel/(28812:28812): La consola se desconecto. Finalizando Kernel
+[INFO] 16:29:32:994 Kernel/(28812:28812): Instrucciones: 
+
+[INFO] 16:29:32:994 Kernel/(28812:28812): WRITE
+[INFO] 16:29:32:994 Kernel/(28812:28812): WRITE
+[INFO] 16:29:32:994 Kernel/(28812:28812): WRITE
+[INFO] 16:29:32:994 Kernel/(28812:28812): COPY
+[INFO] 16:29:32:994 Kernel/(28812:28812): WRITE
+[INFO] 16:29:32:994 Kernel/(28812:28812): WRITE
+[INFO] 16:29:32:994 Kernel/(28812:28812): I/O
+[INFO] 16:29:32:994 Kernel/(28812:28812): READ
+[INFO] 16:29:32:994 Kernel/(28812:28812): WRITE
+[INFO] 16:29:32:994 Kernel/(28812:28812): READ
+[INFO] 16:29:32:995 Kernel/(28812:28812): READ
+[INFO] 16:29:32:995 Kernel/(28812:28812): WRITE
+[INFO] 16:29:32:995 Kernel/(28812:28812): READ
+[INFO] 16:29:32:995 Kernel/(28812:28812): READ
+[INFO] 16:29:32:995 Kernel/(28812:28812): EXIT
+[INFO] 16:29:36:331 Kernel/(28812:28812): Hola cpu, soy Kernel
+[INFO] 16:33:29:829 Kernel/(29375:29375): Kernel listo para recibir a consola
+[INFO] 16:33:32:887 Kernel/(29375:29375): Se conecto la consola!
+[ERROR] 16:33:32:888 Kernel/(29375:29375): La consola se desconecto. Finalizando Kernel
+[INFO] 16:33:32:888 Kernel/(29375:29375): Instrucciones: 
+
+[INFO] 16:33:32:888 Kernel/(29375:29375): WRITE
+[INFO] 16:33:32:889 Kernel/(29375:29375): WRITE
+[INFO] 16:33:32:889 Kernel/(29375:29375): WRITE
+[INFO] 16:33:32:889 Kernel/(29375:29375): COPY
+[INFO] 16:33:32:889 Kernel/(29375:29375): WRITE
+[INFO] 16:33:32:889 Kernel/(29375:29375): WRITE
+[INFO] 16:33:32:889 Kernel/(29375:29375): I/O
+[INFO] 16:33:32:889 Kernel/(29375:29375): READ
+[INFO] 16:33:32:889 Kernel/(29375:29375): WRITE
+[INFO] 16:33:32:889 Kernel/(29375:29375): READ
+[INFO] 16:33:32:889 Kernel/(29375:29375): READ
+[INFO] 16:33:32:889 Kernel/(29375:29375): WRITE
+[INFO] 16:33:32:889 Kernel/(29375:29375): READ
+[INFO] 16:33:32:890 Kernel/(29375:29375): READ
+[INFO] 16:33:32:890 Kernel/(29375:29375): EXIT
+[INFO] 16:33:32:890 Kernel/(29375:29375): Hola cpu, soy Kernel
+[INFO] 16:38:24:101 Kernel/(29885:29885): Kernel listo para recibir a consola
+[INFO] 16:38:48:497 Kernel/(29885:29885): Se conecto la consola!
+[ERROR] 16:38:48:506 Kernel/(29885:29885): La consola se desconecto. Finalizando Kernel
+[INFO] 16:38:48:507 Kernel/(29885:29885): Instrucciones: 
+
+[INFO] 16:38:48:507 Kernel/(29885:29885): WRITE
+[INFO] 16:38:48:507 Kernel/(29885:29885): WRITE
+[INFO] 16:38:48:507 Kernel/(29885:29885): WRITE
+[INFO] 16:38:48:507 Kernel/(29885:29885): COPY
+[INFO] 16:38:48:507 Kernel/(29885:29885): WRITE
+[INFO] 16:38:48:507 Kernel/(29885:29885): WRITE
+[INFO] 16:38:48:507 Kernel/(29885:29885): I/O
+[INFO] 16:38:48:507 Kernel/(29885:29885): READ
+[INFO] 16:38:48:507 Kernel/(29885:29885): WRITE
+[INFO] 16:38:48:507 Kernel/(29885:29885): READ
+[INFO] 16:38:48:507 Kernel/(29885:29885): READ
+[INFO] 16:38:48:507 Kernel/(29885:29885): WRITE
+[INFO] 16:38:48:507 Kernel/(29885:29885): READ
+[INFO] 16:38:48:508 Kernel/(29885:29885): READ
+[INFO] 16:38:48:508 Kernel/(29885:29885): EXIT
+[INFO] 16:38:48:508 Kernel/(29885:29885): Hola cpu, soy Kernel
+[INFO] 16:39:27:480 Kernel/(30106:30106): Kernel listo para recibir a consola
+[INFO] 16:39:51:579 Kernel/(30202:30202): Kernel listo para recibir a consola
+[INFO] 16:40:27:997 Kernel/(30311:30311): Kernel listo para recibir a consola
+[INFO] 16:41:26:807 Kernel/(30498:30498): Kernel listo para recibir a consola
+[INFO] 16:41:31:990 Kernel/(30498:30498): Se conecto la consola!
+[ERROR] 16:41:31:990 Kernel/(30498:30498): La consola se desconecto. Finalizando Kernel
+[INFO] 16:41:31:990 Kernel/(30498:30498): Instrucciones: 
+
+[INFO] 16:41:31:991 Kernel/(30498:30498): WRITE
+[INFO] 16:41:31:991 Kernel/(30498:30498): WRITE
+[INFO] 16:41:31:991 Kernel/(30498:30498): WRITE
+[INFO] 16:41:31:991 Kernel/(30498:30498): COPY
+[INFO] 16:41:31:991 Kernel/(30498:30498): WRITE
+[INFO] 16:41:31:991 Kernel/(30498:30498): WRITE
+[INFO] 16:41:31:991 Kernel/(30498:30498): I/O
+[INFO] 16:41:31:991 Kernel/(30498:30498): READ
+[INFO] 16:41:31:991 Kernel/(30498:30498): WRITE
+[INFO] 16:41:31:991 Kernel/(30498:30498): READ
+[INFO] 16:41:31:991 Kernel/(30498:30498): READ
+[INFO] 16:41:31:991 Kernel/(30498:30498): WRITE
+[INFO] 16:41:31:991 Kernel/(30498:30498): READ
+[INFO] 16:41:31:992 Kernel/(30498:30498): READ
+[INFO] 16:41:31:992 Kernel/(30498:30498): EXIT
+[INFO] 16:41:31:992 Kernel/(30498:30498): Hola cpu, soy Kernel
+[INFO] 16:46:30:052 Kernel/(31053:31053): Kernel listo para recibir a consola
+[INFO] 16:46:39:268 Kernel/(31053:31053): Se conecto la consola!
+[ERROR] 16:46:39:270 Kernel/(31053:31053): La consola se desconecto. Finalizando Kernel
+[INFO] 16:46:39:270 Kernel/(31053:31053): Instrucciones: 
+
+[INFO] 16:46:39:270 Kernel/(31053:31053): WRITE
+[INFO] 16:46:39:270 Kernel/(31053:31053): WRITE
+[INFO] 16:46:39:270 Kernel/(31053:31053): WRITE
+[INFO] 16:46:39:270 Kernel/(31053:31053): COPY
+[INFO] 16:46:39:270 Kernel/(31053:31053): WRITE
+[INFO] 16:46:39:270 Kernel/(31053:31053): WRITE
+[INFO] 16:46:39:270 Kernel/(31053:31053): I/O
+[INFO] 16:46:39:271 Kernel/(31053:31053): READ
+[INFO] 16:46:39:271 Kernel/(31053:31053): WRITE
+[INFO] 16:46:39:271 Kernel/(31053:31053): READ
+[INFO] 16:46:39:271 Kernel/(31053:31053): READ
+[INFO] 16:46:39:271 Kernel/(31053:31053): WRITE
+[INFO] 16:46:39:271 Kernel/(31053:31053): READ
+[INFO] 16:46:39:271 Kernel/(31053:31053): READ
+[INFO] 16:46:39:271 Kernel/(31053:31053): EXIT
+[INFO] 16:46:39:271 Kernel/(31053:31053): Hola cpu, soy Kernel
+[INFO] 16:47:15:112 Kernel/(31243:31243): Kernel listo para recibir a consola
+[INFO] 16:47:19:728 Kernel/(31243:31243): Se conecto la consola!
+[ERROR] 16:47:19:730 Kernel/(31243:31243): La consola se desconecto. Finalizando Kernel
+[INFO] 16:47:19:730 Kernel/(31243:31243): Instrucciones: 
+
+[INFO] 16:47:19:730 Kernel/(31243:31243): WRITE
+[INFO] 16:47:19:730 Kernel/(31243:31243): WRITE
+[INFO] 16:47:19:730 Kernel/(31243:31243): WRITE
+[INFO] 16:47:19:730 Kernel/(31243:31243): COPY
+[INFO] 16:47:19:730 Kernel/(31243:31243): WRITE
+[INFO] 16:47:19:732 Kernel/(31243:31243): WRITE
+[INFO] 16:47:19:732 Kernel/(31243:31243): I/O
+[INFO] 16:47:19:732 Kernel/(31243:31243): READ
+[INFO] 16:47:19:732 Kernel/(31243:31243): WRITE
+[INFO] 16:47:19:732 Kernel/(31243:31243): READ
+[INFO] 16:47:19:732 Kernel/(31243:31243): READ
+[INFO] 16:47:19:732 Kernel/(31243:31243): WRITE
+[INFO] 16:47:19:732 Kernel/(31243:31243): READ
+[INFO] 16:47:19:732 Kernel/(31243:31243): READ
+[INFO] 16:47:19:732 Kernel/(31243:31243): EXIT
+[INFO] 16:47:19:733 Kernel/(31243:31243): Hola cpu, soy Kernel
+[INFO] 16:47:19:733 Kernel/(31243:31243): passooo
+[INFO] 16:51:49:401 Kernel/(31759:31759): Kernel listo para recibir a consola
+[INFO] 16:51:54:796 Kernel/(31759:31759): Se conecto la consola!
+[ERROR] 16:51:58:246 Kernel/(31759:31759): La consola se desconecto. Finalizando Kernel
+[INFO] 16:52:01:110 Kernel/(31759:31759): Instrucciones: 
+
+[INFO] 16:52:01:111 Kernel/(31759:31759): WRITE
+[INFO] 16:52:01:111 Kernel/(31759:31759): WRITE
+[INFO] 16:52:01:111 Kernel/(31759:31759): WRITE
+[INFO] 16:52:01:111 Kernel/(31759:31759): COPY
+[INFO] 16:52:01:111 Kernel/(31759:31759): WRITE
+[INFO] 16:52:01:111 Kernel/(31759:31759): WRITE
+[INFO] 16:52:01:111 Kernel/(31759:31759): I/O
+[INFO] 16:52:01:111 Kernel/(31759:31759): READ
+[INFO] 16:52:01:111 Kernel/(31759:31759): WRITE
+[INFO] 16:52:01:111 Kernel/(31759:31759): READ
+[INFO] 16:52:01:111 Kernel/(31759:31759): READ
+[INFO] 16:52:01:111 Kernel/(31759:31759): WRITE
+[INFO] 16:52:01:111 Kernel/(31759:31759): READ
+[INFO] 16:52:01:111 Kernel/(31759:31759): READ
+[INFO] 16:52:01:111 Kernel/(31759:31759): EXIT
+[INFO] 16:52:07:633 Kernel/(31759:31759): Hola cpu, soy Kernel
+[INFO] 16:52:18:546 Kernel/(31759:31759): passooo
+[INFO] 16:54:59:859 Kernel/(32225:32225): Kernel listo para recibir a consola
+[INFO] 16:55:04:705 Kernel/(32225:32225): Se conecto la consola!
+[ERROR] 16:55:04:712 Kernel/(32225:32225): La consola se desconecto. Finalizando Kernel
+[INFO] 16:55:04:712 Kernel/(32225:32225): Instrucciones: 
+
+[INFO] 16:55:04:712 Kernel/(32225:32225): WRITE
+[INFO] 16:55:04:712 Kernel/(32225:32225): WRITE
+[INFO] 16:55:04:712 Kernel/(32225:32225): WRITE
+[INFO] 16:55:04:712 Kernel/(32225:32225): COPY
+[INFO] 16:55:04:712 Kernel/(32225:32225): WRITE
+[INFO] 16:55:04:712 Kernel/(32225:32225): WRITE
+[INFO] 16:55:04:712 Kernel/(32225:32225): I/O
+[INFO] 16:55:04:712 Kernel/(32225:32225): READ
+[INFO] 16:55:04:712 Kernel/(32225:32225): WRITE
+[INFO] 16:55:04:712 Kernel/(32225:32225): READ
+[INFO] 16:55:04:712 Kernel/(32225:32225): READ
+[INFO] 16:55:04:712 Kernel/(32225:32225): WRITE
+[INFO] 16:55:04:712 Kernel/(32225:32225): READ
+[INFO] 16:55:04:712 Kernel/(32225:32225): READ
+[INFO] 16:55:04:712 Kernel/(32225:32225): EXIT
+[INFO] 16:55:04:712 Kernel/(32225:32225): Hola cpu, soy Kernel
+[INFO] 16:55:50:810 Kernel/(32417:32417): Kernel listo para recibir a consola
+[INFO] 16:55:54:957 Kernel/(32417:32417): Se conecto la consola!
+[ERROR] 16:55:59:348 Kernel/(32417:32417): La consola se desconecto. Finalizando Kernel
+[INFO] 16:56:00:658 Kernel/(32417:32417): Instrucciones: 
+
+[INFO] 16:56:00:658 Kernel/(32417:32417): WRITE
+[INFO] 16:56:00:658 Kernel/(32417:32417): WRITE
+[INFO] 16:56:00:658 Kernel/(32417:32417): WRITE
+[INFO] 16:56:00:658 Kernel/(32417:32417): COPY
+[INFO] 16:56:00:658 Kernel/(32417:32417): WRITE
+[INFO] 16:56:00:658 Kernel/(32417:32417): WRITE
+[INFO] 16:56:00:658 Kernel/(32417:32417): I/O
+[INFO] 16:56:00:658 Kernel/(32417:32417): READ
+[INFO] 16:56:00:658 Kernel/(32417:32417): WRITE
+[INFO] 16:56:00:659 Kernel/(32417:32417): READ
+[INFO] 16:56:00:659 Kernel/(32417:32417): READ
+[INFO] 16:56:00:659 Kernel/(32417:32417): WRITE
+[INFO] 16:56:00:659 Kernel/(32417:32417): READ
+[INFO] 16:56:00:659 Kernel/(32417:32417): READ
+[INFO] 16:56:00:659 Kernel/(32417:32417): EXIT
+[INFO] 16:56:06:455 Kernel/(32417:32417): Hola cpu, soy Kernel
+[INFO] 17:01:35:687 Kernel/(617:617): Kernel listo para recibir a consola
+[INFO] 17:01:41:217 Kernel/(617:617): Se conecto la consola!
+[ERROR] 17:01:41:227 Kernel/(617:617): La consola se desconecto. Finalizando Kernel
+[INFO] 17:01:41:227 Kernel/(617:617): -1217658811
+[INFO] 17:01:41:227 Kernel/(617:617): Instrucciones: 
+
+[INFO] 17:01:41:228 Kernel/(617:617): WRITE
+[INFO] 17:01:41:228 Kernel/(617:617): WRITE
+[INFO] 17:01:41:228 Kernel/(617:617): WRITE
+[INFO] 17:01:41:228 Kernel/(617:617): COPY
+[INFO] 17:01:41:228 Kernel/(617:617): WRITE
+[INFO] 17:01:41:228 Kernel/(617:617): WRITE
+[INFO] 17:01:41:228 Kernel/(617:617): I/O
+[INFO] 17:01:41:228 Kernel/(617:617): READ
+[INFO] 17:01:41:228 Kernel/(617:617): WRITE
+[INFO] 17:01:41:228 Kernel/(617:617): READ
+[INFO] 17:01:41:228 Kernel/(617:617): READ
+[INFO] 17:01:41:228 Kernel/(617:617): WRITE
+[INFO] 17:01:41:228 Kernel/(617:617): READ
+[INFO] 17:01:41:228 Kernel/(617:617): READ
+[INFO] 17:01:41:228 Kernel/(617:617): EXIT
+[INFO] 17:10:55:575 Kernel/(1501:1501): Kernel listo para recibir a consola
+[INFO] 17:10:59:520 Kernel/(1501:1501): Se conecto la consola!
+[ERROR] 17:10:59:533 Kernel/(1501:1501): La consola se desconecto. Finalizando Kernel
+[INFO] 17:10:59:534 Kernel/(1501:1501): -1216872379
+[INFO] 17:10:59:535 Kernel/(1501:1501): Instrucciones: 
+
+[INFO] 17:10:59:535 Kernel/(1501:1501): WRITE
+[INFO] 17:10:59:535 Kernel/(1501:1501): WRITE
+[INFO] 17:10:59:535 Kernel/(1501:1501): WRITE
+[INFO] 17:10:59:536 Kernel/(1501:1501): COPY
+[INFO] 17:10:59:536 Kernel/(1501:1501): WRITE
+[INFO] 17:10:59:536 Kernel/(1501:1501): WRITE
+[INFO] 17:10:59:536 Kernel/(1501:1501): I/O
+[INFO] 17:10:59:536 Kernel/(1501:1501): READ
+[INFO] 17:10:59:536 Kernel/(1501:1501): WRITE
+[INFO] 17:10:59:536 Kernel/(1501:1501): READ
+[INFO] 17:10:59:536 Kernel/(1501:1501): READ
+[INFO] 17:10:59:536 Kernel/(1501:1501): WRITE
+[INFO] 17:10:59:537 Kernel/(1501:1501): READ
+[INFO] 17:10:59:537 Kernel/(1501:1501): READ
+[INFO] 17:10:59:537 Kernel/(1501:1501): EXIT
+[INFO] 17:14:12:267 Kernel/(1879:1879): Kernel listo para recibir a consola
+[INFO] 17:14:26:373 Kernel/(1955:1955): Kernel listo para recibir a consola
+[INFO] 17:14:31:404 Kernel/(1955:1955): Se conecto la consola!
+[ERROR] 17:14:31:408 Kernel/(1955:1955): La consola se desconecto. Finalizando Kernel
+[INFO] 17:16:03:192 Kernel/(2200:2200): Kernel listo para recibir a consola
+[INFO] 17:16:12:521 Kernel/(2200:2200): Se conecto la consola!
+[ERROR] 17:16:12:522 Kernel/(2200:2200): La consola se desconecto. Finalizando Kernel
+[INFO] 17:16:12:522 Kernel/(2200:2200): Instrucciones: 
+
+[INFO] 17:16:12:522 Kernel/(2200:2200): WRITE
+[INFO] 17:16:12:522 Kernel/(2200:2200): WRITE
+[INFO] 17:16:12:522 Kernel/(2200:2200): WRITE
+[INFO] 17:16:12:522 Kernel/(2200:2200): COPY
+[INFO] 17:16:12:522 Kernel/(2200:2200): WRITE
+[INFO] 17:16:12:522 Kernel/(2200:2200): WRITE
+[INFO] 17:16:12:522 Kernel/(2200:2200): I/O
+[INFO] 17:16:12:522 Kernel/(2200:2200): READ
+[INFO] 17:16:12:523 Kernel/(2200:2200): WRITE
+[INFO] 17:16:12:523 Kernel/(2200:2200): READ
+[INFO] 17:16:12:523 Kernel/(2200:2200): READ
+[INFO] 17:16:12:523 Kernel/(2200:2200): WRITE
+[INFO] 17:16:12:523 Kernel/(2200:2200): READ
+[INFO] 17:16:12:523 Kernel/(2200:2200): READ
+[INFO] 17:16:12:523 Kernel/(2200:2200): EXIT
+[INFO] 17:16:47:141 Kernel/(2353:2353): Kernel listo para recibir a consola
+[INFO] 17:16:51:084 Kernel/(2353:2353): Se conecto la consola!
+[ERROR] 17:16:51:084 Kernel/(2353:2353): La consola se desconecto. Finalizando Kernel
+[INFO] 17:17:59:322 Kernel/(2563:2563): Kernel listo para recibir a consola
+[INFO] 17:18:02:592 Kernel/(2563:2563): Se conecto la consola!
+[ERROR] 17:18:02:593 Kernel/(2563:2563): La consola se desconecto. Finalizando Kernel
+[INFO] 17:19:16:137 Kernel/(2771:2771): Kernel listo para recibir a consola
+[INFO] 17:19:19:813 Kernel/(2771:2771): Se conecto la consola!
+[ERROR] 17:19:19:814 Kernel/(2771:2771): La consola se desconecto. Finalizando Kernel
+[INFO] 17:19:19:814 Kernel/(2771:2771): size 15
+[INFO] 17:19:19:815 Kernel/(2771:2771): Instrucciones: 
+
+[INFO] 17:19:19:815 Kernel/(2771:2771): WRITE
+[INFO] 17:19:19:815 Kernel/(2771:2771): WRITE
+[INFO] 17:19:19:815 Kernel/(2771:2771): WRITE
+[INFO] 17:19:19:815 Kernel/(2771:2771): COPY
+[INFO] 17:19:19:815 Kernel/(2771:2771): WRITE
+[INFO] 17:19:19:815 Kernel/(2771:2771): WRITE
+[INFO] 17:19:19:815 Kernel/(2771:2771): I/O
+[INFO] 17:19:19:815 Kernel/(2771:2771): READ
+[INFO] 17:19:19:815 Kernel/(2771:2771): WRITE
+[INFO] 17:19:19:815 Kernel/(2771:2771): READ
+[INFO] 17:19:19:815 Kernel/(2771:2771): READ
+[INFO] 17:19:19:816 Kernel/(2771:2771): WRITE
+[INFO] 17:19:19:816 Kernel/(2771:2771): READ
+[INFO] 17:19:19:816 Kernel/(2771:2771): READ
+[INFO] 17:19:19:816 Kernel/(2771:2771): EXIT
+[INFO] 17:21:18:380 Kernel/(3068:3068): Kernel listo para recibir a consola
+[INFO] 17:21:24:476 Kernel/(3068:3068): Se conecto la consola!
+[ERROR] 17:21:29:099 Kernel/(3068:3068): La consola se desconecto. Finalizando Kernel
+[INFO] 17:24:21:917 Kernel/(3577:3577): Kernel listo para recibir a consola
+[INFO] 17:24:26:422 Kernel/(3577:3577): Se conecto la consola!
+[ERROR] 17:24:26:424 Kernel/(3577:3577): La consola se desconecto. Finalizando Kernel
+[INFO] 17:26:40:254 Kernel/(3860:3860): Kernel listo para recibir a consola
+[INFO] 17:26:44:838 Kernel/(3860:3860): Se conecto la consola!
+[ERROR] 17:26:44:861 Kernel/(3860:3860): La consola se desconecto. Finalizando Kernel
+[INFO] 17:31:21:160 Kernel/(4366:4366): Kernel listo para recibir a consola
+[INFO] 17:31:25:563 Kernel/(4366:4366): Se conecto la consola!
+[ERROR] 17:31:25:575 Kernel/(4366:4366): La consola se desconecto. Finalizando Kernel
+[INFO] 17:31:25:576 Kernel/(4366:4366): WRITE
+[INFO] 17:31:25:576 Kernel/(4366:4366): Instrucciones: 
+
+[INFO] 17:31:25:576 Kernel/(4366:4366): WRITE
+[INFO] 17:31:25:576 Kernel/(4366:4366): WRITE
+[INFO] 17:31:25:576 Kernel/(4366:4366): WRITE
+[INFO] 17:31:25:576 Kernel/(4366:4366): COPY
+[INFO] 17:31:25:576 Kernel/(4366:4366): WRITE
+[INFO] 17:31:25:576 Kernel/(4366:4366): WRITE
+[INFO] 17:31:25:576 Kernel/(4366:4366): I/O
+[INFO] 17:31:25:576 Kernel/(4366:4366): READ
+[INFO] 17:31:25:577 Kernel/(4366:4366): WRITE
+[INFO] 17:31:25:577 Kernel/(4366:4366): READ
+[INFO] 17:31:25:577 Kernel/(4366:4366): READ
+[INFO] 17:31:25:577 Kernel/(4366:4366): WRITE
+[INFO] 17:31:25:577 Kernel/(4366:4366): READ
+[INFO] 17:31:25:577 Kernel/(4366:4366): READ
+[INFO] 17:31:25:577 Kernel/(4366:4366): EXIT
+[INFO] 17:36:03:896 Kernel/(4944:4944): Kernel listo para recibir a consola
+[INFO] 17:36:07:760 Kernel/(4944:4944): Se conecto la consola!
+[ERROR] 17:36:07:794 Kernel/(4944:4944): La consola se desconecto. Finalizando Kernel
+[INFO] 17:36:07:794 Kernel/(4944:4944): WRITE
+[INFO] 17:36:07:794 Kernel/(4944:4944): Instrucciones: 
+
+[INFO] 18:48:30:338 Kernel/(10532:10532): Kernel listo para recibir a consola
+[INFO] 18:48:34:928 Kernel/(10532:10532): Se conecto la consola!
+[ERROR] 18:48:34:945 Kernel/(10532:10532): La consola se desconecto. Finalizando Kernel
+[INFO] 18:48:34:945 Kernel/(10532:10532): WRITE
+[INFO] 18:48:34:945 Kernel/(10532:10532): Instrucciones: 
+
+[INFO] 18:48:34:946 Kernel/(10532:10532): 142021856
+[INFO] 18:48:34:946 Kernel/(10532:10532): 142026160
+[INFO] 18:48:34:947 Kernel/(10532:10532): 142026224
+[INFO] 18:48:34:947 Kernel/(10532:10532): 142026288
+[INFO] 18:48:34:947 Kernel/(10532:10532): 142023376
+[INFO] 18:48:34:947 Kernel/(10532:10532): 142023440
+[INFO] 18:48:34:947 Kernel/(10532:10532): 142023504
+[INFO] 18:48:34:947 Kernel/(10532:10532): 142023568
+[INFO] 18:48:34:947 Kernel/(10532:10532): 142023632
+[INFO] 18:48:34:948 Kernel/(10532:10532): 142023696
+[INFO] 18:48:34:948 Kernel/(10532:10532): 142023760
+[INFO] 18:48:34:948 Kernel/(10532:10532): 142023824
+[INFO] 18:48:34:948 Kernel/(10532:10532): 142023888
+[INFO] 18:48:34:948 Kernel/(10532:10532): 142023952
+[INFO] 18:48:34:948 Kernel/(10532:10532): 142024016
+[INFO] 18:58:33:500 Kernel/(11172:11172): Kernel listo para recibir a consola
+[INFO] 18:58:54:154 Kernel/(11172:11172): Se conecto la consola!
+[ERROR] 18:58:54:154 Kernel/(11172:11172): La consola se desconecto. Finalizando Kernel
+[INFO] 18:58:54:154 Kernel/(11172:11172): WRITE
+[INFO] 19:02:43:213 Kernel/(11461:11461): Kernel listo para recibir a consola
+[INFO] 19:03:35:768 Kernel/(11570:11570): Kernel listo para recibir a consola
+[INFO] 19:03:46:072 Kernel/(11570:11570): Se conecto la consola!
+[ERROR] 19:03:46:073 Kernel/(11570:11570): La consola se desconecto. Finalizando Kernel
+[INFO] 19:03:46:074 Kernel/(11570:11570): Hola cpu, soy Kernel
+[INFO] 19:03:46:074 Kernel/(11570:11570): Le envio a cpu el pcb
+[INFO] 19:09:49:966 Kernel/(12072:12072): Kernel listo para recibir a consola
+[INFO] 19:09:54:677 Kernel/(12072:12072): Se conecto la consola!
+[ERROR] 19:09:54:678 Kernel/(12072:12072): La consola se desconecto. Finalizando Kernel
+[INFO] 19:09:54:679 Kernel/(12072:12072): Hola cpu, soy Kernel
+[INFO] 19:09:54:679 Kernel/(12072:12072): Le envio a cpu el pcb
+[INFO] 19:16:58:633 Kernel/(12612:12612): Kernel listo para recibir a consola
+[INFO] 19:17:04:599 Kernel/(12612:12612): Se conecto la consola!
+[ERROR] 19:17:04:619 Kernel/(12612:12612): La consola se desconecto. Finalizando Kernel
+[INFO] 19:17:04:620 Kernel/(12612:12612): Hola cpu, soy Kernel
+[INFO] 19:17:04:620 Kernel/(12612:12612): Le envio a cpu el pcb
+[INFO] 19:21:28:978 Kernel/(13031:13031): Kernel listo para recibir a consola
+[INFO] 19:21:32:979 Kernel/(13031:13031): Se conecto la consola!
+[ERROR] 19:21:32:985 Kernel/(13031:13031): La consola se desconecto. Finalizando Kernel
+[INFO] 19:21:32:988 Kernel/(13031:13031): Hola cpu, soy Kernel
+[INFO] 19:21:32:988 Kernel/(13031:13031): Le envio a cpu el pcb

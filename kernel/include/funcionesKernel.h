@@ -25,7 +25,7 @@ int puertoCpuDispatch;//son intss
 char* puertoCpuInterrupt;
 char* puertoKernel;
 char* algoritmoPlanificacion;
-char* estimacionInicial;
+int estimacionInicial;
 int alfa;
 int gradoDeMultiprogramacion;
 int gradoMultiprogramacionActual;
@@ -60,11 +60,22 @@ typedef struct
 	int socket_cliente;
 } t_pcb;
 
+typedef struct
+{
+	char* identificador;
+	int parametros[2];
+} instruccion;
+
+
+typedef enum
+{	MENSAJE,
+	RECIBIR_INSTRUCCIONES
+}op_code_consola;
+
 typedef enum
 {
-	I_O,
-	EXIT,
-	INTERRUPT
+	MENSAJE_A_CPU,
+	ENVIAR_PCB
 }op_code_cpu;
 
 typedef enum
@@ -73,6 +84,8 @@ typedef enum
 	NRO_TP1
 }op_code_memoria;
 
+t_pcb* pcb;
+
 //Funciones como cliente de Memoria
 int conexionConMemoria();
 void enviarPID();
@@ -80,11 +93,6 @@ void inicializarConfiguraciones();
 t_list* recibir_paquete_int(int);
 
 //-------------- Funciones para Kernel como servidor de consola ---------
-typedef struct
-{
-	char* identificador;
-	int parametros[2];
-} instrucciones;
 
 void* recibir_buffer(int*, int);
 int iniciar_servidor(void);
@@ -95,7 +103,7 @@ void recibir_mensaje(int);
 int recibir_operacion(int);
 
 //Funcion propia del Kernel como servidor
-void iterator(char* value);
+void iterator(int);
 int conexionConConsola(void);
 //Funcion propia del Kernel como servidor
 
@@ -110,6 +118,7 @@ typedef struct
 {
 	op_code_memoria codigo_operacion_memoria;
 	op_code_cpu codigo_operacion_cpu;
+	
 	t_buffer* buffer;
 } t_paquete;
 
@@ -121,13 +130,16 @@ void enviar_mensaje(char* mensaje, int socket_cliente);
 void crear_buffer(t_paquete* paquete);
 t_paquete* crear_paquete(int);
 void eliminar_paquete_mensaje(t_paquete* paqueteMensaje);
-void obtenerTamanioIdentificadores(instrucciones* instruccion);
-void agregar_instrucciones_a_paquete(instrucciones* instruccion);
+
 void enviar_paquete(t_paquete* paquete, int socket_cliente);
 void liberar_conexion(int socket_cliente);
 void eliminar_paquete(t_paquete* paquete);
 
 void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio);
+void agregar_a_paquete_kernel_cpu(t_pcb*);
+void obtenerTamanioIdentificadores(instruccion*);
+void agregar_instrucciones_al_paquete(instruccion*);
+
 
 //Funciones propias del Kernel como cliente
 t_log* iniciar_logger(void);
@@ -137,7 +149,7 @@ t_config* iniciar_config(void);
 //Revisar esta funcion
 
 void terminar_programa(int, t_log*, t_config*);
-void conexionConCpu(void);
+int conexionConCpu(void);
 
 void cargar_pcb();
 void crear_colas();

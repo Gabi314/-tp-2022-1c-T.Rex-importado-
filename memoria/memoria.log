@@ -41,3 +41,372 @@
 
 [ERROR] 15:53:36:033 MEMORIA/(3581:3581): Se desconecto el cliente. Terminando conexion
 [INFO] 15:53:36:035 MEMORIA/(3581:3581): Fin de memoria
+[INFO] 17:55:06:574 MEMORIA/(16300:16300): Ya existe la direccion de swap
+[INFO] 17:55:06:582 MEMORIA/(16300:16300): Memoria lista para recibir a Cpu
+[INFO] 17:55:12:250 MEMORIA/(16300:16300): Se conecto un cliente!
+[INFO] 17:55:13:262 MEMORIA/(16300:16300): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 17:55:13:263 MEMORIA/(16300:16300): Envio el tamanio de pag y cant entradas
+[INFO] 17:55:14:263 MEMORIA/(16300:16300): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 17:55:14:264 MEMORIA/(16300:16300): Envio el numero de tabla de 2do nivel 0
+[INFO] 17:55:15:265 MEMORIA/(16300:16300): Me llego  la entrada de segundo nivel 0
+[INFO] 17:55:15:266 MEMORIA/(16300:16300): Envio el marco correspondiente el cual es 0
+[INFO] 17:55:17:267 MEMORIA/(16300:16300): Me llego el marco 0 con desplazamiento 0
+[INFO] 17:55:18:269 MEMORIA/(16300:16300): -------------------WRITE-------------------
+[INFO] 17:55:18:270 MEMORIA/(16300:16300): Me llego el valor a escribir: 1000
+[INFO] 17:55:18:270 MEMORIA/(16300:16300): -------------------WRITE-------------------
+
+[INFO] 17:55:19:271 MEMORIA/(16300:16300): Me llego el marco 0 con desplazamiento 4
+[INFO] 17:55:20:272 MEMORIA/(16300:16300): -------------------WRITE-------------------
+[INFO] 17:55:20:273 MEMORIA/(16300:16300): Me llego el valor a escribir: 1001
+[INFO] 17:55:20:273 MEMORIA/(16300:16300): -------------------WRITE-------------------
+
+[INFO] 17:55:21:273 MEMORIA/(16300:16300): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 17:55:21:274 MEMORIA/(16300:16300): Envio el numero de tabla de 2do nivel 0
+[INFO] 17:55:22:275 MEMORIA/(16300:16300): Me llego  la entrada de segundo nivel 1
+[INFO] 17:55:22:275 MEMORIA/(16300:16300): Envio el marco correspondiente el cual es 1
+[INFO] 17:55:23:276 MEMORIA/(16300:16300): Me llego el marco 1 con desplazamiento 4
+[INFO] 17:55:24:277 MEMORIA/(16300:16300): -------------------WRITE-------------------
+[INFO] 17:55:24:277 MEMORIA/(16300:16300): Me llego el valor a escribir: 2000
+[INFO] 17:55:24:277 MEMORIA/(16300:16300): -------------------WRITE-------------------
+
+[INFO] 17:55:25:278 MEMORIA/(16300:16300): -------------------COPIAR-------------------
+[INFO] 17:55:25:281 MEMORIA/(16300:16300): Se copio el valor 2000 en la dir fisica:(marco 1 offset 0)
+[INFO] 17:55:25:281 MEMORIA/(16300:16300): -------------------COPIAR-------------------
+
+[INFO] 17:55:26:281 MEMORIA/(16300:16300): Me llego el nroTabla1erNivel 2 y con la entrada 0
+[INFO] 18:04:19:855 MEMORIA/(17315:17315): Ya existe la direccion de swap
+[INFO] 18:04:19:869 MEMORIA/(17315:17315): Memoria lista para recibir a Cpu
+[INFO] 18:07:42:399 MEMORIA/(17665:17665): Ya existe la direccion de swap
+[INFO] 18:07:42:412 MEMORIA/(17665:17665): Memoria lista para recibir a Cpu
+[INFO] 18:08:02:654 MEMORIA/(17665:17665): Se conecto un cliente!
+[INFO] 18:08:03:663 MEMORIA/(17665:17665): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 18:08:03:664 MEMORIA/(17665:17665): Envio el tamanio de pag y cant entradas
+[INFO] 18:08:04:664 MEMORIA/(17665:17665): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 18:08:04:665 MEMORIA/(17665:17665): Envio el numero de tabla de 2do nivel 0
+[INFO] 18:08:05:665 MEMORIA/(17665:17665): Me llego  la entrada de segundo nivel 0
+[INFO] 18:08:05:665 MEMORIA/(17665:17665): Envio el marco correspondiente el cual es 0
+[INFO] 18:08:07:666 MEMORIA/(17665:17665): Me llego el marco 0 con desplazamiento 0
+[INFO] 18:08:08:667 MEMORIA/(17665:17665): -------------------WRITE-------------------
+[INFO] 18:08:08:667 MEMORIA/(17665:17665): Me llego el valor a escribir: 1000
+[INFO] 18:08:08:667 MEMORIA/(17665:17665): -------------------WRITE-------------------
+
+[INFO] 18:08:09:667 MEMORIA/(17665:17665): Me llego el marco 0 con desplazamiento 4
+[INFO] 18:08:10:668 MEMORIA/(17665:17665): -------------------WRITE-------------------
+[INFO] 18:08:10:668 MEMORIA/(17665:17665): Me llego el valor a escribir: 1001
+[INFO] 18:08:10:668 MEMORIA/(17665:17665): -------------------WRITE-------------------
+
+[INFO] 18:08:11:669 MEMORIA/(17665:17665): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 18:08:11:669 MEMORIA/(17665:17665): Envio el numero de tabla de 2do nivel 0
+[INFO] 18:08:12:670 MEMORIA/(17665:17665): Me llego  la entrada de segundo nivel 1
+[INFO] 18:08:12:670 MEMORIA/(17665:17665): Envio el marco correspondiente el cual es 1
+[INFO] 18:08:13:672 MEMORIA/(17665:17665): Me llego el marco 1 con desplazamiento 4
+[INFO] 18:08:14:672 MEMORIA/(17665:17665): -------------------WRITE-------------------
+[INFO] 18:08:14:673 MEMORIA/(17665:17665): Me llego el valor a escribir: 2000
+[INFO] 18:08:14:673 MEMORIA/(17665:17665): -------------------WRITE-------------------
+
+[INFO] 18:08:15:674 MEMORIA/(17665:17665): -------------------COPIAR-------------------
+[INFO] 18:08:15:674 MEMORIA/(17665:17665): Se copio el valor 2000 en la dir fisica:(marco 1 offset 0)
+[INFO] 18:08:15:674 MEMORIA/(17665:17665): -------------------COPIAR-------------------
+
+[INFO] 18:08:16:674 MEMORIA/(17665:17665): Me llego el nroTabla1erNivel 2 y con la entrada 0
+[INFO] 18:10:43:484 MEMORIA/(17921:17921): Ya existe la direccion de swap
+[INFO] 18:10:51:899 MEMORIA/(17921:17921): Memoria lista para recibir a Cpu
+[INFO] 18:11:13:824 MEMORIA/(17921:17921): Se conecto un cliente!
+[INFO] 18:11:23:598 MEMORIA/(17921:17921): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 18:11:25:033 MEMORIA/(17921:17921): Envio el tamanio de pag y cant entradas
+[INFO] 18:11:37:061 MEMORIA/(17921:17921): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 18:11:38:279 MEMORIA/(17921:17921): Envio el numero de tabla de 2do nivel 0
+[INFO] 18:11:48:868 MEMORIA/(17921:17921): Me llego  la entrada de segundo nivel 0
+[INFO] 18:11:50:389 MEMORIA/(17921:17921): Envio el marco correspondiente el cual es 0
+[INFO] 18:12:06:583 MEMORIA/(17921:17921): Me llego el marco 0 con desplazamiento 0
+[INFO] 18:12:14:732 MEMORIA/(17921:17921): -------------------WRITE-------------------
+[INFO] 18:12:15:357 MEMORIA/(17921:17921): Me llego el valor a escribir: 1000
+[INFO] 18:12:16:623 MEMORIA/(17921:17921): -------------------WRITE-------------------
+
+[INFO] 18:12:25:023 MEMORIA/(17921:17921): Me llego el marco 0 con desplazamiento 4
+[INFO] 18:12:34:224 MEMORIA/(17921:17921): -------------------WRITE-------------------
+[INFO] 18:12:34:886 MEMORIA/(17921:17921): Me llego el valor a escribir: 1001
+[INFO] 18:12:40:921 MEMORIA/(17921:17921): -------------------WRITE-------------------
+
+[INFO] 18:12:48:258 MEMORIA/(17921:17921): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 18:12:48:829 MEMORIA/(17921:17921): Envio el numero de tabla de 2do nivel 0
+[INFO] 18:13:37:580 MEMORIA/(17921:17921): Me llego  la entrada de segundo nivel 1
+[INFO] 18:13:38:637 MEMORIA/(17921:17921): Envio el marco correspondiente el cual es 1
+[INFO] 18:13:46:659 MEMORIA/(17921:17921): Me llego el marco 1 con desplazamiento 4
+[INFO] 18:13:57:159 MEMORIA/(17921:17921): -------------------WRITE-------------------
+[INFO] 18:13:58:021 MEMORIA/(17921:17921): Me llego el valor a escribir: 2000
+[INFO] 18:14:00:438 MEMORIA/(17921:17921): -------------------WRITE-------------------
+
+[INFO] 18:14:11:928 MEMORIA/(17921:17921): -------------------COPIAR-------------------
+[INFO] 18:14:13:957 MEMORIA/(17921:17921): Se copio el valor 2000 en la dir fisica:(marco 1 offset 0)
+[INFO] 18:14:14:666 MEMORIA/(17921:17921): -------------------COPIAR-------------------
+
+[INFO] 18:14:43:659 MEMORIA/(17921:17921): Me llego el nroTabla1erNivel 2 y con la entrada 0
+[INFO] 18:20:05:546 MEMORIA/(19118:19118): Ya existe la direccion de swap
+[INFO] 18:20:05:558 MEMORIA/(19118:19118): Memoria lista para recibir a Cpu
+[INFO] 18:20:09:728 MEMORIA/(19118:19118): Se conecto un cliente!
+[INFO] 18:20:10:729 MEMORIA/(19118:19118): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 18:20:10:729 MEMORIA/(19118:19118): Envio el tamanio de pag y cant entradas
+[INFO] 18:20:11:730 MEMORIA/(19118:19118): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 18:20:11:730 MEMORIA/(19118:19118): Envio el numero de tabla de 2do nivel 0
+[INFO] 18:20:12:731 MEMORIA/(19118:19118): Me llego  la entrada de segundo nivel 0
+[INFO] 18:20:12:731 MEMORIA/(19118:19118): Envio el marco correspondiente el cual es 0
+[INFO] 18:20:14:732 MEMORIA/(19118:19118): Me llego el marco 0 con desplazamiento 0
+[INFO] 18:20:15:732 MEMORIA/(19118:19118): -------------------WRITE-------------------
+[INFO] 18:20:15:732 MEMORIA/(19118:19118): Me llego el valor a escribir: 1000
+[INFO] 18:20:15:732 MEMORIA/(19118:19118): -------------------WRITE-------------------
+
+[INFO] 18:20:16:734 MEMORIA/(19118:19118): Me llego el marco 0 con desplazamiento 4
+[INFO] 18:20:17:734 MEMORIA/(19118:19118): -------------------WRITE-------------------
+[INFO] 18:20:17:735 MEMORIA/(19118:19118): Me llego el valor a escribir: 1001
+[INFO] 18:20:17:735 MEMORIA/(19118:19118): -------------------WRITE-------------------
+
+[INFO] 18:20:18:736 MEMORIA/(19118:19118): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 18:20:18:736 MEMORIA/(19118:19118): Envio el numero de tabla de 2do nivel 0
+[INFO] 18:20:19:736 MEMORIA/(19118:19118): Me llego  la entrada de segundo nivel 1
+[INFO] 18:20:19:737 MEMORIA/(19118:19118): Envio el marco correspondiente el cual es 1
+[INFO] 18:20:20:737 MEMORIA/(19118:19118): Me llego el marco 1 con desplazamiento 4
+[INFO] 18:20:21:738 MEMORIA/(19118:19118): -------------------WRITE-------------------
+[INFO] 18:20:21:738 MEMORIA/(19118:19118): Me llego el valor a escribir: 2000
+[INFO] 18:20:21:738 MEMORIA/(19118:19118): -------------------WRITE-------------------
+
+[INFO] 18:20:22:739 MEMORIA/(19118:19118): -------------------COPIAR-------------------
+[INFO] 18:20:22:739 MEMORIA/(19118:19118): Se copio el valor 2000 en la dir fisica:(marco 1 offset 0)
+[INFO] 18:20:22:739 MEMORIA/(19118:19118): -------------------COPIAR-------------------
+
+[INFO] 18:20:23:739 MEMORIA/(19118:19118): Me llego el nroTabla1erNivel 0 y con la entrada 2
+[INFO] 18:20:23:740 MEMORIA/(19118:19118): Envio el numero de tabla de 2do nivel 2
+[INFO] 18:20:24:740 MEMORIA/(19118:19118): Me llego  la entrada de segundo nivel 0
+[INFO] 18:20:24:740 MEMORIA/(19118:19118): Envio el marco correspondiente el cual es 2
+[INFO] 18:20:25:741 MEMORIA/(19118:19118): Me llego el marco 2 con desplazamiento 4
+[INFO] 18:20:26:744 MEMORIA/(19118:19118): -------------------WRITE-------------------
+[INFO] 18:20:26:744 MEMORIA/(19118:19118): Me llego el valor a escribir: 4000
+[INFO] 18:20:26:744 MEMORIA/(19118:19118): -------------------WRITE-------------------
+
+[ERROR] 18:20:27:745 MEMORIA/(19118:19118): Se desconecto el cliente. Terminando conexion
+[INFO] 18:20:27:745 MEMORIA/(19118:19118): Fin de memoria
+[INFO] 18:50:47:468 MEMORIA/(22080:22080): Ya existe la direccion de swap
+[INFO] 18:50:47:469 MEMORIA/(22080:22080): Memoria lista para recibir a Cpu
+[INFO] 18:50:53:090 MEMORIA/(22080:22080): Se conecto un cliente!
+[INFO] 18:50:54:095 MEMORIA/(22080:22080): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 18:50:54:096 MEMORIA/(22080:22080): Envio el tamanio de pag y cant entradas
+[INFO] 18:50:55:097 MEMORIA/(22080:22080): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 18:50:55:097 MEMORIA/(22080:22080): Envio el numero de tabla de 2do nivel 0
+[INFO] 18:50:56:097 MEMORIA/(22080:22080): Me llego  la entrada de segundo nivel 0
+[INFO] 18:50:56:097 MEMORIA/(22080:22080): Envio el marco correspondiente el cual es 0
+[INFO] 18:50:58:098 MEMORIA/(22080:22080): Me llego el marco 0 con desplazamiento 0
+[INFO] 18:50:59:099 MEMORIA/(22080:22080): -------------------WRITE-------------------
+[INFO] 18:50:59:099 MEMORIA/(22080:22080): Me llego el valor a escribir: 1000
+[INFO] 18:50:59:099 MEMORIA/(22080:22080): -------------------WRITE-------------------
+
+[INFO] 18:51:00:100 MEMORIA/(22080:22080): Me llego el marco 0 con desplazamiento 4
+[INFO] 18:51:01:100 MEMORIA/(22080:22080): -------------------WRITE-------------------
+[INFO] 18:51:01:100 MEMORIA/(22080:22080): Me llego el valor a escribir: 1001
+[INFO] 18:51:01:100 MEMORIA/(22080:22080): -------------------WRITE-------------------
+
+[INFO] 18:51:02:101 MEMORIA/(22080:22080): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 18:51:02:101 MEMORIA/(22080:22080): Envio el numero de tabla de 2do nivel 0
+[INFO] 18:51:03:102 MEMORIA/(22080:22080): Me llego  la entrada de segundo nivel 1
+[INFO] 18:51:03:102 MEMORIA/(22080:22080): Envio el marco correspondiente el cual es 1
+[INFO] 18:51:04:103 MEMORIA/(22080:22080): Me llego el marco 1 con desplazamiento 4
+[INFO] 18:51:05:103 MEMORIA/(22080:22080): -------------------WRITE-------------------
+[INFO] 18:51:05:103 MEMORIA/(22080:22080): Me llego el valor a escribir: 2000
+[INFO] 18:51:05:103 MEMORIA/(22080:22080): -------------------WRITE-------------------
+
+[INFO] 18:51:06:104 MEMORIA/(22080:22080): -------------------COPIAR-------------------
+[INFO] 18:51:06:104 MEMORIA/(22080:22080): Se copio el valor 2000 en la dir fisica:(marco 1 offset 0)
+[INFO] 18:51:06:104 MEMORIA/(22080:22080): -------------------COPIAR-------------------
+
+[INFO] 18:51:07:105 MEMORIA/(22080:22080): Me llego el nroTabla1erNivel 0 y con la entrada 2
+[INFO] 18:51:07:105 MEMORIA/(22080:22080): Envio el numero de tabla de 2do nivel 2
+[INFO] 18:51:08:105 MEMORIA/(22080:22080): Me llego  la entrada de segundo nivel 0
+[INFO] 18:51:08:106 MEMORIA/(22080:22080): Envio el marco correspondiente el cual es 2
+[INFO] 18:51:09:106 MEMORIA/(22080:22080): Me llego el marco 2 con desplazamiento 0
+[INFO] 18:51:10:106 MEMORIA/(22080:22080): -------------------WRITE-------------------
+[INFO] 18:51:10:107 MEMORIA/(22080:22080): Me llego el valor a escribir: 4000
+[INFO] 18:51:10:107 MEMORIA/(22080:22080): -------------------WRITE-------------------
+
+[INFO] 18:51:11:108 MEMORIA/(22080:22080): Me llego el marco 2 con desplazamiento 4
+[INFO] 18:51:12:109 MEMORIA/(22080:22080): -------------------WRITE-------------------
+[INFO] 18:51:12:109 MEMORIA/(22080:22080): Me llego el valor a escribir: 4000
+[INFO] 18:51:12:109 MEMORIA/(22080:22080): -------------------WRITE-------------------
+
+[ERROR] 18:51:13:110 MEMORIA/(22080:22080): Se desconecto el cliente. Terminando conexion
+[INFO] 18:51:13:111 MEMORIA/(22080:22080): Fin de memoria
+[INFO] 18:54:48:090 MEMORIA/(22428:22428): Ya existe la direccion de swap
+[INFO] 18:54:48:097 MEMORIA/(22428:22428): Memoria lista para recibir a Cpu
+[INFO] 18:54:51:519 MEMORIA/(22428:22428): Se conecto un cliente!
+[INFO] 18:54:52:520 MEMORIA/(22428:22428): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 18:54:52:520 MEMORIA/(22428:22428): Envio el tamanio de pag y cant entradas
+[INFO] 18:54:53:520 MEMORIA/(22428:22428): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 18:54:53:521 MEMORIA/(22428:22428): Envio el numero de tabla de 2do nivel 0
+[INFO] 18:54:54:521 MEMORIA/(22428:22428): Me llego  la entrada de segundo nivel 0
+[INFO] 18:54:54:521 MEMORIA/(22428:22428): Envio el marco correspondiente el cual es 0
+[INFO] 18:54:56:523 MEMORIA/(22428:22428): Me llego el marco 0 con desplazamiento 0
+[INFO] 18:54:57:523 MEMORIA/(22428:22428): -------------------WRITE-------------------
+[INFO] 18:54:57:524 MEMORIA/(22428:22428): Me llego el valor a escribir: 1000
+[INFO] 18:54:57:524 MEMORIA/(22428:22428): -------------------WRITE-------------------
+
+[INFO] 18:54:58:524 MEMORIA/(22428:22428): Me llego el marco 0 con desplazamiento 4
+[INFO] 18:54:59:525 MEMORIA/(22428:22428): -------------------WRITE-------------------
+[INFO] 18:54:59:525 MEMORIA/(22428:22428): Me llego el valor a escribir: 1001
+[INFO] 18:54:59:525 MEMORIA/(22428:22428): -------------------WRITE-------------------
+
+[INFO] 18:55:00:525 MEMORIA/(22428:22428): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 18:55:00:526 MEMORIA/(22428:22428): Envio el numero de tabla de 2do nivel 0
+[INFO] 18:55:01:526 MEMORIA/(22428:22428): Me llego  la entrada de segundo nivel 1
+[INFO] 18:55:01:526 MEMORIA/(22428:22428): Envio el marco correspondiente el cual es 1
+[INFO] 18:55:02:527 MEMORIA/(22428:22428): Me llego el marco 1 con desplazamiento 4
+[INFO] 18:55:03:527 MEMORIA/(22428:22428): -------------------WRITE-------------------
+[INFO] 18:55:03:527 MEMORIA/(22428:22428): Me llego el valor a escribir: 2000
+[INFO] 18:55:03:527 MEMORIA/(22428:22428): -------------------WRITE-------------------
+
+[INFO] 18:55:04:528 MEMORIA/(22428:22428): -------------------COPIAR-------------------
+[INFO] 18:55:04:528 MEMORIA/(22428:22428): Se copio el valor 2000 en la dir fisica:(marco 1 offset 0)
+[INFO] 18:55:04:529 MEMORIA/(22428:22428): -------------------COPIAR-------------------
+
+[INFO] 18:55:05:530 MEMORIA/(22428:22428): Me llego el nroTabla1erNivel 0 y con la entrada 2
+[INFO] 18:55:05:530 MEMORIA/(22428:22428): Envio el numero de tabla de 2do nivel 2
+[INFO] 18:55:06:530 MEMORIA/(22428:22428): Me llego  la entrada de segundo nivel 0
+[INFO] 18:55:06:531 MEMORIA/(22428:22428): Envio el marco correspondiente el cual es 2
+[INFO] 18:55:07:531 MEMORIA/(22428:22428): Me llego el marco 2 con desplazamiento 0
+[INFO] 18:55:08:532 MEMORIA/(22428:22428): -------------------WRITE-------------------
+[INFO] 18:55:08:532 MEMORIA/(22428:22428): Me llego el valor a escribir: 4000
+[INFO] 18:55:08:532 MEMORIA/(22428:22428): -------------------WRITE-------------------
+
+[INFO] 18:55:09:533 MEMORIA/(22428:22428): Me llego el marco 2 con desplazamiento 4
+[INFO] 18:55:10:534 MEMORIA/(22428:22428): -------------------WRITE-------------------
+[INFO] 18:55:10:534 MEMORIA/(22428:22428): Me llego el valor a escribir: 4001
+[INFO] 18:55:10:534 MEMORIA/(22428:22428): -------------------WRITE-------------------
+
+[INFO] 18:55:11:535 MEMORIA/(22428:22428): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 18:55:11:535 MEMORIA/(22428:22428): Envio el numero de tabla de 2do nivel 0
+[INFO] 18:55:12:535 MEMORIA/(22428:22428): Me llego  la entrada de segundo nivel 0
+[INFO] 18:55:12:536 MEMORIA/(22428:22428): Envio el marco correspondiente el cual es 0
+[INFO] 18:55:13:537 MEMORIA/(22428:22428): Me llego el marco 0 con desplazamiento 0
+[INFO] 18:55:13:537 MEMORIA/(22428:22428): -------------------READ-------------------
+[INFO] 18:55:13:537 MEMORIA/(22428:22428): Valor leido: 1000
+[INFO] 18:55:13:537 MEMORIA/(22428:22428): -------------------READ-------------------
+
+[ERROR] 18:55:14:537 MEMORIA/(22428:22428): Se desconecto el cliente. Terminando conexion
+[INFO] 18:55:14:537 MEMORIA/(22428:22428): Fin de memoria
+[INFO] 19:09:15:957 MEMORIA/(11955:11955): Ya existe la direccion de swap
+[INFO] 19:09:15:971 MEMORIA/(11955:11955): Memoria lista para recibir a Cpu
+[INFO] 19:16:17:014 MEMORIA/(12463:12463): Ya existe la direccion de swap
+[INFO] 19:16:17:015 MEMORIA/(12463:12463): Memoria lista para recibir a Cpu
+[INFO] 19:21:16:422 MEMORIA/(12924:12924): Ya existe la direccion de swap
+[INFO] 19:21:16:422 MEMORIA/(12924:12924): Memoria lista para recibir a Cpu
+[INFO] 19:21:32:992 MEMORIA/(12924:12924): Se conecto un cliente!
+[INFO] 19:21:33:993 MEMORIA/(12924:12924): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 19:21:33:993 MEMORIA/(12924:12924): Envio el tamanio de pag y cant entradas
+[INFO] 19:21:34:994 MEMORIA/(12924:12924): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 19:21:34:995 MEMORIA/(12924:12924): Envio el numero de tabla de 2do nivel 0
+[INFO] 19:21:35:996 MEMORIA/(12924:12924): Me llego  la entrada de segundo nivel 0
+[INFO] 19:21:35:996 MEMORIA/(12924:12924): Envio el marco correspondiente el cual es 0
+[INFO] 19:21:37:997 MEMORIA/(12924:12924): Me llego el marco 0 con desplazamiento 0
+[INFO] 19:21:38:997 MEMORIA/(12924:12924): -------------------WRITE-------------------
+[INFO] 19:21:38:998 MEMORIA/(12924:12924): Me llego el valor a escribir: 1000
+[INFO] 19:21:38:998 MEMORIA/(12924:12924): -------------------WRITE-------------------
+
+[INFO] 19:21:39:998 MEMORIA/(12924:12924): Me llego el marco 0 con desplazamiento 4
+[INFO] 19:21:40:998 MEMORIA/(12924:12924): -------------------WRITE-------------------
+[INFO] 19:21:40:999 MEMORIA/(12924:12924): Me llego el valor a escribir: 1001
+[INFO] 19:21:40:999 MEMORIA/(12924:12924): -------------------WRITE-------------------
+
+[INFO] 19:21:42:000 MEMORIA/(12924:12924): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 19:21:42:000 MEMORIA/(12924:12924): Envio el numero de tabla de 2do nivel 0
+[INFO] 19:21:43:000 MEMORIA/(12924:12924): Me llego  la entrada de segundo nivel 1
+[INFO] 19:21:43:000 MEMORIA/(12924:12924): Envio el marco correspondiente el cual es 1
+[INFO] 19:21:44:001 MEMORIA/(12924:12924): Me llego el marco 1 con desplazamiento 4
+[INFO] 19:21:45:001 MEMORIA/(12924:12924): -------------------WRITE-------------------
+[INFO] 19:21:45:002 MEMORIA/(12924:12924): Me llego el valor a escribir: 2000
+[INFO] 19:21:45:002 MEMORIA/(12924:12924): -------------------WRITE-------------------
+
+[INFO] 19:21:46:002 MEMORIA/(12924:12924): -------------------COPIAR-------------------
+[INFO] 19:21:46:002 MEMORIA/(12924:12924): Se copio el valor 2000 en la dir fisica:(marco 1 offset 0)
+[INFO] 19:21:46:002 MEMORIA/(12924:12924): -------------------COPIAR-------------------
+
+[INFO] 19:21:47:003 MEMORIA/(12924:12924): Me llego el nroTabla1erNivel 0 y con la entrada 2
+[INFO] 19:21:47:003 MEMORIA/(12924:12924): Envio el numero de tabla de 2do nivel 2
+[INFO] 19:21:48:005 MEMORIA/(12924:12924): Me llego  la entrada de segundo nivel 0
+[INFO] 19:21:48:005 MEMORIA/(12924:12924): Envio el marco correspondiente el cual es 2
+[INFO] 19:21:49:007 MEMORIA/(12924:12924): Me llego el marco 2 con desplazamiento 0
+[INFO] 19:21:50:008 MEMORIA/(12924:12924): -------------------WRITE-------------------
+[INFO] 19:21:50:008 MEMORIA/(12924:12924): Me llego el valor a escribir: 4000
+[INFO] 19:21:50:008 MEMORIA/(12924:12924): -------------------WRITE-------------------
+
+[INFO] 19:21:51:009 MEMORIA/(12924:12924): Me llego el marco 2 con desplazamiento 4
+[INFO] 19:21:52:010 MEMORIA/(12924:12924): -------------------WRITE-------------------
+[INFO] 19:21:52:010 MEMORIA/(12924:12924): Me llego el valor a escribir: 4001
+[INFO] 19:21:52:010 MEMORIA/(12924:12924): -------------------WRITE-------------------
+
+[INFO] 19:21:53:011 MEMORIA/(12924:12924): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 19:21:53:011 MEMORIA/(12924:12924): Envio el numero de tabla de 2do nivel 0
+[INFO] 19:21:54:012 MEMORIA/(12924:12924): Me llego  la entrada de segundo nivel 0
+[INFO] 19:21:54:012 MEMORIA/(12924:12924): Envio el marco correspondiente el cual es 0
+[INFO] 19:21:55:012 MEMORIA/(12924:12924): Me llego el marco 0 con desplazamiento 0
+[INFO] 19:21:55:013 MEMORIA/(12924:12924): -------------------READ-------------------
+[INFO] 19:21:55:013 MEMORIA/(12924:12924): Valor leido: 1000
+[INFO] 19:21:55:013 MEMORIA/(12924:12924): -------------------READ-------------------
+
+[INFO] 19:21:56:013 MEMORIA/(12924:12924): Me llego el nroTabla1erNivel 0 y con la entrada 1
+[INFO] 19:21:56:013 MEMORIA/(12924:12924): Envio el numero de tabla de 2do nivel 1
+[INFO] 19:21:57:013 MEMORIA/(12924:12924): Me llego  la entrada de segundo nivel 0
+[INFO] 19:21:57:014 MEMORIA/(12924:12924): La posicion del puntero en la lista de marcos es: 0
+[INFO] 19:21:57:014 MEMORIA/(12924:12924): La posicion del puntero en la lista de marcos es: 1
+[INFO] 19:21:57:014 MEMORIA/(12924:12924): La posicion del puntero en la lista de marcos es: 2
+[INFO] 19:21:57:014 MEMORIA/(12924:12924): No hay ninguna pagina con bit de uso en 0
+[INFO] 19:21:57:014 MEMORIA/(12924:12924): Por algoritmo reemplazo todos los bit de uso a 0 y busco de nuevo
+[INFO] 19:21:57:014 MEMORIA/(12924:12924): La posicion del puntero en la lista de marcos es: 0
+[INFO] 19:21:57:014 MEMORIA/(12924:12924): PF, la posicion del puntero en la lista de marcos queda en: 1
+[INFO] 19:21:57:014 MEMORIA/(12924:12924): Envio el marco correspondiente el cual es 0
+[INFO] 19:21:58:014 MEMORIA/(12924:12924): Me llego el marco 0 con desplazamiento 0
+[INFO] 19:21:59:015 MEMORIA/(12924:12924): -------------------WRITE-------------------
+[INFO] 19:21:59:015 MEMORIA/(12924:12924): Me llego el valor a escribir: 3000
+[INFO] 19:21:59:015 MEMORIA/(12924:12924): -------------------WRITE-------------------
+
+[INFO] 19:22:00:016 MEMORIA/(12924:12924): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 19:22:00:016 MEMORIA/(12924:12924): Envio el numero de tabla de 2do nivel 0
+[INFO] 19:22:01:017 MEMORIA/(12924:12924): Me llego  la entrada de segundo nivel 1
+[INFO] 19:22:01:018 MEMORIA/(12924:12924): Envio el marco correspondiente el cual es 1
+[INFO] 19:22:02:018 MEMORIA/(12924:12924): Me llego el marco 1 con desplazamiento 0
+[INFO] 19:22:02:018 MEMORIA/(12924:12924): -------------------READ-------------------
+[INFO] 19:22:02:019 MEMORIA/(12924:12924): Valor leido: 2000
+[INFO] 19:22:02:019 MEMORIA/(12924:12924): -------------------READ-------------------
+
+[INFO] 19:22:03:019 MEMORIA/(12924:12924): Me llego el nroTabla1erNivel 0 y con la entrada 2
+[INFO] 19:22:03:019 MEMORIA/(12924:12924): Envio el numero de tabla de 2do nivel 2
+[INFO] 19:22:04:020 MEMORIA/(12924:12924): Me llego  la entrada de segundo nivel 0
+[INFO] 19:22:04:020 MEMORIA/(12924:12924): Envio el marco correspondiente el cual es 2
+[INFO] 19:22:05:021 MEMORIA/(12924:12924): Me llego el marco 2 con desplazamiento 0
+[INFO] 19:22:05:021 MEMORIA/(12924:12924): -------------------READ-------------------
+[INFO] 19:22:05:021 MEMORIA/(12924:12924): Valor leido: 4000
+[INFO] 19:22:05:021 MEMORIA/(12924:12924): -------------------READ-------------------
+
+[INFO] 19:22:06:022 MEMORIA/(12924:12924): Me llego el nroTabla1erNivel 0 y con la entrada 3
+[INFO] 19:22:06:022 MEMORIA/(12924:12924): Envio el numero de tabla de 2do nivel 3
+[INFO] 19:22:07:023 MEMORIA/(12924:12924): Me llego  la entrada de segundo nivel 3
+[INFO] 19:22:07:023 MEMORIA/(12924:12924): La posicion del puntero en la lista de marcos es: 1
+[INFO] 19:22:07:023 MEMORIA/(12924:12924): PF, la posicion del puntero en la lista de marcos queda en: 2
+[INFO] 19:22:07:023 MEMORIA/(12924:12924): Envio el marco correspondiente el cual es 1
+[INFO] 19:22:08:024 MEMORIA/(12924:12924): Me llego el marco 1 con desplazamiento 160
+[INFO] 19:22:09:024 MEMORIA/(12924:12924): -------------------WRITE-------------------
+[INFO] 19:22:09:025 MEMORIA/(12924:12924): Me llego el valor a escribir: 9999
+[INFO] 19:22:09:025 MEMORIA/(12924:12924): -------------------WRITE-------------------
+
+[INFO] 19:22:10:025 MEMORIA/(12924:12924): Me llego el marco 1 con desplazamiento 160
+[INFO] 19:22:10:026 MEMORIA/(12924:12924): -------------------READ-------------------
+[INFO] 19:22:10:026 MEMORIA/(12924:12924): Valor leido: 9999
+[INFO] 19:22:10:026 MEMORIA/(12924:12924): -------------------READ-------------------
+
+[INFO] 19:22:11:026 MEMORIA/(12924:12924): Me llego el nroTabla1erNivel 0 y con la entrada 1
+[INFO] 19:22:11:026 MEMORIA/(12924:12924): Envio el numero de tabla de 2do nivel 1
+[INFO] 19:22:12:027 MEMORIA/(12924:12924): Me llego  la entrada de segundo nivel 0
+[INFO] 19:22:12:027 MEMORIA/(12924:12924): Envio el marco correspondiente el cual es 0
+[INFO] 19:22:13:028 MEMORIA/(12924:12924): Me llego el marco 0 con desplazamiento 0
+[INFO] 19:22:13:029 MEMORIA/(12924:12924): -------------------READ-------------------
+[INFO] 19:22:13:029 MEMORIA/(12924:12924): Valor leido: 3000
+[INFO] 19:22:13:029 MEMORIA/(12924:12924): -------------------READ-------------------
+
+[ERROR] 19:22:14:030 MEMORIA/(12924:12924): Se desconecto el cliente. Terminando conexion
+[INFO] 19:22:14:030 MEMORIA/(12924:12924): Fin de memoria
