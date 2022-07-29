@@ -403,13 +403,8 @@ t_algoritmo_planificacion obtener_algoritmo(){
 
 t_pcb* sacarDeNew(){
 
-	//sem_wait(&contadorNew);
-	//pthread_mutex_lock(&mutexNew);
-
 	t_pcb* proceso = queue_pop(colaNew);
 	log_info(logger, "[NEW] Se saca el proceso de PID: %d de la cola", proceso->idProceso);
-
-	//pthread_mutex_unlock(&mutexNew);
 
 	return proceso;
 }
@@ -699,6 +694,8 @@ void asignar_memoria() {
 
 		sem_wait(&pcbEnNew);
 		sem_wait(&gradoDeMultiprogramacion);
+
+		log_info(logger,"[asignar_memoria] :se desperto ");
 		pthread_mutex_lock(&asignarMemoria); //falta dar prioridad a los de suspended and ready
 		t_pcb* proceso = sacarDeNew();
 		agregarAReady(proceso);
@@ -731,6 +728,7 @@ void asignar_memoria() {
 
 		sem_post(&pcbEnReady);
 		log_info(logger,"[asignar_memoria]: desde asignar_memoria despertamos a readyAExe");
+
 		}
 
 	}
@@ -751,9 +749,9 @@ void readyAExe(){
 
 		log_info(logger,"[readyAExe]: .........se despierta readyAExe ");
 
-		procesoAEjecutar = malloc(sizeof(t_pcb*));
+
 		pthread_mutex_lock(&obtenerProceso);
-		procesoAEjecutar = obtenerSiguienteDeReady(); //cambia la cola de ready, por eso el mutex
+		t_pcb * procesoAEjecutar = obtenerSiguienteDeReady(); //cambia la cola de ready, por eso el mutex
 		pthread_mutex_unlock(&obtenerProceso);
 		log_info(logger,"[readyAExe]: Desde readyAExe obtuvimos el proceso de pid: %d", procesoAEjecutar->idProceso);
 
@@ -815,7 +813,7 @@ t_pcb* obtenerSiguienteSRT(){
 t_pcb* obtenerSiguienteDeReady(){
 
 
-	t_pcb * procesoPlanificado = malloc(sizeof(t_pcb*));
+	t_pcb * procesoPlanificado;
 
 	// Aca dentro un SWITCH para los distintos algoritmos q llama a una funcion para cada uno
 	/*switch(algoritmoPlanificacionActual){
@@ -856,7 +854,7 @@ void ejecutar(t_pcb* proceso){
 
 	time_t a = time(NULL);
 	sem_wait(&cpuDisponible);
-	log_info(logger,"[ejecutar]: Se duerme ejecutar()");
+	log_info(logger,"[ejecutar]: Se desperto ejecutar(). CPU NO DISPONIBLE! ");
 	pthread_mutex_lock(&ejecucion);
 	proceso->horaDeIngresoAExe = ((float) a)*1000;
 	proceso->estado = EXEC;
@@ -880,6 +878,7 @@ void ejecutar(t_pcb* proceso){
 	log_info(logger,"[ejecutar]: ejecucion activa es true!!");
 
 	log_info(logger,"[ejecutar]: enviamos el proceso a cpu");
+
 	simulador_de_cpu(1,proceso);
 
 	//agregar_a_paquete_kernel_cpu(proceso,PCB_A_EJECUTAR);
@@ -935,7 +934,7 @@ void atenderDesalojo(){
 
 	t_pcb * proceso = list_get(colaReady,0);
 
-	log_info(logger,"[atenderDesalojo]: se despierta al simuñador de cpu para continuar con el desalojo");
+	log_info(logger,"[atenderDesalojo]: se despierta al simulador de cpu para continuar con el desalojo");
 	simulador_de_cpu(2,proceso);
 
 //	enviar_mensaje("Desalojar proceso",socketCpuInterrupt,MENSAJE_INTERRUPT);
@@ -970,48 +969,52 @@ void estimarRafaga(t_pcb* proceso){
 void terminarEjecucion(){
 
 	while(1){
-	sem_wait(&pcbExit);
-	log_info(logger,"[terminarEjecucion]: Se desperto terminarEjecucion...");
-	t_pidXsocket * unaConsola = malloc(sizeof(t_pidXsocket));
-	pthread_mutex_lock(&procesoExit);
-	procesoAFinalizar->estado = TERMINATED;
-	pthread_mutex_unlock(&procesoExit);
-	log_info(logger,"[terminarEjecucion]: Se cambia el estado del proceso %d a TERMINATED", procesoAFinalizar->idProceso);
 
-//	enviar_mensaje("Liberar estructuras",socketMemoria,MENSAJE_LIBRERAR_ESTRUCTURAS);
-	log_info(logger,"[terminarEjecucion]: Se envia un mensaje a memoria para que libere estructuras");
+		sem_wait(&pcbExit);
+		log_info(logger,"[terminarEjecucion]: Se desperto terminarEjecucion...");
+		t_pidXsocket * unaConsola;
+		pthread_mutex_lock(&procesoExit);
+		procesoAFinalizar->estado = TERMINATED;
+		pthread_mutex_unlock(&procesoExit);
+		log_info(logger,"[terminarEjecucion]: Se cambia el estado del proceso %d a TERMINATED", procesoAFinalizar->idProceso);
+
+	//	enviar_mensaje("Liberar estructuras",socketMemoria,MENSAJE_LIBRERAR_ESTRUCTURAS);
+		log_info(logger,"[terminarEjecucion]: Se envia un mensaje a memoria para que libere estructuras");
 
 
-	pthread_mutex_lock(&consolasExit);
+		pthread_mutex_lock(&consolasExit);
 
-	bool consola_tiene_pid(void * elemento) {
-		return ((t_pidXsocket * ) elemento)->pid == procesoAFinalizar->idProceso;
+		bool consola_tiene_pid(void * elemento) {
+			return ((t_pidXsocket * ) elemento)->pid == procesoAFinalizar->idProceso;
+		}
+
+		unaConsola = list_find(listaDeConsolas,consola_tiene_pid);
+
+
+		/*
+
+		t_tripulante_a_planificar* tripulante_buscado = malloc(sizeof(t_tripulante_a_planificar));
+		bool _el_tripulante_tiene_este_tid(void* elemento){
+			return (((t_tripulante_a_planificar*)elemento)->tid == tripulante_tid);
+		}
+
+		tripulante_buscado = list_find(lista_tripulantes, _el_tripulante_tiene_este_tid);
+		return tripulante_buscado;
+
+		 */
+		log_info(logger, "[terminarEjecucion]: Encontramos el socket del proceso %d, resulta que es %d", unaConsola->pid,unaConsola->socket);
+	//	enviar_mensaje("Finalizo la ejecucion",unaConsola->socket,MENSAJE_FINALIZAR_EXE); //TODAVIA FALTA HACER QUE CONSOLA PUEDA RECIBIR MENSAJES
+
+		pthread_mutex_unlock(&consolasExit);
+	//	close(unaConsola->socket);
+
+		log_info(logger, "[terminarEjecucion]: Aumenta grado de multiprogramacion actual y termina terminarEjecucion!!");
+		sem_post(&gradoDeMultiprogramacion);
+		}
+	free(procesoAFinalizar);
+
 	}
 
-	unaConsola = list_find(listaDeConsolas,consola_tiene_pid);
-
-
-	/*
-
-	t_tripulante_a_planificar* tripulante_buscado = malloc(sizeof(t_tripulante_a_planificar));
-	bool _el_tripulante_tiene_este_tid(void* elemento){
-		return (((t_tripulante_a_planificar*)elemento)->tid == tripulante_tid);
-	}
-
-	tripulante_buscado = list_find(lista_tripulantes, _el_tripulante_tiene_este_tid);
-	return tripulante_buscado;
-
-	 */
-	log_info(logger, "[terminarEjecucion]: Encontramos el socket del proceso %d, resulta que es %d", unaConsola->pid,unaConsola->socket);
-//	enviar_mensaje("Finalizo la ejecucion",unaConsola->socket,MENSAJE_FINALIZAR_EXE); //TODAVIA FALTA HACER QUE CONSOLA PUEDA RECIBIR MENSAJES
-
-	pthread_mutex_unlock(&consolasExit);
-//	close(unaConsola->socket);
-
-	log_info(logger, "[terminarEjecucion]: Aumenta grado de multiprogramacion actual y termina terminarEjecucion!!");
-	sem_post(&gradoDeMultiprogramacion);
-	}
-}
 
 /*
 				time_t a = time(NULL);									//de I/O se encarga de atenderla
@@ -1233,23 +1236,32 @@ void inicializar_lista_de_prueba() {
 //[13-16]: I/O
 //[17-19]: NO_OP
 // 20: EXIT
+log_info(logger,"primero les reservamos espacio....");
 
+lista2 = list_create();
+lista5 = list_create();
+lista6 = list_create();
+lista8 = list_create();
 
-lista3 = malloc(sizeof(t_list));
-/*
-lista50 = malloc(sizeof(t_list));
-lista60 = malloc(sizeof(t_list));
-lista270 = malloc(sizeof(t_list));
-*/
-
-list_add(lista3,instruccion18);
-list_add(lista3,instruccion20);
+log_info(logger,"y ahora les añadimos elementos!!!");
+list_add(lista2,instruccion18);
+list_add(lista2,instruccion20);
+log_info(logger,"ya esta lista 3");
+list_add(lista5,instruccion19);
+list_add(lista5,instruccion20);
+log_info(logger,"ya esta lista 50");
+list_add(lista6,instruccion19);
+list_add(lista6,instruccion20);
+log_info(logger,"ya esta lista 60");
+list_add(lista8,instruccion18);
+list_add(lista8,instruccion20);
+log_info(logger,"ya esta lista 270");
 /*
 list_add(lista50,instruccion2);
 list_add(lista50,instruccion15);
 list_add(lista50,instruccion7);
 list_add(lista50,instruccion5);
-list_add(lista50,instruccion20);
+list_asdd(lista50,instruccion20);
 
 list_add(lista60,instruccion12);
 list_add(lista60,instruccion20);
@@ -1260,43 +1272,43 @@ list_add(lista270,instruccion10);
 list_add(lista270,instruccion20);
 */
 
-
+log_info(logger,"y ahora les añadimos elementos!!!");
 
 
 }
 
 void atender_consola_prueba(int nuevo_cliente) {
+				log_info(logger,"[atender_consola_prueba]: comenzamos a atender al cliente %d", nuevo_cliente);
 				t_pcb* PCB = malloc(sizeof(t_pcb));
-				inicializar_instrucciones_de_prueba();
-				inicializar_lista_de_prueba();
-				t_list * listaDeInstrucciones = malloc(sizeof(t_list));
-
+				t_list * listaDeInstrucciones;
+				log_info(logger,"[atender_consola_prueba]: continuamos seleccionando instrucciones para el cliente %d", nuevo_cliente);
 
 				switch (nuevo_cliente){
-					case 3:
-						listaDeInstrucciones = lista3;
+					case 2:
+						listaDeInstrucciones = lista2;
 						break;
-						/*
-					case 50:
-						listaDeInstrucciones = lista50;
+					case 5:
+						listaDeInstrucciones = lista5;
 						break;
-					case 60:
-						listaDeInstrucciones = lista60;
+					case 6:
+						listaDeInstrucciones = lista6;
 						break;
-					case 270:
-						listaDeInstrucciones = lista270;
+					case 8:
+						listaDeInstrucciones = lista8;
 						break;
-*/
+
 					default:
 					log_info(logger,"[atender_consola_prueba]: Se acepto una consola invalida!");
 					break;
 					}
 
 
-				log_info(logger,"[atender_consola_prueba]: Tenemos lista de instrucciones!");
+				log_info(logger,"[atender_consola_prueba]: Tenemos lista de instrucciones para el cliente %d!",nuevo_cliente);
+
+
 
 				PCB->idProceso = rand() % 985 + 16;
-				PCB->tamanioProceso = sizeof(PCB); // esto igual hay que calcularlo despues. Aunque no se cómo
+				PCB->tamanioProceso = sizeof(t_pcb); // esto igual hay que calcularlo despues. Aunque no se cómo
 				PCB->instrucciones = listaDeInstrucciones;
 				PCB->program_counter = 1;
 				PCB->tabla_paginas = -1;
@@ -1307,7 +1319,7 @@ void atender_consola_prueba(int nuevo_cliente) {
 				PCB->estado = NEW;
 
 
-				log_info(logger,"[atender_consola_prueba]: inicializamos el pcb");
+				log_info(logger,"[atender_consola_prueba]: inicializamos el pcb del cliente %d", nuevo_cliente);
 
 				t_pidXsocket*  datosCliente = malloc(sizeof(t_pidXsocket));
 				datosCliente->pid = PCB->idProceso;
@@ -1329,21 +1341,23 @@ void atender_consola_prueba(int nuevo_cliente) {
 
 
 
-				log_info(logger,"[atender_consola_prueba]: agregamos el pcb a new");
+				log_info(logger,"[atender_consola_prueba]: agregamos el pcb de id %d a new", datosCliente->pid);
 
 				sem_post(&pcbEnNew);
 			}
 
 void recibir_consola_prueba(int servidor){
 	int i = 1;
-
+	inicializar_instrucciones_de_prueba();
+	log_info(logger,"[recibir_consola_prueba]: ahora inicializamos listas....");
+	inicializar_lista_de_prueba();
 	while(1){
 	pthread_t hilo1;
 	log_info(logger,"[recibir_consola_prueba]: esperamos una nueva consola");
 	int nuevo_cliente = esperar_cliente_prueba(i); // es bloqueante. Si no llega el cliente, se bloquea el hilo.
 
 		if (nuevo_cliente > 0) {
-
+			log_info(logger,"[recibir_consola_prueba]: levantamos un hilo");
 		int hiloCreado = pthread_create(&hilo1, NULL,&atender_consola_prueba,nuevo_cliente);
 		pthread_join(hilo1,NULL);
 
@@ -1351,6 +1365,7 @@ void recibir_consola_prueba(int servidor){
 
 		else {
 			log_info(logger,"[recibir_consola_prueba]: fin de la espera");
+	//		free(colaNew);
 			break; // la idea de esto seria que el hilo termine de ejecutarse pero no se si funque porque esta dentro de un else
 		}
 
@@ -1362,24 +1377,23 @@ void recibir_consola_prueba(int servidor){
 int esperar_cliente_prueba(int i){
 	switch (i){
 	case 1:
-		usleep(300);
-		log_info(logger, "[esperar_cliente_prueba]: Se conecto la consola 3!");
-		return 3;
+		usleep(2000000);
+		log_info(logger, "[esperar_cliente_prueba]: Se conecto la consola 2!");
+		return 2;
 
-	/*
 	case 2:
-		usleep(4700);
-		log_info(logger, "[esperar_cliente_prueba]: Se conecto la consola 50!");
-		return 50;
+		usleep(3000000);
+		log_info(logger, "[esperar_cliente_prueba]: Se conecto la consola 5!");
+		return 5;
 	case 3:
-		usleep(1000);
-		log_info(logger, "[esperar_cliente_prueba]: Se conecto la consola 60!");
-		return 60;
+		usleep(1000000);
+		log_info(logger, "[esperar_cliente_prueba]: Se conecto la consola 6!");
+		return 6;
 	case 4:
-		usleep(21000);
-		log_info(logger, "[esperar_cliente_prueba]: Se conecto la consola 270!");
-		return 270;
-		*/
+		usleep(1000000);
+		log_info(logger, "[esperar_cliente_prueba]: Se conecto la consola 8!");
+		return 8;
+
 	default:
 		log_info(logger,"[esperar_cliente_prueba]: No hay mas consolas");
 	return -1;
@@ -1391,7 +1405,7 @@ int esperar_cliente_prueba(int i){
 
 int recibir_operacion_prueba() {
 
-	usleep(1000);
+	usleep(500000);
 	return PAQUETE_TP;
 }
 
@@ -1407,42 +1421,42 @@ void simulador_de_cpu(int operacion, t_pcb * proceso){
 
 	switch(operacion) {
 	case 1:
-		log_info(logger,"cpu simulando la ejecucion de NO_OP por 1000 ms............ ");
-		usleep(1000);
-		log_info(logger,"Fin de la simulacion!");
+
+		log_info(logger,"[CPU] simulando la ejecucion de NO_OP por 1000 ms............ ");
+		sleep(1);
+		if (proceso != procesoADesalojar) {
+		log_info(logger,"[CPU] Fin de la simulacion!");
 		pthread_mutex_lock(&mutexExit);
 		procesoAFinalizar = proceso;
 		pthread_mutex_unlock(&mutexExit);
-		log_info(logger,"Desde cpu nos llega el proceso a finalizar de pid %d ", procesoAFinalizar->idProceso);
+		log_info(logger,"[CPU] Desde cpu nos llega el proceso a finalizar de pid %d ", procesoAFinalizar->idProceso);
 		sem_post(&pcbExit);
 
-		log_info(logger,"Desde el simulador despertamos terminarEjecucion");
-
+		log_info(logger,"[CPU] Desde el simulador despertamos terminarEjecucion");
+		}
 	break;
 
 	case 2:
 		pthread_mutex_lock(&mutexInterrupt);
 		procesoADesalojar = proceso;
 		pthread_mutex_unlock(&mutexInterrupt);
-		log_info(logger,"Desde cpu nos llega el proceso a desalojar de pid %d ", procesoADesalojar->idProceso);
+		log_info(logger,"[CPU] Desde cpu nos llega el proceso a desalojar de pid %d ", procesoADesalojar->idProceso);
 		sem_post(&pcbInterrupt);
-		log_info(logger,"Desde el simulador volvemos a despertar a atenderDesalojo");
+		log_info(logger,"[CPU] Desde el simulador volvemos a despertar a atenderDesalojo");
 	break;
 
 	case 3:
 	break;
 
 	default:
-		log_info(logger,"operacion no reconocida");
+		log_info(logger,"[CPU] operacion no reconocida");
 	break;
 
 	}
-
-
 	ejecucionActiva = false;
-	log_info(logger,"ejecucionActiva ahora es false....");
+	log_info(logger,"[CPU] ejecucionActiva ahora es false....");
 	sem_post(&cpuDisponible);
-	log_info(logger,"LA CPU VUELVE A ESTAR DISPONIBLE!");
+	log_info(logger,"[CPU] LA CPU VUELVE A ESTAR DISPONIBLE!");
 
 }
 

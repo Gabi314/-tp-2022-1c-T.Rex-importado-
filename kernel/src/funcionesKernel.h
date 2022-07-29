@@ -319,10 +319,10 @@ int servidorPrueba;
 int recibir_operacion_prueba();
 t_list * recibir_paquete_int_prueba();
 
-t_list * lista3;
-t_list * lista50;
-t_list * lista60;
-t_list * lista270;
+t_list * lista2;
+t_list * lista5;
+t_list * lista6;
+t_list * lista8;
 instrucciones * instruccion1;
 instrucciones * instruccion2;
 instrucciones * instruccion3;

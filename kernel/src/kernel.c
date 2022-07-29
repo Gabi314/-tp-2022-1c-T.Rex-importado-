@@ -13,6 +13,9 @@ int main(void) {
 	 pthread_t hilo0, hiloAdmin[6];
 	 int hiloAdminCreado[6];
 	 ejecucionActiva = false;
+	 procesoADesalojar = NULL;
+	 procesoAFinalizar = NULL;
+	 procesoAEjecutar = NULL;
 
 
 /*
@@ -47,7 +50,10 @@ int main(void) {
 		pthread_detach(hiloAdmin[4]);
 	//	pthread_detach(hiloAdmin[5]);
 
-	 	while(1);
+	 	while(1){
+	 	}
+
+
 		//conexionConConsola();
 		//conexionConCpu();
 		//conexionConMemoria();
@@ -61,10 +67,10 @@ int main(void) {
 
 
 void inicializar_configuracion(){
-	t_config* config;
+	config = config_create("kernel.config");
 
 	logger = log_create("log.log", "Servidor", 1, LOG_LEVEL_INFO);
-	if((config = config_create("kernel.config")) == NULL){
+	if(config == NULL) {
 			printf("Error leyendo archivo de configuración. \n");
 		}
 	//ipKernel = config_get_string_value(config, "IP");
