@@ -59,7 +59,6 @@ void eliminar_paquete(t_paquete* paquete);
 	COPY = 4,
 	READ = 5
 }nroDeInstruccion;
-
 typedef struct{
 	nroDeInstruccion unaInstruccion;
 	int parametro1;

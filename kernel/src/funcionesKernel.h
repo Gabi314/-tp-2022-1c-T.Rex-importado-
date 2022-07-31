@@ -47,6 +47,7 @@ int contadorInstrucciones;
 int desplazamiento;
 char* tamanioDelProceso;
 bool ejecucionActiva;
+int min (int x, int y);
 
 typedef enum estado { NEW, READY, BLOCKED, EXEC, SUSP_READY, SUSP_BLOCKED, TERMINATED } t_estado;
 
@@ -68,7 +69,6 @@ typedef struct
 	int program_counter;
 	int tabla_paginas;
 	float estimacion_rafaga;
-	float estimacion_anterior;
 	clock_t rafagaMs;
 	clock_t horaDeIngresoAExe;
 	t_estado estado;
@@ -215,7 +215,7 @@ void agregarANew(t_pcb* proceso);
 t_pcb* sacarDeNew();
 void agregarAReady(t_pcb* proceso);
 void agregarABlocked(t_pcb* proceso);
-void sacarDeBlocked(t_pcb* proceso);
+void sacarDeBlocked();
 void agregarASuspendedBlocked(t_pcb* proceso);
 void sacarDeSuspendedBlocked(t_pcb* proceso);
 void agregarASuspendedReady(t_pcb* proceso);
@@ -251,7 +251,7 @@ void asignar_memoria();
  */
 void atender_interrupcion_de_ejecucion();
 
-t_pcb * procesoADesalojar;
+t_pcb * procesoDesalojado;
 t_pcb * procesoAFinalizar;
 t_pcb * procesoABloquear;
 
@@ -297,10 +297,13 @@ sem_t gradoDeMultiprogramacion;
 sem_t cpuDisponible;
 sem_t desalojarProceso;
 sem_t procesoEjecutandose;
-sem_t procesoDesalojado;
+sem_t procesoDesalojadoSem;
 sem_t pcbInterrupt;
 sem_t pcbExit;
 sem_t pcbBlocked;
+sem_t suspAReady;
+
+
 
 pthread_mutex_t asignarMemoria;
 pthread_mutex_t obtenerProceso;
@@ -312,6 +315,8 @@ pthread_mutex_t consolaNueva;
 pthread_mutex_t encolandoPcb;
 pthread_mutex_t mutexExit;
 pthread_mutex_t mutexInterrupt;
+pthread_mutex_t mutexIO;
+pthread_mutex_t bloqueandoProceso;
 //-------------VARIABLES Y FUNCIONES DE PRUEBA -------------------------
 
 // int clientesDePrueba[4]={4,50,60,270};

@@ -1,7 +1,5 @@
 #include "funcionesKernel.h"
 
-
-
 int main(void) {
 
 	inicializar_configuracion();
@@ -10,10 +8,12 @@ int main(void) {
 //	generar_conexiones();
 
 
-	 pthread_t hilo0, hiloAdmin[6];
-	 int hiloAdminCreado[6];
+
+	 pthread_t hilo0;
+	 pthread_t hiloAdmin[6];
+//	 int hiloAdminCreado[6];
 	 ejecucionActiva = false;
-	 procesoADesalojar = NULL;
+	 procesoDesalojado = NULL;
 	 procesoAFinalizar = NULL;
 	 procesoAEjecutar = NULL;
 
@@ -29,11 +29,11 @@ int main(void) {
 	 	pthread_detach(hiloCreado);
 
 
-	 	hiloAdminCreado[0] = pthread_create(&hiloAdmin[0],NULL,&asignar_memoria,NULL);
+	 //	hiloAdminCreado[0] = pthread_create(&hiloAdmin[0],NULL,&asignar_memoria,NULL);
 //	 	hiloAdminCreado[1] = pthread_create(&hiloAdmin[1],NULL,&atender_interrupcion_de_ejecucion,NULL);
-	 	hiloAdminCreado[2] = pthread_create(&hiloAdmin[2],NULL,&atenderDesalojo,NULL);
-	 	hiloAdminCreado[3] = pthread_create(&hiloAdmin[3],NULL,&readyAExe,NULL);
-	 	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&terminarEjecucion,NULL);
+	 //	hiloAdminCreado[2] = pthread_create(&hiloAdmin[2],NULL,&atenderDesalojo,NULL);
+	 //	hiloAdminCreado[3] = pthread_create(&hiloAdmin[3],NULL,&readyAExe,NULL);
+	// 	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&terminarEjecucion,NULL);
 	// 	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&suspender,NULL);
 	//	hiloAdminCreado[5] = pthread_create(&hiloAdmin[5],NULL,&desbloquear_suspendido,NULL);
 
@@ -43,14 +43,16 @@ int main(void) {
 // blocked a ready
 // readySuspended a ready
 
-	 	pthread_detach(hiloAdmin[0]);
+	 //	pthread_detach(hiloAdmin[0]);
 //	 	pthread_detach(hiloAdmin[1]);
-	 	pthread_detach(hiloAdmin[2]);
-	 	pthread_detach(hiloAdmin[3]);
-		pthread_detach(hiloAdmin[4]);
+	 //	pthread_detach(hiloAdmin[2]);
+	 //	pthread_detach(hiloAdmin[3]);
+	// 	pthread_detach(hiloAdmin[4]);
 	//	pthread_detach(hiloAdmin[5]);
 
-	 	while(1){
+		log_info(logger,"termino el while");
+	 	while(true){
+
 	 	}
 
 
@@ -86,7 +88,7 @@ void inicializar_configuracion(){
 	alfa = atoi(config_get_string_value(config, "ALFA"));
 	gradoMultiprogramacionTotal = atoi(config_get_string_value(config, "GRADO_MULTIPROGRAMACION"));
 	tiempoMaximoBloqueado = atoi(config_get_string_value(config, "TIEMPO_MAXIMO_BLOQUEADO"));
-	gradoMultiprogramacionActual = 0; //Arranca en 0 porque no hay procesos en memoria
+
 }
 
 
@@ -130,8 +132,9 @@ void inicializar_semaforos(){
 	pthread_mutex_init(&consolaNueva,NULL);
 	pthread_mutex_init(&encolandoPcb,NULL);
 	pthread_mutex_init(&mutexExit,NULL);
-	pthread_mutex_init(& mutexInterrupt,NULL);
-
+	pthread_mutex_init(&mutexInterrupt,NULL);
+	pthread_mutex_init(&mutexIO,NULL);
+	pthread_mutex_init(&bloqueandoProceso,NULL);
 }
 
 t_log* iniciar_logger(void){

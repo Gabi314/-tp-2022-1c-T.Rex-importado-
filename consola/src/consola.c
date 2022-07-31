@@ -1,7 +1,7 @@
 #include "funcionesConsola.h"
 // ./home/utnso/tp-2022-1c-T.Rex/pseudocodigo
 
-int main(int argc, char** argv) {
+int main(int argc, char *argv[]) {
 
 	logger = iniciar_logger();
 
@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
 	t_paquete* paquete = crear_paquete();
 
 
-	FILE* archivo = fopen(argv[2], "r");
+	FILE* archivo = fopen(argv[1], "r");
 
 	if(archivo == NULL){
 		log_error(logger,"No se lee el archivo");
@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
 	//ssize_t read;
 
 	struct stat sb;
-	stat(argv[2], &sb);
+	stat(argv[1], &sb);
 	char * contenido = malloc(sb.st_size);;
 
 	char** lineasDeInstrucciones;
@@ -89,12 +89,12 @@ void dividirInstruccionesAlPaquete(t_log* logger,t_paquete* paquete,char** linea
 
 		while (contadorNO_OP < atoi(lineasDeInstrucciones[1])){//["NO_OP","5"]
 
-			log_info(logger,"instruccion: %s\n",instruccion->identificador);//puede ser un log
+		//	log_info(logger,"instruccion: %s\n",instruccion->identificador);
 			agregar_a_paquete(paquete, instruccion, strlen(instruccion->identificador)+1);
 			contadorNO_OP++;
 		}
 	}else if (!strcmp(lineasDeInstrucciones[0],"I/O") || !strcmp(lineasDeInstrucciones[0],"READ") || !strcmp(lineasDeInstrucciones[0],"WRITE") || !strcmp(lineasDeInstrucciones[0],"COPY") || !strcmp(lineasDeInstrucciones[0],"EXIT")){
-		log_info(logger,"instruccion: %s\n",instruccion->identificador);
+		//log_info(logger,"instruccion: %s\n",instruccion->identificador);
 
 		if (!strcmp(lineasDeInstrucciones[0],"I/O") || !strcmp(lineasDeInstrucciones[0],"READ") || !strcmp(lineasDeInstrucciones[0],"WRITE") || !strcmp(lineasDeInstrucciones[0],"COPY")){
 			instruccion -> parametros[0] = atoi(lineasDeInstrucciones[1]);
