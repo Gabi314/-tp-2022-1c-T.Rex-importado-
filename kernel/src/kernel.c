@@ -11,7 +11,7 @@ int main(void) {
 
 	 pthread_t hilo0;
 	 pthread_t hiloAdmin[6];
-//	 int hiloAdminCreado[6];
+	 int hiloAdminCreado[6];
 	 ejecucionActiva = false;
 	 procesoDesalojado = NULL;
 	 procesoAFinalizar = NULL;
@@ -29,24 +29,19 @@ int main(void) {
 	 	pthread_detach(hiloCreado);
 
 
-	 //	hiloAdminCreado[0] = pthread_create(&hiloAdmin[0],NULL,&asignar_memoria,NULL);
+	 	hiloAdminCreado[0] = pthread_create(&hiloAdmin[0],NULL,&asignar_memoria,NULL);
 //	 	hiloAdminCreado[1] = pthread_create(&hiloAdmin[1],NULL,&atender_interrupcion_de_ejecucion,NULL);
-	 //	hiloAdminCreado[2] = pthread_create(&hiloAdmin[2],NULL,&atenderDesalojo,NULL);
-	 //	hiloAdminCreado[3] = pthread_create(&hiloAdmin[3],NULL,&readyAExe,NULL);
-	// 	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&terminarEjecucion,NULL);
-	// 	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&suspender,NULL);
+	 	hiloAdminCreado[2] = pthread_create(&hiloAdmin[2],NULL,&atenderDesalojo,NULL);
+	 	hiloAdminCreado[3] = pthread_create(&hiloAdmin[3],NULL,&readyAExe,NULL);
+	// 	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&atenderIO,NULL);
 	//	hiloAdminCreado[5] = pthread_create(&hiloAdmin[5],NULL,&desbloquear_suspendido,NULL);
 
 
-// TRANSICIONES QUE FALTAN EN HILOS
-// exec a blocked
-// blocked a ready
-// readySuspended a ready
 
-	 //	pthread_detach(hiloAdmin[0]);
+	 	pthread_detach(hiloAdmin[0]);
 //	 	pthread_detach(hiloAdmin[1]);
-	 //	pthread_detach(hiloAdmin[2]);
-	 //	pthread_detach(hiloAdmin[3]);
+	 	pthread_detach(hiloAdmin[2]);
+	 	pthread_detach(hiloAdmin[3]);
 	// 	pthread_detach(hiloAdmin[4]);
 	//	pthread_detach(hiloAdmin[5]);
 

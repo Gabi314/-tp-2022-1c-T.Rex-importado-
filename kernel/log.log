@@ -1,0 +1,107 @@
+[INFO] 15:02:02:539 Servidor/(3815:3815): termino el while
+[INFO] 15:02:02:529 Servidor/(3815:3823): [recibir_consola_prueba]: ahora inicializamos listas....
+[INFO] 15:02:02:597 Servidor/(3815:3823): primero les reservamos espacio....
+[INFO] 15:02:02:597 Servidor/(3815:3823): y ahora les añadimos elementos!!!
+[INFO] 15:02:02:599 Servidor/(3815:3823): ya esta lista 3
+[INFO] 15:02:02:604 Servidor/(3815:3823): ya esta lista 50
+[INFO] 15:02:02:605 Servidor/(3815:3823): ya esta lista 60
+[INFO] 15:02:02:606 Servidor/(3815:3823): ya esta lista 270
+[INFO] 15:02:02:606 Servidor/(3815:3823): y ahora les añadimos elementos!!!
+[INFO] 15:02:02:606 Servidor/(3815:3823): [recibir_consola_prueba]: esperamos una nueva consola
+[INFO] 15:02:04:615 Servidor/(3815:3823): [esperar_cliente_prueba]: Se conecto la consola 2!
+[INFO] 15:02:04:616 Servidor/(3815:3823): [recibir_consola_prueba]: levantamos un hilo
+[INFO] 15:02:04:637 Servidor/(3815:3827): [atender_consola_prueba]: comenzamos a atender al cliente 2
+[INFO] 15:02:04:637 Servidor/(3815:3823): [recibir_consola_prueba]: esperamos una nueva consola
+[INFO] 15:02:04:638 Servidor/(3815:3827): [atender_consola_prueba]: continuamos seleccionando instrucciones para el cliente 2
+[INFO] 15:02:04:638 Servidor/(3815:3827): [atender_consola_prueba]: Tenemos lista de instrucciones para el cliente 2!
+[INFO] 15:02:04:640 Servidor/(3815:3827): [atender_consola_prueba]: inicializamos el pcb del cliente 2
+[INFO] 15:02:04:652 Servidor/(3815:3827): [atender_consola_prueba]: creamos la estructura datosCiente con id 874 y socket 2
+[INFO] 15:02:04:653 Servidor/(3815:3827): [atender_consola_prueba]: agregamos el pcb y el socket a la lista de consolas 
+[INFO] 15:02:04:654 Servidor/(3815:3827): [NEW] Entra el proceso de PID: 874 a la cola.
+[INFO] 15:02:04:667 Servidor/(3815:3827): el tamanio de la cola de new es 1
+[INFO] 15:02:04:667 Servidor/(3815:3827): [atender_consola_prueba]: agregamos el pcb de id 874 a new
+[INFO] 15:02:04:670 Servidor/(3815:3824): [asignar_memoria] :se desperto 
+[INFO] 15:02:04:673 Servidor/(3815:3824): [NEW] Se saca el proceso de PID: 874 de la cola
+[INFO] 15:02:04:692 Servidor/(3815:3824): [READY] Entra el proceso de PID: 874 a la cola.
+[INFO] 15:02:04:692 Servidor/(3815:3824): [agregarAReady]:el tamanio de la cola de ready es 1
+[INFO] 15:02:04:700 Servidor/(3815:3824): [agregarAReady]: despertamos readyAExe)
+[INFO] 15:02:04:701 Servidor/(3815:3824): [asignar_memoria]: enviamos el pid 874
+[INFO] 15:02:04:701 Servidor/(3815:3826): [readyAExe]: .........se despierta readyAExe 
+[INFO] 15:02:04:701 Servidor/(3815:3824): [asignar_memoria]: recibimos el codigo de operacion de numero 1 (deberia ser 1)
+[INFO] 15:02:04:703 Servidor/(3815:3824): [asignar_memoria]: recibimos el numero de tabla de paginas 10
+[INFO] 15:02:04:703 Servidor/(3815:3826): [readyAExe]: a partir de ahora, CPU NO DISPONIBLE! 
+[INFO] 15:02:04:705 Servidor/(3815:3826): [obtenerSiguienteFIFO]: PROCESOS EN READY: 0 
+
+[INFO] 15:02:04:706 Servidor/(3815:3826): [readyAExe]: Desde readyAExe obtuvimos el proceso de pid: 874
+[INFO] 15:02:04:707 Servidor/(3815:3826): [readyAExe]: Desde readyAExe mandamos al proceso de pid 874 a ejecutar  
+[INFO] 15:02:04:716 Servidor/(3815:3826): [EXEC] Ingresa el proceso de PID: 874
+[INFO] 15:02:04:717 Servidor/(3815:3826): [ejecutar]: enviamos el proceso a cpu
+[INFO] 15:02:04:717 Servidor/(3815:3826): [ejecutar]: ejecucion activa es true!!
+[INFO] 15:02:04:718 Servidor/(3815:3824): [asignar_memoria]: desde asignar_memoria despertamos a readyAExe
+[INFO] 15:02:04:720 Servidor/(3815:3826): [ejecutar]: Se cambia el estado a EXEC y se calcula el inicio de ejecucion
+[INFO] 15:02:04:732 Servidor/(3815:3826): [readyAExe]: finaliza
+[INFO] 15:02:07:639 Servidor/(3815:3823): [esperar_cliente_prueba]: Se conecto la consola 5!
+[INFO] 15:02:07:640 Servidor/(3815:3823): [recibir_consola_prueba]: levantamos un hilo
+[INFO] 15:02:07:652 Servidor/(3815:3823): [recibir_consola_prueba]: esperamos una nueva consola
+[INFO] 15:02:07:660 Servidor/(3815:3834): [atender_consola_prueba]: comenzamos a atender al cliente 5
+[INFO] 15:02:07:660 Servidor/(3815:3834): [atender_consola_prueba]: continuamos seleccionando instrucciones para el cliente 5
+[INFO] 15:02:07:661 Servidor/(3815:3834): [atender_consola_prueba]: Tenemos lista de instrucciones para el cliente 5!
+[INFO] 15:02:07:661 Servidor/(3815:3834): [atender_consola_prueba]: inicializamos el pcb del cliente 5
+[INFO] 15:02:07:662 Servidor/(3815:3834): [atender_consola_prueba]: creamos la estructura datosCiente con id 322 y socket 5
+[INFO] 15:02:07:662 Servidor/(3815:3834): [atender_consola_prueba]: agregamos el pcb y el socket a la lista de consolas 
+[INFO] 15:02:07:662 Servidor/(3815:3834): [NEW] Entra el proceso de PID: 322 a la cola.
+[INFO] 15:02:07:663 Servidor/(3815:3834): el tamanio de la cola de new es 1
+[INFO] 15:02:07:663 Servidor/(3815:3834): [atender_consola_prueba]: agregamos el pcb de id 322 a new
+[INFO] 15:02:07:663 Servidor/(3815:3824): [asignar_memoria] :se desperto 
+[INFO] 15:02:07:663 Servidor/(3815:3824): [NEW] Se saca el proceso de PID: 322 de la cola
+[INFO] 15:02:07:664 Servidor/(3815:3824): [READY] Entra el proceso de PID: 322 a la cola.
+[INFO] 15:02:07:664 Servidor/(3815:3824): [agregarAReady]:el tamanio de la cola de ready es 1
+[INFO] 15:02:07:665 Servidor/(3815:3824): [agregarAReady]: despertamos readyAExe)
+[INFO] 15:02:07:665 Servidor/(3815:3824): [asignar_memoria]: enviamos el pid 322
+[INFO] 15:02:07:665 Servidor/(3815:3824): [asignar_memoria]: recibimos el codigo de operacion de numero 1 (deberia ser 1)
+[INFO] 15:02:07:667 Servidor/(3815:3824): [asignar_memoria]: recibimos el numero de tabla de paginas 10
+[INFO] 15:02:07:668 Servidor/(3815:3824): [asignar_memoria]: desde asignar_memoria despertamos a readyAExe
+[INFO] 15:02:08:656 Servidor/(3815:3823): [esperar_cliente_prueba]: Se conecto la consola 6!
+[INFO] 15:02:08:656 Servidor/(3815:3823): [recibir_consola_prueba]: levantamos un hilo
+[INFO] 15:02:08:657 Servidor/(3815:3823): [recibir_consola_prueba]: esperamos una nueva consola
+[INFO] 15:02:08:671 Servidor/(3815:3835): [atender_consola_prueba]: comenzamos a atender al cliente 6
+[INFO] 15:02:08:671 Servidor/(3815:3835): [atender_consola_prueba]: continuamos seleccionando instrucciones para el cliente 6
+[INFO] 15:02:08:672 Servidor/(3815:3835): [atender_consola_prueba]: Tenemos lista de instrucciones para el cliente 6!
+[INFO] 15:02:08:672 Servidor/(3815:3835): [atender_consola_prueba]: inicializamos el pcb del cliente 6
+[INFO] 15:02:08:672 Servidor/(3815:3835): [atender_consola_prueba]: creamos la estructura datosCiente con id 323 y socket 6
+[INFO] 15:02:08:673 Servidor/(3815:3835): [atender_consola_prueba]: agregamos el pcb y el socket a la lista de consolas 
+[INFO] 15:02:08:674 Servidor/(3815:3835): [NEW] Entra el proceso de PID: 323 a la cola.
+[INFO] 15:02:08:674 Servidor/(3815:3835): el tamanio de la cola de new es 1
+[INFO] 15:02:08:674 Servidor/(3815:3835): [atender_consola_prueba]: agregamos el pcb de id 323 a new
+[INFO] 15:02:08:680 Servidor/(3815:3824): [asignar_memoria] :se desperto 
+[INFO] 15:02:08:680 Servidor/(3815:3824): [NEW] Se saca el proceso de PID: 323 de la cola
+[INFO] 15:02:08:681 Servidor/(3815:3824): [READY] Entra el proceso de PID: 323 a la cola.
+[INFO] 15:02:08:681 Servidor/(3815:3824): [agregarAReady]:el tamanio de la cola de ready es 2
+[INFO] 15:02:08:681 Servidor/(3815:3824): [agregarAReady]: despertamos readyAExe)
+[INFO] 15:02:08:682 Servidor/(3815:3824): [asignar_memoria]: enviamos el pid 323
+[INFO] 15:02:08:682 Servidor/(3815:3824): [asignar_memoria]: recibimos el codigo de operacion de numero 1 (deberia ser 1)
+[INFO] 15:02:08:682 Servidor/(3815:3824): [asignar_memoria]: recibimos el numero de tabla de paginas 10
+[INFO] 15:02:08:682 Servidor/(3815:3824): [asignar_memoria]: desde asignar_memoria despertamos a readyAExe
+[INFO] 15:02:09:657 Servidor/(3815:3823): [esperar_cliente_prueba]: Se conecto la consola 8!
+[INFO] 15:02:09:658 Servidor/(3815:3823): [recibir_consola_prueba]: levantamos un hilo
+[INFO] 15:02:09:658 Servidor/(3815:3823): [recibir_consola_prueba]: esperamos una nueva consola
+[INFO] 15:02:09:658 Servidor/(3815:3823): [esperar_cliente_prueba]: No hay mas consolas
+[INFO] 15:02:09:658 Servidor/(3815:3823): [recibir_consola_prueba]: fin de la espera
+[INFO] 15:02:09:663 Servidor/(3815:3836): [atender_consola_prueba]: comenzamos a atender al cliente 8
+[INFO] 15:02:09:663 Servidor/(3815:3836): [atender_consola_prueba]: continuamos seleccionando instrucciones para el cliente 8
+[INFO] 15:02:09:664 Servidor/(3815:3836): [atender_consola_prueba]: Tenemos lista de instrucciones para el cliente 8!
+[INFO] 15:02:09:664 Servidor/(3815:3836): [atender_consola_prueba]: inicializamos el pcb del cliente 8
+[INFO] 15:02:09:664 Servidor/(3815:3836): [atender_consola_prueba]: creamos la estructura datosCiente con id 151 y socket 8
+[INFO] 15:02:09:668 Servidor/(3815:3836): [atender_consola_prueba]: agregamos el pcb y el socket a la lista de consolas 
+[INFO] 15:02:09:669 Servidor/(3815:3836): [NEW] Entra el proceso de PID: 151 a la cola.
+[INFO] 15:02:09:670 Servidor/(3815:3836): el tamanio de la cola de new es 1
+[INFO] 15:02:09:671 Servidor/(3815:3836): [atender_consola_prueba]: agregamos el pcb de id 151 a new
+[INFO] 15:02:09:671 Servidor/(3815:3824): [asignar_memoria] :se desperto 
+[INFO] 15:02:09:671 Servidor/(3815:3824): [NEW] Se saca el proceso de PID: 151 de la cola
+[INFO] 15:02:09:672 Servidor/(3815:3824): [READY] Entra el proceso de PID: 151 a la cola.
+[INFO] 15:02:09:672 Servidor/(3815:3824): [agregarAReady]:el tamanio de la cola de ready es 3
+[INFO] 15:02:09:672 Servidor/(3815:3824): [agregarAReady]: despertamos readyAExe)
+[INFO] 15:02:09:674 Servidor/(3815:3824): [asignar_memoria]: enviamos el pid 151
+[INFO] 15:02:09:674 Servidor/(3815:3824): [asignar_memoria]: recibimos el codigo de operacion de numero 1 (deberia ser 1)
+[INFO] 15:02:09:675 Servidor/(3815:3824): [asignar_memoria]: recibimos el numero de tabla de paginas 10
+[INFO] 15:02:09:675 Servidor/(3815:3824): [asignar_memoria]: desde asignar_memoria despertamos a readyAExe

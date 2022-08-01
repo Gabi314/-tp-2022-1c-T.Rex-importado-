@@ -48,6 +48,8 @@ int desplazamiento;
 char* tamanioDelProceso;
 bool ejecucionActiva;
 int min (int x, int y);
+int tiempoBloqueo;
+
 
 typedef enum estado { NEW, READY, BLOCKED, EXEC, SUSP_READY, SUSP_BLOCKED, TERMINATED } t_estado;
 
@@ -86,20 +88,25 @@ typedef struct
 
 typedef enum
 {
-	I_O,
-	EXIT,
-	INTERRUPT,
-	MENSAJE_INTERRUPT, // lo mandamos para que cpu desaloje
-	PCB_A_EJECUTAR
+	I_O,  //recibimos pcb para atender su IO -- DISPATCH
+	TIEMPO_DE_BLOQUEO, // recibimos el tiempo de bloqueo junto con el pcb_io -- socket? DISPATCH
+	EXIT, //recibimos pcb para terminar -- DISPATCH
+	INTERRUPT, //recibimos pcb desalojado -- DISPATCH
+	MENSAJE_INTERRUPT, //enviamos mensaje de interrupcion para que cpu desaloje -- INTERRUPT
+	PCB_A_EJECUTAR //enviamos pcb a cpu para ejecutar (pasa a Exe) -- DISPATCH
 }op_code_cpu;
 
 typedef enum
 {
-	MENSAJE_LIBRERAR_ESTRUCTURAS, // a memoria para liberar estructuras en estado EXIT
-	PAQUETE_TP, // lo recibimos de memoria en asignar memoria
-	PAQUETE
+	MENSAJE_LIBRERAR_ESTRUCTURAS, // enviamos mensaje a memoria para liberar estructuras cuando termina un proceso
+	PAQUETE_TP, // recibimos el valor de la tabla de paginas de memoria en asignar memoria
+	PAQUETE, //este lo usamos en enviarPID entonces seria PID_A_OBTENER_TP
+	MENSAJE_SUSP, // enviamos aviso a memoria de que suspendimos un proceso, aca
+					//hay que enviar un pid o pcb y se identifica que hay que suspender por el op_code
+	CONF_SUSP, // esperamos la confirmacion de que el proceso es suspendido(memoria efectivamente lo manda al disco)
+	MENSAJE_DESUSP // avisamos a memoria que desuspendemos un proceso (para que lo saque del disco), aca
+					//hay que enviar un pid o pcb y se identifica que hay que suspender por el op_code
 }op_code_memoria;
-
 
 
 typedef enum
@@ -250,6 +257,8 @@ void asignar_memoria();
 	controle que la ejecucion del proceso sea la última
  */
 void atender_interrupcion_de_ejecucion();
+
+int recibir_tiempo();
 
 t_pcb * procesoDesalojado;
 t_pcb * procesoAFinalizar;
