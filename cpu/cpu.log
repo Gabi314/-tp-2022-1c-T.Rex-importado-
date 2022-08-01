@@ -624,3 +624,1041 @@
 
 [INFO] 19:22:12:027 CPU/(12981:12981): Finalizo el proceso 
 [INFO] 19:22:12:027 CPU/(12981:12981): Termino cpu
+[INFO] 12:38:45:401 CPU/(4938:4938): Cpu listo para recibir a Kernel
+[INFO] 12:39:15:621 CPU/(4938:4938): Se conecto el Kernel!
+[INFO] 12:39:15:624 CPU/(4938:4938): Me llegaron las siguientes instrucciones:
+
+[INFO] 12:39:15:624 CPU/(4938:4938): WRITE
+[INFO] 12:39:15:624 CPU/(4938:4938): WRITE
+[INFO] 12:39:15:624 CPU/(4938:4938): WRITE
+[INFO] 12:39:15:624 CPU/(4938:4938): COPY
+[INFO] 12:39:15:624 CPU/(4938:4938): WRITE
+[INFO] 12:39:15:624 CPU/(4938:4938): WRITE
+[INFO] 12:39:15:625 CPU/(4938:4938): READ
+[INFO] 12:39:15:625 CPU/(4938:4938): WRITE
+[INFO] 12:39:15:625 CPU/(4938:4938): READ
+[INFO] 12:39:15:625 CPU/(4938:4938): READ
+[INFO] 12:39:15:625 CPU/(4938:4938): WRITE
+[INFO] 12:39:15:625 CPU/(4938:4938): READ
+[INFO] 12:39:15:625 CPU/(4938:4938): READ
+[INFO] 12:39:15:625 CPU/(4938:4938): EXIT
+[INFO] 12:39:15:625 CPU/(4938:4938): Se desconecto el kernel. Terminando conexion
+[INFO] 12:39:15:626 CPU/(4938:4938): Hola memoria, soy cpu
+[INFO] 12:39:16:627 CPU/(4938:4938): Me llegaron los siguientes valores:
+[INFO] 12:39:16:627 CPU/(4938:4938): tamanio de pagina: 256 
+[INFO] 12:39:16:627 CPU/(4938:4938): entradas por tabla: 4 
+
+[INFO] 12:39:16:627 CPU/(4938:4938): ----------------EXECUTE WRITE----------------
+[INFO] 12:39:16:627 CPU/(4938:4938): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:39:16:627 CPU/(4938:4938): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 12:39:17:628 CPU/(4938:4938): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 12:39:17:629 CPU/(4938:4938): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 12:39:18:630 CPU/(4938:4938): Me llego el marco que es 0
+[INFO] 12:39:19:631 CPU/(4938:4938): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 12:39:19:631 CPU/(4938:4938): Le envio a memoria el valor a escribir 1000
+[INFO] 12:39:21:634 CPU/(4938:4938): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:39:21:634 CPU/(4938:4938): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:39:21:634 CPU/(4938:4938): ----------------EXECUTE WRITE----------------
+[INFO] 12:39:21:634 CPU/(4938:4938): Le envio a memoria direccion fisica: Marco:0 y Offset: 4
+[INFO] 12:39:21:634 CPU/(4938:4938): Le envio a memoria el valor a escribir 1001
+[INFO] 12:39:23:636 CPU/(4938:4938): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:39:23:636 CPU/(4938:4938): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:39:23:636 CPU/(4938:4938): ----------------EXECUTE WRITE----------------
+[INFO] 12:39:23:637 CPU/(4938:4938): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:39:23:637 CPU/(4938:4938): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 12:39:24:639 CPU/(4938:4938): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 12:39:24:639 CPU/(4938:4938): Le envio a memoria entrada de tabla de 2do nivel que es 1
+[INFO] 12:39:25:640 CPU/(4938:4938): Me llego el marco que es 1
+[INFO] 12:39:25:640 CPU/(4938:4938): TLB: Reemplazo la pagina 1 en el marco 1 cuya entrada es 0
+[INFO] 12:39:25:640 CPU/(4938:4938): Le envio a memoria direccion fisica: Marco:1 y Offset: 4
+[INFO] 12:39:25:640 CPU/(4938:4938): Le envio a memoria el valor a escribir 2000
+[INFO] 12:39:27:642 CPU/(4938:4938): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:39:27:642 CPU/(4938:4938): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:39:27:642 CPU/(4938:4938): ----------------EXECUTE COPY----------------
+[INFO] 12:39:27:642 CPU/(4938:4938): Le envio a memoria para que copie de dir fisica1: (marco: 1 offset: 4) a dir fisica2: (marco: 1 offset: 0)
+[INFO] 12:39:27:642 CPU/(4938:4938): ----------------FINALIZA COPY----------------
+
+[INFO] 12:39:27:643 CPU/(4938:4938): ----------------EXECUTE WRITE----------------
+[INFO] 12:39:27:643 CPU/(4938:4938): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:39:27:643 CPU/(4938:4938): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 2)
+[INFO] 12:39:29:646 CPU/(4938:4938): Me llego el numero de tabla de segundoNivel que es  2
+[INFO] 12:39:29:646 CPU/(4938:4938): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 12:39:30:647 CPU/(4938:4938): Me llego el marco que es 2
+[INFO] 12:39:30:647 CPU/(4938:4938): TLB: Reemplazo la pagina 8 en el marco 2 cuya entrada es 0
+[INFO] 12:39:30:647 CPU/(4938:4938): Le envio a memoria direccion fisica: Marco:2 y Offset: 0
+[INFO] 12:39:30:647 CPU/(4938:4938): Le envio a memoria el valor a escribir 4000
+[INFO] 12:39:32:649 CPU/(4938:4938): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:39:32:650 CPU/(4938:4938): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:39:32:650 CPU/(4938:4938): ----------------EXECUTE WRITE----------------
+[INFO] 12:39:32:650 CPU/(4938:4938): Le envio a memoria direccion fisica: Marco:2 y Offset: 4
+[INFO] 12:39:32:650 CPU/(4938:4938): Le envio a memoria el valor a escribir 4001
+[INFO] 12:39:34:651 CPU/(4938:4938): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:39:34:651 CPU/(4938:4938): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:39:34:651 CPU/(4938:4938): ----------------EXECUTE READ----------------
+[INFO] 12:39:34:651 CPU/(4938:4938): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:39:34:652 CPU/(4938:4938): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 12:39:35:652 CPU/(4938:4938): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 12:39:35:653 CPU/(4938:4938): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 12:39:36:654 CPU/(4938:4938): Me llego el marco que es 0
+[INFO] 12:39:36:654 CPU/(4938:4938): TLB: Reemplazo la pagina 0 en el marco 0 cuya entrada es 0
+[INFO] 12:39:36:654 CPU/(4938:4938): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 12:39:36:654 CPU/(4938:4938): ----------------FINALIZA READ----------------
+
+[INFO] 12:39:36:654 CPU/(4938:4938): ----------------EXECUTE WRITE----------------
+[INFO] 12:39:36:654 CPU/(4938:4938): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:39:36:654 CPU/(4938:4938): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 1)
+[INFO] 12:39:38:656 CPU/(4938:4938): Me llego el numero de tabla de segundoNivel que es  1
+[INFO] 12:39:38:657 CPU/(4938:4938): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 12:39:39:659 CPU/(4938:4938): Me llego el marco que es 0
+[INFO] 12:39:39:659 CPU/(4938:4938): TLB: Reemplazo la pagina 4 en el marco 0 cuya entrada es 0
+[INFO] 12:39:39:659 CPU/(4938:4938): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 12:39:39:659 CPU/(4938:4938): Le envio a memoria el valor a escribir 3000
+[INFO] 12:39:41:661 CPU/(4938:4938): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:39:41:661 CPU/(4938:4938): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:39:41:661 CPU/(4938:4938): ----------------EXECUTE READ----------------
+[INFO] 12:39:41:661 CPU/(4938:4938): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:39:41:662 CPU/(4938:4938): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 12:39:42:663 CPU/(4938:4938): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 12:39:42:663 CPU/(4938:4938): Le envio a memoria entrada de tabla de 2do nivel que es 1
+[INFO] 12:39:43:666 CPU/(4938:4938): Me llego el marco que es 1
+[INFO] 12:39:43:666 CPU/(4938:4938): TLB: Reemplazo la pagina 1 en el marco 1 cuya entrada es 0
+[INFO] 12:39:43:666 CPU/(4938:4938): Le envio a memoria direccion fisica: Marco:1 y Offset: 0
+[INFO] 12:39:43:666 CPU/(4938:4938): ----------------FINALIZA READ----------------
+
+[INFO] 12:39:43:666 CPU/(4938:4938): ----------------EXECUTE READ----------------
+[INFO] 12:39:43:667 CPU/(4938:4938): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:39:43:667 CPU/(4938:4938): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 2)
+[INFO] 12:39:45:669 CPU/(4938:4938): Me llego el numero de tabla de segundoNivel que es  2
+[INFO] 12:39:45:669 CPU/(4938:4938): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 12:39:46:670 CPU/(4938:4938): Me llego el marco que es 2
+[INFO] 12:39:46:670 CPU/(4938:4938): TLB: Reemplazo la pagina 8 en el marco 2 cuya entrada es 0
+[INFO] 12:39:46:670 CPU/(4938:4938): Le envio a memoria direccion fisica: Marco:2 y Offset: 0
+[INFO] 12:39:46:670 CPU/(4938:4938): ----------------FINALIZA READ----------------
+
+[INFO] 12:39:46:670 CPU/(4938:4938): ----------------EXECUTE WRITE----------------
+[INFO] 12:39:46:670 CPU/(4938:4938): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:39:46:670 CPU/(4938:4938): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 3)
+[INFO] 12:39:48:672 CPU/(4938:4938): Me llego el numero de tabla de segundoNivel que es  3
+[INFO] 12:39:48:672 CPU/(4938:4938): Le envio a memoria entrada de tabla de 2do nivel que es 3
+[INFO] 12:39:49:673 CPU/(4938:4938): Me llego el marco que es 1
+[INFO] 12:39:49:673 CPU/(4938:4938): TLB: Reemplazo la pagina 15 en el marco 1 cuya entrada es 0
+[INFO] 12:39:49:673 CPU/(4938:4938): Le envio a memoria direccion fisica: Marco:1 y Offset: 160
+[INFO] 12:39:49:674 CPU/(4938:4938): Le envio a memoria el valor a escribir 9999
+[INFO] 12:39:51:675 CPU/(4938:4938): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:39:51:675 CPU/(4938:4938): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:39:51:675 CPU/(4938:4938): ----------------EXECUTE READ----------------
+[INFO] 12:39:51:675 CPU/(4938:4938): Le envio a memoria direccion fisica: Marco:1 y Offset: 160
+[INFO] 12:39:51:676 CPU/(4938:4938): ----------------FINALIZA READ----------------
+
+[INFO] 12:39:51:676 CPU/(4938:4938): ----------------EXECUTE READ----------------
+[INFO] 12:39:51:677 CPU/(4938:4938): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:39:51:677 CPU/(4938:4938): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 1)
+[INFO] 12:39:53:678 CPU/(4938:4938): Me llego el numero de tabla de segundoNivel que es  1
+[INFO] 12:39:53:678 CPU/(4938:4938): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 12:39:54:679 CPU/(4938:4938): Me llego el marco que es 0
+[INFO] 12:39:54:679 CPU/(4938:4938): TLB: Reemplazo la pagina 4 en el marco 0 cuya entrada es 0
+[INFO] 12:39:54:679 CPU/(4938:4938): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 12:39:54:679 CPU/(4938:4938): ----------------FINALIZA READ----------------
+
+[INFO] 12:39:54:679 CPU/(4938:4938): Finalizo el proceso 
+[INFO] 12:39:54:679 CPU/(4938:4938): Termino cpu
+[INFO] 12:44:50:723 CPU/(5839:5839): Cpu listo para recibir a Kernel
+[INFO] 12:44:57:806 CPU/(5839:5839): Se conecto el Kernel!
+[INFO] 12:44:57:808 CPU/(5839:5839): Me llegaron las siguientes instrucciones:
+
+[INFO] 12:44:57:809 CPU/(5839:5839): WRITE
+[INFO] 12:44:57:809 CPU/(5839:5839): WRITE
+[INFO] 12:44:57:809 CPU/(5839:5839): WRITE
+[INFO] 12:44:57:809 CPU/(5839:5839): WRITE
+[INFO] 12:44:57:809 CPU/(5839:5839): WRITE
+[INFO] 12:44:57:809 CPU/(5839:5839): WRITE
+[INFO] 12:44:57:809 CPU/(5839:5839): WRITE
+[INFO] 12:44:57:809 CPU/(5839:5839): READ
+[INFO] 12:44:57:809 CPU/(5839:5839): READ
+[INFO] 12:44:57:809 CPU/(5839:5839): READ
+[INFO] 12:44:57:809 CPU/(5839:5839): EXIT
+[INFO] 12:44:57:809 CPU/(5839:5839): Se desconecto el kernel. Terminando conexion
+[INFO] 12:44:57:810 CPU/(5839:5839): Hola memoria, soy cpu
+[INFO] 12:44:58:811 CPU/(5839:5839): Me llegaron los siguientes valores:
+[INFO] 12:44:58:811 CPU/(5839:5839): tamanio de pagina: 128 
+[INFO] 12:44:58:811 CPU/(5839:5839): entradas por tabla: 4 
+
+[INFO] 12:44:58:811 CPU/(5839:5839): ----------------EXECUTE WRITE----------------
+[INFO] 12:44:58:811 CPU/(5839:5839): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:44:58:811 CPU/(5839:5839): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 12:44:59:812 CPU/(5839:5839): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 12:44:59:812 CPU/(5839:5839): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 12:45:00:817 CPU/(5839:5839): Me llego el marco que es 0
+[INFO] 12:45:01:817 CPU/(5839:5839): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 12:45:01:817 CPU/(5839:5839): Le envio a memoria el valor a escribir 100
+[INFO] 12:45:03:820 CPU/(5839:5839): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:45:03:820 CPU/(5839:5839): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:45:03:820 CPU/(5839:5839): ----------------EXECUTE WRITE----------------
+[INFO] 12:45:03:821 CPU/(5839:5839): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:45:03:821 CPU/(5839:5839): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 12:45:04:823 CPU/(5839:5839): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 12:45:04:823 CPU/(5839:5839): Le envio a memoria entrada de tabla de 2do nivel que es 1
+[INFO] 12:45:05:824 CPU/(5839:5839): Me llego el marco que es 1
+[INFO] 12:45:06:824 CPU/(5839:5839): Le envio a memoria direccion fisica: Marco:1 y Offset: 4
+[INFO] 12:45:06:824 CPU/(5839:5839): Le envio a memoria el valor a escribir 101
+[INFO] 12:45:08:827 CPU/(5839:5839): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:45:08:827 CPU/(5839:5839): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:45:08:827 CPU/(5839:5839): ----------------EXECUTE WRITE----------------
+[INFO] 12:45:08:827 CPU/(5839:5839): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:45:08:827 CPU/(5839:5839): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 12:45:09:828 CPU/(5839:5839): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 12:45:09:828 CPU/(5839:5839): Le envio a memoria entrada de tabla de 2do nivel que es 2
+[INFO] 12:45:10:830 CPU/(5839:5839): Me llego el marco que es 2
+[INFO] 12:45:11:831 CPU/(5839:5839): Le envio a memoria direccion fisica: Marco:2 y Offset: 4
+[INFO] 12:45:11:832 CPU/(5839:5839): Le envio a memoria el valor a escribir 102
+[INFO] 12:45:13:833 CPU/(5839:5839): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:45:13:834 CPU/(5839:5839): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:45:13:834 CPU/(5839:5839): ----------------EXECUTE WRITE----------------
+[INFO] 12:45:13:834 CPU/(5839:5839): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:45:13:834 CPU/(5839:5839): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 1)
+[INFO] 12:45:14:835 CPU/(5839:5839): Me llego el numero de tabla de segundoNivel que es  1
+[INFO] 12:45:14:835 CPU/(5839:5839): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 12:45:15:837 CPU/(5839:5839): Me llego el marco que es 3
+[INFO] 12:45:16:837 CPU/(5839:5839): Le envio a memoria direccion fisica: Marco:3 y Offset: 8
+[INFO] 12:45:16:838 CPU/(5839:5839): Le envio a memoria el valor a escribir 104
+[INFO] 12:45:18:839 CPU/(5839:5839): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:45:18:840 CPU/(5839:5839): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:45:18:840 CPU/(5839:5839): ----------------EXECUTE WRITE----------------
+[INFO] 12:45:18:840 CPU/(5839:5839): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:45:18:840 CPU/(5839:5839): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 12:45:19:840 CPU/(5839:5839): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 12:45:19:840 CPU/(5839:5839): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 12:45:20:842 CPU/(5839:5839): Me llego el marco que es 0
+[INFO] 12:45:20:842 CPU/(5839:5839): TLB: Reemplazo la pagina 0 en el marco 0 cuya entrada es 1
+[INFO] 12:45:20:842 CPU/(5839:5839): Le envio a memoria direccion fisica: Marco:0 y Offset: 4
+[INFO] 12:45:20:842 CPU/(5839:5839): Le envio a memoria el valor a escribir 110
+[INFO] 12:45:22:844 CPU/(5839:5839): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:45:22:844 CPU/(5839:5839): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:45:22:844 CPU/(5839:5839): ----------------EXECUTE WRITE----------------
+[INFO] 12:45:22:845 CPU/(5839:5839): Le envio a memoria direccion fisica: Marco:0 y Offset: 8
+[INFO] 12:45:22:845 CPU/(5839:5839): Le envio a memoria el valor a escribir 120
+[INFO] 12:45:24:846 CPU/(5839:5839): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:45:24:846 CPU/(5839:5839): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:45:24:847 CPU/(5839:5839): ----------------EXECUTE WRITE----------------
+[INFO] 12:45:24:847 CPU/(5839:5839): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:45:24:847 CPU/(5839:5839): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 2)
+[INFO] 12:45:25:848 CPU/(5839:5839): Me llego el numero de tabla de segundoNivel que es  2
+[INFO] 12:45:25:848 CPU/(5839:5839): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 12:45:26:849 CPU/(5839:5839): Me llego el marco que es 4
+[INFO] 12:45:26:849 CPU/(5839:5839): TLB: Reemplazo la pagina 8 en el marco 4 cuya entrada es 1
+[INFO] 12:45:26:849 CPU/(5839:5839): Le envio a memoria direccion fisica: Marco:4 y Offset: 4
+[INFO] 12:45:26:849 CPU/(5839:5839): Le envio a memoria el valor a escribir 108
+[INFO] 12:45:28:852 CPU/(5839:5839): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:45:28:852 CPU/(5839:5839): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:45:28:852 CPU/(5839:5839): ----------------EXECUTE READ----------------
+[INFO] 12:45:28:852 CPU/(5839:5839): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:45:28:852 CPU/(5839:5839): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 12:45:29:854 CPU/(5839:5839): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 12:45:29:854 CPU/(5839:5839): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 12:45:30:855 CPU/(5839:5839): Me llego el marco que es 0
+[INFO] 12:45:30:855 CPU/(5839:5839): TLB: Reemplazo la pagina 0 en el marco 0 cuya entrada es 1
+[INFO] 12:45:30:855 CPU/(5839:5839): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 12:45:30:855 CPU/(5839:5839): ----------------FINALIZA READ----------------
+
+[INFO] 12:45:30:855 CPU/(5839:5839): ----------------EXECUTE READ----------------
+[INFO] 12:45:30:855 CPU/(5839:5839): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:45:30:855 CPU/(5839:5839): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 12:45:32:857 CPU/(5839:5839): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 12:45:32:857 CPU/(5839:5839): Le envio a memoria entrada de tabla de 2do nivel que es 2
+[INFO] 12:45:33:858 CPU/(5839:5839): Me llego el marco que es 2
+[INFO] 12:45:33:858 CPU/(5839:5839): TLB: Reemplazo la pagina 2 en el marco 2 cuya entrada es 1
+[INFO] 12:45:33:859 CPU/(5839:5839): Le envio a memoria direccion fisica: Marco:2 y Offset: 4
+[INFO] 12:45:33:859 CPU/(5839:5839): ----------------FINALIZA READ----------------
+
+[INFO] 12:45:33:859 CPU/(5839:5839): ----------------EXECUTE READ----------------
+[INFO] 12:45:33:859 CPU/(5839:5839): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:45:33:860 CPU/(5839:5839): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 1)
+[INFO] 12:45:35:861 CPU/(5839:5839): Me llego el numero de tabla de segundoNivel que es  1
+[INFO] 12:45:35:861 CPU/(5839:5839): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 12:45:36:862 CPU/(5839:5839): Me llego el marco que es 3
+[INFO] 12:45:36:862 CPU/(5839:5839): TLB: Reemplazo la pagina 4 en el marco 3 cuya entrada es 1
+[INFO] 12:45:36:862 CPU/(5839:5839): Le envio a memoria direccion fisica: Marco:3 y Offset: 8
+[INFO] 12:45:36:862 CPU/(5839:5839): ----------------FINALIZA READ----------------
+
+[INFO] 12:45:36:863 CPU/(5839:5839): Finalizo el proceso 
+[INFO] 12:45:36:863 CPU/(5839:5839): Termino cpu
+[INFO] 12:53:53:460 CPU/(7191:7191): Cpu listo para recibir a Kernel
+[INFO] 12:54:02:847 CPU/(7191:7191): Se conecto el Kernel!
+[INFO] 12:54:02:848 CPU/(7191:7191): Me llegaron las siguientes instrucciones:
+
+[INFO] 12:54:02:849 CPU/(7191:7191): WRITE
+[INFO] 12:54:02:849 CPU/(7191:7191): WRITE
+[INFO] 12:54:02:849 CPU/(7191:7191): WRITE
+[INFO] 12:54:02:849 CPU/(7191:7191): WRITE
+[INFO] 12:54:02:849 CPU/(7191:7191): WRITE
+[INFO] 12:54:02:849 CPU/(7191:7191): WRITE
+[INFO] 12:54:02:849 CPU/(7191:7191): WRITE
+[INFO] 12:54:02:849 CPU/(7191:7191): READ
+[INFO] 12:54:02:849 CPU/(7191:7191): READ
+[INFO] 12:54:02:849 CPU/(7191:7191): READ
+[INFO] 12:54:02:849 CPU/(7191:7191): EXIT
+[INFO] 12:54:02:849 CPU/(7191:7191): Se desconecto el kernel. Terminando conexion
+[INFO] 12:54:02:851 CPU/(7191:7191): Hola memoria, soy cpu
+[INFO] 12:54:03:852 CPU/(7191:7191): Me llegaron los siguientes valores:
+[INFO] 12:54:03:853 CPU/(7191:7191): tamanio de pagina: 128 
+[INFO] 12:54:03:853 CPU/(7191:7191): entradas por tabla: 4 
+
+[INFO] 12:54:03:853 CPU/(7191:7191): ----------------EXECUTE WRITE----------------
+[INFO] 12:54:03:853 CPU/(7191:7191): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:54:03:853 CPU/(7191:7191): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 12:54:04:855 CPU/(7191:7191): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 12:54:04:855 CPU/(7191:7191): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 12:54:05:858 CPU/(7191:7191): Me llego el marco que es 0
+[INFO] 12:54:06:858 CPU/(7191:7191): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 12:54:06:859 CPU/(7191:7191): Le envio a memoria el valor a escribir 100
+[INFO] 12:54:08:861 CPU/(7191:7191): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:54:08:861 CPU/(7191:7191): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:54:08:861 CPU/(7191:7191): ----------------EXECUTE WRITE----------------
+[INFO] 12:54:08:861 CPU/(7191:7191): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:54:08:861 CPU/(7191:7191): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 12:54:09:863 CPU/(7191:7191): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 12:54:09:863 CPU/(7191:7191): Le envio a memoria entrada de tabla de 2do nivel que es 1
+[INFO] 12:54:10:864 CPU/(7191:7191): Me llego el marco que es 1
+[INFO] 12:54:11:865 CPU/(7191:7191): Le envio a memoria direccion fisica: Marco:1 y Offset: 4
+[INFO] 12:54:11:865 CPU/(7191:7191): Le envio a memoria el valor a escribir 101
+[INFO] 12:54:13:867 CPU/(7191:7191): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:54:13:867 CPU/(7191:7191): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:54:13:867 CPU/(7191:7191): ----------------EXECUTE WRITE----------------
+[INFO] 12:54:13:867 CPU/(7191:7191): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:54:13:867 CPU/(7191:7191): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 12:54:14:868 CPU/(7191:7191): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 12:54:14:868 CPU/(7191:7191): Le envio a memoria entrada de tabla de 2do nivel que es 2
+[INFO] 12:54:15:869 CPU/(7191:7191): Me llego el marco que es 2
+[INFO] 12:54:16:869 CPU/(7191:7191): Le envio a memoria direccion fisica: Marco:2 y Offset: 4
+[INFO] 12:54:16:870 CPU/(7191:7191): Le envio a memoria el valor a escribir 102
+[INFO] 12:54:18:871 CPU/(7191:7191): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:54:18:871 CPU/(7191:7191): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:54:18:872 CPU/(7191:7191): ----------------EXECUTE WRITE----------------
+[INFO] 12:54:18:872 CPU/(7191:7191): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:54:18:872 CPU/(7191:7191): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 1)
+[INFO] 12:54:19:873 CPU/(7191:7191): Me llego el numero de tabla de segundoNivel que es  1
+[INFO] 12:54:19:873 CPU/(7191:7191): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 12:54:20:875 CPU/(7191:7191): Me llego el marco que es 3
+[INFO] 12:54:21:875 CPU/(7191:7191): Le envio a memoria direccion fisica: Marco:3 y Offset: 8
+[INFO] 12:54:21:877 CPU/(7191:7191): Le envio a memoria el valor a escribir 104
+[INFO] 12:54:23:878 CPU/(7191:7191): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:54:23:879 CPU/(7191:7191): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:54:23:879 CPU/(7191:7191): ----------------EXECUTE WRITE----------------
+[INFO] 12:54:23:879 CPU/(7191:7191): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:54:23:879 CPU/(7191:7191): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 12:54:24:880 CPU/(7191:7191): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 12:54:24:880 CPU/(7191:7191): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 12:54:25:881 CPU/(7191:7191): Me llego el marco que es 0
+[INFO] 12:54:25:881 CPU/(7191:7191): TLB: Reemplazo la pagina 0 en el marco 0 cuya entrada es 0
+[INFO] 12:54:25:881 CPU/(7191:7191): Le envio a memoria direccion fisica: Marco:0 y Offset: 4
+[INFO] 12:54:25:881 CPU/(7191:7191): Le envio a memoria el valor a escribir 110
+[INFO] 12:54:27:883 CPU/(7191:7191): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:54:27:883 CPU/(7191:7191): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:54:27:883 CPU/(7191:7191): ----------------EXECUTE WRITE----------------
+[INFO] 12:54:27:883 CPU/(7191:7191): Le envio a memoria direccion fisica: Marco:0 y Offset: 8
+[INFO] 12:54:27:883 CPU/(7191:7191): Le envio a memoria el valor a escribir 120
+[INFO] 12:54:29:887 CPU/(7191:7191): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:54:29:888 CPU/(7191:7191): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:54:29:888 CPU/(7191:7191): ----------------EXECUTE WRITE----------------
+[INFO] 12:54:29:888 CPU/(7191:7191): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:54:29:888 CPU/(7191:7191): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 2)
+[INFO] 12:54:30:889 CPU/(7191:7191): Me llego el numero de tabla de segundoNivel que es  2
+[INFO] 12:54:30:889 CPU/(7191:7191): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 12:54:31:890 CPU/(7191:7191): Me llego el marco que es 4
+[INFO] 12:54:31:891 CPU/(7191:7191): TLB: Reemplazo la pagina 8 en el marco 4 cuya entrada es 0
+[INFO] 12:54:31:891 CPU/(7191:7191): Le envio a memoria direccion fisica: Marco:4 y Offset: 4
+[INFO] 12:54:31:891 CPU/(7191:7191): Le envio a memoria el valor a escribir 108
+[INFO] 12:54:33:892 CPU/(7191:7191): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 12:54:33:893 CPU/(7191:7191): ----------------FINALIZA WRITE----------------
+
+[INFO] 12:54:33:893 CPU/(7191:7191): ----------------EXECUTE READ----------------
+[INFO] 12:54:33:893 CPU/(7191:7191): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:54:33:893 CPU/(7191:7191): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 12:54:34:894 CPU/(7191:7191): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 12:54:34:894 CPU/(7191:7191): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 12:54:35:895 CPU/(7191:7191): Me llego el marco que es 0
+[INFO] 12:54:35:895 CPU/(7191:7191): TLB: Reemplazo la pagina 0 en el marco 0 cuya entrada es 0
+[INFO] 12:54:35:895 CPU/(7191:7191): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 12:54:35:895 CPU/(7191:7191): ----------------FINALIZA READ----------------
+
+[INFO] 12:54:35:896 CPU/(7191:7191): ----------------EXECUTE READ----------------
+[INFO] 12:54:35:896 CPU/(7191:7191): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:54:35:896 CPU/(7191:7191): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 12:54:37:901 CPU/(7191:7191): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 12:54:37:901 CPU/(7191:7191): Le envio a memoria entrada de tabla de 2do nivel que es 2
+[INFO] 12:54:38:902 CPU/(7191:7191): Me llego el marco que es 2
+[INFO] 12:54:38:902 CPU/(7191:7191): TLB: Reemplazo la pagina 2 en el marco 2 cuya entrada es 0
+[INFO] 12:54:38:902 CPU/(7191:7191): Le envio a memoria direccion fisica: Marco:2 y Offset: 4
+[INFO] 12:54:38:902 CPU/(7191:7191): ----------------FINALIZA READ----------------
+
+[INFO] 12:54:38:903 CPU/(7191:7191): ----------------EXECUTE READ----------------
+[INFO] 12:54:38:903 CPU/(7191:7191): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 12:54:38:903 CPU/(7191:7191): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 1)
+[INFO] 12:54:40:905 CPU/(7191:7191): Me llego el numero de tabla de segundoNivel que es  1
+[INFO] 12:54:40:905 CPU/(7191:7191): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 12:54:41:907 CPU/(7191:7191): Me llego el marco que es 3
+[INFO] 12:54:41:907 CPU/(7191:7191): TLB: Reemplazo la pagina 4 en el marco 3 cuya entrada es 0
+[INFO] 12:54:41:907 CPU/(7191:7191): Le envio a memoria direccion fisica: Marco:3 y Offset: 8
+[INFO] 12:54:41:907 CPU/(7191:7191): ----------------FINALIZA READ----------------
+
+[INFO] 12:54:41:909 CPU/(7191:7191): Finalizo el proceso 
+[INFO] 12:54:41:909 CPU/(7191:7191): Termino cpu
+[INFO] 13:11:49:320 CPU/(9407:9407): Cpu listo para recibir a Kernel
+[INFO] 13:11:57:613 CPU/(9407:9407): Se conecto el Kernel!
+[INFO] 13:11:57:616 CPU/(9407:9407): Me llegaron las siguientes instrucciones:
+
+[INFO] 13:11:57:616 CPU/(9407:9407): WRITE
+[INFO] 13:11:57:616 CPU/(9407:9407): WRITE
+[INFO] 13:11:57:616 CPU/(9407:9407): WRITE
+[INFO] 13:11:57:616 CPU/(9407:9407): WRITE
+[INFO] 13:11:57:616 CPU/(9407:9407): WRITE
+[INFO] 13:11:57:616 CPU/(9407:9407): WRITE
+[INFO] 13:11:57:616 CPU/(9407:9407): WRITE
+[INFO] 13:11:57:616 CPU/(9407:9407): READ
+[INFO] 13:11:57:617 CPU/(9407:9407): READ
+[INFO] 13:11:57:617 CPU/(9407:9407): READ
+[INFO] 13:11:57:617 CPU/(9407:9407): EXIT
+[INFO] 13:11:57:617 CPU/(9407:9407): Se desconecto el kernel. Terminando conexion
+[INFO] 13:11:57:617 CPU/(9407:9407): Hola memoria, soy cpu
+[INFO] 13:11:58:619 CPU/(9407:9407): Me llegaron los siguientes valores:
+[INFO] 13:11:58:619 CPU/(9407:9407): tamanio de pagina: 128 
+[INFO] 13:11:58:619 CPU/(9407:9407): entradas por tabla: 4 
+
+[INFO] 13:11:58:619 CPU/(9407:9407): ----------------EXECUTE WRITE----------------
+[INFO] 13:11:58:619 CPU/(9407:9407): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 13:11:58:619 CPU/(9407:9407): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 13:11:59:620 CPU/(9407:9407): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 13:11:59:620 CPU/(9407:9407): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 13:12:00:622 CPU/(9407:9407): Me llego el marco que es 0
+[INFO] 13:12:00:623 CPU/(9407:9407): Se agrega la pagina 0 con marco 0 a tlb
+[INFO] 13:12:01:623 CPU/(9407:9407): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 13:12:01:624 CPU/(9407:9407): Le envio a memoria el valor a escribir 100
+[INFO] 13:12:03:626 CPU/(9407:9407): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 13:12:03:626 CPU/(9407:9407): ----------------FINALIZA WRITE----------------
+
+[INFO] 13:12:03:626 CPU/(9407:9407): ----------------EXECUTE WRITE----------------
+[INFO] 13:12:03:626 CPU/(9407:9407): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 13:12:03:626 CPU/(9407:9407): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 13:12:04:627 CPU/(9407:9407): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 13:12:04:627 CPU/(9407:9407): Le envio a memoria entrada de tabla de 2do nivel que es 1
+[INFO] 13:12:05:629 CPU/(9407:9407): Me llego el marco que es 1
+[INFO] 13:12:05:629 CPU/(9407:9407): Se agrega la pagina 1 con marco 1 a tlb
+[INFO] 13:12:06:630 CPU/(9407:9407): Le envio a memoria direccion fisica: Marco:1 y Offset: 4
+[INFO] 13:12:06:631 CPU/(9407:9407): Le envio a memoria el valor a escribir 101
+[INFO] 13:12:08:632 CPU/(9407:9407): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 13:12:08:632 CPU/(9407:9407): ----------------FINALIZA WRITE----------------
+
+[INFO] 13:12:08:633 CPU/(9407:9407): ----------------EXECUTE WRITE----------------
+[INFO] 13:12:08:633 CPU/(9407:9407): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 13:12:08:633 CPU/(9407:9407): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 13:12:09:634 CPU/(9407:9407): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 13:12:09:634 CPU/(9407:9407): Le envio a memoria entrada de tabla de 2do nivel que es 2
+[INFO] 13:12:10:635 CPU/(9407:9407): Me llego el marco que es 2
+[INFO] 13:12:10:635 CPU/(9407:9407): Se agrega la pagina 2 con marco 2 a tlb
+[INFO] 13:12:11:635 CPU/(9407:9407): Le envio a memoria direccion fisica: Marco:2 y Offset: 4
+[INFO] 13:12:11:636 CPU/(9407:9407): Le envio a memoria el valor a escribir 102
+[INFO] 13:12:13:637 CPU/(9407:9407): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 13:12:13:637 CPU/(9407:9407): ----------------FINALIZA WRITE----------------
+
+[INFO] 13:12:13:637 CPU/(9407:9407): ----------------EXECUTE WRITE----------------
+[INFO] 13:12:13:637 CPU/(9407:9407): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 13:12:13:638 CPU/(9407:9407): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 1)
+[INFO] 13:12:14:639 CPU/(9407:9407): Me llego el numero de tabla de segundoNivel que es  1
+[INFO] 13:12:14:639 CPU/(9407:9407): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 13:12:15:640 CPU/(9407:9407): Me llego el marco que es 3
+[INFO] 13:12:15:640 CPU/(9407:9407): Se agrega la pagina 4 con marco 3 a tlb
+[INFO] 13:12:16:641 CPU/(9407:9407): Le envio a memoria direccion fisica: Marco:3 y Offset: 8
+[INFO] 13:12:16:641 CPU/(9407:9407): Le envio a memoria el valor a escribir 104
+[INFO] 13:12:18:643 CPU/(9407:9407): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 13:12:18:643 CPU/(9407:9407): ----------------FINALIZA WRITE----------------
+
+[INFO] 13:12:18:643 CPU/(9407:9407): ----------------EXECUTE WRITE----------------
+[INFO] 13:12:18:643 CPU/(9407:9407): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 13:12:18:643 CPU/(9407:9407): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 13:12:19:644 CPU/(9407:9407): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 13:12:19:644 CPU/(9407:9407): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 13:12:20:645 CPU/(9407:9407): Me llego el marco que es 0
+[INFO] 13:12:20:645 CPU/(9407:9407): TLB: Reemplazo la pagina 0 en el marco 0 cuya entrada es 0
+[INFO] 13:12:20:645 CPU/(9407:9407): Le envio a memoria direccion fisica: Marco:0 y Offset: 4
+[INFO] 13:12:20:646 CPU/(9407:9407): Le envio a memoria el valor a escribir 110
+[INFO] 13:12:22:646 CPU/(9407:9407): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 13:12:22:646 CPU/(9407:9407): ----------------FINALIZA WRITE----------------
+
+[INFO] 13:12:22:647 CPU/(9407:9407): ----------------EXECUTE WRITE----------------
+[INFO] 13:12:22:647 CPU/(9407:9407): Le envio a memoria direccion fisica: Marco:0 y Offset: 8
+[INFO] 13:12:22:647 CPU/(9407:9407): Le envio a memoria el valor a escribir 120
+[INFO] 13:12:24:649 CPU/(9407:9407): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 13:12:24:649 CPU/(9407:9407): ----------------FINALIZA WRITE----------------
+
+[INFO] 13:12:24:649 CPU/(9407:9407): ----------------EXECUTE WRITE----------------
+[INFO] 13:12:24:649 CPU/(9407:9407): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 13:12:24:649 CPU/(9407:9407): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 2)
+[INFO] 13:12:25:651 CPU/(9407:9407): Me llego el numero de tabla de segundoNivel que es  2
+[INFO] 13:12:25:651 CPU/(9407:9407): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 13:12:26:653 CPU/(9407:9407): Me llego el marco que es 4
+[INFO] 13:12:26:654 CPU/(9407:9407): TLB: Reemplazo la pagina 8 en el marco 4 cuya entrada es 0
+[INFO] 13:12:26:654 CPU/(9407:9407): Le envio a memoria direccion fisica: Marco:4 y Offset: 4
+[INFO] 13:12:26:654 CPU/(9407:9407): Le envio a memoria el valor a escribir 108
+[INFO] 13:12:28:655 CPU/(9407:9407): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 13:12:28:656 CPU/(9407:9407): ----------------FINALIZA WRITE----------------
+
+[INFO] 13:12:28:656 CPU/(9407:9407): ----------------EXECUTE READ----------------
+[INFO] 13:12:28:656 CPU/(9407:9407): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 13:12:28:656 CPU/(9407:9407): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 13:12:29:657 CPU/(9407:9407): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 13:12:29:657 CPU/(9407:9407): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 13:12:30:658 CPU/(9407:9407): Me llego el marco que es 0
+[INFO] 13:12:30:658 CPU/(9407:9407): TLB: Reemplazo la pagina 0 en el marco 0 cuya entrada es 0
+[INFO] 13:12:30:658 CPU/(9407:9407): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 13:12:30:658 CPU/(9407:9407): ----------------FINALIZA READ----------------
+
+[INFO] 13:12:30:659 CPU/(9407:9407): ----------------EXECUTE READ----------------
+[INFO] 13:12:30:659 CPU/(9407:9407): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 13:12:30:659 CPU/(9407:9407): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 13:12:32:660 CPU/(9407:9407): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 13:12:32:660 CPU/(9407:9407): Le envio a memoria entrada de tabla de 2do nivel que es 2
+[INFO] 13:12:33:662 CPU/(9407:9407): Me llego el marco que es 2
+[INFO] 13:12:33:663 CPU/(9407:9407): TLB: Reemplazo la pagina 2 en el marco 2 cuya entrada es 0
+[INFO] 13:12:33:663 CPU/(9407:9407): Le envio a memoria direccion fisica: Marco:2 y Offset: 4
+[INFO] 13:12:33:663 CPU/(9407:9407): ----------------FINALIZA READ----------------
+
+[INFO] 13:12:33:663 CPU/(9407:9407): ----------------EXECUTE READ----------------
+[INFO] 13:12:33:663 CPU/(9407:9407): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 13:12:33:663 CPU/(9407:9407): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 1)
+[INFO] 13:12:35:665 CPU/(9407:9407): Me llego el numero de tabla de segundoNivel que es  1
+[INFO] 13:12:35:665 CPU/(9407:9407): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 13:12:36:666 CPU/(9407:9407): Me llego el marco que es 3
+[INFO] 13:12:36:666 CPU/(9407:9407): TLB: Reemplazo la pagina 4 en el marco 3 cuya entrada es 0
+[INFO] 13:12:36:666 CPU/(9407:9407): Le envio a memoria direccion fisica: Marco:3 y Offset: 8
+[INFO] 13:12:36:666 CPU/(9407:9407): ----------------FINALIZA READ----------------
+
+[INFO] 13:12:36:666 CPU/(9407:9407): Finalizo el proceso 
+[INFO] 13:12:36:666 CPU/(9407:9407): Termino cpu
+[INFO] 14:39:06:622 CPU/(15770:15770): Cpu listo para recibir a Kernel
+[INFO] 14:39:30:518 CPU/(15848:15848): Cpu listo para recibir a Kernel
+[INFO] 14:39:51:246 CPU/(15848:15848): Se conecto el Kernel!
+[INFO] 14:39:55:806 CPU/(15848:15848): Me llegaron las siguientes instrucciones:
+
+[INFO] 14:39:56:709 CPU/(15848:15848): WRITE
+[INFO] 14:39:56:709 CPU/(15848:15848): WRITE
+[INFO] 14:39:56:709 CPU/(15848:15848): WRITE
+[INFO] 14:39:56:710 CPU/(15848:15848): WRITE
+[INFO] 14:39:56:710 CPU/(15848:15848): WRITE
+[INFO] 14:39:56:710 CPU/(15848:15848): WRITE
+[INFO] 14:39:56:710 CPU/(15848:15848): WRITE
+[INFO] 14:39:56:710 CPU/(15848:15848): READ
+[INFO] 14:39:56:710 CPU/(15848:15848): READ
+[INFO] 14:39:56:710 CPU/(15848:15848): READ
+[INFO] 14:39:56:710 CPU/(15848:15848): EXIT
+[INFO] 14:39:59:938 CPU/(15848:15848): Se desconecto el kernel. Terminando conexion
+[INFO] 14:40:06:003 CPU/(15848:15848): Hola memoria, soy cpu
+[INFO] 14:40:07:003 CPU/(15848:15848): Me llegaron los siguientes valores:
+[INFO] 14:40:07:003 CPU/(15848:15848): tamanio de pagina: 128 
+[INFO] 14:40:07:003 CPU/(15848:15848): entradas por tabla: 4 
+
+[INFO] 14:40:17:989 CPU/(15848:15848): ----------------EXECUTE WRITE----------------
+[INFO] 14:40:17:989 CPU/(15848:15848): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 14:40:17:989 CPU/(15848:15848): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 14:40:18:989 CPU/(15848:15848): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 14:40:18:989 CPU/(15848:15848): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 14:40:19:990 CPU/(15848:15848): Me llego el marco que es 0
+[INFO] 14:40:19:990 CPU/(15848:15848): Se agrega la pagina 0 con marco 0 a tlb
+[INFO] 14:40:20:990 CPU/(15848:15848): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 14:40:20:991 CPU/(15848:15848): Le envio a memoria el valor a escribir 100
+[INFO] 14:40:22:992 CPU/(15848:15848): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 14:40:22:992 CPU/(15848:15848): ----------------FINALIZA WRITE----------------
+
+[INFO] 14:40:31:613 CPU/(15848:15848): ----------------EXECUTE WRITE----------------
+[INFO] 14:40:31:613 CPU/(15848:15848): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 14:40:31:613 CPU/(15848:15848): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 14:40:32:614 CPU/(15848:15848): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 14:40:32:614 CPU/(15848:15848): Le envio a memoria entrada de tabla de 2do nivel que es 1
+[INFO] 14:40:33:615 CPU/(15848:15848): Me llego el marco que es 1
+[INFO] 14:40:33:615 CPU/(15848:15848): Se agrega la pagina 1 con marco 1 a tlb
+[INFO] 14:40:34:615 CPU/(15848:15848): Le envio a memoria direccion fisica: Marco:1 y Offset: 4
+[INFO] 14:40:34:615 CPU/(15848:15848): Le envio a memoria el valor a escribir 101
+[INFO] 14:40:36:617 CPU/(15848:15848): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 14:40:36:617 CPU/(15848:15848): ----------------FINALIZA WRITE----------------
+
+[INFO] 14:40:50:692 CPU/(15848:15848): ----------------EXECUTE WRITE----------------
+[INFO] 14:40:50:692 CPU/(15848:15848): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 14:40:50:692 CPU/(15848:15848): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 14:40:51:697 CPU/(15848:15848): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 14:40:51:697 CPU/(15848:15848): Le envio a memoria entrada de tabla de 2do nivel que es 2
+[INFO] 14:40:52:697 CPU/(15848:15848): Me llego el marco que es 2
+[INFO] 14:40:52:697 CPU/(15848:15848): Se agrega la pagina 2 con marco 2 a tlb
+[INFO] 14:40:53:697 CPU/(15848:15848): Le envio a memoria direccion fisica: Marco:2 y Offset: 4
+[INFO] 14:40:53:698 CPU/(15848:15848): Le envio a memoria el valor a escribir 102
+[INFO] 14:40:55:699 CPU/(15848:15848): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 14:40:55:699 CPU/(15848:15848): ----------------FINALIZA WRITE----------------
+
+[INFO] 14:41:03:835 CPU/(15848:15848): ----------------EXECUTE WRITE----------------
+[INFO] 14:41:03:835 CPU/(15848:15848): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 14:41:03:835 CPU/(15848:15848): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 1)
+[INFO] 14:41:04:836 CPU/(15848:15848): Me llego el numero de tabla de segundoNivel que es  1
+[INFO] 14:41:04:836 CPU/(15848:15848): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 14:41:05:837 CPU/(15848:15848): Me llego el marco que es 3
+[INFO] 14:41:05:837 CPU/(15848:15848): Se agrega la pagina 4 con marco 3 a tlb
+[INFO] 14:41:06:837 CPU/(15848:15848): Le envio a memoria direccion fisica: Marco:3 y Offset: 8
+[INFO] 14:41:06:838 CPU/(15848:15848): Le envio a memoria el valor a escribir 104
+[INFO] 14:41:08:838 CPU/(15848:15848): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 14:41:08:839 CPU/(15848:15848): ----------------FINALIZA WRITE----------------
+
+[INFO] 14:41:23:300 CPU/(15848:15848): ----------------EXECUTE WRITE----------------
+[INFO] 14:44:46:424 CPU/(15848:15848): Le envio a memoria direccion fisica: Marco:8 y Offset: 4
+[INFO] 14:44:50:519 CPU/(15848:15848): Le envio a memoria el valor a escribir 110
+[INFO] 14:47:03:637 CPU/(16484:16484): Cpu listo para recibir a Kernel
+[INFO] 14:47:14:089 CPU/(16484:16484): Se conecto el Kernel!
+[INFO] 14:47:14:091 CPU/(16484:16484): Me llegaron las siguientes instrucciones:
+
+[INFO] 14:47:14:091 CPU/(16484:16484): WRITE
+[INFO] 14:47:14:091 CPU/(16484:16484): WRITE
+[INFO] 14:47:14:092 CPU/(16484:16484): WRITE
+[INFO] 14:47:14:092 CPU/(16484:16484): WRITE
+[INFO] 14:47:14:092 CPU/(16484:16484): WRITE
+[INFO] 14:47:14:092 CPU/(16484:16484): WRITE
+[INFO] 14:47:14:093 CPU/(16484:16484): WRITE
+[INFO] 14:47:14:093 CPU/(16484:16484): READ
+[INFO] 14:47:14:093 CPU/(16484:16484): READ
+[INFO] 14:47:14:093 CPU/(16484:16484): READ
+[INFO] 14:47:14:093 CPU/(16484:16484): EXIT
+[INFO] 14:47:14:093 CPU/(16484:16484): Se desconecto el kernel. Terminando conexion
+[INFO] 14:47:14:094 CPU/(16484:16484): Hola memoria, soy cpu
+[INFO] 14:47:15:095 CPU/(16484:16484): Me llegaron los siguientes valores:
+[INFO] 14:47:15:095 CPU/(16484:16484): tamanio de pagina: 128 
+[INFO] 14:47:15:095 CPU/(16484:16484): entradas por tabla: 4 
+
+[INFO] 14:47:15:095 CPU/(16484:16484): ----------------EXECUTE WRITE----------------
+[INFO] 14:47:15:095 CPU/(16484:16484): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 14:47:15:095 CPU/(16484:16484): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 14:47:16:096 CPU/(16484:16484): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 14:47:16:096 CPU/(16484:16484): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 14:47:17:097 CPU/(16484:16484): Me llego el marco que es 0
+[INFO] 14:47:17:097 CPU/(16484:16484): Se agrega la pagina 0 con marco 0 a tlb
+[INFO] 14:47:18:097 CPU/(16484:16484): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 14:47:18:097 CPU/(16484:16484): Le envio a memoria el valor a escribir 100
+[INFO] 14:47:20:099 CPU/(16484:16484): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 14:47:20:099 CPU/(16484:16484): ----------------FINALIZA WRITE----------------
+
+[INFO] 14:47:20:099 CPU/(16484:16484): ----------------EXECUTE WRITE----------------
+[INFO] 14:47:20:099 CPU/(16484:16484): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 14:47:20:099 CPU/(16484:16484): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 14:47:21:100 CPU/(16484:16484): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 14:47:21:100 CPU/(16484:16484): Le envio a memoria entrada de tabla de 2do nivel que es 1
+[INFO] 14:47:22:101 CPU/(16484:16484): Me llego el marco que es 1
+[INFO] 14:47:22:101 CPU/(16484:16484): Se agrega la pagina 1 con marco 1 a tlb
+[INFO] 14:47:23:101 CPU/(16484:16484): Le envio a memoria direccion fisica: Marco:1 y Offset: 4
+[INFO] 14:47:23:101 CPU/(16484:16484): Le envio a memoria el valor a escribir 101
+[INFO] 14:47:25:105 CPU/(16484:16484): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 14:47:25:106 CPU/(16484:16484): ----------------FINALIZA WRITE----------------
+
+[INFO] 14:47:25:107 CPU/(16484:16484): ----------------EXECUTE WRITE----------------
+[INFO] 14:47:25:107 CPU/(16484:16484): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 14:47:25:107 CPU/(16484:16484): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 14:47:26:108 CPU/(16484:16484): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 14:47:26:108 CPU/(16484:16484): Le envio a memoria entrada de tabla de 2do nivel que es 2
+[INFO] 14:47:27:109 CPU/(16484:16484): Me llego el marco que es 2
+[INFO] 14:47:27:109 CPU/(16484:16484): Se agrega la pagina 2 con marco 2 a tlb
+[INFO] 14:47:28:109 CPU/(16484:16484): Le envio a memoria direccion fisica: Marco:2 y Offset: 4
+[INFO] 14:47:28:109 CPU/(16484:16484): Le envio a memoria el valor a escribir 102
+[INFO] 14:47:30:110 CPU/(16484:16484): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 14:47:30:110 CPU/(16484:16484): ----------------FINALIZA WRITE----------------
+
+[INFO] 14:47:30:110 CPU/(16484:16484): ----------------EXECUTE WRITE----------------
+[INFO] 14:47:30:110 CPU/(16484:16484): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 14:47:30:110 CPU/(16484:16484): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 1)
+[INFO] 14:47:31:111 CPU/(16484:16484): Me llego el numero de tabla de segundoNivel que es  1
+[INFO] 14:47:31:111 CPU/(16484:16484): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 14:47:32:112 CPU/(16484:16484): Me llego el marco que es 3
+[INFO] 14:47:32:112 CPU/(16484:16484): Se agrega la pagina 4 con marco 3 a tlb
+[INFO] 14:47:33:112 CPU/(16484:16484): Le envio a memoria direccion fisica: Marco:3 y Offset: 8
+[INFO] 14:47:33:112 CPU/(16484:16484): Le envio a memoria el valor a escribir 104
+[INFO] 14:47:35:113 CPU/(16484:16484): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 14:47:35:113 CPU/(16484:16484): ----------------FINALIZA WRITE----------------
+
+[INFO] 14:47:35:113 CPU/(16484:16484): ----------------EXECUTE WRITE----------------
+[INFO] 14:47:35:113 CPU/(16484:16484): Le envio a memoria direccion fisica: Marco:0 y Offset: 4
+[INFO] 14:47:35:114 CPU/(16484:16484): Le envio a memoria el valor a escribir 110
+[INFO] 14:47:37:114 CPU/(16484:16484): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 14:47:37:114 CPU/(16484:16484): ----------------FINALIZA WRITE----------------
+
+[INFO] 14:47:37:114 CPU/(16484:16484): ----------------EXECUTE WRITE----------------
+[INFO] 14:47:37:115 CPU/(16484:16484): Le envio a memoria direccion fisica: Marco:0 y Offset: 8
+[INFO] 14:47:37:115 CPU/(16484:16484): Le envio a memoria el valor a escribir 120
+[INFO] 14:47:39:115 CPU/(16484:16484): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 14:47:39:116 CPU/(16484:16484): ----------------FINALIZA WRITE----------------
+
+[INFO] 14:47:39:116 CPU/(16484:16484): ----------------EXECUTE WRITE----------------
+[INFO] 14:47:39:116 CPU/(16484:16484): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 14:47:39:116 CPU/(16484:16484): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 2)
+[INFO] 14:47:40:116 CPU/(16484:16484): Me llego el numero de tabla de segundoNivel que es  2
+[INFO] 14:47:40:116 CPU/(16484:16484): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 14:47:41:118 CPU/(16484:16484): Me llego el marco que es 4
+[INFO] 14:47:41:118 CPU/(16484:16484): TLB: Reemplazo la pagina 8 en el marco 4 cuya entrada es 0
+[INFO] 14:47:41:118 CPU/(16484:16484): Le envio a memoria direccion fisica: Marco:4 y Offset: 4
+[INFO] 14:47:41:118 CPU/(16484:16484): Le envio a memoria el valor a escribir 108
+[INFO] 14:47:43:119 CPU/(16484:16484): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 14:47:43:119 CPU/(16484:16484): ----------------FINALIZA WRITE----------------
+
+[INFO] 14:47:43:119 CPU/(16484:16484): ----------------EXECUTE READ----------------
+[INFO] 14:47:43:119 CPU/(16484:16484): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 14:47:43:119 CPU/(16484:16484): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 14:47:44:120 CPU/(16484:16484): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 14:47:44:120 CPU/(16484:16484): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 14:47:45:121 CPU/(16484:16484): Me llego el marco que es 0
+[INFO] 14:47:45:121 CPU/(16484:16484): TLB: Reemplazo la pagina 0 en el marco 0 cuya entrada es 1
+[INFO] 14:47:45:121 CPU/(16484:16484): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 14:47:45:121 CPU/(16484:16484): ----------------FINALIZA READ----------------
+
+[INFO] 14:47:45:121 CPU/(16484:16484): ----------------EXECUTE READ----------------
+[INFO] 14:47:45:121 CPU/(16484:16484): Le envio a memoria direccion fisica: Marco:2 y Offset: 4
+[INFO] 14:47:45:121 CPU/(16484:16484): ----------------FINALIZA READ----------------
+
+[INFO] 14:47:45:121 CPU/(16484:16484): ----------------EXECUTE READ----------------
+[INFO] 14:47:45:121 CPU/(16484:16484): Le envio a memoria direccion fisica: Marco:3 y Offset: 8
+[INFO] 14:47:45:121 CPU/(16484:16484): ----------------FINALIZA READ----------------
+
+[INFO] 14:47:45:121 CPU/(16484:16484): Finalizo el proceso 
+[INFO] 14:47:45:121 CPU/(16484:16484): Termino cpu
+[INFO] 15:00:21:260 CPU/(17198:17198): Cpu listo para recibir a Kernel
+[INFO] 15:00:35:273 CPU/(17198:17198): Se conecto el Kernel!
+[INFO] 15:00:35:274 CPU/(17198:17198): Me llegaron las siguientes instrucciones:
+
+[INFO] 15:00:35:275 CPU/(17198:17198): WRITE
+[INFO] 15:00:35:276 CPU/(17198:17198): WRITE
+[INFO] 15:00:35:276 CPU/(17198:17198): WRITE
+[INFO] 15:00:35:276 CPU/(17198:17198): WRITE
+[INFO] 15:00:35:277 CPU/(17198:17198): WRITE
+[INFO] 15:00:35:277 CPU/(17198:17198): WRITE
+[INFO] 15:00:35:277 CPU/(17198:17198): WRITE
+[INFO] 15:00:35:277 CPU/(17198:17198): READ
+[INFO] 15:00:35:277 CPU/(17198:17198): READ
+[INFO] 15:00:35:277 CPU/(17198:17198): READ
+[INFO] 15:00:35:277 CPU/(17198:17198): EXIT
+[INFO] 15:00:35:278 CPU/(17198:17198): Se desconecto el kernel. Terminando conexion
+[INFO] 15:00:35:278 CPU/(17198:17198): Hola memoria, soy cpu
+[INFO] 15:00:36:279 CPU/(17198:17198): Me llegaron los siguientes valores:
+[INFO] 15:00:36:279 CPU/(17198:17198): tamanio de pagina: 128 
+[INFO] 15:00:36:279 CPU/(17198:17198): entradas por tabla: 4 
+
+[INFO] 15:00:36:279 CPU/(17198:17198): ----------------EXECUTE WRITE----------------
+[INFO] 15:00:36:279 CPU/(17198:17198): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 15:00:36:279 CPU/(17198:17198): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 15:00:37:280 CPU/(17198:17198): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 15:00:37:280 CPU/(17198:17198): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 15:00:38:281 CPU/(17198:17198): Me llego el marco que es 0
+[INFO] 15:00:38:281 CPU/(17198:17198): Se agrega la pagina 0 con marco 0 a tlb
+[INFO] 15:00:39:281 CPU/(17198:17198): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 15:00:39:281 CPU/(17198:17198): Le envio a memoria el valor a escribir 100
+[INFO] 15:00:41:283 CPU/(17198:17198): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 15:00:41:283 CPU/(17198:17198): ----------------FINALIZA WRITE----------------
+
+[INFO] 15:00:41:283 CPU/(17198:17198): ----------------EXECUTE WRITE----------------
+[INFO] 15:00:41:283 CPU/(17198:17198): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 15:00:41:283 CPU/(17198:17198): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 15:00:42:284 CPU/(17198:17198): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 15:00:42:284 CPU/(17198:17198): Le envio a memoria entrada de tabla de 2do nivel que es 1
+[INFO] 15:00:43:285 CPU/(17198:17198): Me llego el marco que es 1
+[INFO] 15:00:43:285 CPU/(17198:17198): Se agrega la pagina 1 con marco 1 a tlb
+[INFO] 15:00:44:286 CPU/(17198:17198): Le envio a memoria direccion fisica: Marco:1 y Offset: 4
+[INFO] 15:00:44:286 CPU/(17198:17198): Le envio a memoria el valor a escribir 101
+[INFO] 15:00:46:287 CPU/(17198:17198): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 15:00:46:287 CPU/(17198:17198): ----------------FINALIZA WRITE----------------
+
+[INFO] 15:00:46:287 CPU/(17198:17198): ----------------EXECUTE WRITE----------------
+[INFO] 15:00:46:287 CPU/(17198:17198): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 15:00:46:287 CPU/(17198:17198): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 15:00:47:289 CPU/(17198:17198): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 15:00:47:289 CPU/(17198:17198): Le envio a memoria entrada de tabla de 2do nivel que es 2
+[INFO] 15:00:48:290 CPU/(17198:17198): Me llego el marco que es 2
+[INFO] 15:00:48:290 CPU/(17198:17198): Se agrega la pagina 2 con marco 2 a tlb
+[INFO] 15:00:49:290 CPU/(17198:17198): Le envio a memoria direccion fisica: Marco:2 y Offset: 4
+[INFO] 15:00:49:290 CPU/(17198:17198): Le envio a memoria el valor a escribir 102
+[INFO] 15:00:51:291 CPU/(17198:17198): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 15:00:51:291 CPU/(17198:17198): ----------------FINALIZA WRITE----------------
+
+[INFO] 15:00:51:291 CPU/(17198:17198): ----------------EXECUTE WRITE----------------
+[INFO] 15:00:51:292 CPU/(17198:17198): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 15:00:51:292 CPU/(17198:17198): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 1)
+[INFO] 15:00:52:293 CPU/(17198:17198): Me llego el numero de tabla de segundoNivel que es  1
+[INFO] 15:00:52:293 CPU/(17198:17198): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 15:00:53:294 CPU/(17198:17198): Me llego el marco que es 3
+[INFO] 15:00:53:294 CPU/(17198:17198): Se agrega la pagina 4 con marco 3 a tlb
+[INFO] 15:00:54:294 CPU/(17198:17198): Le envio a memoria direccion fisica: Marco:3 y Offset: 8
+[INFO] 15:00:54:294 CPU/(17198:17198): Le envio a memoria el valor a escribir 104
+[INFO] 15:00:56:296 CPU/(17198:17198): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 15:00:56:296 CPU/(17198:17198): ----------------FINALIZA WRITE----------------
+
+[INFO] 15:00:56:296 CPU/(17198:17198): ----------------EXECUTE WRITE----------------
+[INFO] 15:00:56:296 CPU/(17198:17198): Le envio a memoria direccion fisica: Marco:0 y Offset: 4
+[INFO] 15:00:56:296 CPU/(17198:17198): Le envio a memoria el valor a escribir 110
+[INFO] 15:00:58:297 CPU/(17198:17198): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 15:00:58:297 CPU/(17198:17198): ----------------FINALIZA WRITE----------------
+
+[INFO] 15:00:58:297 CPU/(17198:17198): ----------------EXECUTE WRITE----------------
+[INFO] 15:00:58:297 CPU/(17198:17198): Le envio a memoria direccion fisica: Marco:0 y Offset: 8
+[INFO] 15:00:58:298 CPU/(17198:17198): Le envio a memoria el valor a escribir 120
+[INFO] 15:01:00:301 CPU/(17198:17198): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 15:01:00:301 CPU/(17198:17198): ----------------FINALIZA WRITE----------------
+
+[INFO] 15:01:00:301 CPU/(17198:17198): ----------------EXECUTE WRITE----------------
+[INFO] 15:01:00:301 CPU/(17198:17198): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 15:01:00:301 CPU/(17198:17198): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 2)
+[INFO] 15:01:01:301 CPU/(17198:17198): Me llego el numero de tabla de segundoNivel que es  2
+[INFO] 15:01:01:302 CPU/(17198:17198): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 15:01:02:303 CPU/(17198:17198): Me llego el marco que es 4
+[INFO] 15:01:02:303 CPU/(17198:17198): TLB: Reemplazo la pagina 8 en el marco 4 cuya entrada es 1
+[INFO] 15:01:02:303 CPU/(17198:17198): Le envio a memoria direccion fisica: Marco:4 y Offset: 4
+[INFO] 15:01:02:303 CPU/(17198:17198): Le envio a memoria el valor a escribir 108
+[INFO] 15:01:04:304 CPU/(17198:17198): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 15:01:04:304 CPU/(17198:17198): ----------------FINALIZA WRITE----------------
+
+[INFO] 15:01:04:304 CPU/(17198:17198): ----------------EXECUTE READ----------------
+[INFO] 15:01:04:304 CPU/(17198:17198): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 15:01:04:304 CPU/(17198:17198): ----------------FINALIZA READ----------------
+
+[INFO] 15:01:04:304 CPU/(17198:17198): ----------------EXECUTE READ----------------
+[INFO] 15:01:04:304 CPU/(17198:17198): Le envio a memoria direccion fisica: Marco:2 y Offset: 4
+[INFO] 15:01:04:304 CPU/(17198:17198): ----------------FINALIZA READ----------------
+
+[INFO] 15:01:04:304 CPU/(17198:17198): ----------------EXECUTE READ----------------
+[INFO] 15:01:04:304 CPU/(17198:17198): Le envio a memoria direccion fisica: Marco:3 y Offset: 8
+[INFO] 15:01:04:304 CPU/(17198:17198): ----------------FINALIZA READ----------------
+
+[INFO] 15:01:04:304 CPU/(17198:17198): Finalizo el proceso 
+[INFO] 15:01:04:304 CPU/(17198:17198): Termino cpu
+[INFO] 20:26:37:696 CPU/(11888:11888): Cpu listo para recibir a Kernel
+[INFO] 20:28:10:991 CPU/(12204:12204): Cpu listo para recibir a Kernel
+[INFO] 20:28:34:321 CPU/(12204:12204): Se conecto el Kernel!
+[INFO] 20:28:34:322 CPU/(12204:12204): Me llegaron las siguientes instrucciones:
+
+[INFO] 20:28:34:323 CPU/(12204:12204): WRITE
+[INFO] 20:28:34:323 CPU/(12204:12204): WRITE
+[INFO] 20:28:34:323 CPU/(12204:12204): WRITE
+[INFO] 20:28:34:323 CPU/(12204:12204): WRITE
+[INFO] 20:28:34:323 CPU/(12204:12204): WRITE
+[INFO] 20:28:34:323 CPU/(12204:12204): WRITE
+[INFO] 20:28:34:324 CPU/(12204:12204): WRITE
+[INFO] 20:28:34:324 CPU/(12204:12204): READ
+[INFO] 20:28:34:324 CPU/(12204:12204): READ
+[INFO] 20:28:34:325 CPU/(12204:12204): READ
+[INFO] 20:28:34:325 CPU/(12204:12204): EXIT
+[INFO] 20:28:34:325 CPU/(12204:12204): Se desconecto el kernel. Terminando conexion
+[INFO] 20:28:34:326 CPU/(12204:12204): Hola memoria, soy cpu
+[INFO] 20:28:35:326 CPU/(12204:12204): Me llegaron los siguientes valores:
+[INFO] 20:28:35:327 CPU/(12204:12204): tamanio de pagina: 128 
+[INFO] 20:28:35:327 CPU/(12204:12204): entradas por tabla: 4 
+
+[INFO] 20:28:35:327 CPU/(12204:12204): ----------------EXECUTE WRITE----------------
+[INFO] 20:28:35:327 CPU/(12204:12204): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 20:28:35:327 CPU/(12204:12204): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 20:28:36:327 CPU/(12204:12204): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 20:28:36:327 CPU/(12204:12204): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 20:28:37:328 CPU/(12204:12204): Me llego el marco que es 0
+[INFO] 20:28:37:328 CPU/(12204:12204): Se agrega la pagina 0 con marco 0 a tlb
+[INFO] 20:28:38:329 CPU/(12204:12204): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 20:28:38:329 CPU/(12204:12204): Le envio a memoria el valor a escribir 100
+[INFO] 20:28:40:330 CPU/(12204:12204): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 20:28:40:330 CPU/(12204:12204): ----------------FINALIZA WRITE----------------
+
+[INFO] 20:28:40:330 CPU/(12204:12204): ----------------EXECUTE WRITE----------------
+[INFO] 20:28:40:330 CPU/(12204:12204): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 20:28:40:330 CPU/(12204:12204): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 20:28:41:330 CPU/(12204:12204): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 20:28:41:330 CPU/(12204:12204): Le envio a memoria entrada de tabla de 2do nivel que es 1
+[INFO] 20:28:42:331 CPU/(12204:12204): Me llego el marco que es 1
+[INFO] 20:28:42:331 CPU/(12204:12204): Se agrega la pagina 1 con marco 1 a tlb
+[INFO] 20:28:43:331 CPU/(12204:12204): Le envio a memoria direccion fisica: Marco:1 y Offset: 4
+[INFO] 20:28:43:332 CPU/(12204:12204): Le envio a memoria el valor a escribir 101
+[INFO] 20:28:45:332 CPU/(12204:12204): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 20:28:45:332 CPU/(12204:12204): ----------------FINALIZA WRITE----------------
+
+[INFO] 20:28:45:332 CPU/(12204:12204): ----------------EXECUTE WRITE----------------
+[INFO] 20:28:45:332 CPU/(12204:12204): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 20:28:45:333 CPU/(12204:12204): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 20:28:46:337 CPU/(12204:12204): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 20:28:46:337 CPU/(12204:12204): Le envio a memoria entrada de tabla de 2do nivel que es 2
+[INFO] 20:28:47:337 CPU/(12204:12204): Me llego el marco que es 2
+[INFO] 20:28:47:338 CPU/(12204:12204): Se agrega la pagina 2 con marco 2 a tlb
+[INFO] 20:28:48:338 CPU/(12204:12204): Le envio a memoria direccion fisica: Marco:2 y Offset: 4
+[INFO] 20:28:48:339 CPU/(12204:12204): Le envio a memoria el valor a escribir 102
+[INFO] 20:28:50:339 CPU/(12204:12204): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 20:28:50:340 CPU/(12204:12204): ----------------FINALIZA WRITE----------------
+
+[INFO] 20:28:50:340 CPU/(12204:12204): ----------------EXECUTE WRITE----------------
+[INFO] 20:28:50:340 CPU/(12204:12204): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 20:28:50:340 CPU/(12204:12204): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 1)
+[INFO] 20:28:51:341 CPU/(12204:12204): Me llego el numero de tabla de segundoNivel que es  1
+[INFO] 20:28:51:341 CPU/(12204:12204): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 20:28:52:342 CPU/(12204:12204): Me llego el marco que es 3
+[INFO] 20:28:52:342 CPU/(12204:12204): Se agrega la pagina 4 con marco 3 a tlb
+[INFO] 20:28:53:342 CPU/(12204:12204): Le envio a memoria direccion fisica: Marco:3 y Offset: 8
+[INFO] 20:28:53:343 CPU/(12204:12204): Le envio a memoria el valor a escribir 104
+[INFO] 20:28:55:345 CPU/(12204:12204): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 20:28:55:345 CPU/(12204:12204): ----------------FINALIZA WRITE----------------
+
+[INFO] 20:28:55:345 CPU/(12204:12204): ----------------EXECUTE WRITE----------------
+[INFO] 20:28:55:345 CPU/(12204:12204): Le envio a memoria direccion fisica: Marco:0 y Offset: 4
+[INFO] 20:28:55:345 CPU/(12204:12204): Le envio a memoria el valor a escribir 110
+[INFO] 20:28:57:346 CPU/(12204:12204): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 20:28:57:346 CPU/(12204:12204): ----------------FINALIZA WRITE----------------
+
+[INFO] 20:28:57:346 CPU/(12204:12204): ----------------EXECUTE WRITE----------------
+[INFO] 20:28:57:346 CPU/(12204:12204): Le envio a memoria direccion fisica: Marco:0 y Offset: 8
+[INFO] 20:28:57:346 CPU/(12204:12204): Le envio a memoria el valor a escribir 120
+[INFO] 20:28:59:347 CPU/(12204:12204): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 20:28:59:347 CPU/(12204:12204): ----------------FINALIZA WRITE----------------
+
+[INFO] 20:28:59:347 CPU/(12204:12204): ----------------EXECUTE WRITE----------------
+[INFO] 20:28:59:347 CPU/(12204:12204): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 20:28:59:347 CPU/(12204:12204): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 2)
+[INFO] 20:29:00:348 CPU/(12204:12204): Me llego el numero de tabla de segundoNivel que es  2
+[INFO] 20:29:00:349 CPU/(12204:12204): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 20:29:01:349 CPU/(12204:12204): Me llego el marco que es 4
+[INFO] 20:29:01:349 CPU/(12204:12204): TLB: Reemplazo la pagina 8 en el marco 4 cuya entrada es 1
+[INFO] 20:29:01:349 CPU/(12204:12204): Le envio a memoria direccion fisica: Marco:4 y Offset: 4
+[INFO] 20:29:01:349 CPU/(12204:12204): Le envio a memoria el valor a escribir 108
+[INFO] 20:29:03:351 CPU/(12204:12204): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 20:29:03:351 CPU/(12204:12204): ----------------FINALIZA WRITE----------------
+
+[INFO] 20:29:03:351 CPU/(12204:12204): ----------------EXECUTE READ----------------
+[INFO] 20:29:03:351 CPU/(12204:12204): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 20:29:03:351 CPU/(12204:12204): ----------------FINALIZA READ----------------
+
+[INFO] 20:29:03:351 CPU/(12204:12204): ----------------EXECUTE READ----------------
+[INFO] 20:29:03:351 CPU/(12204:12204): Le envio a memoria direccion fisica: Marco:2 y Offset: 4
+[INFO] 20:29:03:351 CPU/(12204:12204): ----------------FINALIZA READ----------------
+
+[INFO] 20:29:03:351 CPU/(12204:12204): ----------------EXECUTE READ----------------
+[INFO] 20:29:03:351 CPU/(12204:12204): Le envio a memoria direccion fisica: Marco:3 y Offset: 8
+[INFO] 20:29:03:351 CPU/(12204:12204): ----------------FINALIZA READ----------------
+
+[INFO] 20:29:03:351 CPU/(12204:12204): Finalizo el proceso 
+[INFO] 20:29:03:351 CPU/(12204:12204): Termino cpu
+[INFO] 22:07:15:594 CPU/(24118:24118): Cpu listo para recibir a Kernel
+[INFO] 22:07:30:713 CPU/(24118:24118): Se conecto el Kernel!
+[INFO] 22:07:30:715 CPU/(24118:24118): Me llegaron las siguientes instrucciones:
+
+[INFO] 22:07:30:716 CPU/(24118:24118): WRITE
+[INFO] 22:07:30:716 CPU/(24118:24118): WRITE
+[INFO] 22:07:30:716 CPU/(24118:24118): WRITE
+[INFO] 22:07:30:720 CPU/(24118:24118): WRITE
+[INFO] 22:07:30:720 CPU/(24118:24118): WRITE
+[INFO] 22:07:30:721 CPU/(24118:24118): WRITE
+[INFO] 22:07:30:721 CPU/(24118:24118): WRITE
+[INFO] 22:07:30:721 CPU/(24118:24118): READ
+[INFO] 22:07:30:721 CPU/(24118:24118): READ
+[INFO] 22:07:30:721 CPU/(24118:24118): READ
+[INFO] 22:07:30:721 CPU/(24118:24118): EXIT
+[INFO] 22:07:30:721 CPU/(24118:24118): Se desconecto el kernel. Terminando conexion
+[INFO] 22:07:30:722 CPU/(24118:24118): Hola memoria, soy cpu
+[INFO] 22:07:31:722 CPU/(24118:24118): Me llegaron los siguientes valores:
+[INFO] 22:07:31:723 CPU/(24118:24118): tamanio de pagina: 128 
+[INFO] 22:07:31:723 CPU/(24118:24118): entradas por tabla: 4 
+
+[INFO] 22:07:31:723 CPU/(24118:24118): ----------------EXECUTE WRITE----------------
+[INFO] 22:07:31:723 CPU/(24118:24118): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 22:07:31:723 CPU/(24118:24118): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 22:07:32:723 CPU/(24118:24118): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 22:07:32:723 CPU/(24118:24118): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 22:07:33:729 CPU/(24118:24118): Me llego el marco que es 0
+[INFO] 22:07:33:729 CPU/(24118:24118): Se agrega la pagina 0 con marco 0 a tlb
+[INFO] 22:07:34:729 CPU/(24118:24118): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 22:07:34:730 CPU/(24118:24118): Le envio a memoria el valor a escribir 100
+[INFO] 22:07:36:732 CPU/(24118:24118): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 22:07:36:732 CPU/(24118:24118): ----------------FINALIZA WRITE----------------
+
+[INFO] 22:07:36:732 CPU/(24118:24118): ----------------EXECUTE WRITE----------------
+[INFO] 22:07:36:732 CPU/(24118:24118): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 22:07:36:732 CPU/(24118:24118): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 22:07:37:733 CPU/(24118:24118): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 22:07:37:733 CPU/(24118:24118): Le envio a memoria entrada de tabla de 2do nivel que es 1
+[INFO] 22:07:38:734 CPU/(24118:24118): Me llego el marco que es 1
+[INFO] 22:07:38:734 CPU/(24118:24118): Se agrega la pagina 1 con marco 1 a tlb
+[INFO] 22:07:39:734 CPU/(24118:24118): Le envio a memoria direccion fisica: Marco:1 y Offset: 4
+[INFO] 22:07:39:734 CPU/(24118:24118): Le envio a memoria el valor a escribir 101
+[INFO] 22:07:41:735 CPU/(24118:24118): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 22:07:41:735 CPU/(24118:24118): ----------------FINALIZA WRITE----------------
+
+[INFO] 22:07:41:735 CPU/(24118:24118): ----------------EXECUTE WRITE----------------
+[INFO] 22:07:41:735 CPU/(24118:24118): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 22:07:41:735 CPU/(24118:24118): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 0)
+[INFO] 22:07:42:737 CPU/(24118:24118): Me llego el numero de tabla de segundoNivel que es  0
+[INFO] 22:07:42:737 CPU/(24118:24118): Le envio a memoria entrada de tabla de 2do nivel que es 2
+[INFO] 22:07:43:738 CPU/(24118:24118): Me llego el marco que es 2
+[INFO] 22:07:43:738 CPU/(24118:24118): Se agrega la pagina 2 con marco 2 a tlb
+[INFO] 22:07:44:738 CPU/(24118:24118): Le envio a memoria direccion fisica: Marco:2 y Offset: 4
+[INFO] 22:07:44:738 CPU/(24118:24118): Le envio a memoria el valor a escribir 102
+[INFO] 22:07:46:740 CPU/(24118:24118): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 22:07:46:740 CPU/(24118:24118): ----------------FINALIZA WRITE----------------
+
+[INFO] 22:07:46:740 CPU/(24118:24118): ----------------EXECUTE WRITE----------------
+[INFO] 22:07:46:740 CPU/(24118:24118): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 22:07:46:740 CPU/(24118:24118): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 1)
+[INFO] 22:07:47:742 CPU/(24118:24118): Me llego el numero de tabla de segundoNivel que es  1
+[INFO] 22:07:47:742 CPU/(24118:24118): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 22:07:48:742 CPU/(24118:24118): Me llego el marco que es 3
+[INFO] 22:07:48:742 CPU/(24118:24118): Se agrega la pagina 4 con marco 3 a tlb
+[INFO] 22:07:49:743 CPU/(24118:24118): Le envio a memoria direccion fisica: Marco:3 y Offset: 8
+[INFO] 22:07:49:743 CPU/(24118:24118): Le envio a memoria el valor a escribir 104
+[INFO] 22:07:51:744 CPU/(24118:24118): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 22:07:51:744 CPU/(24118:24118): ----------------FINALIZA WRITE----------------
+
+[INFO] 22:07:51:744 CPU/(24118:24118): ----------------EXECUTE WRITE----------------
+[INFO] 22:07:51:744 CPU/(24118:24118): Le envio a memoria direccion fisica: Marco:0 y Offset: 4
+[INFO] 22:07:51:744 CPU/(24118:24118): Le envio a memoria el valor a escribir 110
+[INFO] 22:07:53:746 CPU/(24118:24118): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 22:07:53:746 CPU/(24118:24118): ----------------FINALIZA WRITE----------------
+
+[INFO] 22:07:53:746 CPU/(24118:24118): ----------------EXECUTE WRITE----------------
+[INFO] 22:07:53:746 CPU/(24118:24118): Le envio a memoria direccion fisica: Marco:0 y Offset: 8
+[INFO] 22:07:53:746 CPU/(24118:24118): Le envio a memoria el valor a escribir 120
+[INFO] 22:07:55:748 CPU/(24118:24118): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 22:07:55:748 CPU/(24118:24118): ----------------FINALIZA WRITE----------------
+
+[INFO] 22:07:55:748 CPU/(24118:24118): ----------------EXECUTE WRITE----------------
+[INFO] 22:07:55:748 CPU/(24118:24118): La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)
+[INFO] 22:07:55:748 CPU/(24118:24118): Le envio a memoria nro tabla 1er nivel y entrada de 1er nivel (que son 0 y 2)
+[INFO] 22:07:56:750 CPU/(24118:24118): Me llego el numero de tabla de segundoNivel que es  2
+[INFO] 22:07:56:750 CPU/(24118:24118): Le envio a memoria entrada de tabla de 2do nivel que es 0
+[INFO] 22:07:57:751 CPU/(24118:24118): Me llego el marco que es 4
+[INFO] 22:07:57:752 CPU/(24118:24118): TLB: Reemplazo la pagina 8 en el marco 4 cuya entrada es 1
+[INFO] 22:07:57:752 CPU/(24118:24118): Le envio a memoria direccion fisica: Marco:4 y Offset: 4
+[INFO] 22:07:57:752 CPU/(24118:24118): Le envio a memoria el valor a escribir 108
+[INFO] 22:07:59:754 CPU/(24118:24118): Me llego el mensaje Se escribio el valor correctamente
+[INFO] 22:07:59:755 CPU/(24118:24118): ----------------FINALIZA WRITE----------------
+
+[INFO] 22:07:59:755 CPU/(24118:24118): ----------------EXECUTE READ----------------
+[INFO] 22:07:59:755 CPU/(24118:24118): Le envio a memoria direccion fisica: Marco:0 y Offset: 0
+[INFO] 22:07:59:755 CPU/(24118:24118): ----------------FINALIZA READ----------------
+
+[INFO] 22:07:59:755 CPU/(24118:24118): ----------------EXECUTE READ----------------
+[INFO] 22:07:59:755 CPU/(24118:24118): Le envio a memoria direccion fisica: Marco:2 y Offset: 4
+[INFO] 22:07:59:755 CPU/(24118:24118): ----------------FINALIZA READ----------------
+
+[INFO] 22:07:59:755 CPU/(24118:24118): ----------------EXECUTE READ----------------
+[INFO] 22:07:59:755 CPU/(24118:24118): Le envio a memoria direccion fisica: Marco:3 y Offset: 8
+[INFO] 22:07:59:755 CPU/(24118:24118): ----------------FINALIZA READ----------------
+
+[INFO] 22:07:59:755 CPU/(24118:24118): Finalizo el proceso 
+[INFO] 22:07:59:755 CPU/(24118:24118): Termino cpu

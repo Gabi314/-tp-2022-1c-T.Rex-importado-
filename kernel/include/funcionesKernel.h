@@ -17,13 +17,15 @@
 #define IP_KERNEL "127.0.0.1"
 #define PUERTO_KERNEL "8000"
 
-int pidKernel;
+
 int socketServidor;
 int socketCpuDispatch;
 char* ipCpu;
-int puertoCpuDispatch;//son intss
+int puertoCpuDispatch;
 char* puertoCpuInterrupt;
 char* puertoKernel;
+
+int pidKernel;
 char* algoritmoPlanificacion;
 int estimacionInicial;
 int alfa;
@@ -31,13 +33,15 @@ int gradoDeMultiprogramacion;
 int gradoMultiprogramacionActual;
 bool procesoEjecutando;
 char* tiempoMaximoBloqueado;
+
 int socketMemoria;
 char* ipMemoria;
-int puertoMemoria;//son intss
+int puertoMemoria;
+
 int tamanioTotalIdentificadores;
 int contadorInstrucciones;
 int desplazamiento;
-char* tamanioDelProceso;
+int tamanioDelProceso;
 
 t_queue* colaNew;
 t_queue* colaReady;
@@ -69,7 +73,8 @@ typedef struct
 
 typedef enum
 {	MENSAJE,
-	RECIBIR_INSTRUCCIONES
+	RECIBIR_INSTRUCCIONES,
+	RECIBIR_TAMANIO_DEL_PROCESO
 }op_code_consola;
 
 typedef enum
@@ -89,7 +94,7 @@ t_pcb* pcb;
 //Funciones como cliente de Memoria
 int conexionConMemoria();
 void enviarPID();
-void inicializarConfiguraciones();
+void inicializarConfiguraciones(char*);
 t_list* recibir_paquete_int(int);
 
 //-------------- Funciones para Kernel como servidor de consola ---------
@@ -98,6 +103,7 @@ void* recibir_buffer(int*, int);
 int iniciar_servidor(void);
 int esperar_cliente(int);
 t_list* recibir_paquete(int);
+t_list* recibir_paqueteInt(int);
 t_pcb* tomar_pcb(int);
 void recibir_mensaje(int);
 int recibir_operacion(int);
@@ -151,7 +157,7 @@ t_config* iniciar_config(void);
 void terminar_programa(int, t_log*, t_config*);
 int conexionConCpu(void);
 
-void cargar_pcb();
+void cargar_pcb(int);
 void crear_colas();
 void generar_conexiones();// Todas las funciones que agreguen, hagan el prototipo sino rompe los huevos los warning cuando compila
 

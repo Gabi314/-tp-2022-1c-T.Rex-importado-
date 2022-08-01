@@ -5,10 +5,19 @@ int nroTabla1erNivel = 0; //harcodeada: esto en realidad viene del pcb -> tabla_
 t_pcb* unPcb;  // viene de kernel
 int hayInstrucciones;
 int bloqueado = 0;
-int main(void) {
+int main(int argc, char *argv[]) {
+
 	logger = log_create("cpu.log", "CPU", 1, LOG_LEVEL_DEBUG);
-	inicializarConfiguraciones();
+
+	if(argc < 2) {
+	    log_error(logger,"Falta un parametro");
+	    return EXIT_FAILURE;
+	}
+
+	inicializarConfiguraciones(argv[1]);
+
 	unPcb = malloc(sizeof(t_pcb));
+
 	conexionConKernel(); //recibo el pcb
 	
 	tlb = inicializarTLB();
@@ -29,8 +38,8 @@ int main(void) {
 }
 
 
-void inicializarConfiguraciones(){
-	config = config_create("cpu.config");// ver bien como recibir los path de config por parametros
+void inicializarConfiguraciones(char* unaConfig){
+	config = config_create(unaConfig);// ver bien como recibir los path de config por parametros
 
 	ipMemoria = config_get_string_value(config,"IP_MEMORIA");
 	puertoMemoria = config_get_int_value(config,"PUERTO_MEMORIA");
@@ -66,7 +75,7 @@ int conexionConMemoria(void){
 
 int accederAMemoria(int marco){
 
-	log_info(logger,"La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)");
+	log_info(logger,"La pagina no se encuentra en tlb, se debera acceder a memoria(tabla de paginas)"); // dice que la 0 no esta en tlb DEBUGGEAR
 	enviarEntradaTabla1erNivel();//1er acceso con esto memoria manda nroTabla2doNivel
 
 	int seAccedeAMemoria = 1;

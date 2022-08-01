@@ -152,7 +152,7 @@ void enviarDireccionesFisicasParaCopia(int,int,int,int);
 void terminar_programa(int, t_log*, t_config*);
 
 int conexionConMemoria(void);
-void inicializarConfiguraciones();
+void inicializarConfiguraciones(char*);
 
 t_list* inicializarTLB();
 void generarListaCamposTLB(t_list*);

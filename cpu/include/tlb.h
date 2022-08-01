@@ -23,7 +23,7 @@ int chequearMarcoEnTLB(int numeroDePagina){
 				return unaEntradaTLB->nroDeMarco; // se puede almacenar este valor en una variable y retornarlo fuera del for
 			}
 	}
-	free(unaEntradaTLB);
+	//free(unaEntradaTLB);
 	return -1;
 
 
@@ -38,6 +38,8 @@ void agregarEntradaATLB(int marco,int pagina){
 	unaEntrada->instanteGuardada = time(NULL);
 	unaEntrada->ultimaReferencia = time(NULL);
 
+	log_info(logger,"Se agrega la pagina %d con marco %d a tlb",pagina,marco);
+
 	list_add(tlb,unaEntrada);
 
 }
@@ -47,7 +49,7 @@ void algoritmosDeReemplazoTLB(int pagina,int marco){//probarrrr-----------------
 		entradaTLB* unaEntradaTLB = malloc(sizeof(entradaTLB));
 		entradaTLB* otraEntradaTLB = malloc(sizeof(entradaTLB));
 
-		int indiceConInstanteGuardadoMayor = 1;
+		int indiceConInstanteGuardadoMayor = 0;
 
 		for(int i = 0; i<cantidadEntradasTlb;i++){
 			unaEntradaTLB = list_get(tlb,i);

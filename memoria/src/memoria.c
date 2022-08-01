@@ -26,12 +26,19 @@ t_list* listaT2Nivel;
 t_list* listaDePaginasEnMemoria;
 
 
-int main(void) {
+int main(int argc, char *argv[]) {
 	pathDeArchivos = string_new();
 	pathDeArchivos = "/home/utnso/swap";
 
 	logger = log_create("memoria.log", "MEMORIA", 1, LOG_LEVEL_INFO);
-	crearConfiguraciones();
+
+	if(argc < 2) {
+	    log_error(logger,"Falta un parametro");
+	    return EXIT_FAILURE;
+	}
+
+	crearConfiguraciones(argv[1]);
+
 	crearDirectorio();
 
 	listaT1nivel = list_create();
@@ -39,9 +46,11 @@ int main(void) {
 	listaT2Nivel = list_create();
 	listaDePaginasEnMemoria = list_create();
 	inicializarMarcos();
+
+	conexionConKernel();
+	liberar_conexion(clienteKernel);
 	inicializarEstructuras(pidActual);//esto tiene que estar despues de recibir el pid de kernel
-	//conexionConKernel();
-	//liberar_conexion(clienteKernel);
+
 	conexionConCpu();
 
 	log_info(logger,"Fin de memoria");
@@ -66,7 +75,7 @@ void crearDirectorio(){
 
 int conexionConCpu(void){
 
-	int server_fd = iniciar_servidor(); // tendria que estar comentado porque viene despues de coenxion con kernel
+	//int server_fd = iniciar_servidor(); // tendria que estar comentado porque viene despues de coenxion con kernel
 	log_info(logger, "Memoria lista para recibir a Cpu");
 	clienteCpu = esperar_cliente(server_fd);
 
@@ -177,8 +186,8 @@ int conexionConCpu(void){
 	return EXIT_SUCCESS;
 }
 
-void crearConfiguraciones(){
-	t_config* config = config_create("memoria.config");
+void crearConfiguraciones(char* unaConfig){
+	t_config* config = config_create(unaConfig);
 
 	if(config  == NULL){
 		printf("Error leyendo archivo de configuración. \n");
@@ -648,6 +657,9 @@ void cargarPagina(entradaTabla2doNivel* unaEntrada){
 		modificarPaginaACargar(unaEntrada,marcoAAsignar->numeroDeMarco);
 		list_add(listaDePaginasEnMemoria,unaEntrada);
 		contadorDeMarcosPorProceso++; // ANALIZAR CONTADOR
+		
+		log_info(logger,"La cantidad de marcos asignados a este proceso es: %d", contadorDeMarcosPorProceso);
+		
 		if(unaEntrada->modificado == 1){
 					leerDeSwap(unaEntrada->numeroDeEntradaPorProceso,marcoAAsignar->numeroDeMarco);
 				}

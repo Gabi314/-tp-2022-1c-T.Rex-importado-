@@ -20,7 +20,8 @@
 typedef enum
 {
 	MENSAJE,
-	PAQUETE
+	INSTRUCCIONES,
+	TAMANIO_PROCESO
 }op_code;
 
 typedef struct
@@ -44,34 +45,24 @@ typedef struct
 // Esto para levantar la conexion de la consola----------------------
 int crear_conexion(char* ip, char* puerto);
 void enviar_mensaje(char* mensaje, int socket_cliente);
-t_paquete* crear_paquete(void);
+t_paquete* crear_paquete(int);
 void agregar_a_paquete(t_paquete* paquete, instrucciones* instruccion, int identificador_length);
+void agregar_a_paquete_tamanioProceso(t_paquete*,void*,int);
 void enviar_paquete(t_paquete* paquete, int socket_cliente);
 void liberar_conexion(int socket_cliente);
 void eliminar_paquete(t_paquete* paquete);
 
-
-// Funciones y estructuras de consola en si ---------------------------------------
-/*typedef enum{ Se podria usar un enum en un futuro
-	NO_OP = 1,
-	I_O = 2,
-	WRITE = 3,
-	COPY = 4,
-	READ = 5
-}nroDeInstruccion;
-typedef struct{
-	nroDeInstruccion unaInstruccion;
-	int parametro1;
-	int parametro2;
-}instruccion;
-*/
-
 t_log* logger;
 t_config* config;
+
+int conexion;
+char* ip;
+char* puerto;
 
 t_log* iniciar_logger(void);
 t_config* iniciar_config(void);
 void leer_consola(t_log*);
+void enviarTamanioDelProceso(int);
 void dividirInstruccionesAlPaquete(t_log* logger,t_paquete* paquete,char** lineasDeInstrucciones,instrucciones* instruccion);
 void terminar_programa(int, t_log*, t_config*);
 

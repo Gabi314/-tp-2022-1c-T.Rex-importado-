@@ -126,6 +126,28 @@ t_list* recibir_paquete(int socket_cliente)
 	return listaDeInstrucciones;
 }
 
+t_list* recibir_paqueteInt(int socket_cliente)
+{
+	int size;
+	int desplazamiento = 0;
+	void * buffer;
+	t_list* valores = list_create();
+	int tamanio;
+
+	buffer = recibir_buffer(&size, socket_cliente);
+	while(desplazamiento < size)
+	{
+		memcpy(&tamanio, buffer + desplazamiento, sizeof(int));
+		desplazamiento+=sizeof(int);
+		int valor = 0;
+		memcpy(&valor, buffer+desplazamiento, sizeof(int));
+		desplazamiento+=sizeof(int);
+		list_add(valores, (void *)valor);
+	}
+	free(buffer);
+	return valores;
+}
+
 
 t_pcb* tomar_pcb(int socket_cliente)
 {

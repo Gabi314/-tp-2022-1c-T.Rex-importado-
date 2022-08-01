@@ -2,36 +2,43 @@
 
 t_list* listaInstrucciones;
 
-int main(void) {
+int main(int argc, char *argv[]) {
 	logger = log_create("kernel.log", "KERNEL", 1, LOG_LEVEL_INFO);
-	inicializarConfiguraciones();
+
+	if(argc < 2) {
+	    log_error(logger,"Falta un parametro");
+	    return EXIT_FAILURE;
+	}
+
+
+	inicializarConfiguraciones(argv[1]);
 	//crear_colas();
     //generar_conexiones();
-
+	int nroTabla1erNivel = conexionConMemoria();
 	conexionConConsola();
-	cargar_pcb();
+	cargar_pcb(nroTabla1erNivel);
 	conexionConCpu();
-	//conexionConMemoria();
+
 }
 
 
-void cargar_pcb(){
+void cargar_pcb(int nroTabla1erNivel){
 	pcb = malloc(sizeof(t_pcb));
 	pcb -> instrucciones = list_create();
 
 	pcb->instrucciones = listaInstrucciones;
 	pcb->idProceso = 0; //esto es por la idea de tomas de hacerlo secuencial, proceso 1 id 0, proceso 2 id 1, etc...
 	pcb->program_counter = 0;
-	pcb->tamanioProceso = 1024; // viene por consola en realidad
-	pcb->tabla_paginas = 0;//viene de memoria
+	pcb->tamanioProceso = tamanioDelProceso;
+	pcb->tabla_paginas = nroTabla1erNivel;
 	pcb->estimacion_rafaga = estimacionInicial; // no se si varia
 
 
 	gradoMultiprogramacionActual = 0; //Arranca en 0 porque no hay procesos en memoria
 }
 
-void inicializarConfiguraciones(){
-	t_config* config = config_create("kernel.config");
+void inicializarConfiguraciones(char* unaConfig){
+	t_config* config = config_create(unaConfig);
 	if(config  == NULL){
 		printf("Error leyendo archivo de configuración. \n");
 	}
@@ -84,12 +91,11 @@ int conexionConMemoria(void){
 		listaQueContieneNroTabla1erNivel = recibir_paquete_int(socketMemoria);
 	}
 
-	//poner en pcb:
 	int nroTabla1erNivel = (int) list_get(listaQueContieneNroTabla1erNivel,0);
 
 	log_info(logger,"Me llego la tabla de primero nivel nro: %d",nroTabla1erNivel);
 
-	return EXIT_SUCCESS;
+	return nroTabla1erNivel;
 }
 
 void enviarPID(){//pasar entrada y nroTabla1ernivel
@@ -116,6 +122,8 @@ int conexionConConsola(void){
 	log_info(logger, "Kernel listo para recibir a consola");
 	int cliente_fd = esperar_cliente(server_fd);
 
+	t_list* listaQueContieneTamProceso;
+
 	while (1) {
 		int cod_op = recibir_operacion(cliente_fd);
 		switch (cod_op) {
@@ -125,9 +133,16 @@ int conexionConConsola(void){
 			case RECIBIR_INSTRUCCIONES:
 				listaInstrucciones = list_create();
 				listaInstrucciones = recibir_paquete(cliente_fd);
-				
+				log_info(logger,"me llegaron las instrucciones");
 				//list_iterate(instrucciones, (void*) iterator);
 			break;
+			case RECIBIR_TAMANIO_DEL_PROCESO:
+				listaQueContieneTamProceso = list_create();
+				listaQueContieneTamProceso = recibir_paqueteInt(cliente_fd);
+
+				tamanioDelProceso = (int) list_get(listaQueContieneTamProceso,0);
+				log_info(logger,"Me llego el tamanio de proceso %d",tamanioDelProceso);
+				break;
 			case -1:
 				log_error(logger, "La consola se desconecto. Finalizando Kernel");
 			return EXIT_FAILURE;

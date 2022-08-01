@@ -10,9 +10,6 @@ int main(int argc, char *argv[]) {
     	return EXIT_FAILURE;
 	}
 
-	int conexion;
-	char* ip;
-	char* puerto;
 
 	config = iniciar_config();
 
@@ -22,11 +19,12 @@ int main(int argc, char *argv[]) {
 	// Creamos una conexión hacia el servidor
 	conexion = crear_conexion(ip, puerto);
 
-	//Armamos y enviamos el paquete
-	t_paquete* paquete = crear_paquete();
+	int tamanioDelProceso = atoi(argv[1]);
+
+	enviarTamanioDelProceso(tamanioDelProceso);
 
 
-	FILE* archivo = fopen(argv[1], "r");
+	FILE* archivo = fopen(argv[2], "r");
 
 	if(archivo == NULL){
 		log_error(logger,"No se lee el archivo");
@@ -34,17 +32,15 @@ int main(int argc, char *argv[]) {
 		log_info(logger,"Se leyo el archivo correctamente");
 	}
 
-	//char * contenido = NULL;
-	//size_t len = 0;
-	//ssize_t read;
-
 	struct stat sb;
-	stat(argv[1], &sb);
+	stat(argv[2], &sb);
 	char * contenido = malloc(sb.st_size);;
 
 	char** lineasDeInstrucciones;
 
-	 while (fscanf(archivo, "%[^\n] ", contenido) != EOF) {
+	t_paquete* paquete = crear_paquete(INSTRUCCIONES);
+
+	while (fscanf(archivo, "%[^\n] ", contenido) != EOF) {
 
 		 instrucciones* instruccion = malloc(sizeof(instrucciones));
 
@@ -72,6 +68,7 @@ int main(int argc, char *argv[]) {
 	if (contenido) //valida si contenido es NULL
 	free(contenido);
 
+
 	// Enviamos el paquete
 	enviar_paquete(paquete,conexion);
 	eliminar_paquete(paquete);
@@ -79,6 +76,14 @@ int main(int argc, char *argv[]) {
 	terminar_programa(conexion, logger, config);
 
 
+}
+
+void enviarTamanioDelProceso(int tamanioDelProceso){
+	t_paquete* paquete = crear_paquete(TAMANIO_PROCESO);
+	agregar_a_paquete_tamanioProceso(paquete,&tamanioDelProceso,sizeof(tamanioDelProceso));
+
+	enviar_paquete(paquete,conexion);
+	eliminar_paquete(paquete);
 }
 
 void dividirInstruccionesAlPaquete(t_log* logger,t_paquete* paquete,char** lineasDeInstrucciones,instrucciones* instruccion){

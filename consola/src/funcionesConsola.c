@@ -67,10 +67,10 @@ void crear_buffer(t_paquete* paquete)
 }
 
 
-t_paquete* crear_paquete(void)
+t_paquete* crear_paquete(int cod_op)
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
-	paquete->codigo_operacion = PAQUETE;
+	paquete->codigo_operacion = cod_op;
 	crear_buffer(paquete);
 	return paquete;
 }
@@ -85,6 +85,16 @@ void agregar_a_paquete(t_paquete* paquete, instrucciones* instruccion, int ident
 	memcpy(paquete->buffer->stream + paquete->buffer->size + sizeof(int) + identificador_length, &instruccion->parametros, sizeof(int[2]));
 
 	paquete->buffer->size += identificador_length + sizeof(int) + sizeof(int[2]);
+}
+
+void agregar_a_paquete_tamanioProceso(t_paquete* paquete, void* valor, int tamanio)
+{
+	paquete->buffer->stream = realloc(paquete->buffer->stream, paquete->buffer->size + tamanio + sizeof(int));
+
+	memcpy(paquete->buffer->stream + paquete->buffer->size, &tamanio, sizeof(int));
+	memcpy(paquete->buffer->stream + paquete->buffer->size + sizeof(int), valor, tamanio);
+
+	paquete->buffer->size += tamanio + sizeof(int);
 }
 
 void enviar_paquete(t_paquete* paquete, int socket_cliente)

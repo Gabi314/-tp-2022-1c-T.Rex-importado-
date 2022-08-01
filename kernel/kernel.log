@@ -996,3 +996,94 @@
 [ERROR] 19:21:32:985 Kernel/(13031:13031): La consola se desconecto. Finalizando Kernel
 [INFO] 19:21:32:988 Kernel/(13031:13031): Hola cpu, soy Kernel
 [INFO] 19:21:32:988 Kernel/(13031:13031): Le envio a cpu el pcb
+[INFO] 12:38:55:951 Kernel/(4969:4969): Kernel listo para recibir a consola
+[INFO] 12:39:15:594 Kernel/(4969:4969): Se conecto la consola!
+[ERROR] 12:39:15:618 Kernel/(4969:4969): La consola se desconecto. Finalizando Kernel
+[INFO] 12:39:15:621 Kernel/(4969:4969): Hola cpu, soy Kernel
+[INFO] 12:39:15:621 Kernel/(4969:4969): Le envio a cpu el pcb
+[INFO] 12:44:54:176 Kernel/(5862:5862): Kernel listo para recibir a consola
+[INFO] 12:44:57:789 Kernel/(5862:5862): Se conecto la consola!
+[ERROR] 12:44:57:806 Kernel/(5862:5862): La consola se desconecto. Finalizando Kernel
+[INFO] 12:44:57:807 Kernel/(5862:5862): Hola cpu, soy Kernel
+[INFO] 12:44:57:807 Kernel/(5862:5862): Le envio a cpu el pcb
+[INFO] 12:53:58:784 Kernel/(7208:7208): Kernel listo para recibir a consola
+[INFO] 12:54:02:839 Kernel/(7208:7208): Se conecto la consola!
+[ERROR] 12:54:02:847 Kernel/(7208:7208): La consola se desconecto. Finalizando Kernel
+[INFO] 12:54:02:848 Kernel/(7208:7208): Hola cpu, soy Kernel
+[INFO] 12:54:02:848 Kernel/(7208:7208): Le envio a cpu el pcb
+[INFO] 13:11:54:377 Kernel/(9421:9421): Kernel listo para recibir a consola
+[INFO] 13:11:57:600 Kernel/(9421:9421): Se conecto la consola!
+[ERROR] 13:11:57:613 Kernel/(9421:9421): La consola se desconecto. Finalizando Kernel
+[INFO] 13:11:57:613 Kernel/(9421:9421): Hola cpu, soy Kernel
+[INFO] 13:11:57:613 Kernel/(9421:9421): Le envio a cpu el pcb
+[INFO] 14:32:15:058 Kernel/(14961:14961): Kernel listo para recibir a consola
+[INFO] 14:33:03:127 Kernel/(15076:15076): Kernel listo para recibir a consola
+[INFO] 14:36:13:109 Kernel/(15449:15449): Kernel listo para recibir a consola
+[INFO] 14:38:35:949 Kernel/(15449:15449): Se conecto la consola!
+[ERROR] 14:38:35:953 Kernel/(15449:15449): La consola se desconecto. Finalizando Kernel
+[INFO] 14:38:35:953 Kernel/(15449:15449): Hola cpu, soy Kernel
+[INFO] 14:38:35:953 Kernel/(15449:15449): Le envio a cpu el pcb
+[INFO] 14:39:36:001 Kernel/(15913:15913): Kernel listo para recibir a consola
+[INFO] 14:39:41:544 Kernel/(15913:15913): Se conecto la consola!
+[ERROR] 14:39:41:545 Kernel/(15913:15913): La consola se desconecto. Finalizando Kernel
+[INFO] 14:39:41:545 Kernel/(15913:15913): Hola cpu, soy Kernel
+[INFO] 14:39:41:546 Kernel/(15913:15913): Le envio a cpu el pcb
+[INFO] 14:47:09:987 Kernel/(16533:16533): Kernel listo para recibir a consola
+[INFO] 14:47:14:088 Kernel/(16533:16533): Se conecto la consola!
+[ERROR] 14:47:14:089 Kernel/(16533:16533): La consola se desconecto. Finalizando Kernel
+[INFO] 14:47:14:089 Kernel/(16533:16533): Hola cpu, soy Kernel
+[INFO] 14:47:14:090 Kernel/(16533:16533): Le envio a cpu el pcb
+[INFO] 15:00:26:535 Kernel/(17246:17246): Kernel listo para recibir a consola
+[INFO] 15:00:35:272 Kernel/(17246:17246): Se conecto la consola!
+[ERROR] 15:00:35:273 Kernel/(17246:17246): La consola se desconecto. Finalizando Kernel
+[INFO] 15:00:35:273 Kernel/(17246:17246): Hola cpu, soy Kernel
+[INFO] 15:00:35:273 Kernel/(17246:17246): Le envio a cpu el pcb
+[INFO] 20:12:05:369 Kernel/(9444:9444): Kernel listo para recibir a consola
+[INFO] 20:13:03:744 Kernel/(9444:9444): Se conecto la consola!
+[ERROR] 20:13:05:018 Kernel/(9444:9444): La consola se desconecto. Finalizando Kernel
+[INFO] 20:13:05:019 Kernel/(9444:9444): Hola cpu, soy Kernel
+[INFO] 20:15:07:190 Kernel/(10007:10007): Kernel listo para recibir a consola
+[INFO] 20:16:05:644 Kernel/(10007:10007): Se conecto la consola!
+[ERROR] 20:16:06:461 Kernel/(10007:10007): La consola se desconecto. Finalizando Kernel
+[INFO] 20:16:06:462 Kernel/(10007:10007): Hola cpu, soy Kernel
+[INFO] 20:16:57:773 Kernel/(10397:10397): Kernel listo para recibir a consola
+[INFO] 20:17:03:292 Kernel/(10397:10397): Se conecto la consola!
+[INFO] 20:17:03:298 Kernel/(10397:10397): Me llego el tamanio de proceso 1024
+[ERROR] 20:17:03:298 Kernel/(10397:10397): La consola se desconecto. Finalizando Kernel
+[INFO] 20:17:03:299 Kernel/(10397:10397): Hola cpu, soy Kernel
+[INFO] 20:17:03:299 Kernel/(10397:10397): Le envio a cpu el pcb
+[INFO] 20:18:43:279 Kernel/(10721:10721): Kernel listo para recibir a consola
+[INFO] 20:19:29:593 Kernel/(10721:10721): Se conecto la consola!
+[INFO] 20:19:29:593 Kernel/(10721:10721): Me llego el tamanio de proceso 1024
+[INFO] 20:19:29:594 Kernel/(10721:10721): me llegaron las instrucciones
+[ERROR] 20:19:29:594 Kernel/(10721:10721): La consola se desconecto. Finalizando Kernel
+[INFO] 20:26:43:508 KERNEL/(11954:11954): Hola memoria, soy Kernel
+[INFO] 20:26:43:514 KERNEL/(11954:11954): Le envio a memoria mi pid que es 0
+[INFO] 20:28:14:209 KERNEL/(12255:12255): Hola memoria, soy Kernel
+[INFO] 20:28:14:210 KERNEL/(12255:12255): Le envio a memoria mi pid que es 0
+[INFO] 20:28:14:222 KERNEL/(12255:12255): Me llego la tabla de primero nivel nro: 0
+[INFO] 20:28:14:222 Kernel/(12255:12255): Kernel listo para recibir a consola
+[INFO] 20:28:34:317 Kernel/(12255:12255): Se conecto la consola!
+[INFO] 20:28:34:318 Kernel/(12255:12255): Me llego el tamanio de proceso 1024
+[INFO] 20:28:34:319 Kernel/(12255:12255): me llegaron las instrucciones
+[ERROR] 20:28:34:320 Kernel/(12255:12255): La consola se desconecto. Finalizando Kernel
+[INFO] 20:28:34:321 Kernel/(12255:12255): Hola cpu, soy Kernel
+[INFO] 20:28:34:321 Kernel/(12255:12255): Le envio a cpu el pcb
+[INFO] 20:30:01:096 KERNEL/(12530:12530): Hola memoria, soy Kernel
+[INFO] 20:30:01:097 KERNEL/(12530:12530): Le envio a memoria mi pid que es 0
+[INFO] 20:34:24:384 KERNEL/(13171:13171): Hola memoria, soy Kernel
+[INFO] 20:34:24:385 KERNEL/(13171:13171): Le envio a memoria mi pid que es 0
+[INFO] 20:34:24:385 KERNEL/(13171:13171): Me llego la tabla de primero nivel nro: 0
+[INFO] 20:34:24:385 Kernel/(13171:13171): Kernel listo para recibir a consola
+[INFO] 20:35:35:564 KERNEL/(13366:13366): Hola memoria, soy Kernel
+[INFO] 20:35:35:566 KERNEL/(13366:13366): Le envio a memoria mi pid que es 0
+[INFO] 22:07:24:807 KERNEL/(24177:24177): Hola memoria, soy Kernel
+[INFO] 22:07:24:808 KERNEL/(24177:24177): Le envio a memoria mi pid que es 0
+[INFO] 22:07:24:808 KERNEL/(24177:24177): Me llego la tabla de primero nivel nro: 0
+[INFO] 22:07:24:809 Kernel/(24177:24177): Kernel listo para recibir a consola
+[INFO] 22:07:30:685 Kernel/(24177:24177): Se conecto la consola!
+[INFO] 22:07:30:685 Kernel/(24177:24177): Me llego el tamanio de proceso 1024
+[INFO] 22:07:30:713 Kernel/(24177:24177): me llegaron las instrucciones
+[ERROR] 22:07:30:713 Kernel/(24177:24177): La consola se desconecto. Finalizando Kernel
+[INFO] 22:07:30:713 Kernel/(24177:24177): Hola cpu, soy Kernel
+[INFO] 22:07:30:714 Kernel/(24177:24177): Le envio a cpu el pcb

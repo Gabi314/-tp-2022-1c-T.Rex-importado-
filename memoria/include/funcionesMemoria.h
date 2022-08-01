@@ -128,7 +128,7 @@ typedef struct{// capaz usar diccionario
 	int pid;
 }t_primerNivel;
 
-void crearConfiguraciones();
+void crearConfiguraciones(char*);
 void inicializarEstructuras();
 void inicializarMarcos();
 
