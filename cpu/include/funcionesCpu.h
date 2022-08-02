@@ -152,6 +152,8 @@ void enviarDireccionFisica(int,int,int);
 void enviarValorAEscribir(uint32_t);
 void enviarDireccionesFisicasParaCopia(int,int,int,int);
 
+void enviarPcb(t_pcb*);
+
 void terminar_programa(int, t_log*, t_config*);
 
 int conexionConMemoria(void);

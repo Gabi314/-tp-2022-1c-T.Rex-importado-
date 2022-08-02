@@ -244,7 +244,7 @@ t_paquete* agregar_a_paquete_kernel_cpu(t_pcb* pcb)
 	tamanioTotalIdentificadores = 0;
 	contadorInstrucciones = 0;
 	desplazamiento = 0;
-	paquete = crear_paquete(0);//despues vemos cual usar
+	paquete = crear_paquete(EXIT);//despues vemos cual usar
 	list_iterate(pcb->instrucciones, (void*) obtenerTamanioIdentificadores);
 	paquete->buffer->stream = realloc(paquete->buffer->stream, paquete->buffer->size + tamanioTotalIdentificadores + contadorInstrucciones*sizeof(int[2]) + contadorInstrucciones*sizeof(int) + 6*sizeof(int) + sizeof(float));
 	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->idProceso), sizeof(int));

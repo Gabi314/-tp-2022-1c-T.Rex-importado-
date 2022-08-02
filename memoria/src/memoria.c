@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
 	inicializarMarcos();
 
 	conexionConKernel();
-	liberar_conexion(clienteKernel);
+	liberar_conexion(clienteKernel);// si no esta esto flashea con cpu pero que pasa si quiero usar kernel de nuevo!
 	inicializarEstructuras(pidActual);//esto tiene que estar despues de recibir el pid de kernel
 
 	conexionConCpu();
@@ -811,6 +811,8 @@ int conexionConKernel(void){
 				int nroTabla1erNivel = buscarNroTablaDe1erNivel(pidActual);
 
 				enviarNroTabla1erNivel(clienteKernel,nroTabla1erNivel);
+
+				return EXIT_SUCCESS;
 
 				break;
 			case -1:

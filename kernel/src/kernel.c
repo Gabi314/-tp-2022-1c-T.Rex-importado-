@@ -29,16 +29,12 @@ int main(int argc, char *argv[]) {
 	int hiloCreado = pthread_create(&hilo0, NULL,&recibir_consola,socketServidor);
 	pthread_detach(hiloCreado);
 
-
-
 	hiloAdminCreado[0] = pthread_create(&hiloAdmin[0],NULL,&asignar_memoria,NULL);
 	//hiloAdminCreado[1] = pthread_create(&hiloAdmin[1],NULL,&atender_interrupcion_de_ejecucion,NULL); // problemas con esto
 	hiloAdminCreado[2] = pthread_create(&hiloAdmin[2],NULL,&atenderDesalojo,NULL);
 	hiloAdminCreado[3] = pthread_create(&hiloAdmin[3],NULL,&readyAExe,NULL);
 	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&atenderIO,NULL);
 	hiloAdminCreado[5] = pthread_create(&hiloAdmin[5],NULL,&desbloquear_suspendido,NULL);
-
-
 
 	pthread_detach(hiloAdmin[0]);
 	//pthread_detach(hiloAdmin[1]);

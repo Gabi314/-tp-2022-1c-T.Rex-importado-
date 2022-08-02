@@ -228,7 +228,7 @@ void* serializar_paquete(t_paquete* paquete, int bytes)
 	return magic;
 }
 
-int crear_conexion(char *ip, int puertoMemoria)
+int crear_conexion(char *ip, int unPuerto)
 {
 	struct addrinfo hints;
 	struct addrinfo *server_info;
@@ -238,7 +238,7 @@ int crear_conexion(char *ip, int puertoMemoria)
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_flags = AI_PASSIVE;
 
-	char* puerto = string_itoa(puertoMemoria);  // convierte el entero a string para el getaddrinfo
+	char* puerto = string_itoa(unPuerto);  // convierte el entero a string para el getaddrinfo
 
 	getaddrinfo(ip, puerto, &hints, &server_info);
 
@@ -776,14 +776,14 @@ while (1) {
 		sem_post(&pcbInterrupt);
 		break;
 
-	default:
-		log_info(logger, "operacion invalida");
-		break;
+//	default:
+//		log_info(logger, "operacion invalida");
+//		break;
 	}
 	ejecucionActiva = false;
-	log_info(logger,"[atender_interrupcion_de_ejecucion]: ejecucionActiva es false");
+//	log_info(logger,"[atender_interrupcion_de_ejecucion]: ejecucionActiva es false");
 	sem_post(&cpuDisponible);
-	log_info(logger,"[atender_interrupcion_de_ejecucion]: a partir de ahora CPU DISPONIBLE!");
+//	log_info(logger,"[atender_interrupcion_de_ejecucion]: a partir de ahora CPU DISPONIBLE!");
 
 	}
 }

@@ -192,7 +192,7 @@ void ejecutar(instruccion* unaInstruccion){
 
 	}else if(! strcmp(unaInstruccion->identificador,"EXIT")){
 		// enviar pcb actualizado finaliza el proceso
-		//enviarPcb(unPcb);
+		enviarPcb(unPcb);
 		log_info(logger,"Finalizo el proceso ");
 		hayInstrucciones = 0;
 	}
@@ -291,7 +291,7 @@ void enviarPcb(t_pcb* unPcb){
 
 	paquete = agregar_a_paquete_kernel_cpu(unPcb);
 
-	log_info(logger,"Envio el pcb actualizado a Kernel");
+	log_info(logger,"Envio el pcb actualizado a Kernel para su finalizacion");
 	enviar_paquete(paquete,clienteKernel);
 	eliminar_paquete(paquete);
 }
@@ -314,8 +314,8 @@ int conexionConKernel(void){
 	log_info(logger, "Cpu listo para recibir a Kernel");
 	int clienteKernel = esperar_cliente(server_fd);
 
-	int salirDelWhile = 0;
-	while (!salirDelWhile) {
+	//int salirDelWhile = 0;
+	while (1) {
 		int cod_op = recibir_operacion(clienteKernel);
 		
 		if(cod_op == RECIBIR_PCB){
@@ -323,7 +323,9 @@ int conexionConKernel(void){
 
 			log_info(logger, "Me llegaron las siguientes instrucciones:\n");
 			list_iterate(unPcb -> instrucciones, (void*) iterator);
-			salirDelWhile = 1;// ver esto
+
+
+			return EXIT_SUCCESS;
 		}else if(cod_op == -1){
 			log_info(logger, "Se desconecto el kernel. Terminando conexion");
 			return EXIT_SUCCESS;
