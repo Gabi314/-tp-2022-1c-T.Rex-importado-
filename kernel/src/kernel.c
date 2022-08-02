@@ -46,10 +46,10 @@ int main(void) {
 	//	pthread_detach(hiloAdmin[5]);
 
 		log_info(logger,"termino el while");
-	 	while(true){
+	 //	while(true){
 
-	 	}
-
+	 	//}
+		sem_wait(&suspAReady);
 
 		//conexionConConsola();
 		//conexionConCpu();
