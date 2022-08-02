@@ -31,8 +31,12 @@ typedef enum
 }op_code_cpu;
 
 typedef enum
-{	MENSAJE_A_KERNEL,
-	NRO_TP1
+{
+	MENSAJE_A_KERNEL,
+	NRO_TP1,
+	MENSAJE_LIBERAR_POR_TERMINADO,
+	MENSAJE_LIBERAR_POR_SUSPENDIDO,
+	MENSAJE_CONFIRMACION_SUSPENDIDO
 }op_code_kernel;
 
 typedef struct

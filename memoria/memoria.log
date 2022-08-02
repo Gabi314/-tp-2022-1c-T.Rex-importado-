@@ -1221,3 +1221,135 @@
 
 [ERROR] 22:08:03:757 MEMORIA/(24049:24049): Se desconecto el cliente. Terminando conexion
 [INFO] 22:08:03:757 MEMORIA/(24049:24049): Fin de memoria
+[INFO] 20:43:54:369 MEMORIA/(18278:18278): Ya existe la direccion de swap
+[INFO] 20:43:54:417 MEMORIA/(18278:18278): Memoria lista para recibir a Kernel
+[INFO] 20:48:41:143 MEMORIA/(18824:18824): Ya existe la direccion de swap
+[INFO] 20:48:41:144 MEMORIA/(18824:18824): Memoria lista para recibir a Kernel
+[INFO] 20:49:09:479 MEMORIA/(18824:18824): Se conecto un cliente!
+[INFO] 20:49:09:481 MEMORIA/(18824:18824): Envio el numero de tabla de 1er nivel a Kernel que es 0
+[ERROR] 20:53:02:951 MEMORIA/(18824:18824): Se desconecto el cliente. Terminando conexion
+[INFO] 20:53:02:951 MEMORIA/(18824:18824): Memoria lista para recibir a Cpu
+[INFO] 20:55:27:205 MEMORIA/(19653:19653): Ya existe la direccion de swap
+[INFO] 20:55:27:211 MEMORIA/(19653:19653): Memoria lista para recibir a Kernel
+[INFO] 20:55:47:293 MEMORIA/(18824:18824): Se conecto un cliente!
+[WARNING] 20:55:48:296 MEMORIA/(18824:18824): Operacion desconocida. No quieras meter la pata
+[WARNING] 20:55:49:296 MEMORIA/(18824:18824): Operacion desconocida. No quieras meter la pata
+[INFO] 20:56:52:562 MEMORIA/(19945:19945): Ya existe la direccion de swap
+[INFO] 20:56:52:573 MEMORIA/(19945:19945): Memoria lista para recibir a Kernel
+[INFO] 20:59:29:767 MEMORIA/(20415:20415): Ya existe la direccion de swap
+[INFO] 20:59:29:778 MEMORIA/(20415:20415): Memoria lista para recibir a Kernel
+[INFO] 20:59:51:451 MEMORIA/(20415:20415): Se conecto un cliente!
+[INFO] 20:59:51:452 MEMORIA/(20415:20415): Envio el numero de tabla de 1er nivel a Kernel que es 0
+[ERROR] 21:05:31:731 MEMORIA/(20415:20415): Se desconecto el cliente. Terminando conexion
+[INFO] 21:05:31:732 MEMORIA/(20415:20415): Memoria lista para recibir a Cpu
+[INFO] 21:05:31:732 MEMORIA/(20415:20415): Se conecto un cliente!
+[INFO] 21:05:32:732 MEMORIA/(20415:20415): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 21:05:32:739 MEMORIA/(20415:20415): Envio el tamanio de pag y cant entradas
+[INFO] 21:05:33:739 MEMORIA/(20415:20415): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 21:05:33:740 MEMORIA/(20415:20415): Envio el numero de tabla de 2do nivel 0
+[INFO] 21:05:34:741 MEMORIA/(20415:20415): Me llego  la entrada de segundo nivel 0
+[INFO] 21:05:34:741 MEMORIA/(20415:20415): La cantidad de marcos asignados a este proceso es: 1
+[INFO] 21:05:34:741 MEMORIA/(20415:20415): Envio el marco correspondiente el cual es 0
+[INFO] 21:05:36:743 MEMORIA/(20415:20415): Me llego el marco 0 con desplazamiento 0
+[INFO] 21:05:37:744 MEMORIA/(20415:20415): -------------------WRITE-------------------
+[INFO] 21:05:37:744 MEMORIA/(20415:20415): Me llego el valor a escribir: 100
+[INFO] 21:05:37:744 MEMORIA/(20415:20415): -------------------WRITE-------------------
+
+[INFO] 21:05:38:744 MEMORIA/(20415:20415): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 21:05:38:745 MEMORIA/(20415:20415): Envio el numero de tabla de 2do nivel 0
+[INFO] 21:05:39:745 MEMORIA/(20415:20415): Me llego  la entrada de segundo nivel 1
+[INFO] 21:05:39:746 MEMORIA/(20415:20415): La cantidad de marcos asignados a este proceso es: 2
+[INFO] 21:05:39:746 MEMORIA/(20415:20415): Envio el marco correspondiente el cual es 1
+[INFO] 21:05:41:747 MEMORIA/(20415:20415): Me llego el marco 1 con desplazamiento 4
+[INFO] 21:05:42:750 MEMORIA/(20415:20415): -------------------WRITE-------------------
+[INFO] 21:05:42:752 MEMORIA/(20415:20415): Me llego el valor a escribir: 101
+[INFO] 21:05:42:753 MEMORIA/(20415:20415): -------------------WRITE-------------------
+
+[INFO] 21:05:43:753 MEMORIA/(20415:20415): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 21:05:43:753 MEMORIA/(20415:20415): Envio el numero de tabla de 2do nivel 0
+[INFO] 21:05:44:754 MEMORIA/(20415:20415): Me llego  la entrada de segundo nivel 2
+[INFO] 21:05:44:754 MEMORIA/(20415:20415): La cantidad de marcos asignados a este proceso es: 3
+[INFO] 21:05:44:754 MEMORIA/(20415:20415): Envio el marco correspondiente el cual es 2
+[INFO] 21:05:46:755 MEMORIA/(20415:20415): Me llego el marco 2 con desplazamiento 4
+[INFO] 21:05:47:756 MEMORIA/(20415:20415): -------------------WRITE-------------------
+[INFO] 21:05:47:756 MEMORIA/(20415:20415): Me llego el valor a escribir: 102
+[INFO] 21:05:47:756 MEMORIA/(20415:20415): -------------------WRITE-------------------
+
+[INFO] 21:05:48:757 MEMORIA/(20415:20415): Me llego el nroTabla1erNivel 0 y con la entrada 1
+[INFO] 21:05:48:757 MEMORIA/(20415:20415): Envio el numero de tabla de 2do nivel 1
+[INFO] 21:05:49:761 MEMORIA/(20415:20415): Me llego  la entrada de segundo nivel 0
+[INFO] 21:05:49:761 MEMORIA/(20415:20415): La cantidad de marcos asignados a este proceso es: 4
+[INFO] 21:05:49:761 MEMORIA/(20415:20415): Envio el marco correspondiente el cual es 3
+[INFO] 21:05:51:762 MEMORIA/(20415:20415): Me llego el marco 3 con desplazamiento 8
+[INFO] 21:05:52:763 MEMORIA/(20415:20415): -------------------WRITE-------------------
+[INFO] 21:05:52:763 MEMORIA/(20415:20415): Me llego el valor a escribir: 104
+[INFO] 21:05:52:763 MEMORIA/(20415:20415): -------------------WRITE-------------------
+
+[INFO] 21:05:53:764 MEMORIA/(20415:20415): Me llego el marco 0 con desplazamiento 4
+[INFO] 21:05:54:765 MEMORIA/(20415:20415): -------------------WRITE-------------------
+[INFO] 21:05:54:765 MEMORIA/(20415:20415): Me llego el valor a escribir: 110
+[INFO] 21:05:54:765 MEMORIA/(20415:20415): -------------------WRITE-------------------
+
+[INFO] 21:05:55:766 MEMORIA/(20415:20415): Me llego el marco 0 con desplazamiento 8
+[INFO] 21:05:56:766 MEMORIA/(20415:20415): -------------------WRITE-------------------
+[INFO] 21:05:56:766 MEMORIA/(20415:20415): Me llego el valor a escribir: 120
+[INFO] 21:05:56:766 MEMORIA/(20415:20415): -------------------WRITE-------------------
+
+[INFO] 21:05:57:767 MEMORIA/(20415:20415): Me llego el nroTabla1erNivel 0 y con la entrada 2
+[INFO] 21:05:57:767 MEMORIA/(20415:20415): Envio el numero de tabla de 2do nivel 2
+[INFO] 21:05:58:768 MEMORIA/(20415:20415): Me llego  la entrada de segundo nivel 0
+[INFO] 21:05:58:768 MEMORIA/(20415:20415): La cantidad de marcos asignados a este proceso es: 5
+[INFO] 21:05:58:768 MEMORIA/(20415:20415): Envio el marco correspondiente el cual es 4
+[INFO] 21:05:59:769 MEMORIA/(20415:20415): Me llego el marco 4 con desplazamiento 4
+[INFO] 21:06:00:770 MEMORIA/(20415:20415): -------------------WRITE-------------------
+[INFO] 21:06:00:771 MEMORIA/(20415:20415): Me llego el valor a escribir: 108
+[INFO] 21:06:00:771 MEMORIA/(20415:20415): -------------------WRITE-------------------
+
+[INFO] 21:06:01:772 MEMORIA/(20415:20415): Me llego el marco 0 con desplazamiento 0
+[INFO] 21:06:01:772 MEMORIA/(20415:20415): -------------------READ-------------------
+[INFO] 21:06:01:772 MEMORIA/(20415:20415): Valor leido: 100
+[INFO] 21:06:01:772 MEMORIA/(20415:20415): -------------------READ-------------------
+
+[INFO] 21:06:02:772 MEMORIA/(20415:20415): Me llego el marco 2 con desplazamiento 4
+[INFO] 21:06:02:773 MEMORIA/(20415:20415): -------------------READ-------------------
+[INFO] 21:06:02:773 MEMORIA/(20415:20415): Valor leido: 102
+[INFO] 21:06:02:773 MEMORIA/(20415:20415): -------------------READ-------------------
+
+[INFO] 21:06:03:773 MEMORIA/(20415:20415): Me llego el marco 3 con desplazamiento 8
+[INFO] 21:06:03:773 MEMORIA/(20415:20415): -------------------READ-------------------
+[INFO] 21:06:03:773 MEMORIA/(20415:20415): Valor leido: 104
+[INFO] 21:06:03:773 MEMORIA/(20415:20415): -------------------READ-------------------
+
+[ERROR] 21:06:04:774 MEMORIA/(20415:20415): Se desconecto el cliente. Terminando conexion
+[INFO] 21:06:04:774 MEMORIA/(20415:20415): Fin de memoria
+[INFO] 21:11:16:073 MEMORIA/(21562:21562): Ya existe la direccion de swap
+[INFO] 21:11:16:080 MEMORIA/(21562:21562): Memoria lista para recibir a Kernel
+[INFO] 21:11:32:514 MEMORIA/(21562:21562): Se conecto un cliente!
+[INFO] 21:11:32:516 MEMORIA/(21562:21562): Envio el numero de tabla de 1er nivel a Kernel que es 0
+[ERROR] 21:18:03:525 MEMORIA/(21562:21562): Se desconecto el cliente. Terminando conexion
+[INFO] 21:18:03:526 MEMORIA/(21562:21562): Memoria lista para recibir a Cpu
+[INFO] 21:18:03:526 MEMORIA/(21562:21562): Se conecto un cliente!
+[INFO] 21:18:04:526 MEMORIA/(21562:21562): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 21:18:04:526 MEMORIA/(21562:21562): Envio el tamanio de pag y cant entradas
+[INFO] 21:18:05:527 MEMORIA/(21562:21562): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 21:18:05:527 MEMORIA/(21562:21562): Envio el numero de tabla de 2do nivel 0
+[INFO] 21:18:06:528 MEMORIA/(21562:21562): Me llego  la entrada de segundo nivel 0
+[INFO] 21:18:06:528 MEMORIA/(21562:21562): La cantidad de marcos asignados a este proceso es: 1
+[INFO] 21:18:06:528 MEMORIA/(21562:21562): Envio el marco correspondiente el cual es 0
+[INFO] 21:18:08:531 MEMORIA/(21562:21562): Me llego el marco 0 con desplazamiento 0
+[INFO] 21:18:19:897 MEMORIA/(22340:22340): Ya existe la direccion de swap
+[INFO] 21:18:19:898 MEMORIA/(22340:22340): Memoria lista para recibir a Kernel
+[INFO] 21:18:42:339 MEMORIA/(22340:22340): Se conecto un cliente!
+[INFO] 21:18:42:339 MEMORIA/(22340:22340): Envio el numero de tabla de 1er nivel a Kernel que es 0
+[ERROR] 21:19:32:731 MEMORIA/(22340:22340): Se desconecto el cliente. Terminando conexion
+[INFO] 21:19:32:732 MEMORIA/(22340:22340): Memoria lista para recibir a Cpu
+[INFO] 21:19:32:732 MEMORIA/(22340:22340): Se conecto un cliente!
+[INFO] 21:19:33:732 MEMORIA/(22340:22340): Me llego el mensaje Dame el tamanio de pag y entradas por tabla
+[INFO] 21:19:33:732 MEMORIA/(22340:22340): Envio el tamanio de pag y cant entradas
+[INFO] 21:19:34:733 MEMORIA/(22340:22340): Me llego el nroTabla1erNivel 0 y con la entrada 0
+[INFO] 21:19:34:733 MEMORIA/(22340:22340): Envio el numero de tabla de 2do nivel 0
+[INFO] 21:19:35:734 MEMORIA/(22340:22340): Me llego  la entrada de segundo nivel 0
+[INFO] 21:19:35:734 MEMORIA/(22340:22340): La cantidad de marcos asignados a este proceso es: 1
+[INFO] 21:19:35:734 MEMORIA/(22340:22340): Envio el marco correspondiente el cual es 0
+[ERROR] 21:19:36:734 MEMORIA/(22340:22340): Se desconecto el cliente. Terminando conexion
+[INFO] 21:19:36:735 MEMORIA/(22340:22340): Fin de memoria

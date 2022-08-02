@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
 	conexionConKernel(); //recibo el pcb
 	
 	tlb = inicializarTLB();
-	conexionConMemoria();//DEBUGGEAAAR
+	conexionConMemoria();
 
 
 	//list_iterate(unPcb->instrucciones, ejecutar);
@@ -31,6 +31,7 @@ int main(int argc, char *argv[]) {
 //			nroTabla1erNivel = 1;//viene otro process
 //		}
 		ejecutar(buscarInstruccionAEjecutar(unPcb));
+		//checkInterrupt(); // hacer esto
 	}
 
 	log_info(logger,"Termino cpu");
@@ -312,7 +313,9 @@ int conexionConKernel(void){
 	int server_fd = iniciar_servidor();
 	log_info(logger, "Cpu listo para recibir a Kernel");
 	int clienteKernel = esperar_cliente(server_fd);
-	while (1) {
+
+	int salirDelWhile = 0;
+	while (!salirDelWhile) {
 		int cod_op = recibir_operacion(clienteKernel);
 		
 		if(cod_op == RECIBIR_PCB){
@@ -320,6 +323,7 @@ int conexionConKernel(void){
 
 			log_info(logger, "Me llegaron las siguientes instrucciones:\n");
 			list_iterate(unPcb -> instrucciones, (void*) iterator);
+			salirDelWhile = 1;// ver esto
 		}else if(cod_op == -1){
 			log_info(logger, "Se desconecto el kernel. Terminando conexion");
 			return EXIT_SUCCESS;

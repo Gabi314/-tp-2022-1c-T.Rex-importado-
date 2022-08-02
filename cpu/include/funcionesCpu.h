@@ -33,7 +33,10 @@ typedef enum
 typedef enum
 {
 	MENSAJE_A_KERNEL,
-	RECIBIR_PCB          
+	RECIBIR_PCB,
+	I_O,
+	EXIT,
+	INTERRUPT
 }op_code_kernel;
 
 typedef struct

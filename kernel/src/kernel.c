@@ -1,6 +1,5 @@
 #include "funcionesKernel.h"
 
-t_list* listaInstrucciones;
 
 int main(int argc, char *argv[]) {
 	logger = log_create("kernel.log", "KERNEL", 1, LOG_LEVEL_INFO);
@@ -12,30 +11,67 @@ int main(int argc, char *argv[]) {
 
 
 	inicializarConfiguraciones(argv[1]);
-	//crear_colas();
-    //generar_conexiones();
-	int nroTabla1erNivel = conexionConMemoria();
-	conexionConConsola();
-	cargar_pcb(nroTabla1erNivel);
-	conexionConCpu();
+
+
+	inicializar_colas();
+	inicializar_semaforos();
+
+
+	pthread_t hilo0;
+	pthread_t hiloAdmin[6];
+	int hiloAdminCreado[6];
+
+	ejecucionActiva = false;
+	procesoDesalojado = NULL;
+
+	socketServidor = iniciar_servidor();
+
+	int hiloCreado = pthread_create(&hilo0, NULL,&recibir_consola,socketServidor);
+	pthread_detach(hiloCreado);
+
+
+
+	hiloAdminCreado[0] = pthread_create(&hiloAdmin[0],NULL,&asignar_memoria,NULL);
+	//hiloAdminCreado[1] = pthread_create(&hiloAdmin[1],NULL,&atender_interrupcion_de_ejecucion,NULL); // problemas con esto
+	hiloAdminCreado[2] = pthread_create(&hiloAdmin[2],NULL,&atenderDesalojo,NULL);
+	hiloAdminCreado[3] = pthread_create(&hiloAdmin[3],NULL,&readyAExe,NULL);
+	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&atenderIO,NULL);
+	hiloAdminCreado[5] = pthread_create(&hiloAdmin[5],NULL,&desbloquear_suspendido,NULL);
+
+
+
+	pthread_detach(hiloAdmin[0]);
+	//pthread_detach(hiloAdmin[1]);
+	pthread_detach(hiloAdmin[2]);
+	pthread_detach(hiloAdmin[3]);
+	pthread_detach(hiloAdmin[4]);
+	pthread_detach(hiloAdmin[5]);
+
+	log_info(logger,"termino el while");
+
+	sem_wait(&kernelSinFinalizar);
+
+	//int nroTabla1erNivel = conexionConMemoria();
+	//conexionConConsola();
+
+	//cargar_pcb(nroTabla1erNivel);
+	//conexionConCpu();
 
 }
 
 
-void cargar_pcb(int nroTabla1erNivel){
-	pcb = malloc(sizeof(t_pcb));
-	pcb -> instrucciones = list_create();
-
-	pcb->instrucciones = listaInstrucciones;
-	pcb->idProceso = 0; //esto es por la idea de tomas de hacerlo secuencial, proceso 1 id 0, proceso 2 id 1, etc...
-	pcb->program_counter = 0;
-	pcb->tamanioProceso = tamanioDelProceso;
-	pcb->tabla_paginas = nroTabla1erNivel;
-	pcb->estimacion_rafaga = estimacionInicial; // no se si varia
-
-
-	gradoMultiprogramacionActual = 0; //Arranca en 0 porque no hay procesos en memoria
-}
+//void cargar_pcb(int nroTabla1erNivel){
+//	pcb = malloc(sizeof(t_pcb));
+//	pcb -> instrucciones = list_create();
+//
+//	pcb->instrucciones = listaInstrucciones;
+//	pcb->idProceso = 0; //esto es por la idea de tomas de hacerlo secuencial, proceso 1 id 0, proceso 2 id 1, etc...
+//	pcb->program_counter = 0;
+//	pcb->tamanioProceso = tamanioDelProceso;
+//	pcb->tabla_paginas = nroTabla1erNivel;
+//	pcb->estimacion_rafaga = estimacionInicial; // no se si varia
+//
+//}
 
 void inicializarConfiguraciones(char* unaConfig){
 	t_config* config = config_create(unaConfig);
@@ -52,26 +88,46 @@ void inicializarConfiguraciones(char* unaConfig){
 	algoritmoPlanificacion = config_get_string_value(config, "ALGORITMO_PLANIFICACION");
 	estimacionInicial = atoi(config_get_string_value(config, "ESTIMACION_INICIAL"));
 	alfa = atoi(config_get_string_value(config, "ALFA"));
-	gradoDeMultiprogramacion = atoi(config_get_string_value(config, "GRADO_MULTIPROGRAMACION"));
-	tiempoMaximoBloqueado = config_get_string_value(config, "TIEMPO_MAXIMO_BLOQUEADO");
+	gradoMultiprogramacionTotal = atoi(config_get_string_value(config, "GRADO_MULTIPROGRAMACION"));
+	tiempoMaximoBloqueado = atoi(config_get_string_value(config, "TIEMPO_MAXIMO_BLOQUEADO"));
 }
 
-void crear_colas(){
+
+void inicializar_colas(){
 	colaNew = queue_create();
-	colaReady = queue_create(); //deberia ser una fila, pq la vamos a tener q ordenar con el algoritmo srt
+	colaReady = list_create();
 	colaSuspendedReady = queue_create();
-	colaExe = queue_create();
-	colaBlocked = queue_create();
-	colaSuspendedBlocked = queue_create();
-	colaExit = queue_create();
+	colaBlocked = list_create();
+	colaSuspendedBlocked = list_create();
+	colaExit = list_create();
+	listaDeConsolas = list_create();
 }
 
-void generar_conexiones(){
-     //socketServidor = iniciar_servidor();
-     //log_info(logger, "Servidor listo para recibir al cliente");
-     socketMemoria = crear_conexion(ipMemoria, puertoMemoria);//estan pasando un string en los puertos
-     //socketCpuDispatch = crear_conexion(ipCpu, puertoCpuDispatch);
-	 //falta también las conexiones con cpu para interrupciones
+void inicializar_semaforos(){
+	sem_init(&pcbEnNew,0,0);
+	sem_init(&pcbEnReady,0,0);
+	sem_init(&cpuDisponible,0,1);
+	sem_init(&gradoDeMultiprogramacion,0,gradoMultiprogramacionTotal);
+	sem_init(&desalojarProceso,0,0);
+	sem_init(&procesoEjecutandose,0,0);
+	sem_init(&procesoDesalojadoSem,0,1);
+	sem_init(&pcbInterrupt,0,0);
+	sem_init(&pcbBlocked,0,0);
+	sem_init(&pcbExit,0,0);
+	sem_init(&kernelSinFinalizar,0,0);
+
+	pthread_mutex_init(&asignarMemoria,NULL);
+	pthread_mutex_init(&obtenerProceso,NULL);
+	pthread_mutex_init(&ejecucion,NULL);
+	pthread_mutex_init(&procesoExit,NULL);
+	pthread_mutex_init(&consolasExit,NULL);
+	pthread_mutex_init(&desalojandoProceso,NULL);
+	pthread_mutex_init(&consolaNueva,NULL);
+	pthread_mutex_init(&encolandoPcb,NULL);
+	pthread_mutex_init(&mutexExit,NULL);
+	pthread_mutex_init(&mutexInterrupt,NULL);
+	pthread_mutex_init(&mutexIO,NULL);
+	pthread_mutex_init(&bloqueandoProceso,NULL);
 }
 
 
@@ -115,12 +171,12 @@ void enviarPID(){//pasar entrada y nroTabla1ernivel
 //---------------------------------------------------------------------------------------------
 
 //preguntar por el switch
-int conexionConConsola(void){
+int conexionConConsola(int cliente_fd){
 	logger = log_create("./kernel.log", "Kernel", 1, LOG_LEVEL_DEBUG);
 
-	int server_fd = iniciar_servidor();
+	//int server_fd = iniciar_servidor();
 	log_info(logger, "Kernel listo para recibir a consola");
-	int cliente_fd = esperar_cliente(server_fd);
+	//int cliente_fd = esperar_cliente(socketServidor);
 
 	t_list* listaQueContieneTamProceso;
 
@@ -157,7 +213,7 @@ int conexionConConsola(void){
 // -----------------------------------------------------------------------------------------------------
 
 
-int conexionConCpu(void){
+int conexionConCpu(t_pcb* pcb){
 
     socketCpuDispatch = crear_conexion(ipCpu, puertoCpuDispatch);
 	
