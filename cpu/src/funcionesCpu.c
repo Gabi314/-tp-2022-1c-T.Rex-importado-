@@ -1,7 +1,7 @@
 #include "funcionesCpu.h"
 
 //----------------------------- Para ser servidor de Kernel ------------------------------------
-int iniciar_servidor(void)
+int iniciar_servidor(int tipoDePuerto) // puede ser interrupt o dispatch
 {
 
 	int socket_servidor;
@@ -13,9 +13,10 @@ int iniciar_servidor(void)
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_flags = AI_PASSIVE;
 
-	char* puertoCpuDispatch = string_itoa(PUERTO_CPU_DISPATCH);// convierte el entero a string para el getaddrinfo
 
-	getaddrinfo(IP_CPU, puertoCpuDispatch, &hints, &servinfo);
+	char* puerto= string_itoa(tipoDePuerto);// convierte el entero a string para el getaddrinfo
+
+	getaddrinfo(IP_CPU, puerto, &hints, &servinfo);
 
 	// Creamos el socket de escucha del servidor
 	socket_servidor = socket(servinfo->ai_family,servinfo->ai_socktype, servinfo->ai_protocol);
@@ -239,12 +240,12 @@ void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio)
 	paquete->buffer->size += tamanio + sizeof(int);
 }
 //ESTO ES PARA MANDAR UN PCB A KERNEL-------------------------------------------------------------------------------------
-t_paquete* agregar_a_paquete_kernel_cpu(t_pcb* pcb)
+t_paquete* agregar_a_paquete_kernel_cpu(t_pcb* pcb,int cod_op)
 {
 	tamanioTotalIdentificadores = 0;
 	contadorInstrucciones = 0;
 	desplazamiento = 0;
-	paquete = crear_paquete(EXIT);//despues vemos cual usar
+	paquete = crear_paquete(cod_op);
 	list_iterate(pcb->instrucciones, (void*) obtenerTamanioIdentificadores);
 	paquete->buffer->stream = realloc(paquete->buffer->stream, paquete->buffer->size + tamanioTotalIdentificadores + contadorInstrucciones*sizeof(int[2]) + contadorInstrucciones*sizeof(int) + 6*sizeof(int) + sizeof(float));
 	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->idProceso), sizeof(int));

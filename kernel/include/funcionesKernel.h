@@ -26,7 +26,7 @@ int socketCpuDispatch;
 int socketCpuInterrupt;
 char* ipCpu;
 int puertoCpuDispatch;
-char* puertoCpuInterrupt;
+int puertoCpuInterrupt;
 char* puertoKernel;
 
 int pidKernel;
@@ -101,7 +101,8 @@ typedef enum
 	ENVIAR_PCB,
 	I_O,
 	EXIT,
-	INTERRUPT
+	INTERRUPT,
+	MENSAJE_INTERRUPT
 }op_code_cpu;
 
 typedef enum
@@ -155,7 +156,7 @@ typedef struct
 
 t_paquete* paquete;
 
-int crear_conexion(char* ip, int puertoCpuDispatch);
+int crear_conexion(char*,int);
 void enviar_mensaje(char*, int ,int);
 void crear_buffer(t_paquete* paquete);
 t_paquete* crear_paquete(int);

@@ -18,6 +18,8 @@ int main(int argc, char *argv[]) {
 
 	unPcb = malloc(sizeof(t_pcb));
 
+	server_fd = iniciar_servidor(PUERTO_CPU_DISPATCH);
+
 	conexionConKernel(); //recibo el pcb
 	
 	tlb = inicializarTLB();
@@ -178,26 +180,36 @@ void ejecutar(instruccion* unaInstruccion){
 	}else if(! strcmp(unaInstruccion->identificador,"I/O")){
 
 		log_info(logger,"----------------I/O-----------------------");
-		//sleep(unaInstruccion->parametros[0]/1000);
+		//enviarTiempoIO(unaInstruccion->parametros[0]/1000);
 		//enviar_mensaje("Se suspende el proceso",conexionMemoria,MENSAJE);//Se envia pcb a kernel solamente
-		//enviarPcb(unPcb);
-		bloqueado = 1;
+		enviarPcb(unPcb,I_O);
+		//bloqueado = 1; esto no se
 		// luego kernel le avisa a memoria que se suspende
 		reiniciarTLB();
 
-		log_info(logger,"----------------FIN DE I/O----------------");
-
-		//log_info(logger,"Se reanuda el proceso\n");
-
+		//log_info(logger,"----------------FIN DE I/O----------------"); esto debe ir cuando vuelve de la I/O
 
 	}else if(! strcmp(unaInstruccion->identificador,"EXIT")){
 		// enviar pcb actualizado finaliza el proceso
-		enviarPcb(unPcb);
+		enviarPcb(unPcb,EXIT);
 		log_info(logger,"Finalizo el proceso ");
 		hayInstrucciones = 0;
 	}
 }
 
+void checkInterrupt(){
+	int server_fd = iniciar_servidor(PUERTO_CPU_INTERRUPT);
+
+	int clienteKernel = esperar_cliente(server_fd);
+
+	int cod_op = recibir_operacion(clienteKernel);
+
+	if(cod_op == MENSAJE_INTERRUPT){
+		recibir_mensaje(clienteKernel);
+	}
+	log_info(logger,"Envio el pcb actualizado a kernel por interrupcion");
+	enviarPcb(unPcb,INTERRUPT);
+}
 
 int buscarDireccionFisica(int direccionLogica){
 	calculosDireccionLogica(direccionLogica);
@@ -287,9 +299,9 @@ void enviarDireccionesFisicasParaCopia(int marcoDeDestino,int desplazamientoDest
 	eliminar_paquete(paquete);
 }
 
-void enviarPcb(t_pcb* unPcb){
+void enviarPcb(t_pcb* unPcb,int cod_op){
 
-	paquete = agregar_a_paquete_kernel_cpu(unPcb);
+	paquete = agregar_a_paquete_kernel_cpu(unPcb,cod_op);
 
 	log_info(logger,"Envio el pcb actualizado a Kernel para su finalizacion");
 	enviar_paquete(paquete,clienteKernel);
@@ -308,10 +320,11 @@ void terminar_programa(int conexionMemoria, t_log* logger, t_config* config){
 
 
 int conexionConKernel(void){
-	logger = log_create("cpu.log", "CPU", 1, LOG_LEVEL_DEBUG);
 
-	int server_fd = iniciar_servidor();
+	//int server_fd = iniciar_servidor(PUERTO_CPU_DISPATCH);
+
 	log_info(logger, "Cpu listo para recibir a Kernel");
+
 	int clienteKernel = esperar_cliente(server_fd);
 
 	//int salirDelWhile = 0;

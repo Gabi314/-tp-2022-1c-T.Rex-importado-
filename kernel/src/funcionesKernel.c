@@ -776,14 +776,15 @@ while (1) {
 		sem_post(&pcbInterrupt);
 		break;
 
-//	default:
-//		log_info(logger, "operacion invalida");
-//		break;
+	default:
+		//log_info(logger, "operacion invalida");
+
+		break;
 	}
 	ejecucionActiva = false;
-//	log_info(logger,"[atender_interrupcion_de_ejecucion]: ejecucionActiva es false");
+	//log_info(logger,"[atender_interrupcion_de_ejecucion]: ejecucionActiva es false");
 	sem_post(&cpuDisponible);
-//	log_info(logger,"[atender_interrupcion_de_ejecucion]: a partir de ahora CPU DISPONIBLE!");
+	//log_info(logger,"[atender_interrupcion_de_ejecucion]: a partir de ahora CPU DISPONIBLE!");
 
 	}
 }
@@ -894,7 +895,9 @@ while (1) {
 			"[atenderDesalojo]: se despierta al simulador de cpu para continuar con el desalojo");
 	//simulador_de_cpu(2, proceso);
 
-	//enviar_mensaje("Desalojar proceso",socketCpuInterrupt,MENSAJE_INTERRUPT); chequear la interrupcion
+	//socketCpuInterrupt = crear_conexion(ipCpu, puertoCpuInterrupt); // se crea la conexion con el puerto interrupt
+
+	enviar_mensaje("Desalojar proceso",socketCpuInterrupt,MENSAJE_INTERRUPT); //chequear la interrupcion
 
 	sem_wait(&pcbInterrupt);
 

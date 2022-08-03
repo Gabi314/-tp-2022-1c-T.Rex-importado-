@@ -18,6 +18,7 @@
 
 #define IP_CPU "127.0.0.1"
 #define PUERTO_CPU_DISPATCH 8001 // por ahora este faltan los otros puertos para conectar a kernel
+#define PUERTO_CPU_INTERRUPT 8005
 
 typedef enum
 {
@@ -36,7 +37,8 @@ typedef enum
 	RECIBIR_PCB,
 	I_O,
 	EXIT,
-	INTERRUPT
+	INTERRUPT,
+	MENSAJE_INTERRUPT
 }op_code_kernel;
 
 typedef struct
@@ -58,6 +60,7 @@ t_paquete* paquete;
 
 //--------------  Cpu como servidor de Kernel ---------
 int clienteKernel;
+int server_fd;
 
 int tamanioTotalIdentificadores;
 int contadorInstrucciones;
@@ -85,7 +88,7 @@ typedef struct
 
 void* recibir_buffer(int*, int);
 
-int iniciar_servidor(void);
+int iniciar_servidor(int);
 int esperar_cliente(int);
 t_list* recibir_paquete(int);
 void recibir_mensaje(int);
@@ -97,7 +100,7 @@ int conexionConKernel(void);
 void obtenerTamanioIdentificadores(instruccion*);
 t_pcb* recibir_pcb();
 void agregarInstruccionesAlPaquete(instruccion*);
-t_paquete* agregar_a_paquete_kernel_cpu(t_pcb*);
+t_paquete* agregar_a_paquete_kernel_cpu(t_pcb*,int);
 //Funcion propia de cpu como servidor
 
 //--------------  Cpu como cliente de Memoria -------------
@@ -152,7 +155,7 @@ void enviarDireccionFisica(int,int,int);
 void enviarValorAEscribir(uint32_t);
 void enviarDireccionesFisicasParaCopia(int,int,int,int);
 
-void enviarPcb(t_pcb*);
+void enviarPcb(t_pcb*,int);
 
 void terminar_programa(int, t_log*, t_config*);
 

@@ -1,179 +1,87 @@
-[INFO] 11:26:17:674 KERNEL/(8865:8865): termino el while
-[INFO] 11:26:17:687 KERNEL/(8865:8870): esperamos una nueva consola
-[INFO] 11:26:25:510 KERNEL/(8865:8870): Se conecto la consola!
-[INFO] 11:26:25:511 KERNEL/(8865:8870): recibimos al cliente de socket 0
-[INFO] 11:26:25:511 KERNEL/(8865:8870): levantamos y detacheamos el hilo de la consola 0
-[INFO] 11:26:25:511 KERNEL/(8865:8870): esperamos una nueva consola
-[INFO] 11:26:25:521 Kernel/(8865:8934): Kernel listo para recibir a consola
-[INFO] 11:26:25:525 Kernel/(8865:8934): Me llego el tamanio de proceso 1024
-[ERROR] 11:26:25:528 Kernel/(8865:8934): La consola se desconecto. Finalizando Kernel
-[INFO] 11:26:25:528 Kernel/(8865:8934): [atender_consola]recibimos las instrucciones del cliente 0!
-[INFO] 11:26:25:528 Kernel/(8865:8934): [atender_consola]inicializamos PCB de id_proceso 0
-[INFO] 11:26:25:528 Kernel/(8865:8934): [atender_consola]creamos la estructura datosCLiente de socket 0 y pid 0
-[INFO] 11:26:25:528 Kernel/(8865:8934): [atender_consola]agregamos la estructura a la lista de consolas!
-[INFO] 11:26:25:528 Kernel/(8865:8934): [NEW] Entra el proceso de PID: 0 a la cola.
-[INFO] 11:26:25:528 Kernel/(8865:8934): el tamanio de la cola de new es 1
-[INFO] 11:26:25:528 Kernel/(8865:8934): [atender_consola] despertamos a asignar_memoria()
-[INFO] 11:26:25:528 Kernel/(8865:8871): [asignar_memoria] :se desperto 
-[INFO] 11:26:25:528 Kernel/(8865:8871): [NEW] Se saca el proceso de PID: 0 de la cola
-[INFO] 11:26:25:528 Kernel/(8865:8871): [asignar_memoria]: enviamos el pid 0
-[INFO] 11:26:25:528 Kernel/(8865:8871): Hola memoria, soy Kernel
-[INFO] 11:26:25:528 Kernel/(8865:8871): Le envio a memoria mi pid que es 0
-[INFO] 11:28:20:433 KERNEL/(9205:9205): termino el while
-[INFO] 11:28:20:440 KERNEL/(9205:9212): esperamos una nueva consola
-[INFO] 11:28:25:983 KERNEL/(9205:9212): Se conecto la consola!
-[INFO] 11:28:25:983 KERNEL/(9205:9212): recibimos al cliente de socket 0
-[INFO] 11:28:25:983 KERNEL/(9205:9212): levantamos y detacheamos el hilo de la consola 0
-[INFO] 11:28:25:983 KERNEL/(9205:9212): esperamos una nueva consola
-[INFO] 11:28:26:002 Kernel/(9205:9267): Kernel listo para recibir a consola
-[INFO] 11:33:53:645 KERNEL/(9721:9721): termino el while
-[INFO] 11:33:53:647 KERNEL/(9721:9726): esperamos una nueva consola
-[INFO] 11:33:59:592 KERNEL/(9721:9726): Se conecto la consola!
-[INFO] 11:33:59:592 KERNEL/(9721:9726): recibimos al cliente de socket 0
-[INFO] 11:33:59:593 KERNEL/(9721:9726): levantamos y detacheamos el hilo de la consola 0
-[INFO] 11:33:59:593 KERNEL/(9721:9726): esperamos una nueva consola
-[INFO] 11:33:59:608 Kernel/(9721:9783): Kernel listo para recibir a consola
-[INFO] 11:33:59:608 Kernel/(9721:9783): Me llego el tamanio de proceso 1024
-[INFO] 11:33:59:608 Kernel/(9721:9783): me llegaron las instrucciones
-[ERROR] 11:33:59:608 Kernel/(9721:9783): La consola se desconecto. Finalizando Kernel
-[INFO] 11:33:59:612 Kernel/(9721:9783): [atender_consola]recibimos las instrucciones del cliente 0!
-[INFO] 11:33:59:612 Kernel/(9721:9783): [atender_consola]inicializamos PCB de id_proceso 0
-[INFO] 11:33:59:612 Kernel/(9721:9783): [atender_consola]creamos la estructura datosCLiente de socket 0 y pid 0
-[INFO] 11:33:59:612 Kernel/(9721:9783): [atender_consola]agregamos la estructura a la lista de consolas!
-[INFO] 11:33:59:612 Kernel/(9721:9783): [NEW] Entra el proceso de PID: 0 a la cola.
-[INFO] 11:33:59:612 Kernel/(9721:9783): el tamanio de la cola de new es 1
-[INFO] 11:33:59:612 Kernel/(9721:9783): [atender_consola] despertamos a asignar_memoria()
-[INFO] 11:33:59:612 Kernel/(9721:9727): [asignar_memoria] :se desperto 
-[INFO] 11:33:59:612 Kernel/(9721:9727): [NEW] Se saca el proceso de PID: 0 de la cola
-[INFO] 11:33:59:612 Kernel/(9721:9727): [asignar_memoria]: enviamos el pid 0
-[INFO] 11:33:59:613 Kernel/(9721:9727): Hola memoria, soy Kernel
-[INFO] 11:33:59:613 Kernel/(9721:9727): Le envio a memoria mi pid que es 0
-[INFO] 11:38:29:133 KERNEL/(10165:10165): termino el while
-[INFO] 11:38:29:136 KERNEL/(10165:10171): esperamos una nueva consola
-[INFO] 11:39:57:341 KERNEL/(10399:10399): termino el while
-[INFO] 11:39:57:344 KERNEL/(10399:10405): esperamos una nueva consola
-[INFO] 11:40:06:364 KERNEL/(10399:10405): Se conecto la consola!
-[INFO] 11:40:06:364 KERNEL/(10399:10405): recibimos al cliente de socket 0
-[INFO] 11:40:06:364 KERNEL/(10399:10405): levantamos y detacheamos el hilo de la consola 0
-[INFO] 11:40:06:364 KERNEL/(10399:10405): esperamos una nueva consola
-[INFO] 11:40:06:377 Kernel/(10399:10461): Kernel listo para recibir a consola
-[INFO] 11:49:02:110 KERNEL/(11039:11039): termino el while
-[INFO] 11:49:02:114 KERNEL/(11039:11044): esperamos una nueva consola
-[INFO] 11:49:06:295 KERNEL/(11039:11044): Se conecto la consola!
-[INFO] 11:49:06:296 KERNEL/(11039:11044): recibimos al cliente de socket 5
-[INFO] 11:49:06:296 KERNEL/(11039:11044): levantamos y detacheamos el hilo de la consola 5
-[INFO] 11:49:06:296 KERNEL/(11039:11044): esperamos una nueva consola
-[INFO] 11:49:06:300 Kernel/(11039:11101): Kernel listo para recibir a consola
-[INFO] 11:49:06:303 Kernel/(11039:11101): Me llego el tamanio de proceso 1024
-[INFO] 11:49:06:304 Kernel/(11039:11101): me llegaron las instrucciones
-[ERROR] 11:49:06:304 Kernel/(11039:11101): La consola se desconecto. Finalizando Kernel
-[INFO] 11:49:06:305 Kernel/(11039:11101): [atender_consola]recibimos las instrucciones del cliente 5!
-[INFO] 11:49:06:305 Kernel/(11039:11101): [atender_consola]inicializamos PCB de id_proceso 0
-[INFO] 11:49:06:305 Kernel/(11039:11101): [atender_consola]creamos la estructura datosCLiente de socket 5 y pid 0
-[INFO] 11:49:06:305 Kernel/(11039:11101): [atender_consola]agregamos la estructura a la lista de consolas!
-[INFO] 11:49:06:305 Kernel/(11039:11101): [NEW] Entra el proceso de PID: 0 a la cola.
-[INFO] 11:49:06:305 Kernel/(11039:11101): el tamanio de la cola de new es 1
-[INFO] 11:49:06:305 Kernel/(11039:11101): [atender_consola] despertamos a asignar_memoria()
-[INFO] 11:49:06:305 Kernel/(11039:11045): [asignar_memoria] :se desperto 
-[INFO] 11:49:06:305 Kernel/(11039:11045): [NEW] Se saca el proceso de PID: 0 de la cola
-[INFO] 11:49:06:305 Kernel/(11039:11045): [asignar_memoria]: enviamos el pid 0
-[INFO] 11:49:06:305 Kernel/(11039:11045): Hola memoria, soy Kernel
-[INFO] 11:49:06:305 Kernel/(11039:11045): Le envio a memoria mi pid que es 0
-[INFO] 11:49:06:306 Kernel/(11039:11045): Me llego la tabla de primero nivel nro: 0
-[INFO] 11:49:06:306 Kernel/(11039:11045): [asignar_memoria]: recibimos el numero de tabla de paginas 0
-[INFO] 11:49:06:306 Kernel/(11039:11045): [READY] Entra el proceso de PID: 0 a la cola.
-[INFO] 11:49:06:306 Kernel/(11039:11045): [agregarAReady]:el tamanio de la cola de ready es 1
-[INFO] 11:49:06:306 Kernel/(11039:11045): [agregarAReady]: despertamos readyAExe)
-[INFO] 11:49:06:306 Kernel/(11039:11045): [asignar_memoria]: desde asignar_memoria despertamos a readyAExe
-[INFO] 11:49:06:306 Kernel/(11039:11047): [readyAExe]: .........se despierta readyAExe 
-[INFO] 11:49:06:306 Kernel/(11039:11047): [readyAExe]: a partir de ahora, CPU NO DISPONIBLE! 
-[INFO] 11:49:06:306 Kernel/(11039:11047): [obtenerSiguienteFIFO]: PROCESOS EN READY: 0 
+[INFO] 22:37:24:170 KERNEL/(11635:11635): termino el while
+[INFO] 22:37:24:176 KERNEL/(11635:11643): esperamos una nueva consola
+[INFO] 22:37:28:949 KERNEL/(11635:11643): Se conecto la consola!
+[INFO] 22:37:28:949 KERNEL/(11635:11643): recibimos al cliente de socket 5
+[INFO] 22:37:28:949 KERNEL/(11635:11643): levantamos y detacheamos el hilo de la consola 5
+[INFO] 22:37:28:949 KERNEL/(11635:11643): esperamos una nueva consola
+[INFO] 22:37:28:962 Kernel/(11635:11693): Kernel listo para recibir a consola
+[INFO] 22:38:00:148 KERNEL/(11842:11842): termino el while
+[INFO] 22:38:00:158 KERNEL/(11842:11848): esperamos una nueva consola
+[INFO] 22:38:18:057 KERNEL/(11985:11985): termino el while
+[INFO] 22:38:18:060 KERNEL/(11985:11991): esperamos una nueva consola
+[INFO] 22:38:21:610 KERNEL/(11985:11991): Se conecto la consola!
+[INFO] 22:38:21:611 KERNEL/(11985:11991): recibimos al cliente de socket 8
+[INFO] 22:38:21:611 KERNEL/(11985:11991): levantamos y detacheamos el hilo de la consola 8
+[INFO] 22:38:21:611 KERNEL/(11985:11991): esperamos una nueva consola
+[INFO] 22:38:21:621 Kernel/(11985:12043): Kernel listo para recibir a consola
+[INFO] 22:38:21:621 Kernel/(11985:12043): me llegaron las instrucciones
+[ERROR] 22:38:21:621 Kernel/(11985:12043): La consola se desconecto. Finalizando Kernel
+[INFO] 22:38:21:621 Kernel/(11985:12043): [atender_consola]recibimos las instrucciones del cliente 8!
+[INFO] 22:38:21:621 Kernel/(11985:12043): [atender_consola]inicializamos PCB de id_proceso 0
+[INFO] 22:38:21:621 Kernel/(11985:12043): [atender_consola]creamos la estructura datosCLiente de socket 8 y pid 0
+[INFO] 22:38:21:621 Kernel/(11985:12043): [atender_consola]agregamos la estructura a la lista de consolas!
+[INFO] 22:38:21:621 Kernel/(11985:12043): [NEW] Entra el proceso de PID: 0 a la cola.
+[INFO] 22:38:21:621 Kernel/(11985:12043): el tamanio de la cola de new es 1
+[INFO] 22:38:21:621 Kernel/(11985:12043): [atender_consola] despertamos a asignar_memoria()
+[INFO] 22:38:21:621 Kernel/(11985:11992): [asignar_memoria] :se desperto 
+[INFO] 22:38:21:621 Kernel/(11985:11992): [NEW] Se saca el proceso de PID: 0 de la cola
+[INFO] 22:38:21:622 Kernel/(11985:11992): [asignar_memoria]: enviamos el pid 0
+[INFO] 22:38:21:622 Kernel/(11985:11992): Hola memoria, soy Kernel
+[INFO] 22:38:21:622 Kernel/(11985:11992): Le envio a memoria mi pid que es 0
+[INFO] 22:38:21:623 Kernel/(11985:11992): Me llego la tabla de primero nivel nro: 0
+[INFO] 22:38:21:623 Kernel/(11985:11992): [asignar_memoria]: recibimos el numero de tabla de paginas 0
+[INFO] 22:38:21:623 Kernel/(11985:11992): [READY] Entra el proceso de PID: 0 a la cola.
+[INFO] 22:38:21:623 Kernel/(11985:11992): [agregarAReady]:el tamanio de la cola de ready es 1
+[INFO] 22:38:21:623 Kernel/(11985:11992): [agregarAReady]: despertamos readyAExe)
+[INFO] 22:38:21:623 Kernel/(11985:11992): [asignar_memoria]: desde asignar_memoria despertamos a readyAExe
+[INFO] 22:38:21:623 Kernel/(11985:11995): [readyAExe]: .........se despierta readyAExe 
+[INFO] 22:38:21:623 Kernel/(11985:11995): [readyAExe]: a partir de ahora, CPU NO DISPONIBLE! 
+[INFO] 22:38:21:623 Kernel/(11985:11995): [obtenerSiguienteFIFO]: PROCESOS EN READY: 0 
 
-[INFO] 11:49:06:306 Kernel/(11039:11047): [readyAExe]: Desde readyAExe obtuvimos el proceso de pid: 0
-[INFO] 11:49:06:306 Kernel/(11039:11047): [readyAExe]: Desde readyAExe mandamos al proceso de pid 0 a ejecutar  
-[INFO] 11:49:06:306 Kernel/(11039:11047): [EXEC] Ingresa el proceso de PID: 0
-[INFO] 11:49:06:307 Kernel/(11039:11047): Hola cpu, soy Kernel
-[INFO] 11:49:06:307 Kernel/(11039:11047): Le envio a cpu el pcb
-[INFO] 11:49:06:307 Kernel/(11039:11047): [ejecutar]: ejecucion activa es true!!
-[INFO] 11:49:06:307 Kernel/(11039:11047): [ejecutar]: Se cambia el estado a EXEC y se calcula el inicio de ejecucion
-[INFO] 11:49:06:307 Kernel/(11039:11047): [readyAExe]: finaliza
-[INFO] 11:51:14:173 KERNEL/(11333:11333): termino el while
-[INFO] 11:51:14:176 KERNEL/(11333:11338): esperamos una nueva consola
-[INFO] 11:51:18:639 KERNEL/(11333:11338): Se conecto la consola!
-[INFO] 11:51:18:639 KERNEL/(11333:11338): recibimos al cliente de socket 5
-[INFO] 11:51:18:639 KERNEL/(11333:11338): levantamos y detacheamos el hilo de la consola 5
-[INFO] 11:51:18:639 KERNEL/(11333:11338): esperamos una nueva consola
-[INFO] 11:51:18:650 Kernel/(11333:11392): Kernel listo para recibir a consola
-[INFO] 11:51:18:650 Kernel/(11333:11392): Me llego el tamanio de proceso 1024
-[INFO] 11:51:18:650 Kernel/(11333:11392): me llegaron las instrucciones
-[ERROR] 11:51:18:651 Kernel/(11333:11392): La consola se desconecto. Finalizando Kernel
-[INFO] 11:51:18:651 Kernel/(11333:11392): [atender_consola]recibimos las instrucciones del cliente 5!
-[INFO] 11:51:18:651 Kernel/(11333:11392): [atender_consola]inicializamos PCB de id_proceso 0
-[INFO] 11:51:18:651 Kernel/(11333:11392): [atender_consola]creamos la estructura datosCLiente de socket 5 y pid 0
-[INFO] 11:51:18:651 Kernel/(11333:11392): [atender_consola]agregamos la estructura a la lista de consolas!
-[INFO] 11:51:18:651 Kernel/(11333:11392): [NEW] Entra el proceso de PID: 0 a la cola.
-[INFO] 11:51:18:651 Kernel/(11333:11392): el tamanio de la cola de new es 1
-[INFO] 11:51:18:651 Kernel/(11333:11392): [atender_consola] despertamos a asignar_memoria()
-[INFO] 11:51:18:651 Kernel/(11333:11339): [asignar_memoria] :se desperto 
-[INFO] 11:51:18:651 Kernel/(11333:11339): [NEW] Se saca el proceso de PID: 0 de la cola
-[INFO] 11:51:18:652 Kernel/(11333:11339): [asignar_memoria]: enviamos el pid 0
-[INFO] 11:51:18:652 Kernel/(11333:11339): Hola memoria, soy Kernel
-[INFO] 11:51:18:652 Kernel/(11333:11339): Le envio a memoria mi pid que es 0
-[INFO] 11:51:18:653 Kernel/(11333:11339): Me llego la tabla de primero nivel nro: 0
-[INFO] 11:51:18:653 Kernel/(11333:11339): [asignar_memoria]: recibimos el numero de tabla de paginas 0
-[INFO] 11:51:18:653 Kernel/(11333:11339): [READY] Entra el proceso de PID: 0 a la cola.
-[INFO] 11:51:18:653 Kernel/(11333:11339): [agregarAReady]:el tamanio de la cola de ready es 1
-[INFO] 11:51:18:653 Kernel/(11333:11339): [agregarAReady]: despertamos readyAExe)
-[INFO] 11:51:18:653 Kernel/(11333:11339): [asignar_memoria]: desde asignar_memoria despertamos a readyAExe
-[INFO] 11:51:18:653 Kernel/(11333:11341): [readyAExe]: .........se despierta readyAExe 
-[INFO] 11:51:18:653 Kernel/(11333:11341): [readyAExe]: a partir de ahora, CPU NO DISPONIBLE! 
-[INFO] 11:51:18:653 Kernel/(11333:11341): [obtenerSiguienteFIFO]: PROCESOS EN READY: 0 
+[INFO] 22:38:21:623 Kernel/(11985:11995): [readyAExe]: Desde readyAExe obtuvimos el proceso de pid: 0
+[INFO] 22:38:21:623 Kernel/(11985:11995): [readyAExe]: Desde readyAExe mandamos al proceso de pid 0 a ejecutar  
+[INFO] 22:38:21:623 Kernel/(11985:11995): [EXEC] Ingresa el proceso de PID: 0
+[INFO] 22:38:21:623 Kernel/(11985:11995): Hola cpu, soy Kernel
+[INFO] 22:38:21:624 Kernel/(11985:11995): Le envio a cpu el pcb
+[INFO] 22:38:21:624 Kernel/(11985:11995): [ejecutar]: ejecucion activa es true!!
+[INFO] 22:38:21:624 Kernel/(11985:11995): [ejecutar]: Se cambia el estado a EXEC y se calcula el inicio de ejecucion
+[INFO] 22:38:21:624 Kernel/(11985:11995): [readyAExe]: finaliza
+[INFO] 22:52:57:862 KERNEL/(12928:12928): termino el while
+[INFO] 22:52:57:863 KERNEL/(12928:12934): esperamos una nueva consola
+[INFO] 22:53:01:503 KERNEL/(12928:12934): Se conecto la consola!
+[INFO] 22:53:01:503 KERNEL/(12928:12934): recibimos al cliente de socket 8
+[INFO] 22:53:01:503 KERNEL/(12928:12934): levantamos y detacheamos el hilo de la consola 8
+[INFO] 22:53:01:503 KERNEL/(12928:12934): esperamos una nueva consola
+[INFO] 22:53:01:520 Kernel/(12928:12987): Kernel listo para recibir a consola
+[INFO] 22:53:01:520 Kernel/(12928:12987): me llegaron las instrucciones
+[ERROR] 22:53:01:521 Kernel/(12928:12987): La consola se desconecto. Finalizando Kernel
+[INFO] 22:53:01:521 Kernel/(12928:12987): [atender_consola]recibimos las instrucciones del cliente 8!
+[INFO] 22:53:01:521 Kernel/(12928:12987): [atender_consola]inicializamos PCB de id_proceso 0
+[INFO] 22:53:01:521 Kernel/(12928:12987): [atender_consola]creamos la estructura datosCLiente de socket 8 y pid 0
+[INFO] 22:53:01:521 Kernel/(12928:12987): [atender_consola]agregamos la estructura a la lista de consolas!
+[INFO] 22:53:01:522 Kernel/(12928:12987): [NEW] Entra el proceso de PID: 0 a la cola.
+[INFO] 22:53:01:522 Kernel/(12928:12987): el tamanio de la cola de new es 1
+[INFO] 22:53:01:523 Kernel/(12928:12987): [atender_consola] despertamos a asignar_memoria()
+[INFO] 22:53:01:523 Kernel/(12928:12935): [asignar_memoria] :se desperto 
+[INFO] 22:53:01:523 Kernel/(12928:12935): [NEW] Se saca el proceso de PID: 0 de la cola
+[INFO] 22:53:01:523 Kernel/(12928:12935): [asignar_memoria]: enviamos el pid 0
+[INFO] 22:53:01:523 Kernel/(12928:12935): Hola memoria, soy Kernel
+[INFO] 22:53:01:523 Kernel/(12928:12935): Le envio a memoria mi pid que es 0
+[INFO] 22:53:01:524 Kernel/(12928:12935): Me llego la tabla de primero nivel nro: 0
+[INFO] 22:53:01:524 Kernel/(12928:12935): [asignar_memoria]: recibimos el numero de tabla de paginas 0
+[INFO] 22:53:01:525 Kernel/(12928:12935): [READY] Entra el proceso de PID: 0 a la cola.
+[INFO] 22:53:01:525 Kernel/(12928:12935): [agregarAReady]:el tamanio de la cola de ready es 1
+[INFO] 22:53:01:525 Kernel/(12928:12935): [agregarAReady]: despertamos readyAExe)
+[INFO] 22:53:01:525 Kernel/(12928:12935): [asignar_memoria]: desde asignar_memoria despertamos a readyAExe
+[INFO] 22:53:01:525 Kernel/(12928:12938): [readyAExe]: .........se despierta readyAExe 
+[INFO] 22:53:01:525 Kernel/(12928:12938): [readyAExe]: a partir de ahora, CPU NO DISPONIBLE! 
+[INFO] 22:53:01:525 Kernel/(12928:12938): [obtenerSiguienteFIFO]: PROCESOS EN READY: 0 
 
-[INFO] 11:51:18:653 Kernel/(11333:11341): [readyAExe]: Desde readyAExe obtuvimos el proceso de pid: 0
-[INFO] 11:51:18:653 Kernel/(11333:11341): [readyAExe]: Desde readyAExe mandamos al proceso de pid 0 a ejecutar  
-[INFO] 11:51:18:653 Kernel/(11333:11341): [EXEC] Ingresa el proceso de PID: 0
-[INFO] 11:51:18:654 Kernel/(11333:11341): Hola cpu, soy Kernel
-[INFO] 11:51:18:654 Kernel/(11333:11341): Le envio a cpu el pcb
-[INFO] 11:51:18:654 Kernel/(11333:11341): [ejecutar]: ejecucion activa es true!!
-[INFO] 11:51:18:654 Kernel/(11333:11341): [ejecutar]: Se cambia el estado a EXEC y se calcula el inicio de ejecucion
-[INFO] 11:51:18:654 Kernel/(11333:11341): [readyAExe]: finaliza
-[INFO] 11:53:34:584 KERNEL/(11632:11632): termino el while
-[INFO] 11:53:34:584 KERNEL/(11632:11638): esperamos una nueva consola
-[INFO] 11:53:38:346 KERNEL/(11632:11638): Se conecto la consola!
-[INFO] 11:53:38:346 KERNEL/(11632:11638): recibimos al cliente de socket 5
-[INFO] 11:53:38:346 KERNEL/(11632:11638): levantamos y detacheamos el hilo de la consola 5
-[INFO] 11:53:38:346 KERNEL/(11632:11638): esperamos una nueva consola
-[INFO] 11:53:38:362 Kernel/(11632:11691): Kernel listo para recibir a consola
-[INFO] 11:53:38:362 Kernel/(11632:11691): Me llego el tamanio de proceso 1024
-[INFO] 11:53:38:362 Kernel/(11632:11691): me llegaron las instrucciones
-[ERROR] 11:53:38:362 Kernel/(11632:11691): La consola se desconecto. Finalizando Kernel
-[INFO] 11:53:38:363 Kernel/(11632:11691): [atender_consola]recibimos las instrucciones del cliente 5!
-[INFO] 11:53:38:368 Kernel/(11632:11691): [atender_consola]inicializamos PCB de id_proceso 0
-[INFO] 11:53:38:368 Kernel/(11632:11691): [atender_consola]creamos la estructura datosCLiente de socket 5 y pid 0
-[INFO] 11:53:38:368 Kernel/(11632:11691): [atender_consola]agregamos la estructura a la lista de consolas!
-[INFO] 11:53:38:368 Kernel/(11632:11691): [NEW] Entra el proceso de PID: 0 a la cola.
-[INFO] 11:53:38:368 Kernel/(11632:11691): el tamanio de la cola de new es 1
-[INFO] 11:53:38:368 Kernel/(11632:11691): [atender_consola] despertamos a asignar_memoria()
-[INFO] 11:53:38:369 Kernel/(11632:11639): [asignar_memoria] :se desperto 
-[INFO] 11:53:38:369 Kernel/(11632:11639): [NEW] Se saca el proceso de PID: 0 de la cola
-[INFO] 11:53:38:369 Kernel/(11632:11639): [asignar_memoria]: enviamos el pid 0
-[INFO] 11:53:38:369 Kernel/(11632:11639): Hola memoria, soy Kernel
-[INFO] 11:53:38:369 Kernel/(11632:11639): Le envio a memoria mi pid que es 0
-[INFO] 11:53:38:370 Kernel/(11632:11639): Me llego la tabla de primero nivel nro: 0
-[INFO] 11:53:38:370 Kernel/(11632:11639): [asignar_memoria]: recibimos el numero de tabla de paginas 0
-[INFO] 11:53:38:370 Kernel/(11632:11639): [READY] Entra el proceso de PID: 0 a la cola.
-[INFO] 11:53:38:370 Kernel/(11632:11639): [agregarAReady]:el tamanio de la cola de ready es 1
-[INFO] 11:53:38:370 Kernel/(11632:11639): [agregarAReady]: despertamos readyAExe)
-[INFO] 11:53:38:370 Kernel/(11632:11639): [asignar_memoria]: desde asignar_memoria despertamos a readyAExe
-[INFO] 11:53:38:370 Kernel/(11632:11641): [readyAExe]: .........se despierta readyAExe 
-[INFO] 11:53:38:371 Kernel/(11632:11641): [readyAExe]: a partir de ahora, CPU NO DISPONIBLE! 
-[INFO] 11:53:38:371 Kernel/(11632:11641): [obtenerSiguienteFIFO]: PROCESOS EN READY: 0 
-
-[INFO] 11:53:38:371 Kernel/(11632:11641): [readyAExe]: Desde readyAExe obtuvimos el proceso de pid: 0
-[INFO] 11:53:38:371 Kernel/(11632:11641): [readyAExe]: Desde readyAExe mandamos al proceso de pid 0 a ejecutar  
-[INFO] 11:53:38:371 Kernel/(11632:11641): [EXEC] Ingresa el proceso de PID: 0
-[INFO] 11:53:38:371 Kernel/(11632:11641): Hola cpu, soy Kernel
-[INFO] 11:53:38:371 Kernel/(11632:11641): Le envio a cpu el pcb
-[INFO] 11:53:38:371 Kernel/(11632:11641): [ejecutar]: ejecucion activa es true!!
-[INFO] 11:53:38:372 Kernel/(11632:11641): [ejecutar]: Se cambia el estado a EXEC y se calcula el inicio de ejecucion
-[INFO] 11:53:38:372 Kernel/(11632:11641): [readyAExe]: finaliza
+[INFO] 22:53:01:525 Kernel/(12928:12938): [readyAExe]: Desde readyAExe obtuvimos el proceso de pid: 0
+[INFO] 22:53:01:525 Kernel/(12928:12938): [readyAExe]: Desde readyAExe mandamos al proceso de pid 0 a ejecutar  
+[INFO] 22:53:01:525 Kernel/(12928:12938): [EXEC] Ingresa el proceso de PID: 0
+[INFO] 22:53:01:525 Kernel/(12928:12938): Hola cpu, soy Kernel
+[INFO] 22:53:01:525 Kernel/(12928:12938): Le envio a cpu el pcb
+[INFO] 22:53:01:525 Kernel/(12928:12938): [ejecutar]: ejecucion activa es true!!
+[INFO] 22:53:01:526 Kernel/(12928:12938): [ejecutar]: Se cambia el estado a EXEC y se calcula el inicio de ejecucion
+[INFO] 22:53:01:526 Kernel/(12928:12938): [readyAExe]: finaliza
