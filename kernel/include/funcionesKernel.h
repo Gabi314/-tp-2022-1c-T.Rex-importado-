@@ -114,7 +114,20 @@ typedef enum
 	MENSAJE_CONFIRMACION_SUSPENDIDO
 }op_code_memoria;
 
+
+typedef enum {
+    NO_OP,
+    IO,
+    WRITE,
+    COPY,
+    READ,
+    EXIT1
+} op_code;
+
 t_pcb* pcb;
+t_pcb* pcbRecibida;
+t_pcb* pcbRecibidaDispatch;
+int intRecibidoDispatch;
 
 //Funciones como cliente de Memoria
 int conexionConMemoria();
@@ -185,6 +198,11 @@ int conexionConCpu(t_pcb*);
 void cargar_pcb(int);
 void crear_colas();
 void generar_conexiones();
+void levantar_hilos();
+
+
+
+char* generarString(op_code);
 
 //-------------PLANIFICADOR---------------
 

@@ -744,14 +744,128 @@ log_info(logger, "[ejecutar]: Se cambia el estado a EXEC y se calcula el inicio 
 
 }
 
+char* generarString(op_code inst){
+
+        if(inst == NO_OP){
+        return "NO_OP";}
+
+        else if(inst == WRITE){
+        return "WRITE";}
+
+        else if(inst == READ){
+        return "READ";}
+
+        else if(inst == IO){
+        return "I/O";}
+
+        else if(inst == COPY){
+        return "COPY";}
+
+        else{
+        return "EXIT";}
+
+    }
+
+static uint32_t deserializar_PCB_mas_int(void* payload, t_pcb* pcbRecibida) {
+	// armo variables auxiliares donde guardar lo recibido
+	uint32_t id;
+	uint32_t tamProceso;
+	size_t tamLista;
+	t_list* listaInstrucciones;
+	t_estado estadoProceso;
+	uint32_t programCounter;
+	uint32_t tablaPaginas;
+	uint32_t estimacionRafaga;
+	uint32_t elInt;
+
+	// guardo lo recibido en las variables auxiliares (obviamente)
+	memcpy(&id, payload, sizeof(uint32_t));
+	memcpy(&tamProceso, payload + sizeof(uint32_t), sizeof(uint32_t));
+	memcpy(&tamLista, payload + 2*sizeof(uint32_t), sizeof(size_t));
+
+	// abro paréntesis: aloco memoria para la lista
+	//listaInstrucciones = malloc(tamLista);
+	// cierro paréntesis
+	int i = 0;
+	listaInstrucciones = list_create();
+	op_code cop;
+	uint32_t param0;
+	uint32_t param1;
+	while(cop != EXIT) {
+		instruccion* nuevaInst = malloc(sizeof(instruccion));
+		memcpy(&cop,payload + 2*sizeof(uint32_t) + sizeof(size_t)+i*(sizeof(op_code)+2*sizeof(uint32_t)),sizeof(op_code));
+		memcpy(&param0,payload + 2*sizeof(uint32_t) + sizeof(size_t)+i*(sizeof(op_code)+2*sizeof(uint32_t))+sizeof(op_code),sizeof(uint32_t));
+		memcpy(&param1,payload + 2*sizeof(uint32_t) + sizeof(size_t)+i*(sizeof(op_code)+2*sizeof(uint32_t))+sizeof(op_code)+sizeof(uint32_t),sizeof(uint32_t));
+		nuevaInst -> identificador = generarString(cop);
+		nuevaInst -> parametros[0] = param0;
+		nuevaInst -> parametros[1] = param1;
+		list_add(listaInstrucciones, nuevaInst);
+
+		i++;
+	}
+	//memcpy(listaInstrucciones, payload + 2*sizeof(uint32_t) + sizeof(size_t), tamLista);
+	memcpy(&estadoProceso, payload + 2*sizeof(uint32_t) + sizeof(size_t) + tamLista, sizeof(t_estado));
+	memcpy(&programCounter, payload + 2*sizeof(uint32_t) + sizeof(size_t) + tamLista + sizeof(t_estado), sizeof(uint32_t));
+	memcpy(&tablaPaginas, payload + 3*sizeof(uint32_t) + sizeof(size_t) + tamLista + sizeof(t_estado), sizeof(uint32_t));
+	memcpy(&estimacionRafaga, payload + 4*sizeof(uint32_t) + sizeof(size_t) + tamLista + sizeof(t_estado), sizeof(uint32_t));
+	memcpy(&elInt, payload + 5*sizeof(uint32_t) + sizeof(size_t) + tamLista + sizeof(t_estado), sizeof(uint32_t));
+
+	// lo guardo en la PCB
+
+	pcbRecibida -> idProceso = id;
+	pcbRecibida -> tamanioProceso = tamProceso;
+	pcbRecibida -> instrucciones = listaInstrucciones;
+	pcbRecibida -> estado = estadoProceso;
+	pcbRecibida -> program_counter = programCounter;
+	pcbRecibida -> tabla_paginas = tablaPaginas;
+	pcbRecibida -> estimacion_rafaga = estimacionRafaga;
+
+
+	return elInt;
+}
+
+
+uint32_t recv_PCB_mas_int (int conexion, t_pcb* pcbRecibida) {
+	// recibo el tamaño del payload
+	size_t tamanio_payload;
+	if (recv(conexion, &tamanio_payload, sizeof(size_t), MSG_WAITALL) != sizeof(size_t)){
+		log_info(logger, "entro al primer error");
+		return -1; // ATENCIÓN: ESTE ES EL CÓDIGO DE ERROR
+	}
+	// recibo el payload
+	void* stream_payload = malloc(tamanio_payload);
+	if (recv(conexion, stream_payload, tamanio_payload, MSG_WAITALL) != tamanio_payload) {
+		free(stream_payload);
+		log_info(logger, "entro al segundo error");
+		return -1; // ATENCIÓN: ESTE ES EL CÓDIGO DE ERROR
+	}
+
+	uint32_t elInt = deserializar_PCB_mas_int(stream_payload, pcbRecibida);
+
+	//printf("En el recv, el estado del proceso es %s\n", generar_string_de_estado(pcbRecibida->estado_proceso));
+
+	free(stream_payload);
+	return elInt;
+}
+
+
+
 void atender_interrupcion_de_ejecucion() {
 
 while (1) {
-	int cod_op = recibir_operacion(socketCpuDispatch);
+	//int cod_op = recibir_operacion(socketCpuDispatch);
 
-	switch (cod_op) {	// cuando reciba del cpu una interrupcion
+	pcbRecibidaDispatch = malloc(sizeof(pcb));
+	intRecibidoDispatch = recv_PCB_mas_int(socketCpuDispatch, pcbRecibidaDispatch); //si se cae la conexion, aca va a mostrar lo que tenga la ultima PCB que recibio
+
+	if (intRecibidoDispatch == -1) {
+		log_error(logger, "Error al recibir una PCB por dispatch");
+	       exit(-1);
+    }
+
+	switch (pcbRecibidaDispatch -> estado) {	// cuando reciba del cpu una interrupcion
 	// obtener tiempo a partir de un recibir_tiempo()
-	case I_O:
+/*	case I_O:
 		log_info(logger,"[atender_interrupcion_de_ejecucion]: recibimos operacion IO");
 		pthread_mutex_lock(&mutexIO);
 		agregarABlocked(tomar_pcb(socketCpuDispatch));
@@ -760,13 +874,13 @@ while (1) {
 		log_info(logger,"[atender_interrupcion_de_ejecucion]: recibimos tiempo de bloqueo %d", tiempoBloqueo);
 		sem_post(&pcbBlocked);
 		log_info(logger,"[atender_interrupcion_de_ejecucion]: despertamos atenderIO");
-		break;
-	case EXIT:
+		break;*/
+	case TERMINATED:
 		log_info(logger,"[atender_interrupcion_de_ejecucion]: recibimos operacion EXIT");
 		terminarEjecucion(tomar_pcb(socketCpuDispatch));
 		break;
 
-	case INTERRUPT:
+/*	case INTERRUPT:
 
 		log_info(logger,"[atender_interrupcion_de_ejecucion]: recibimos operacion INTERRUPT");
 		pthread_mutex_lock(&mutexInterrupt);
@@ -775,10 +889,9 @@ while (1) {
 		log_info(logger,"[atender_interrupcion_de_ejecucion]: despertamos atenderDesalojo");
 		sem_post(&pcbInterrupt);
 		break;
-
+*/
 	default:
-		//log_info(logger, "operacion invalida");
-
+		log_info(logger, "operacion invalida");
 		break;
 	}
 	ejecucionActiva = false;

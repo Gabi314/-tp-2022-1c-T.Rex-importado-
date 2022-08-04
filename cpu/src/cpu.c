@@ -191,7 +191,9 @@ void ejecutar(instruccion* unaInstruccion){
 
 	}else if(! strcmp(unaInstruccion->identificador,"EXIT")){
 		// enviar pcb actualizado finaliza el proceso
-		enviarPcb(unPcb,EXIT);
+		//enviarPcb(unPcb,EXIT);
+		unPcb -> estado = TERMINATED;
+		send_PCB_mas_int ( clienteKernel , unPcb, -3);
 		log_info(logger,"Finalizo el proceso ");
 		hayInstrucciones = 0;
 	}

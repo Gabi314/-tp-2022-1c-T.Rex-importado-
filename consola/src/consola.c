@@ -16,6 +16,9 @@ int main(int argc, char *argv[]) {
 	ip = config_get_string_value(config,"IP_KERNEL");
 	puerto = config_get_string_value(config,"PUERTO_KERNEL");
 
+	// Creamos una conexión hacia el servidor
+	conexion = crear_conexion(ip, puerto);
+
 	int tamanioDelProceso = atoi(argv[1]);
 
 	enviarTamanioDelProceso(tamanioDelProceso);
@@ -37,8 +40,6 @@ int main(int argc, char *argv[]) {
 
 	t_paquete* paquete = crear_paquete(INSTRUCCIONES);
 
-	// Creamos una conexión hacia el servidor
-	conexion = crear_conexion(ip, puerto);
 
 	while (fscanf(archivo, "%[^\n] ", contenido) != EOF) {
 

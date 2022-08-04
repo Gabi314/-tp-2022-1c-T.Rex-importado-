@@ -68,6 +68,19 @@ int desplazamiento;
 char* tamanioDelProceso;
 //Estructuras
 
+typedef enum {
+    NO_OP1,
+    IO1,
+    WRITE1,
+    COPY1,
+    READ1,
+    EXIT1
+} op_code;
+
+
+typedef enum estado { NEW, READY, BLOCKED, EXEC, SUSP_READY, SUSP_BLOCKED, TERMINATED } t_estado;
+
+
 typedef struct
 {
 	int idProceso;
@@ -76,6 +89,7 @@ typedef struct
 	int programCounter;
 	int nroTabla1erNivel;
 	float estimacionRafaga;
+	t_estado estado;
 	//int socket_cliente;
 } t_pcb;
 
@@ -180,5 +194,8 @@ instruccion* buscarInstruccionAEjecutar(t_pcb*);
 void decode(instruccion*);
 void ejecutar(instruccion*);
 
+
+bool send_PCB_mas_int (int, t_pcb*, uint32_t);
+op_code generarCode(char *inst);
 
 #endif /*FUNCIONES_CPU_H_*/

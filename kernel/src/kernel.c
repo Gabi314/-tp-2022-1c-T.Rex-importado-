@@ -12,41 +12,16 @@ int main(int argc, char *argv[]) {
 
 	inicializarConfiguraciones(argv[1]);
 
-
+	generar_conexiones();
 	inicializar_colas();
 	inicializar_semaforos();
 
+	levantar_hilos();
 
-	pthread_t hilo0;
-	pthread_t hiloAdmin[6];
-	int hiloAdminCreado[6];
 
 	ejecucionActiva = false;
 	procesoDesalojado = NULL;
-	//conexiones
-	socketMemoria = crear_conexion(ipMemoria, puertoMemoria);
-	socketCpuDispatch = crear_conexion(ipCpu, puertoCpuDispatch);
-	socketCpuInterrupt = crear_conexion(ipCpu, puertoCpuInterrupt);
-	socketServidor = iniciar_servidor();
 
-	int hiloCreado = pthread_create(&hilo0, NULL,&recibir_consola,socketServidor);
-	pthread_detach(hiloCreado);
-
-	hiloAdminCreado[0] = pthread_create(&hiloAdmin[0],NULL,&asignar_memoria,NULL);
-	hiloAdminCreado[1] = pthread_create(&hiloAdmin[1],NULL,&atender_interrupcion_de_ejecucion,NULL); // problemas con esto
-	hiloAdminCreado[2] = pthread_create(&hiloAdmin[2],NULL,&atenderDesalojo,NULL);
-	hiloAdminCreado[3] = pthread_create(&hiloAdmin[3],NULL,&readyAExe,NULL);
-	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&atenderIO,NULL);
-	hiloAdminCreado[5] = pthread_create(&hiloAdmin[5],NULL,&desbloquear_suspendido,NULL);
-
-	pthread_detach(hiloAdmin[0]);
-	pthread_detach(hiloAdmin[1]);
-	pthread_detach(hiloAdmin[2]);
-	pthread_detach(hiloAdmin[3]);
-	pthread_detach(hiloAdmin[4]);
-	pthread_detach(hiloAdmin[5]);
-
-	log_info(logger,"termino el while");
 
 	sem_wait(&kernelSinFinalizar);
 
@@ -129,6 +104,37 @@ void inicializar_semaforos(){
 	pthread_mutex_init(&bloqueandoProceso,NULL);
 }
 
+
+void generar_conexiones(){
+	//conexiones
+	socketMemoria = crear_conexion(ipMemoria, puertoMemoria);
+	socketCpuDispatch = crear_conexion(ipCpu, puertoCpuDispatch);
+	socketCpuInterrupt = crear_conexion(ipCpu, puertoCpuInterrupt);
+	socketServidor = iniciar_servidor();
+}
+
+void levantar_hilos(){
+	pthread_t hilo0;
+	pthread_t hiloAdmin[6];
+	int hiloAdminCreado[6];
+
+	int hiloCreado = pthread_create(&hilo0, NULL,&recibir_consola,socketServidor);
+	pthread_detach(hiloCreado);
+
+	hiloAdminCreado[0] = pthread_create(&hiloAdmin[0],NULL,&asignar_memoria,NULL);
+	hiloAdminCreado[1] = pthread_create(&hiloAdmin[1],NULL,&atender_interrupcion_de_ejecucion,NULL); // problemas con esto
+	hiloAdminCreado[2] = pthread_create(&hiloAdmin[2],NULL,&atenderDesalojo,NULL);
+	hiloAdminCreado[3] = pthread_create(&hiloAdmin[3],NULL,&readyAExe,NULL);
+	hiloAdminCreado[4] = pthread_create(&hiloAdmin[4],NULL,&atenderIO,NULL);
+	hiloAdminCreado[5] = pthread_create(&hiloAdmin[5],NULL,&desbloquear_suspendido,NULL);
+
+	pthread_detach(hiloAdmin[0]);
+	pthread_detach(hiloAdmin[1]);
+	pthread_detach(hiloAdmin[2]);
+	pthread_detach(hiloAdmin[3]);
+	pthread_detach(hiloAdmin[4]);
+	pthread_detach(hiloAdmin[5]);
+}
 
 //---------------------------------------------------------------------------------------------
 

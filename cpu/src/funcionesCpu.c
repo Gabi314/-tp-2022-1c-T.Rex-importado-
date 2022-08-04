@@ -310,3 +310,108 @@ void liberar_conexion(int socket_cliente)
 }
 
 
+
+op_code generarCode(char *inst){
+
+        if(strcmp(inst,"NO_OP") == 0){
+        return NO_OP1;}
+
+        else if(strcmp(inst,"WRITE") == 0){
+        return WRITE1;}
+
+        else if(strcmp(inst,"READ") == 0){
+        return READ1;}
+
+        else if(strcmp(inst,"I/O") == 0){
+        return IO1;}
+
+        else if(strcmp(inst,"COPY") == 0){
+        return COPY1;}
+
+        else if(strcmp(inst,"EXIT") == 0){
+        return EXIT1;}
+
+        else
+        printf("ERROR, RECIBI UNA INSTRUCCION CON ID INEXISTENTE (%s)\n", inst);
+        exit(-1);
+    }
+
+
+static void* serializar_PCB_mas_int (t_pcb* pcbASerializar, size_t* tamanio_stream, uint32_t* elInt) {
+	// leo PCB
+	uint32_t id = pcbASerializar -> idProceso;
+	uint32_t tamProceso = pcbASerializar -> tamanioProceso;
+	t_list* listaInstrucciones = pcbASerializar -> instrucciones;
+	t_estado estadoProceso = pcbASerializar -> estado;
+	uint32_t programCounter = pcbASerializar -> programCounter;
+	uint32_t tablaPaginas = pcbASerializar -> nroTabla1erNivel;
+	uint32_t estimacionRafaga = pcbASerializar -> estimacionRafaga;
+
+	// calculo tamaños
+	size_t tamanio_id = sizeof(uint32_t);
+	size_t tamanio_tamProceso = sizeof(uint32_t);
+	size_t tamanio_tamLista = sizeof(size_t);
+	size_t tamLista = list_size(listaInstrucciones) * sizeof(instruccion);
+	size_t tamanio_estado = sizeof(t_estado);
+	size_t tamanio_PC = sizeof(uint32_t);
+	size_t tamanio_tablaPaginas = sizeof(uint32_t);
+	size_t tamanio_estimacionRafaga = sizeof(uint32_t);
+	size_t tamanio_tamPayload = sizeof(size_t);
+	size_t tamanio_elInt = sizeof(uint32_t);
+
+	//printf("El estado en serializar es %s\n", generar_string_de_estado(estadoProceso));
+
+	size_t tamPayload = tamanio_id + tamanio_tamProceso + tamanio_tamLista + tamLista +
+						tamanio_estado + tamanio_PC + tamanio_tablaPaginas +
+						tamanio_estimacionRafaga + tamanio_elInt;
+	*tamanio_stream = tamPayload + tamanio_tamPayload;
+
+	// creo el stream
+	void* stream = malloc(*tamanio_stream);
+	instruccion* instAGuardar;
+	int i=0;
+	op_code cop;			//HACER TODOS
+	uint32_t param0;		//LOS FREE
+	uint32_t param1;		//CUANDO TERMINA LA PCB
+
+	// serializo el tamaño del payload
+	memcpy(stream, &tamPayload, tamanio_tamPayload);
+
+	// serializo el payload en si
+	memcpy(stream + tamanio_tamPayload, &id, tamanio_id);
+	memcpy(stream + tamanio_tamPayload + tamanio_id, &tamProceso, tamanio_tamProceso);
+	memcpy(stream + tamanio_tamPayload + tamanio_id + tamanio_tamProceso, &tamLista, tamanio_tamLista);
+	while (i < list_size(listaInstrucciones)) {
+		instAGuardar = list_get(listaInstrucciones,i);
+		cop = generarCode(instAGuardar -> identificador);
+		param0 = (instAGuardar -> parametros[0]);
+		param1 = instAGuardar -> parametros[1];
+		memcpy(stream + tamanio_tamPayload + tamanio_id + tamanio_tamProceso + tamanio_tamLista + i*(sizeof(instruccion)), &cop, sizeof(op_code));
+		memcpy(stream + tamanio_tamPayload + tamanio_id + tamanio_tamProceso + tamanio_tamLista + i*(sizeof(instruccion)) + sizeof(op_code), &param0, sizeof(uint32_t));
+		memcpy(stream + tamanio_tamPayload + tamanio_id + tamanio_tamProceso + tamanio_tamLista + i*(sizeof(instruccion)) + sizeof(op_code) + sizeof(uint32_t), &param1, sizeof(uint32_t));
+		i++;
+	}
+	memcpy(stream + tamanio_tamPayload + tamanio_id + tamanio_tamProceso + tamanio_tamLista + i*sizeof(instruccion), &estadoProceso, tamanio_estado);
+	memcpy(stream + tamanio_tamPayload + tamanio_id + tamanio_tamProceso + tamanio_tamLista + i*sizeof(instruccion) + tamanio_estado, &programCounter, tamanio_PC);
+	memcpy(stream + tamanio_tamPayload + tamanio_id + tamanio_tamProceso + tamanio_tamLista + i*sizeof(instruccion) + tamanio_estado + tamanio_PC, &tablaPaginas, tamanio_tablaPaginas);
+	memcpy(stream + tamanio_tamPayload + tamanio_id + tamanio_tamProceso + tamanio_tamLista + i*sizeof(instruccion) + tamanio_estado + tamanio_PC + tamanio_tablaPaginas, &estimacionRafaga, tamanio_estimacionRafaga);
+	memcpy(stream + tamanio_tamPayload + tamanio_id + tamanio_tamProceso + tamanio_tamLista + i*sizeof(instruccion) + tamanio_estado + tamanio_PC + tamanio_tablaPaginas + tamanio_estimacionRafaga, elInt, tamanio_elInt);
+
+	return stream;
+}
+
+
+bool send_PCB_mas_int (int conexion, t_pcb* pcbASerializar, uint32_t elInt) {
+	size_t tamanio_stream;
+	void* stream = serializar_PCB_mas_int(pcbASerializar, &tamanio_stream, &elInt);
+
+	if (send(conexion, stream, tamanio_stream, 0) != tamanio_stream) {
+		free(stream);
+		printf("\n\n\n(send_pcb_mas_int) NO ENVIADO (SOCKET %d)\n\n\n", conexion);
+		return false;
+	}
+
+	free(stream);
+	return true;
+}
+
