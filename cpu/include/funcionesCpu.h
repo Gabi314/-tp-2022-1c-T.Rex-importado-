@@ -83,20 +83,23 @@ typedef enum estado { NEW, READY, BLOCKED, EXEC, SUSP_READY, SUSP_BLOCKED, TERMI
 
 typedef struct
 {
-	int idProceso;
-	int tamanioProceso;
+	uint32_t idProceso;
+	uint32_t tamanioProceso;
 	t_list* instrucciones;
-	int programCounter;
-	int nroTabla1erNivel;
-	float estimacionRafaga;
 	t_estado estado;
+	uint32_t programCounter;
+	uint32_t nroTabla1erNivel;
+	uint32_t estimacionRafaga;
+	uint32_t rafagaMs; //pasar a int
+	uint32_t horaDeIngresoAExe;
+
 	//int socket_cliente;
 } t_pcb;
 
 typedef struct
 {
 	char* identificador;
-	int parametros[2];
+	uint32_t parametros[2];
 } instruccion;
 
 
@@ -196,6 +199,6 @@ void ejecutar(instruccion*);
 
 
 bool send_PCB_mas_int (int, t_pcb*, uint32_t);
-op_code generarCode(char *inst);
+op_code generarCode(char *);
 
 #endif /*FUNCIONES_CPU_H_*/

@@ -333,7 +333,7 @@ void agregar_a_paquete_kernel_cpu(t_pcb* pcb)
 	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->estimacion_rafaga), sizeof(float));
 	desplazamiento+=sizeof(float);
 //	memcpy(paquete->buffer->stream + desplazamiento, &(pcb->socket_cliente), sizeof(int));
-	//desplazamiento+=sizeof(int);
+//  desplazamiento+=sizeof(int);
 	paquete->buffer->size = desplazamiento;
 
 	log_info(logger,"Le envio a cpu el pcb");
@@ -776,6 +776,8 @@ static uint32_t deserializar_PCB_mas_int(void* payload, t_pcb* pcbRecibida) {
 	uint32_t programCounter;
 	uint32_t tablaPaginas;
 	uint32_t estimacionRafaga;
+	uint32_t rafagaMs;
+	uint32_t horaDeIngresoAExe;
 	uint32_t elInt;
 
 	// guardo lo recibido en las variables auxiliares (obviamente)
@@ -808,7 +810,11 @@ static uint32_t deserializar_PCB_mas_int(void* payload, t_pcb* pcbRecibida) {
 	memcpy(&programCounter, payload + 2*sizeof(uint32_t) + sizeof(size_t) + tamLista + sizeof(t_estado), sizeof(uint32_t));
 	memcpy(&tablaPaginas, payload + 3*sizeof(uint32_t) + sizeof(size_t) + tamLista + sizeof(t_estado), sizeof(uint32_t));
 	memcpy(&estimacionRafaga, payload + 4*sizeof(uint32_t) + sizeof(size_t) + tamLista + sizeof(t_estado), sizeof(uint32_t));
-	memcpy(&elInt, payload + 5*sizeof(uint32_t) + sizeof(size_t) + tamLista + sizeof(t_estado), sizeof(uint32_t));
+	memcpy(&rafagaMs, payload + 5*sizeof(uint32_t) + sizeof(size_t) + tamLista + sizeof(t_estado), sizeof(uint32_t));
+	memcpy(&horaDeIngresoAExe, payload + 6*sizeof(uint32_t) + sizeof(size_t) + tamLista + sizeof(t_estado), sizeof(uint32_t));
+	memcpy(&elInt, payload + 7*sizeof(uint32_t) + sizeof(size_t) + tamLista + sizeof(t_estado), sizeof(uint32_t));
+
+
 
 	// lo guardo en la PCB
 
@@ -819,6 +825,8 @@ static uint32_t deserializar_PCB_mas_int(void* payload, t_pcb* pcbRecibida) {
 	pcbRecibida -> program_counter = programCounter;
 	pcbRecibida -> tabla_paginas = tablaPaginas;
 	pcbRecibida -> estimacion_rafaga = estimacionRafaga;
+	pcbRecibida -> rafagaMs = rafagaMs;
+	pcbRecibida -> horaDeIngresoAExe = horaDeIngresoAExe;
 
 
 	return elInt;
@@ -855,7 +863,7 @@ void atender_interrupcion_de_ejecucion() {
 while (1) {
 	//int cod_op = recibir_operacion(socketCpuDispatch);
 
-	pcbRecibidaDispatch = malloc(sizeof(pcb));
+	pcbRecibidaDispatch = malloc(sizeof(t_pcb));
 	intRecibidoDispatch = recv_PCB_mas_int(socketCpuDispatch, pcbRecibidaDispatch); //si se cae la conexion, aca va a mostrar lo que tenga la ultima PCB que recibio
 
 	if (intRecibidoDispatch == -1) {

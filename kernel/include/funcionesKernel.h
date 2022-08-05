@@ -65,21 +65,22 @@ typedef enum estado { NEW, READY, BLOCKED, EXEC, SUSP_READY, SUSP_BLOCKED, TERMI
 
 typedef struct
 {
-	int idProceso;
-	int tamanioProceso;
+	uint32_t idProceso;
+	uint32_t tamanioProceso;
 	t_list* instrucciones;
-	int program_counter;
-	int tabla_paginas; // Esto se lo pasa memoria
-	float estimacion_rafaga;
-	clock_t rafagaMs; //pasar a int
-	clock_t horaDeIngresoAExe;
 	t_estado estado;
+	uint32_t program_counter;
+	uint32_t tabla_paginas; // Esto se lo pasa memoria
+	uint32_t estimacion_rafaga;
+	uint32_t rafagaMs; //pasar a int
+	uint32_t horaDeIngresoAExe;
+
 } t_pcb;
 
 typedef struct
 {
 	char* identificador;
-	int parametros[2];
+	uint32_t parametros[2];
 } instruccion;
 
 typedef struct
@@ -124,10 +125,10 @@ typedef enum {
     EXIT1
 } op_code;
 
-t_pcb* pcb;
-t_pcb* pcbRecibida;
+//t_pcb* pcb;
+//t_pcb* pcbRecibida;
 t_pcb* pcbRecibidaDispatch;
-int intRecibidoDispatch;
+uint32_t intRecibidoDispatch;
 
 //Funciones como cliente de Memoria
 int conexionConMemoria();

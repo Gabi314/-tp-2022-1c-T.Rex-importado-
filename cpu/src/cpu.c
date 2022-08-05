@@ -182,7 +182,7 @@ void ejecutar(instruccion* unaInstruccion){
 		log_info(logger,"----------------I/O-----------------------");
 		//enviarTiempoIO(unaInstruccion->parametros[0]/1000);
 		//enviar_mensaje("Se suspende el proceso",conexionMemoria,MENSAJE);//Se envia pcb a kernel solamente
-		enviarPcb(unPcb,I_O);
+		//enviarPcb(unPcb,I_O);
 		//bloqueado = 1; esto no se
 		// luego kernel le avisa a memoria que se suspende
 		reiniciarTLB();
@@ -193,6 +193,7 @@ void ejecutar(instruccion* unaInstruccion){
 		// enviar pcb actualizado finaliza el proceso
 		//enviarPcb(unPcb,EXIT);
 		unPcb -> estado = TERMINATED;
+		log_info(logger, "3 socket cliente = %d", clienteKernel);
 		send_PCB_mas_int ( clienteKernel , unPcb, -3);
 		log_info(logger,"Finalizo el proceso ");
 		hayInstrucciones = 0;
@@ -210,7 +211,7 @@ void checkInterrupt(){
 		recibir_mensaje(clienteKernel);
 	}
 	log_info(logger,"Envio el pcb actualizado a kernel por interrupcion");
-	enviarPcb(unPcb,INTERRUPT);
+	//enviarPcb(unPcb,INTERRUPT);
 }
 
 int buscarDireccionFisica(int direccionLogica){
@@ -327,15 +328,17 @@ int conexionConKernel(void){
 
 	log_info(logger, "Cpu listo para recibir a Kernel");
 
-	int clienteKernel = esperar_cliente(server_fd);
+	clienteKernel = esperar_cliente(server_fd);
+
+	log_info(logger, "socket cliente = %d", clienteKernel);
 
 	//int salirDelWhile = 0;
 	while (1) {
 		int cod_op = recibir_operacion(clienteKernel);
-		
+		log_info(logger, "1 socket cliente = %d", clienteKernel);
 		if(cod_op == RECIBIR_PCB){
 			unPcb = recibir_pcb(clienteKernel);
-
+			log_info(logger, "2 socket cliente = %d", clienteKernel);
 			log_info(logger, "Me llegaron las siguientes instrucciones:\n");
 			list_iterate(unPcb -> instrucciones, (void*) iterator);
 

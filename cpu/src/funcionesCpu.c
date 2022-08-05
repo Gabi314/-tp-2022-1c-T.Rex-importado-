@@ -35,8 +35,14 @@ int iniciar_servidor(int tipoDePuerto) // puede ser interrupt o dispatch
 
 int esperar_cliente(int socket_servidor)
 {
+
 	// Aceptamos un nuevo cliente
-	int socket_cliente = accept(socket_servidor, NULL, NULL); // acepto al cliente------------ ver esto----------------
+
+	struct sockaddr_in dir_cliente;
+	socklen_t tam_direccion = sizeof(struct sockaddr_in);
+
+
+	int socket_cliente = accept(socket_servidor,(void*) &dir_cliente, &tam_direccion); // acepto al cliente------------ ver esto----------------
 	log_info(logger, "Se conecto el Kernel!");
 
 	return socket_cliente;
@@ -346,6 +352,8 @@ static void* serializar_PCB_mas_int (t_pcb* pcbASerializar, size_t* tamanio_stre
 	uint32_t programCounter = pcbASerializar -> programCounter;
 	uint32_t tablaPaginas = pcbASerializar -> nroTabla1erNivel;
 	uint32_t estimacionRafaga = pcbASerializar -> estimacionRafaga;
+	uint32_t rafagaMs = pcbASerializar -> rafagaMs;
+	uint32_t horaDeIngresoAExe = pcbASerializar -> horaDeIngresoAExe;
 
 	// calculo tamaños
 	size_t tamanio_id = sizeof(uint32_t);
@@ -356,6 +364,8 @@ static void* serializar_PCB_mas_int (t_pcb* pcbASerializar, size_t* tamanio_stre
 	size_t tamanio_PC = sizeof(uint32_t);
 	size_t tamanio_tablaPaginas = sizeof(uint32_t);
 	size_t tamanio_estimacionRafaga = sizeof(uint32_t);
+	size_t tamanio_rafagaMs = sizeof(uint32_t);
+	size_t tamanio_horaDeIngresoAExe = sizeof(uint32_t);
 	size_t tamanio_tamPayload = sizeof(size_t);
 	size_t tamanio_elInt = sizeof(uint32_t);
 
@@ -363,8 +373,10 @@ static void* serializar_PCB_mas_int (t_pcb* pcbASerializar, size_t* tamanio_stre
 
 	size_t tamPayload = tamanio_id + tamanio_tamProceso + tamanio_tamLista + tamLista +
 						tamanio_estado + tamanio_PC + tamanio_tablaPaginas +
-						tamanio_estimacionRafaga + tamanio_elInt;
+						tamanio_estimacionRafaga + tamanio_rafagaMs + tamanio_horaDeIngresoAExe + tamanio_elInt;
 	*tamanio_stream = tamPayload + tamanio_tamPayload;
+
+	log_info(logger, "tamanio stream = %d", (*tamanio_stream));
 
 	// creo el stream
 	void* stream = malloc(*tamanio_stream);
@@ -395,11 +407,12 @@ static void* serializar_PCB_mas_int (t_pcb* pcbASerializar, size_t* tamanio_stre
 	memcpy(stream + tamanio_tamPayload + tamanio_id + tamanio_tamProceso + tamanio_tamLista + i*sizeof(instruccion) + tamanio_estado, &programCounter, tamanio_PC);
 	memcpy(stream + tamanio_tamPayload + tamanio_id + tamanio_tamProceso + tamanio_tamLista + i*sizeof(instruccion) + tamanio_estado + tamanio_PC, &tablaPaginas, tamanio_tablaPaginas);
 	memcpy(stream + tamanio_tamPayload + tamanio_id + tamanio_tamProceso + tamanio_tamLista + i*sizeof(instruccion) + tamanio_estado + tamanio_PC + tamanio_tablaPaginas, &estimacionRafaga, tamanio_estimacionRafaga);
-	memcpy(stream + tamanio_tamPayload + tamanio_id + tamanio_tamProceso + tamanio_tamLista + i*sizeof(instruccion) + tamanio_estado + tamanio_PC + tamanio_tablaPaginas + tamanio_estimacionRafaga, elInt, tamanio_elInt);
+	memcpy(stream + tamanio_tamPayload + tamanio_id + tamanio_tamProceso + tamanio_tamLista + i*sizeof(instruccion) + tamanio_estado + tamanio_PC + tamanio_tablaPaginas + tamanio_estimacionRafaga, &rafagaMs, tamanio_rafagaMs);
+	memcpy(stream + tamanio_tamPayload + tamanio_id + tamanio_tamProceso + tamanio_tamLista + i*sizeof(instruccion) + tamanio_estado + tamanio_PC + tamanio_tablaPaginas + tamanio_estimacionRafaga + tamanio_rafagaMs, &horaDeIngresoAExe, tamanio_horaDeIngresoAExe);
+	memcpy(stream + tamanio_tamPayload + tamanio_id + tamanio_tamProceso + tamanio_tamLista + i*sizeof(instruccion) + tamanio_estado + tamanio_PC + tamanio_tablaPaginas + tamanio_estimacionRafaga + tamanio_rafagaMs + tamanio_horaDeIngresoAExe, elInt, tamanio_elInt);
 
 	return stream;
 }
-
 
 bool send_PCB_mas_int (int conexion, t_pcb* pcbASerializar, uint32_t elInt) {
 	size_t tamanio_stream;
@@ -408,6 +421,7 @@ bool send_PCB_mas_int (int conexion, t_pcb* pcbASerializar, uint32_t elInt) {
 	if (send(conexion, stream, tamanio_stream, 0) != tamanio_stream) {
 		free(stream);
 		printf("\n\n\n(send_pcb_mas_int) NO ENVIADO (SOCKET %d)\n\n\n", conexion);
+		log_info(logger, "tamanio stream = %d", tamanio_stream);
 		return false;
 	}
 
